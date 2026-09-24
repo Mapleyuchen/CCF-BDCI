@@ -1,0 +1,128 @@
+[
+  {
+    "experiment_id": "baseline_single_turn_1",
+    "task_type": "single_turn",
+    "system": "baseline",
+    "timestamp": "2026-09-21T10:59:53.533031",
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 0.95,
+      "recall": 0.85,
+      "f1_score": 0.89,
+      "response_time": 0.0,
+      "token_count": 2500
+    },
+    "conversation_length": 5
+  },
+  {
+    "experiment_id": "baseline_single_turn_2",
+    "task_type": "single_turn",
+    "system": "baseline",
+    "timestamp": "2026-09-21T10:59:53.533031",
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 0.95,
+      "recall": 0.85,
+      "f1_score": 0.89,
+      "response_time": 0.0,
+      "token_count": 2500
+    },
+    "conversation_length": 5
+  },
+  {
+    "experiment_id": "baseline_single_turn_3",
+    "task_type": "single_turn",
+    "system": "baseline",
+    "timestamp": "2026-09-21T10:59:53.533031",
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 0.95,
+      "recall": 0.85,
+      "f1_score": 0.89,
+      "response_time": 0.0,
+      "token_count": 2500
+    },
+    "conversation_length": 5
+  },
+  {
+    "experiment_id": "baseline_multi_step_1",
+    "task_type": "multi_step",
+    "system": "baseline",
+    "timestamp": "2026-09-21T10:59:54.536890",
+    "metrics": {
+      "completion_rate": 0.9,
+      "coherence_score": 0.729,
+      "response_time": 0.10038583278656006,
+      "token_count": 8000
+    },
+    "steps": 10,
+    "completed_steps": 9
+  },
+  {
+    "experiment_id": "baseline_multi_step_2",
+    "task_type": "multi_step",
+    "system": "baseline",
+    "timestamp": "2026-09-21T10:59:55.545005",
+    "metrics": {
+      "completion_rate": 0.9,
+      "coherence_score": 0.729,
+      "response_time": 0.1008115291595459,
+      "token_count": 8000
+    },
+    "steps": 10,
+    "completed_steps": 9
+  },
+  {
+    "experiment_id": "baseline_multi_step_3",
+    "task_type": "multi_step",
+    "system": "baseline",
+    "timestamp": "2026-09-21T10:59:56.548124",
+    "metrics": {
+      "completion_rate": 0.9,
+      "coherence_score": 0.729,
+      "response_time": 0.10031189918518066,
+      "token_count": 8000
+    },
+    "steps": 10,
+    "completed_steps": 9
+  },
+  {
+    "experiment_id": "baseline_cross_session_1",
+    "task_type": "cross_session",
+    "system": "baseline",
+    "timestamp": "2026-09-21T10:59:56.848974",
+    "metrics": {
+      "retention_rate": 0.75,
+      "consistency_score": 0.6200000000000001,
+      "response_time": 0.10028354326883952,
+      "token_count": 4400
+    },
+    "sessions": 3
+  },
+  {
+    "experiment_id": "baseline_cross_session_2",
+    "task_type": "cross_session",
+    "system": "baseline",
+    "timestamp": "2026-09-21T10:59:57.149597",
+    "metrics": {
+      "retention_rate": 0.75,
+      "consistency_score": 0.6200000000000001,
+      "response_time": 0.10020740826924641,
+      "token_count": 4400
+    },
+    "sessions": 3
+  },
+  {
+    "experiment_id": "baseline_cross_session_3",
+    "task_type": "cross_session",
+    "system": "baseline",
+    "timestamp": "2026-09-21T10:59:57.450468",
+    "metrics": {
+      "retention_rate": 0.75,
+      "consistency_score": 0.6200000000000001,
+      "response_time": 0.10029037793477376,
+      "token_count": 4400
+    },
+    "sessions": 3
+  }
+]

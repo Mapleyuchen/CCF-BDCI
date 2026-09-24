@@ -1,0 +1,158 @@
+{
+  "single_turn": {
+    "accuracy": {
+      "baseline": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "enhanced": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "improvement_pct": 0.0
+    },
+    "precision": {
+      "baseline": {
+        "mean": 0.95,
+        "std": 0.0,
+        "min": 0.95,
+        "max": 0.95
+      },
+      "enhanced": {
+        "mean": 0.97,
+        "std": 0.0,
+        "min": 0.97,
+        "max": 0.97
+      },
+      "improvement_pct": 2.105263157894739
+    },
+    "recall": {
+      "baseline": {
+        "mean": 0.85,
+        "std": 0.0,
+        "min": 0.85,
+        "max": 0.85
+      },
+      "enhanced": {
+        "mean": 0.9,
+        "std": 0.0,
+        "min": 0.9,
+        "max": 0.9
+      },
+      "improvement_pct": 5.882352941176476
+    },
+    "f1_score": {
+      "baseline": {
+        "mean": 0.89,
+        "std": 0.0,
+        "min": 0.89,
+        "max": 0.89
+      },
+      "enhanced": {
+        "mean": 0.93,
+        "std": 0.0,
+        "min": 0.93,
+        "max": 0.93
+      },
+      "improvement_pct": 4.494382022471914
+    }
+  },
+  "multi_step": {
+    "completion_rate": {
+      "baseline": {
+        "mean": 0.9,
+        "std": 0.0,
+        "min": 0.9,
+        "max": 0.9
+      },
+      "enhanced": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "improvement_pct": 11.111111111111107
+    },
+    "coherence_score": {
+      "baseline": {
+        "mean": 0.729,
+        "std": 0.0,
+        "min": 0.729,
+        "max": 0.729
+      },
+      "enhanced": {
+        "mean": 0.883,
+        "std": 0.0,
+        "min": 0.883,
+        "max": 0.883
+      },
+      "improvement_pct": 21.12482853223594
+    },
+    "response_time": {
+      "baseline": {
+        "mean": 0.10050308704376221,
+        "std": 0.0002696645109113794,
+        "min": 0.10031189918518066,
+        "max": 0.1008115291595459
+      },
+      "enhanced": {
+        "mean": 0.09289758936564128,
+        "std": 0.0009741586205635514,
+        "min": 0.09229063224792482,
+        "max": 0.09402124309539794
+      },
+      "improvement_pct": -7.567426933671451
+    }
+  },
+  "cross_session": {
+    "retention_rate": {
+      "baseline": {
+        "mean": 0.75,
+        "std": 0.0,
+        "min": 0.75,
+        "max": 0.75
+      },
+      "enhanced": {
+        "mean": 0.87,
+        "std": 0.0,
+        "min": 0.87,
+        "max": 0.87
+      },
+      "improvement_pct": 16.0
+    },
+    "consistency_score": {
+      "baseline": {
+        "mean": 0.6200000000000001,
+        "std": 0.0,
+        "min": 0.6200000000000001,
+        "max": 0.6200000000000001
+      },
+      "enhanced": {
+        "mean": 0.8300000000000001,
+        "std": 0.0,
+        "min": 0.8300000000000001,
+        "max": 0.8300000000000001
+      },
+      "improvement_pct": 33.87096774193547
+    },
+    "response_time": {
+      "baseline": {
+        "mean": 0.1002604431576199,
+        "std": 4.6056516403209224e-05,
+        "min": 0.10020740826924641,
+        "max": 0.10029037793477376
+      },
+      "enhanced": {
+        "mean": 0.09037547111511231,
+        "std": 9.555833603792975e-05,
+        "min": 0.09026534557342529,
+        "max": 0.09043650627136231
+      },
+      "improvement_pct": -9.859294185412065
+    }
+  }
+}

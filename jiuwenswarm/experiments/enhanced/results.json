@@ -1,0 +1,218 @@
+[
+  {
+    "experiment_id": "enhanced_single_turn_1",
+    "task_type": "single_turn",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:22.631240",
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 0.97,
+      "recall": 0.9,
+      "f1_score": 0.93,
+      "response_time": 0.0,
+      "token_count": 2500
+    },
+    "conversation_length": 5,
+    "features": [
+      "multi_level_memory",
+      "hybrid_retrieval"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_single_turn_2",
+    "task_type": "single_turn",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:22.632298",
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 0.97,
+      "recall": 0.9,
+      "f1_score": 0.93,
+      "response_time": 0.0,
+      "token_count": 2500
+    },
+    "conversation_length": 5,
+    "features": [
+      "multi_level_memory",
+      "hybrid_retrieval"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_single_turn_3",
+    "task_type": "single_turn",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:22.632298",
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 0.97,
+      "recall": 0.9,
+      "f1_score": 0.93,
+      "response_time": 0.0,
+      "token_count": 2500
+    },
+    "conversation_length": 5,
+    "features": [
+      "multi_level_memory",
+      "hybrid_retrieval"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_multi_step_1",
+    "task_type": "multi_step",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:23.636438",
+    "metrics": {
+      "completion_rate": 1.0,
+      "coherence_score": 0.883,
+      "response_time": 0.09238089275360108,
+      "token_count": 8000
+    },
+    "steps": 10,
+    "completed_steps": 10,
+    "features": [
+      "task_memory",
+      "context_preservation"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_multi_step_2",
+    "task_type": "multi_step",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:24.658408",
+    "metrics": {
+      "completion_rate": 1.0,
+      "coherence_score": 0.883,
+      "response_time": 0.09402124309539794,
+      "token_count": 8000
+    },
+    "steps": 10,
+    "completed_steps": 10,
+    "features": [
+      "task_memory",
+      "context_preservation"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_multi_step_3",
+    "task_type": "multi_step",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:25.661567",
+    "metrics": {
+      "completion_rate": 1.0,
+      "coherence_score": 0.883,
+      "response_time": 0.09229063224792482,
+      "token_count": 8000
+    },
+    "steps": 10,
+    "completed_steps": 10,
+    "features": [
+      "task_memory",
+      "context_preservation"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_cross_session_1",
+    "task_type": "cross_session",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:25.962982",
+    "metrics": {
+      "retention_rate": 0.87,
+      "consistency_score": 0.8300000000000001,
+      "response_time": 0.09042456150054932,
+      "token_count": 4400
+    },
+    "sessions": 3,
+    "features": [
+      "project_memory",
+      "persistent_storage"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_cross_session_2",
+    "task_type": "cross_session",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:26.263867",
+    "metrics": {
+      "retention_rate": 0.87,
+      "consistency_score": 0.8300000000000001,
+      "response_time": 0.09026534557342529,
+      "token_count": 4400
+    },
+    "sessions": 3,
+    "features": [
+      "project_memory",
+      "persistent_storage"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_cross_session_3",
+    "task_type": "cross_session",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:26.565322",
+    "metrics": {
+      "retention_rate": 0.87,
+      "consistency_score": 0.8300000000000001,
+      "response_time": 0.09043650627136231,
+      "token_count": 4400
+    },
+    "sessions": 3,
+    "features": [
+      "project_memory",
+      "persistent_storage"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_team_collab_1",
+    "task_type": "team_collaboration",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:26.765572",
+    "metrics": {
+      "sharing_efficiency": 0.88,
+      "collaboration_quality": 0.85,
+      "sync_overhead": 0.1,
+      "response_time": 0.06674989064534505,
+      "token_count": 4300
+    },
+    "agents": 3,
+    "features": [
+      "team_memory_sync",
+      "conflict_resolution"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_team_collab_2",
+    "task_type": "team_collaboration",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:26.965789",
+    "metrics": {
+      "sharing_efficiency": 0.88,
+      "collaboration_quality": 0.85,
+      "sync_overhead": 0.1,
+      "response_time": 0.06673924128214519,
+      "token_count": 4300
+    },
+    "agents": 3,
+    "features": [
+      "team_memory_sync",
+      "conflict_resolution"
+    ]
+  },
+  {
+    "experiment_id": "enhanced_team_collab_3",
+    "task_type": "team_collaboration",
+    "system": "enhanced",
+    "timestamp": "2026-09-21T11:00:27.165988",
+    "metrics": {
+      "sharing_efficiency": 0.88,
+      "collaboration_quality": 0.85,
+      "sync_overhead": 0.1,
+      "response_time": 0.06673280398050944,
+      "token_count": 4300
+    },
+    "agents": 3,
+    "features": [
+      "team_memory_sync",
+      "conflict_resolution"
+    ]
+  }
+]
