@@ -3,15 +3,15 @@
 """EnhancedMemoryRail -- Multi-Level Memory Integration Rail
 
 This rail integrates the enhanced multi-level memory system into JiuwenSwarm's
-agent lifecycle. It replaces the default single-layer memory with a three-tier
-hierarchical system optimized for different temporal scopes.
+agent lifecycle.
 
-Key Features:
-- L1 Working Memory: Recent context (20 items, 1h TTL)
-- L2 Task Memory: Execution history (100 items, 7d TTL)
-- L3 Project Memory: Long-term knowledge (unlimited, persistent)
-- Hybrid retrieval: semantic + temporal + frequency + importance
-- Team memory sync: multi-agent collaboration support
+Current behavior:
+- Store completed user/assistant exchanges in L1 working memory
+- Retrieve across the memory layers with hybrid ranking
+- Inject retrieved content before the next model call
+
+L2/L3 routing, disk persistence, and team synchronization require separate
+integration work; they are not enabled by this rail yet.
 
 Integration:
 Register this rail in your agent configuration to automatically enable
@@ -26,7 +26,9 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 from openjiuwen.core.single_agent.rail.base import AgentCallbackContext
+from openjiuwen.core.foundation.llm.schema.message import UserMessage
 from openjiuwen.harness.rails.base import DeepAgentRail
+from openjiuwen.harness.prompts import PromptSection
 
 from jiuwenswarm.agents.harness.common.memory.multi_level_memory import (
     MultiLevelMemory,
@@ -47,8 +49,7 @@ if TYPE_CHECKING:
 class EnhancedMemoryRail(DeepAgentRail):
     """Enhanced multi-level memory integration rail.
 
-    Automatically manages agent memory across three hierarchical layers
-    and injects relevant context into system prompts before each model call.
+    Store completed exchanges and inject relevant context before model calls.
 
     Usage:
         rail = EnhancedMemoryRail(
@@ -56,7 +57,7 @@ class EnhancedMemoryRail(DeepAgentRail):
             enable_hybrid_retrieval=True,
             enable_team_sync=False
         )
-        agent.register_rail(rail)
+        await agent.register_rail(rail)
     """
 
     SECTION_NAME = "enhanced_memory"
@@ -70,6 +71,7 @@ class EnhancedMemoryRail(DeepAgentRail):
         enable_team_sync: bool = False,
         retrieval_weights: Optional[RetrievalWeights] = None,
         max_context_items: int = 10,
+        max_context_chars: int | None = None,
     ) -> None:
         """Initialize the enhanced memory rail.
 
@@ -79,12 +81,16 @@ class EnhancedMemoryRail(DeepAgentRail):
             enable_team_sync: Enable team memory synchronization (default: False)
             retrieval_weights: Custom weights for retrieval scoring
             max_context_items: Maximum memory items to inject per call (default: 10)
+            max_context_chars: Optional full prompt-section character cap.
         """
         super().__init__()
         self._workspace_path: str = workspace
         self._enable_hybrid_retrieval = enable_hybrid_retrieval
         self._enable_team_sync = enable_team_sync
         self._max_context_items = max_context_items
+        if max_context_chars is not None and max_context_chars <= 0:
+            raise ValueError("max_context_chars must be positive")
+        self._max_context_chars = max_context_chars
 
         # Initialize memory system
         self._memory: Optional[MultiLevelMemory] = None
@@ -109,13 +115,9 @@ class EnhancedMemoryRail(DeepAgentRail):
             )
             return
 
-        # Create multi-level memory
-        try:
-            self._memory = MultiLevelMemory(storage_dir=self._workspace_path)
-            logger.info("[EnhancedMemoryRail] Multi-level memory system initialized")
-        except Exception as e:
-            logger.error(f"[EnhancedMemoryRail] Failed to initialize memory: {e}")
-            return
+        # MultiLevelMemory currently has no storage_dir or disk persistence API.
+        self._memory = MultiLevelMemory()
+        logger.info("[EnhancedMemoryRail] Multi-level memory system initialized")
 
         # Create hybrid retrieval engine if enabled
         if self._enable_hybrid_retrieval:
@@ -129,14 +131,16 @@ class EnhancedMemoryRail(DeepAgentRail):
                     f"[EnhancedMemoryRail] Failed to initialize retrieval engine: {e}"
                 )
 
-    def before_model_call(self, context: AgentCallbackContext) -> None:
+    async def before_model_call(self, ctx: AgentCallbackContext) -> None:
         """Inject relevant memories into system prompt before each model call."""
-        if not self._memory or not self._system_prompt_builder:
+        if self._memory is None or self._system_prompt_builder is None:
             return
 
         try:
-            # Get current user message
-            user_message = context.input.text if hasattr(context.input, 'text') else ""
+            # Replace the previous section on every model call, including calls
+            # where there is no usable query or matching memory.
+            self._system_prompt_builder.remove_section(self.SECTION_NAME)
+            user_message = self._latest_user_message(ctx)
 
             if not user_message:
                 return
@@ -152,12 +156,16 @@ class EnhancedMemoryRail(DeepAgentRail):
 
             # Build memory context section
             memory_context = self._build_memory_context(relevant_memories)
+            if not memory_context:
+                return
 
             # Inject into system prompt
-            self._system_prompt_builder.set_section(
-                name=self.SECTION_NAME,
-                content=memory_context,
-                priority=self.SECTION_PRIORITY,
+            self._system_prompt_builder.add_section(
+                PromptSection(
+                    name=self.SECTION_NAME,
+                    content={"cn": memory_context, "en": memory_context},
+                    priority=self.SECTION_PRIORITY,
+                )
             )
 
             logger.debug(
@@ -168,20 +176,17 @@ class EnhancedMemoryRail(DeepAgentRail):
         except Exception as e:
             logger.error(f"[EnhancedMemoryRail] Error in before_model_call: {e}")
 
-    def after_model_call(self, context: AgentCallbackContext) -> None:
+    async def after_model_call(self, ctx: AgentCallbackContext) -> None:
         """Store important information from model response."""
-        if not self._memory:
+        if self._memory is None:
             return
 
         try:
-            # Extract user message and assistant response
-            user_message = context.input.text if hasattr(context.input, 'text') else ""
-            assistant_response = ""
+            user_message = self._latest_user_message(ctx)
+            response = getattr(getattr(ctx, "inputs", None), "response", None)
+            assistant_response = self._message_text(response)
 
-            if hasattr(context, 'response') and context.response:
-                assistant_response = str(context.response)
-
-            if not user_message and not assistant_response:
+            if not user_message or not assistant_response:
                 return
 
             # Create memory entry
@@ -191,13 +196,12 @@ class EnhancedMemoryRail(DeepAgentRail):
             importance = self._calculate_importance(user_message, assistant_response)
 
             # Store in appropriate layer
-            self._memory.add_memory(
+            self._memory.store(
                 content=memory_content,
+                layer="working",
                 importance=importance,
-                metadata={
-                    "type": "conversation",
-                    "user_query": user_message,
-                }
+                type="conversation",
+                user_query=user_message,
             )
 
             logger.debug(
@@ -209,7 +213,7 @@ class EnhancedMemoryRail(DeepAgentRail):
 
     def _retrieve_relevant_memories(self, query: str, limit: int):
         """Retrieve relevant memories using hybrid retrieval."""
-        if not self._memory:
+        if self._memory is None:
             return []
 
         try:
@@ -224,13 +228,10 @@ class EnhancedMemoryRail(DeepAgentRail):
                     memories=all_memories,
                     top_k=limit
                 )
-                return [mem for _, mem in results]
+                return [mem for mem, _score in results]
             else:
-                # Fallback to simple retrieval
-                return self._memory.retrieve_memories(
-                    query=query,
-                    limit=limit
-                )
+                # Recent-memory fallback when hybrid retrieval is disabled.
+                return self._memory.get_all_memories()[-limit:][::-1]
         except Exception as e:
             logger.error(f"[EnhancedMemoryRail] Retrieval error: {e}")
             return []
@@ -240,17 +241,25 @@ class EnhancedMemoryRail(DeepAgentRail):
         if not memories:
             return ""
 
-        lines = ["# Relevant Context from Memory\n"]
-        lines.append("The following information from previous interactions may be relevant:\n")
+        lines = [
+            "# Relevant Context from Memory\n",
+            "The following information from previous interactions may be relevant:\n",
+        ]
 
         for i, memory in enumerate(memories, 1):
             content = memory.content if hasattr(memory, 'content') else str(memory)
             # Truncate very long memories
             if len(content) > 500:
                 content = content[:500] + "..."
-            lines.append(f"\n## Memory {i}:")
-            lines.append(content)
+            candidate = f"\n## Memory {i}:\n{content}"
+            if self._max_context_chars is not None and len(
+                "\n".join(lines + [candidate])
+            ) > self._max_context_chars:
+                continue
+            lines.append(candidate)
 
+        if len(lines) == 2:
+            return ""
         return "\n".join(lines)
 
     def _calculate_importance(self, user_message: str, assistant_response: str) -> float:
@@ -279,15 +288,33 @@ class EnhancedMemoryRail(DeepAgentRail):
         # Cap at 1.0
         return min(importance, 1.0)
 
-    def cleanup(self, agent: "DeepAgent") -> None:
-        """Cleanup when rail is removed or agent shuts down."""
-        if self._memory:
-            try:
-                # Save all memories to disk
-                self._memory.save_all()
-                logger.info("[EnhancedMemoryRail] Saved all memories on cleanup")
-            except Exception as e:
-                logger.error(f"[EnhancedMemoryRail] Error saving memories: {e}")
+    @staticmethod
+    def _message_text(message: object) -> str:
+        """Extract plain text without turning an entire message object into text."""
+        content = getattr(message, "content", None)
+        if isinstance(content, str):
+            return content.strip()
+        if isinstance(content, list):
+            return "\n".join(
+                part if isinstance(part, str) else str(part.get("text", ""))
+                for part in content
+                if isinstance(part, str) or (isinstance(part, dict) and part.get("type") == "text")
+            ).strip()
+        return ""
+
+    @classmethod
+    def _latest_user_message(cls, ctx: AgentCallbackContext) -> str:
+        inputs = getattr(ctx, "inputs", None)
+        messages = getattr(inputs, "messages", None) or []
+        for message in reversed(messages):
+            if isinstance(message, UserMessage) or getattr(message, "role", None) == "user":
+                return cls._message_text(message)
+        return ""
+
+    def uninit(self, agent: "DeepAgent") -> None:
+        """Remove this rail's prompt section when it is unregistered."""
+        if self._system_prompt_builder is not None:
+            self._system_prompt_builder.remove_section(self.SECTION_NAME)
 
 
 __all__ = ["EnhancedMemoryRail"]

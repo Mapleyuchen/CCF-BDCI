@@ -1,0 +1,4327 @@
+{
+  "kind": "live_model_experiment",
+  "dataset_sha256": "d1db63c6266134ca54c28eb56762e75f35be8083ee8ab1babdecb7891ee636e8",
+  "dataset_path": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\data\\memory_agent_qa_v2.json",
+  "settings": {
+    "model_name": "qwen-plus",
+    "model_provider": "OpenAI",
+    "model_request": {
+      "temperature": 0,
+      "top_p": null,
+      "max_tokens": null
+    },
+    "context_chars": 600,
+    "top_k": 10,
+    "repeats": 3,
+    "questions": 20,
+    "max_iterations": 1,
+    "tools": []
+  },
+  "summary": {
+    "baseline": {
+      "valid": 60,
+      "failed": 0,
+      "accuracy": 0.15,
+      "mean_evidence_recall": 0.2,
+      "mean_memory_chars": 600,
+      "mean_input_tokens": 202.2,
+      "mean_output_tokens": 2.1666666666666665,
+      "mean_total_tokens": 204.36666666666667,
+      "mean_latency_ms": 357.1696716666641
+    },
+    "enhanced": {
+      "valid": 60,
+      "failed": 0,
+      "accuracy": 1,
+      "mean_evidence_recall": 1.0,
+      "mean_memory_chars": 500.6,
+      "mean_input_tokens": 167.05,
+      "mean_output_tokens": 10.266666666666667,
+      "mean_total_tokens": 177.31666666666666,
+      "mean_latency_ms": 575.8216883332958
+    },
+    "paired": {
+      "n": 60,
+      "unique_questions": 20,
+      "repeats": 3,
+      "accuracy_gain": 0.85,
+      "evidence_recall_gain": 0.8
+    },
+    "by_repeat": [
+      {
+        "repeat": 0,
+        "paired_questions": 20,
+        "baseline_accuracy": 0.15,
+        "enhanced_accuracy": 1
+      },
+      {
+        "repeat": 1,
+        "paired_questions": 20,
+        "baseline_accuracy": 0.15,
+        "enhanced_accuracy": 1
+      },
+      {
+        "repeat": 2,
+        "paired_questions": 20,
+        "baseline_accuracy": 0.15,
+        "enhanced_accuracy": 1
+      }
+    ],
+    "resource_totals": {
+      "baseline": {
+        "query_tokens": 12262,
+        "seed_tokens": 0,
+        "all_tokens": 12262,
+        "tokens_per_valid_question_including_seed": 204.36666666666667,
+        "seed_model_calls": 0
+      },
+      "enhanced": {
+        "query_tokens": 10639,
+        "seed_tokens": 10290,
+        "all_tokens": 20929,
+        "tokens_per_valid_question_including_seed": 348.81666666666666,
+        "seed_model_calls": 60
+      }
+    }
+  },
+  "runs": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 7918.38319999988,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 3410,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 3430
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "seed_latency_ms": 7139.512800000375,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 3410,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 3430
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "seed_latency_ms": 6817.752000000837,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 3410,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 3430
+    }
+  ],
+  "records": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q01",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 925.2472000007401,
+      "answer": "Atlas stores customer profiles in PostgreSQL.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 7,
+      "total_tokens": 208,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Iris"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q02",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 313.8103000001138,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "answers": [
+        "2400",
+        "2,400"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q03",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 290.8757000004698,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 204,
+      "output_tokens": 1,
+      "total_tokens": 205,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "answers": [
+        "November 18"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q04",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 299.2670999992697,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "AES-256",
+        "AES 256"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q05",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 294.7751000010612,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 204,
+      "output_tokens": 1,
+      "total_tokens": 205,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q06",
+      "query": "Which email service sends Beacon alerts?",
+      "relevant_ids": [
+        "F02"
+      ],
+      "answers": [
+        "Mailgun"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q06",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 489.66140000084124,
+      "answer": "The Beacon service sends alert emails through Mailgun.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 10,
+      "total_tokens": 211,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q07",
+      "query": "What framework does Cedar use for its web interface?",
+      "relevant_ids": [
+        "F03"
+      ],
+      "answers": [
+        "React"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q07",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 508.8467999994464,
+      "answer": "Cedar uses React for its web interface.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 204,
+      "output_tokens": 9,
+      "total_tokens": 213,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q08",
+      "query": "In which region is Delta deployed?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Frankfurt"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q08",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 307.0372000001953,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q09",
+      "query": "What is Echo's request limit per minute?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "120"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q09",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 408.919399998922,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q10",
+      "query": "On which day and at what time does Falcon meet?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "Tuesday at 10 AM",
+        "Tuesday at 10:00 AM"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q10",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 336.9196000003285,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 205,
+      "output_tokens": 1,
+      "total_tokens": 206,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q11",
+      "query": "Where does Grove export metrics?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Prometheus"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q11",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 383.64199999887205,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 200,
+      "output_tokens": 1,
+      "total_tokens": 201,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q12",
+      "query": "How often does Harbor run its backup job?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "every six hours",
+        "every 6 hours"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q12",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 284.66949999892677,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q13",
+      "query": "How many reviewers does Juniper require?",
+      "relevant_ids": [
+        "F10"
+      ],
+      "answers": [
+        "two",
+        "2"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q13",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 279.0733000001637,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 202,
+      "output_tokens": 1,
+      "total_tokens": 203,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q14",
+      "query": "What seed number does Kestrel use?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "417"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q14",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 379.04860000162444,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q15",
+      "query": "Who owns the Lunar project?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Morgan Chen"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q15",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 321.45610000043234,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 200,
+      "output_tokens": 1,
+      "total_tokens": 201,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q16",
+      "query": "After how many days does Nimbus archive logs?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "30"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q16",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 481.6878999990877,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q17",
+      "query": "How often does the Orion dashboard refresh?",
+      "relevant_ids": [
+        "F15"
+      ],
+      "answers": [
+        "every five minutes",
+        "every 5 minutes"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q17",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 316.4148000014393,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 202,
+      "output_tokens": 1,
+      "total_tokens": 203,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q18",
+      "query": "What batch size trained the Quartz model?",
+      "relevant_ids": [
+        "F17"
+      ],
+      "answers": [
+        "64"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q18",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 289.08380000029865,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 202,
+      "output_tokens": 1,
+      "total_tokens": 203,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q19",
+      "query": "How many times does River retry failed requests?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three",
+        "3"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q19",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 410.43639999952575,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q20",
+      "query": "Which paper template does Summit use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "ICLR"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-cb9119b8906b485f8641e76804cac111-probe-Q20",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 408.5599000009097,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q01",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 510.9706000002916,
+      "answer": "The Atlas service stores customer profiles in PostgreSQL.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F01",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 9,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Iris"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q02",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 510.210399999778,
+      "answer": "The Iris application uses Redis for session storage.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F11> The Kestrel experiment uses seed number 417. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 499,
+      "observed_ids": [
+        "F09",
+        "F11",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 9,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "answers": [
+        "2400",
+        "2,400"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q03",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 529.855700000553,
+      "answer": "The Maple dataset contains 2400 labeled examples.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F13> The Maple dataset contains 2400 labeled examples. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F01",
+        "F13",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 168,
+      "output_tokens": 12,
+      "total_tokens": 180,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "answers": [
+        "November 18"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q04",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 1174.3478999997023,
+      "answer": "The Pine release is scheduled for November 18.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 488,
+      "observed_ids": [
+        "F12",
+        "F16",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 163,
+      "output_tokens": 11,
+      "total_tokens": 174,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "AES-256",
+        "AES 256"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q05",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 551.7792000009649,
+      "answer": "The Terra database uses AES-256 encryption for backups.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 507,
+      "observed_ids": [
+        "F09",
+        "F16",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 171,
+      "output_tokens": 13,
+      "total_tokens": 184,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q06",
+      "query": "Which email service sends Beacon alerts?",
+      "relevant_ids": [
+        "F02"
+      ],
+      "answers": [
+        "Mailgun"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q06",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 610.015199999907,
+      "answer": "The Beacon service sends alert emails through Mailgun.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F02> The Beacon service sends alert emails through Mailgun. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F14> The Nimbus service archives logs after 30 days. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 518,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F14"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 165,
+      "output_tokens": 10,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q07",
+      "query": "What framework does Cedar use for its web interface?",
+      "relevant_ids": [
+        "F03"
+      ],
+      "answers": [
+        "React"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q07",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 588.7630999986868,
+      "answer": "The Cedar project uses React for its web interface.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F03> The Cedar project uses React for its web interface. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F03",
+        "F09",
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 168,
+      "output_tokens": 10,
+      "total_tokens": 178,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q08",
+      "query": "In which region is Delta deployed?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Frankfurt"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q08",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 538.8090000014927,
+      "answer": "The Delta project is deployed in the Frankfurt region.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F04> The Delta project deploys to the Frankfurt region. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 495,
+      "observed_ids": [
+        "F04",
+        "F12",
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 164,
+      "output_tokens": 10,
+      "total_tokens": 174,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q09",
+      "query": "What is Echo's request limit per minute?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "120"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q09",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 557.1412999997847,
+      "answer": "Echo's request limit is 120 per minute.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F05> The Echo API limits requests to 120 per minute. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 492,
+      "observed_ids": [
+        "F05",
+        "F12",
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 169,
+      "output_tokens": 12,
+      "total_tokens": 181,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q10",
+      "query": "On which day and at what time does Falcon meet?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "Tuesday at 10 AM",
+        "Tuesday at 10:00 AM"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q10",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 539.4280000000435,
+      "answer": "The Falcon team meets every Tuesday at 10 AM.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F06> The Falcon team meets every Tuesday at 10 AM. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 497,
+      "observed_ids": [
+        "F06",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 173,
+      "output_tokens": 12,
+      "total_tokens": 185,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q11",
+      "query": "Where does Grove export metrics?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Prometheus"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q11",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 452.05150000037975,
+      "answer": "The Grove pipeline exports metrics to Prometheus.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F07> The Grove pipeline exports metrics to Prometheus. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 501,
+      "observed_ids": [
+        "F07",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 164,
+      "output_tokens": 8,
+      "total_tokens": 172,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q12",
+      "query": "How often does Harbor run its backup job?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "every six hours",
+        "every 6 hours"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q12",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 447.9025999989972,
+      "answer": "The Harbor backup job runs every six hours.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F08> The Harbor backup job runs every six hours. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F03> The Cedar project uses React for its web interface. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 503,
+      "observed_ids": [
+        "F03",
+        "F08",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 169,
+      "output_tokens": 9,
+      "total_tokens": 178,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q13",
+      "query": "How many reviewers does Juniper require?",
+      "relevant_ids": [
+        "F10"
+      ],
+      "answers": [
+        "two",
+        "2"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q13",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 479.5319999993808,
+      "answer": "The Juniper repository requires two code reviewers.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F10> The Juniper repository requires two code reviewers. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 503,
+      "observed_ids": [
+        "F10",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 167,
+      "output_tokens": 9,
+      "total_tokens": 176,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q14",
+      "query": "What seed number does Kestrel use?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "417"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q14",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 576.7869999999675,
+      "answer": "The Kestrel experiment uses seed number 417.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F11> The Kestrel experiment uses seed number 417. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 496,
+      "observed_ids": [
+        "F11",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 172,
+      "output_tokens": 13,
+      "total_tokens": 185,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q15",
+      "query": "Who owns the Lunar project?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Morgan Chen"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q15",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 484.2394000006607,
+      "answer": "The Lunar project is owned by Morgan Chen.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F04> The Delta project deploys to the Frankfurt region. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 492,
+      "observed_ids": [
+        "F04",
+        "F12",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 161,
+      "output_tokens": 9,
+      "total_tokens": 170,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q16",
+      "query": "After how many days does Nimbus archive logs?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "30"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q16",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 668.4092999985296,
+      "answer": "Nimbus archives logs after 30 days.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F14> The Nimbus service archives logs after 30 days. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 499,
+      "observed_ids": [
+        "F14",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 170,
+      "output_tokens": 10,
+      "total_tokens": 180,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q17",
+      "query": "How often does the Orion dashboard refresh?",
+      "relevant_ids": [
+        "F15"
+      ],
+      "answers": [
+        "every five minutes",
+        "every 5 minutes"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q17",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 435.75049999890325,
+      "answer": "The Orion dashboard refreshes every five minutes.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F15> The Orion dashboard refreshes every five minutes. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 491,
+      "observed_ids": [
+        "F12",
+        "F15",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 162,
+      "output_tokens": 9,
+      "total_tokens": 171,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q18",
+      "query": "What batch size trained the Quartz model?",
+      "relevant_ids": [
+        "F17"
+      ],
+      "answers": [
+        "64"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q18",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 604.1124000003038,
+      "answer": "The Quartz model was trained with batch size 64.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F17> The Quartz model was trained with batch size 64. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 490,
+      "observed_ids": [
+        "F12",
+        "F17",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 165,
+      "output_tokens": 12,
+      "total_tokens": 177,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q19",
+      "query": "How many times does River retry failed requests?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three",
+        "3"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q19",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 551.0510000003705,
+      "answer": "The River client retries failed requests three times.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F18> The River client retries failed requests three times. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F05> The Echo API limits requests to 120 per minute. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F05",
+        "F18",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 172,
+      "output_tokens": 9,
+      "total_tokens": 181,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q20",
+      "query": "Which paper template does Summit use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "ICLR"
+      ],
+      "seed_latency_ms": 7918.38319999988,
+      "conversation_id": "memory-ab-441da442d2fc45d3a554cc4b9997d483-probe-Q20",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 464.37580000019807,
+      "answer": "The Summit document uses the ICLR template.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F18> The River client retries failed requests three times. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 505,
+      "observed_ids": [
+        "F18",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 9,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q01",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 624.597599999106,
+      "answer": "The Atlas service stores customer profiles in PostgreSQL.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F01",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 9,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Iris"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q02",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 482.342699999208,
+      "answer": "The Iris application uses Redis for session storage.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F11> The Kestrel experiment uses seed number 417. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 499,
+      "observed_ids": [
+        "F09",
+        "F11",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 9,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "answers": [
+        "2400",
+        "2,400"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q03",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 513.8607999997475,
+      "answer": "The Maple dataset contains 2400 labeled examples.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F13> The Maple dataset contains 2400 labeled examples. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F01",
+        "F13",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 168,
+      "output_tokens": 12,
+      "total_tokens": 180,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "answers": [
+        "November 18"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q04",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 489.0469000001758,
+      "answer": "The Pine release is scheduled for November 18.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 488,
+      "observed_ids": [
+        "F12",
+        "F16",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 163,
+      "output_tokens": 11,
+      "total_tokens": 174,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "AES-256",
+        "AES 256"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q05",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 537.6312000007601,
+      "answer": "The Terra database uses AES-256 encryption for backups.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 507,
+      "observed_ids": [
+        "F09",
+        "F16",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 171,
+      "output_tokens": 13,
+      "total_tokens": 184,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q06",
+      "query": "Which email service sends Beacon alerts?",
+      "relevant_ids": [
+        "F02"
+      ],
+      "answers": [
+        "Mailgun"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q06",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 562.6022999986162,
+      "answer": "The Beacon service sends alert emails through Mailgun.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F02> The Beacon service sends alert emails through Mailgun. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F14> The Nimbus service archives logs after 30 days. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 518,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F14"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 165,
+      "output_tokens": 10,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q07",
+      "query": "What framework does Cedar use for its web interface?",
+      "relevant_ids": [
+        "F03"
+      ],
+      "answers": [
+        "React"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q07",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 1231.1302999987674,
+      "answer": "The Cedar project uses React for its web interface.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F03> The Cedar project uses React for its web interface. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F03",
+        "F09",
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 168,
+      "output_tokens": 10,
+      "total_tokens": 178,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q08",
+      "query": "In which region is Delta deployed?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Frankfurt"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q08",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 509.25049999932526,
+      "answer": "The Delta project is deployed in the Frankfurt region.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F04> The Delta project deploys to the Frankfurt region. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 495,
+      "observed_ids": [
+        "F04",
+        "F12",
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 164,
+      "output_tokens": 10,
+      "total_tokens": 174,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q09",
+      "query": "What is Echo's request limit per minute?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "120"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q09",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 614.9021000001085,
+      "answer": "Echo's request limit is 120 per minute.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F05> The Echo API limits requests to 120 per minute. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 492,
+      "observed_ids": [
+        "F05",
+        "F12",
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 169,
+      "output_tokens": 12,
+      "total_tokens": 181,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q10",
+      "query": "On which day and at what time does Falcon meet?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "Tuesday at 10 AM",
+        "Tuesday at 10:00 AM"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q10",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 614.0426999991178,
+      "answer": "The Falcon team meets every Tuesday at 10 AM.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F06> The Falcon team meets every Tuesday at 10 AM. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 497,
+      "observed_ids": [
+        "F06",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 173,
+      "output_tokens": 12,
+      "total_tokens": 185,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q11",
+      "query": "Where does Grove export metrics?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Prometheus"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q11",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 593.851599998743,
+      "answer": "The Grove pipeline exports metrics to Prometheus.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F07> The Grove pipeline exports metrics to Prometheus. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 501,
+      "observed_ids": [
+        "F07",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 164,
+      "output_tokens": 8,
+      "total_tokens": 172,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q12",
+      "query": "How often does Harbor run its backup job?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "every six hours",
+        "every 6 hours"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q12",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 634.9157000004197,
+      "answer": "The Harbor backup job runs every six hours.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F08> The Harbor backup job runs every six hours. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F03> The Cedar project uses React for its web interface. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 503,
+      "observed_ids": [
+        "F03",
+        "F08",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 169,
+      "output_tokens": 9,
+      "total_tokens": 178,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q13",
+      "query": "How many reviewers does Juniper require?",
+      "relevant_ids": [
+        "F10"
+      ],
+      "answers": [
+        "two",
+        "2"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q13",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 615.2302999998938,
+      "answer": "The Juniper repository requires two code reviewers.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F10> The Juniper repository requires two code reviewers. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 503,
+      "observed_ids": [
+        "F10",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 167,
+      "output_tokens": 9,
+      "total_tokens": 176,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q14",
+      "query": "What seed number does Kestrel use?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "417"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q14",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 612.7379999998084,
+      "answer": "The Kestrel experiment uses seed number 417.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F11> The Kestrel experiment uses seed number 417. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 496,
+      "observed_ids": [
+        "F11",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 172,
+      "output_tokens": 13,
+      "total_tokens": 185,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q15",
+      "query": "Who owns the Lunar project?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Morgan Chen"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q15",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 512.4995999995008,
+      "answer": "The Lunar project is owned by Morgan Chen.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F04> The Delta project deploys to the Frankfurt region. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 492,
+      "observed_ids": [
+        "F04",
+        "F12",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 161,
+      "output_tokens": 9,
+      "total_tokens": 170,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q16",
+      "query": "After how many days does Nimbus archive logs?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "30"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q16",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 818.1538000008004,
+      "answer": "The Nimbus service archives logs after 30 days.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F14> The Nimbus service archives logs after 30 days. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 499,
+      "observed_ids": [
+        "F14",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 170,
+      "output_tokens": 11,
+      "total_tokens": 181,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q17",
+      "query": "How often does the Orion dashboard refresh?",
+      "relevant_ids": [
+        "F15"
+      ],
+      "answers": [
+        "every five minutes",
+        "every 5 minutes"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q17",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 514.0645000010409,
+      "answer": "The Orion dashboard refreshes every five minutes.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F15> The Orion dashboard refreshes every five minutes. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 491,
+      "observed_ids": [
+        "F12",
+        "F15",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 162,
+      "output_tokens": 9,
+      "total_tokens": 171,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q18",
+      "query": "What batch size trained the Quartz model?",
+      "relevant_ids": [
+        "F17"
+      ],
+      "answers": [
+        "64"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q18",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 610.7386999992741,
+      "answer": "The Quartz model was trained with batch size 64.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F17> The Quartz model was trained with batch size 64. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 490,
+      "observed_ids": [
+        "F12",
+        "F17",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 165,
+      "output_tokens": 12,
+      "total_tokens": 177,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q19",
+      "query": "How many times does River retry failed requests?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three",
+        "3"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q19",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 511.58919999943464,
+      "answer": "The River client retries failed requests three times.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F18> The River client retries failed requests three times. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F05> The Echo API limits requests to 120 per minute. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F05",
+        "F18",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 172,
+      "output_tokens": 9,
+      "total_tokens": 181,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 1,
+      "question_id": "Q20",
+      "query": "Which paper template does Summit use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "ICLR"
+      ],
+      "seed_latency_ms": 7139.512800000375,
+      "conversation_id": "memory-ab-4a35c33995e0407fa8d19d24f7e3d883-probe-Q20",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 614.8670999991737,
+      "answer": "The Summit document uses the ICLR template.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F18> The River client retries failed requests three times. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 505,
+      "observed_ids": [
+        "F18",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 9,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q01",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 569.8294000012538,
+      "answer": "Atlas stores customer profiles in PostgreSQL.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 7,
+      "total_tokens": 208,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Iris"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q02",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 402.180999999473,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "answers": [
+        "2400",
+        "2,400"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q03",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 305.74150000029476,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 204,
+      "output_tokens": 1,
+      "total_tokens": 205,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "answers": [
+        "November 18"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q04",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 399.56420000089565,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "AES-256",
+        "AES 256"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q05",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 317.04069999977946,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 204,
+      "output_tokens": 1,
+      "total_tokens": 205,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q06",
+      "query": "Which email service sends Beacon alerts?",
+      "relevant_ids": [
+        "F02"
+      ],
+      "answers": [
+        "Mailgun"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q06",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 516.5127000000211,
+      "answer": "The Beacon service sends alert emails through Mailgun.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 10,
+      "total_tokens": 211,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q07",
+      "query": "What framework does Cedar use for its web interface?",
+      "relevant_ids": [
+        "F03"
+      ],
+      "answers": [
+        "React"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q07",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 532.2737000005873,
+      "answer": "Cedar uses React for its web interface.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 204,
+      "output_tokens": 9,
+      "total_tokens": 213,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q08",
+      "query": "In which region is Delta deployed?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Frankfurt"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q08",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 302.5370999985171,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q09",
+      "query": "What is Echo's request limit per minute?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "120"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q09",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 285.7222999991791,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q10",
+      "query": "On which day and at what time does Falcon meet?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "Tuesday at 10 AM",
+        "Tuesday at 10:00 AM"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q10",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 285.36929999972926,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 205,
+      "output_tokens": 1,
+      "total_tokens": 206,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q11",
+      "query": "Where does Grove export metrics?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Prometheus"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q11",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 299.5164999992994,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 200,
+      "output_tokens": 1,
+      "total_tokens": 201,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q12",
+      "query": "How often does Harbor run its backup job?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "every six hours",
+        "every 6 hours"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q12",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 339.1695999998774,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q13",
+      "query": "How many reviewers does Juniper require?",
+      "relevant_ids": [
+        "F10"
+      ],
+      "answers": [
+        "two",
+        "2"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q13",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 410.93870000077004,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 202,
+      "output_tokens": 1,
+      "total_tokens": 203,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q14",
+      "query": "What seed number does Kestrel use?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "417"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q14",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 408.03330000017013,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q15",
+      "query": "Who owns the Lunar project?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Morgan Chen"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q15",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 308.9873999997508,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 200,
+      "output_tokens": 1,
+      "total_tokens": 201,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q16",
+      "query": "After how many days does Nimbus archive logs?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "30"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q16",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 291.4951000002475,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q17",
+      "query": "How often does the Orion dashboard refresh?",
+      "relevant_ids": [
+        "F15"
+      ],
+      "answers": [
+        "every five minutes",
+        "every 5 minutes"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q17",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 313.6021999998775,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 202,
+      "output_tokens": 1,
+      "total_tokens": 203,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q18",
+      "query": "What batch size trained the Quartz model?",
+      "relevant_ids": [
+        "F17"
+      ],
+      "answers": [
+        "64"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q18",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 286.69889999946463,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 202,
+      "output_tokens": 1,
+      "total_tokens": 203,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q19",
+      "query": "How many times does River retry failed requests?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three",
+        "3"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q19",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 268.69389999956184,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "question_id": "Q20",
+      "query": "Which paper template does Summit use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "ICLR"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-71fd3ea94d924cc8affa491a8d8e1592-probe-Q20",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 289.35549999914656,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-1\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q01",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 459.774800001469,
+      "answer": "Atlas stores customer profiles in PostgreSQL.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 7,
+      "total_tokens": 208,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Iris"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q02",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 293.096899999,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "answers": [
+        "2400",
+        "2,400"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q03",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 258.19870000123046,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 204,
+      "output_tokens": 1,
+      "total_tokens": 205,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "answers": [
+        "November 18"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q04",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 374.77229999967676,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "AES-256",
+        "AES 256"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q05",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 307.17490000097314,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 204,
+      "output_tokens": 1,
+      "total_tokens": 205,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q06",
+      "query": "Which email service sends Beacon alerts?",
+      "relevant_ids": [
+        "F02"
+      ],
+      "answers": [
+        "Mailgun"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q06",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 513.5676999998395,
+      "answer": "The Beacon service sends alert emails through Mailgun.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 10,
+      "total_tokens": 211,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q07",
+      "query": "What framework does Cedar use for its web interface?",
+      "relevant_ids": [
+        "F03"
+      ],
+      "answers": [
+        "React"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q07",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 511.0625999986951,
+      "answer": "The Cedar project uses React for its web interface.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 204,
+      "output_tokens": 10,
+      "total_tokens": 214,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q08",
+      "query": "In which region is Delta deployed?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Frankfurt"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q08",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 299.0823999989516,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q09",
+      "query": "What is Echo's request limit per minute?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "120"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q09",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 310.0493000001734,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q10",
+      "query": "On which day and at what time does Falcon meet?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "Tuesday at 10 AM",
+        "Tuesday at 10:00 AM"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q10",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 355.1423999997496,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 205,
+      "output_tokens": 1,
+      "total_tokens": 206,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q11",
+      "query": "Where does Grove export metrics?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Prometheus"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q11",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 306.39479999990726,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 200,
+      "output_tokens": 1,
+      "total_tokens": 201,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q12",
+      "query": "How often does Harbor run its backup job?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "every six hours",
+        "every 6 hours"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q12",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 280.8082999999897,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q13",
+      "query": "How many reviewers does Juniper require?",
+      "relevant_ids": [
+        "F10"
+      ],
+      "answers": [
+        "two",
+        "2"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q13",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 274.68339999904856,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 202,
+      "output_tokens": 1,
+      "total_tokens": 203,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q14",
+      "query": "What seed number does Kestrel use?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "417"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q14",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 254.85499999922467,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q15",
+      "query": "Who owns the Lunar project?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Morgan Chen"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q15",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 310.41499999992084,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 200,
+      "output_tokens": 1,
+      "total_tokens": 201,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q16",
+      "query": "After how many days does Nimbus archive logs?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "30"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q16",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 267.8070000001753,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q17",
+      "query": "How often does the Orion dashboard refresh?",
+      "relevant_ids": [
+        "F15"
+      ],
+      "answers": [
+        "every five minutes",
+        "every 5 minutes"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q17",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 287.5901999996131,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 202,
+      "output_tokens": 1,
+      "total_tokens": 203,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q18",
+      "query": "What batch size trained the Quartz model?",
+      "relevant_ids": [
+        "F17"
+      ],
+      "answers": [
+        "64"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q18",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 293.3264000002964,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 202,
+      "output_tokens": 1,
+      "total_tokens": 203,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q19",
+      "query": "How many times does River retry failed requests?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three",
+        "3"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q19",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 307.32370000077935,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 203,
+      "output_tokens": 1,
+      "total_tokens": 204,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "question_id": "Q20",
+      "query": "Which paper template does Summit use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "ICLR"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8f8fa98af1fb4b68a64e30d1b908c9c5-probe-Q20",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 302.3594000005687,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent-memory-ab-xrh3ylo1\\baseline-2\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 201,
+      "output_tokens": 1,
+      "total_tokens": 202,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q01",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 512.9238000008627,
+      "answer": "The Atlas service stores customer profiles in PostgreSQL.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F01",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 9,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Iris"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q02",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 432.2209000001749,
+      "answer": "The Iris application uses Redis for session storage.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F11> The Kestrel experiment uses seed number 417. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 499,
+      "observed_ids": [
+        "F09",
+        "F11",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 9,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "answers": [
+        "2400",
+        "2,400"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q03",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 487.1856999998272,
+      "answer": "The Maple dataset contains 2400 labeled examples.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F13> The Maple dataset contains 2400 labeled examples. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F01",
+        "F13",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 168,
+      "output_tokens": 12,
+      "total_tokens": 180,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "answers": [
+        "November 18"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q04",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 616.339499998503,
+      "answer": "The Pine release is scheduled for November 18.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 488,
+      "observed_ids": [
+        "F12",
+        "F16",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 163,
+      "output_tokens": 11,
+      "total_tokens": 174,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "AES-256",
+        "AES 256"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q05",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 612.3729999999341,
+      "answer": "The Terra database uses AES-256 encryption for backups.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 507,
+      "observed_ids": [
+        "F09",
+        "F16",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 171,
+      "output_tokens": 13,
+      "total_tokens": 184,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q06",
+      "query": "Which email service sends Beacon alerts?",
+      "relevant_ids": [
+        "F02"
+      ],
+      "answers": [
+        "Mailgun"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q06",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 516.1936000004061,
+      "answer": "The Beacon service sends alert emails through Mailgun.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F02> The Beacon service sends alert emails through Mailgun. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F14> The Nimbus service archives logs after 30 days. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 518,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F14"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 165,
+      "output_tokens": 10,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q07",
+      "query": "What framework does Cedar use for its web interface?",
+      "relevant_ids": [
+        "F03"
+      ],
+      "answers": [
+        "React"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q07",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 527.3484000008466,
+      "answer": "The Cedar project uses React for its web interface.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F03> The Cedar project uses React for its web interface. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F03",
+        "F09",
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 168,
+      "output_tokens": 10,
+      "total_tokens": 178,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q08",
+      "query": "In which region is Delta deployed?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Frankfurt"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q08",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 575.4532999999356,
+      "answer": "The Delta project is deployed in the Frankfurt region.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F04> The Delta project deploys to the Frankfurt region. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 495,
+      "observed_ids": [
+        "F04",
+        "F12",
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 164,
+      "output_tokens": 10,
+      "total_tokens": 174,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q09",
+      "query": "What is Echo's request limit per minute?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "120"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q09",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 632.2063999996317,
+      "answer": "Echo's request limit is 120 per minute.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F05> The Echo API limits requests to 120 per minute. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 492,
+      "observed_ids": [
+        "F05",
+        "F12",
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 169,
+      "output_tokens": 12,
+      "total_tokens": 181,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q10",
+      "query": "On which day and at what time does Falcon meet?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "Tuesday at 10 AM",
+        "Tuesday at 10:00 AM"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q10",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 616.5476000005583,
+      "answer": "The Falcon team meets every Tuesday at 10 AM.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F06> The Falcon team meets every Tuesday at 10 AM. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 497,
+      "observed_ids": [
+        "F06",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 173,
+      "output_tokens": 12,
+      "total_tokens": 185,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q11",
+      "query": "Where does Grove export metrics?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Prometheus"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q11",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 510.9334000007948,
+      "answer": "The Grove pipeline exports metrics to Prometheus.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F07> The Grove pipeline exports metrics to Prometheus. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 501,
+      "observed_ids": [
+        "F07",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 164,
+      "output_tokens": 8,
+      "total_tokens": 172,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q12",
+      "query": "How often does Harbor run its backup job?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "every six hours",
+        "every 6 hours"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q12",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 511.92769999943266,
+      "answer": "The Harbor backup job runs every six hours.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F08> The Harbor backup job runs every six hours. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F03> The Cedar project uses React for its web interface. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 503,
+      "observed_ids": [
+        "F03",
+        "F08",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 169,
+      "output_tokens": 9,
+      "total_tokens": 178,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q13",
+      "query": "How many reviewers does Juniper require?",
+      "relevant_ids": [
+        "F10"
+      ],
+      "answers": [
+        "two",
+        "2"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q13",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 513.216300001659,
+      "answer": "The Juniper repository requires two code reviewers.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F10> The Juniper repository requires two code reviewers. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 503,
+      "observed_ids": [
+        "F10",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 167,
+      "output_tokens": 9,
+      "total_tokens": 176,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q14",
+      "query": "What seed number does Kestrel use?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "417"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q14",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 610.5903000006947,
+      "answer": "The Kestrel experiment uses seed number 417.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F11> The Kestrel experiment uses seed number 417. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 496,
+      "observed_ids": [
+        "F11",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 172,
+      "output_tokens": 13,
+      "total_tokens": 185,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q15",
+      "query": "Who owns the Lunar project?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Morgan Chen"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q15",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 511.5863000009995,
+      "answer": "The Lunar project is owned by Morgan Chen.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F04> The Delta project deploys to the Frankfurt region. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 492,
+      "observed_ids": [
+        "F04",
+        "F12",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 161,
+      "output_tokens": 9,
+      "total_tokens": 170,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q16",
+      "query": "After how many days does Nimbus archive logs?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "30"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q16",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 618.8425000000279,
+      "answer": "Nimbus archives logs after 30 days.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F14> The Nimbus service archives logs after 30 days. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 499,
+      "observed_ids": [
+        "F14",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 170,
+      "output_tokens": 10,
+      "total_tokens": 180,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q17",
+      "query": "How often does the Orion dashboard refresh?",
+      "relevant_ids": [
+        "F15"
+      ],
+      "answers": [
+        "every five minutes",
+        "every 5 minutes"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q17",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 610.4257000006328,
+      "answer": "The Orion dashboard refreshes every five minutes.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F15> The Orion dashboard refreshes every five minutes. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 491,
+      "observed_ids": [
+        "F12",
+        "F15",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 162,
+      "output_tokens": 9,
+      "total_tokens": 171,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q18",
+      "query": "What batch size trained the Quartz model?",
+      "relevant_ids": [
+        "F17"
+      ],
+      "answers": [
+        "64"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q18",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 614.4773000014538,
+      "answer": "The Quartz model was trained with batch size 64.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F17> The Quartz model was trained with batch size 64. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 490,
+      "observed_ids": [
+        "F12",
+        "F17",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 165,
+      "output_tokens": 12,
+      "total_tokens": 177,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q19",
+      "query": "How many times does River retry failed requests?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three",
+        "3"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q19",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 535.8892000003834,
+      "answer": "The River client retries failed requests three times.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F18> The River client retries failed requests three times. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F05> The Echo API limits requests to 120 per minute. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F05",
+        "F18",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 172,
+      "output_tokens": 9,
+      "total_tokens": 181,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 2,
+      "question_id": "Q20",
+      "query": "Which paper template does Summit use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "ICLR"
+      ],
+      "seed_latency_ms": 6817.752000000837,
+      "conversation_id": "memory-ab-63f5873fdcb84f73a186ffd5bf5bcf2a-probe-Q20",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 489.0328999990743,
+      "answer": "The Summit document uses the ICLR template.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F18> The River client retries failed requests three times. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 505,
+      "observed_ids": [
+        "F18",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 9,
+      "total_tokens": 175,
+      "correct": true,
+      "status": "ok"
+    }
+  ]
+}

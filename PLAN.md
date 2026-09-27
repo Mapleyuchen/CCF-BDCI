@@ -1,5 +1,13 @@
 # CCF BDCI比赛实施计划
 
+> 当前论文实验主题已确定为“单层记忆检索系统”：`ProjectMemoryRail` 为基线，
+> `EnhancedMemoryRail` 的进程内 L1 检索为增强组。本文档下方的多层记忆、
+> L2/L3 持久化和团队同步章节保留为早期规划；当前实验及论文结果以
+> [`jiuwenswarm/experiments/AGENT_MEMORY_AB.md`](jiuwenswarm/experiments/AGENT_MEMORY_AB.md)、
+> [`jiuwenswarm/experiments/LONGMEMEVAL_TURN20.md`](jiuwenswarm/experiments/LONGMEMEVAL_TURN20.md)
+> 和对应真实模型运行记录为准。公开基准使用 LongMemEval-S 的 20 轮改编切片，
+> 不应写成官方 LongMemEval 成绩。
+
 ## 比赛要求总结
 
 ### 核心任务

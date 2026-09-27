@@ -1,0 +1,1351 @@
+{
+  "kind": "live_model_experiment",
+  "dataset_sha256": "d1db63c6266134ca54c28eb56762e75f35be8083ee8ab1babdecb7891ee636e8",
+  "dataset_path": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\data\\memory_agent_qa_v2.json",
+  "settings": {
+    "model_name": "qwen-plus",
+    "model_provider": "OpenAI",
+    "model_request": {
+      "temperature": 0,
+      "top_p": null,
+      "max_tokens": null
+    },
+    "context_chars": 300,
+    "top_k": 10,
+    "repeats": 1,
+    "questions": 20,
+    "max_iterations": 1,
+    "tools": []
+  },
+  "summary": {
+    "baseline": {
+      "valid": 20,
+      "failed": 0,
+      "accuracy": 0,
+      "mean_evidence_recall": 0.0,
+      "mean_memory_chars": 218,
+      "mean_input_tokens": 91.2,
+      "mean_output_tokens": 1,
+      "mean_total_tokens": 92.2,
+      "mean_latency_ms": 338.1787850001274
+    },
+    "enhanced": {
+      "valid": 20,
+      "failed": 0,
+      "accuracy": 1,
+      "mean_evidence_recall": 1.0,
+      "mean_memory_chars": 236.3,
+      "mean_input_tokens": 96.5,
+      "mean_output_tokens": 10.2,
+      "mean_total_tokens": 106.7,
+      "mean_latency_ms": 563.1573649998245
+    },
+    "paired": {
+      "n": 20,
+      "unique_questions": 20,
+      "repeats": 1,
+      "accuracy_gain": 1,
+      "evidence_recall_gain": 1.0
+    },
+    "by_repeat": [
+      {
+        "repeat": 0,
+        "paired_questions": 20,
+        "baseline_accuracy": 0,
+        "enhanced_accuracy": 1
+      }
+    ],
+    "resource_totals": {
+      "baseline": {
+        "query_tokens": 1844,
+        "seed_tokens": 0,
+        "all_tokens": 1844,
+        "tokens_per_valid_question_including_seed": 92.2,
+        "seed_model_calls": 0
+      },
+      "enhanced": {
+        "query_tokens": 2134,
+        "seed_tokens": 2217,
+        "all_tokens": 4351,
+        "tokens_per_valid_question_including_seed": 217.55,
+        "seed_model_calls": 20
+      }
+    }
+  },
+  "runs": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6753.769899998588,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 2197,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 2217
+    }
+  ],
+  "records": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q01",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 553.9817000008043,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 90,
+      "output_tokens": 1,
+      "total_tokens": 91,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Iris"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q02",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 297.52000000007683,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 90,
+      "output_tokens": 1,
+      "total_tokens": 91,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "answers": [
+        "2400",
+        "2,400"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q03",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 295.9409000013693,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 93,
+      "output_tokens": 1,
+      "total_tokens": 94,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "answers": [
+        "November 18"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q04",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 313.7410999988788,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 90,
+      "output_tokens": 1,
+      "total_tokens": 91,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "AES-256",
+        "AES 256"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q05",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 419.92080000090937,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 93,
+      "output_tokens": 1,
+      "total_tokens": 94,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q06",
+      "query": "Which email service sends Beacon alerts?",
+      "relevant_ids": [
+        "F02"
+      ],
+      "answers": [
+        "Mailgun"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q06",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 275.2073999999993,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 90,
+      "output_tokens": 1,
+      "total_tokens": 91,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q07",
+      "query": "What framework does Cedar use for its web interface?",
+      "relevant_ids": [
+        "F03"
+      ],
+      "answers": [
+        "React"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q07",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 247.04559999918274,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 93,
+      "output_tokens": 1,
+      "total_tokens": 94,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q08",
+      "query": "In which region is Delta deployed?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Frankfurt"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q08",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 271.779400000014,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 90,
+      "output_tokens": 1,
+      "total_tokens": 91,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q09",
+      "query": "What is Echo's request limit per minute?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "120"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q09",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 290.61929999988934,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 92,
+      "output_tokens": 1,
+      "total_tokens": 93,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q10",
+      "query": "On which day and at what time does Falcon meet?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "Tuesday at 10 AM",
+        "Tuesday at 10:00 AM"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q10",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 449.6619000001374,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 94,
+      "output_tokens": 1,
+      "total_tokens": 95,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q11",
+      "query": "Where does Grove export metrics?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Prometheus"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q11",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 294.38500000105705,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 89,
+      "output_tokens": 1,
+      "total_tokens": 90,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q12",
+      "query": "How often does Harbor run its backup job?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "every six hours",
+        "every 6 hours"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q12",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 295.812800000931,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 92,
+      "output_tokens": 1,
+      "total_tokens": 93,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q13",
+      "query": "How many reviewers does Juniper require?",
+      "relevant_ids": [
+        "F10"
+      ],
+      "answers": [
+        "two",
+        "2"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q13",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 264.33039999938046,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 91,
+      "output_tokens": 1,
+      "total_tokens": 92,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q14",
+      "query": "What seed number does Kestrel use?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "417"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q14",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 410.4182999999466,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 92,
+      "output_tokens": 1,
+      "total_tokens": 93,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q15",
+      "query": "Who owns the Lunar project?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Morgan Chen"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q15",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 291.06270000011136,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 89,
+      "output_tokens": 1,
+      "total_tokens": 90,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q16",
+      "query": "After how many days does Nimbus archive logs?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "30"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q16",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 463.49410000038915,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 92,
+      "output_tokens": 1,
+      "total_tokens": 93,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q17",
+      "query": "How often does the Orion dashboard refresh?",
+      "relevant_ids": [
+        "F15"
+      ],
+      "answers": [
+        "every five minutes",
+        "every 5 minutes"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q17",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 261.1183999997593,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 91,
+      "output_tokens": 1,
+      "total_tokens": 92,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q18",
+      "query": "What batch size trained the Quartz model?",
+      "relevant_ids": [
+        "F17"
+      ],
+      "answers": [
+        "64"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q18",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 305.96650000006775,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 91,
+      "output_tokens": 1,
+      "total_tokens": 92,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q19",
+      "query": "How many times does River retry failed requests?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three",
+        "3"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q19",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 337.67729999999574,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 92,
+      "output_tokens": 1,
+      "total_tokens": 93,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q20",
+      "query": "Which paper template does Summit use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "ICLR"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6d14b6d997d9405bb9ad106f1c362ef5-probe-Q20",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 423.89209999964805,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 218,
+      "observed_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 90,
+      "output_tokens": 1,
+      "total_tokens": 91,
+      "correct": false,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q01",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 513.3931000000302,
+      "answer": "The Atlas service stores customer profiles in PostgreSQL.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 245,
+      "observed_ids": [
+        "F01"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 94,
+      "output_tokens": 9,
+      "total_tokens": 103,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Iris"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q02",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 614.0961000000971,
+      "answer": "The Iris application uses Redis for session storage.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> The Iris application uses Redis for session storage. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 240,
+      "observed_ids": [
+        "F09"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 94,
+      "output_tokens": 9,
+      "total_tokens": 103,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "answers": [
+        "2400",
+        "2,400"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q03",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 613.5159000004933,
+      "answer": "The Maple dataset contains 2400 labeled examples.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F13> The Maple dataset contains 2400 labeled examples. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 237,
+      "observed_ids": [
+        "F13"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 100,
+      "output_tokens": 12,
+      "total_tokens": 112,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "answers": [
+        "November 18"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q04",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 511.989700000413,
+      "answer": "The Pine release is scheduled for November 18.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F16> The Pine release is scheduled for November 18. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 234,
+      "observed_ids": [
+        "F16"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 96,
+      "output_tokens": 11,
+      "total_tokens": 107,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "AES-256",
+        "AES 256"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q05",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 521.2247999988904,
+      "answer": "The Terra database uses AES-256 encryption for backups.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 237,
+      "observed_ids": [
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 101,
+      "output_tokens": 13,
+      "total_tokens": 114,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q06",
+      "query": "Which email service sends Beacon alerts?",
+      "relevant_ids": [
+        "F02"
+      ],
+      "answers": [
+        "Mailgun"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q06",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 504.7314000003098,
+      "answer": "The Beacon service sends alert emails through Mailgun.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F02> The Beacon service sends alert emails through Mailgun. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 242,
+      "observed_ids": [
+        "F02"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 95,
+      "output_tokens": 10,
+      "total_tokens": 105,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q07",
+      "query": "What framework does Cedar use for its web interface?",
+      "relevant_ids": [
+        "F03"
+      ],
+      "answers": [
+        "React"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q07",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 509.13560000117286,
+      "answer": "The Cedar project uses React for its web interface.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F03> The Cedar project uses React for its web interface. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 239,
+      "observed_ids": [
+        "F03"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 98,
+      "output_tokens": 10,
+      "total_tokens": 108,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q08",
+      "query": "In which region is Delta deployed?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Frankfurt"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q08",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 615.8942000001844,
+      "answer": "The Delta project is deployed in the Frankfurt region.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F04> The Delta project deploys to the Frankfurt region. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 238,
+      "observed_ids": [
+        "F04"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 95,
+      "output_tokens": 10,
+      "total_tokens": 105,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q09",
+      "query": "What is Echo's request limit per minute?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "120"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q09",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 528.0784999995376,
+      "answer": "Echo's request limit is 120 per minute.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F05> The Echo API limits requests to 120 per minute. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 235,
+      "observed_ids": [
+        "F05"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 100,
+      "output_tokens": 12,
+      "total_tokens": 112,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q10",
+      "query": "On which day and at what time does Falcon meet?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "Tuesday at 10 AM",
+        "Tuesday at 10:00 AM"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q10",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 1215.251100000387,
+      "answer": "The Falcon team meets every Tuesday at 10 AM.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F06> The Falcon team meets every Tuesday at 10 AM. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 233,
+      "observed_ids": [
+        "F06"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 101,
+      "output_tokens": 12,
+      "total_tokens": 113,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q11",
+      "query": "Where does Grove export metrics?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Prometheus"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q11",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 448.10420000067097,
+      "answer": "The Grove pipeline exports metrics to Prometheus.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F07> The Grove pipeline exports metrics to Prometheus. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 237,
+      "observed_ids": [
+        "F07"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 92,
+      "output_tokens": 8,
+      "total_tokens": 100,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q12",
+      "query": "How often does Harbor run its backup job?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "every six hours",
+        "every 6 hours"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q12",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 471.1963999998261,
+      "answer": "The Harbor backup job runs every six hours.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F08> The Harbor backup job runs every six hours. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 231,
+      "observed_ids": [
+        "F08"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 96,
+      "output_tokens": 9,
+      "total_tokens": 105,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q13",
+      "query": "How many reviewers does Juniper require?",
+      "relevant_ids": [
+        "F10"
+      ],
+      "answers": [
+        "two",
+        "2"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q13",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 519.8315999987244,
+      "answer": "The Juniper repository requires two code reviewers.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F10> The Juniper repository requires two code reviewers. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 239,
+      "observed_ids": [
+        "F10"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 95,
+      "output_tokens": 9,
+      "total_tokens": 104,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q14",
+      "query": "What seed number does Kestrel use?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "417"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q14",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 527.6921000004222,
+      "answer": "The Kestrel experiment uses seed number 417.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F11> The Kestrel experiment uses seed number 417. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 232,
+      "observed_ids": [
+        "F11"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 100,
+      "output_tokens": 13,
+      "total_tokens": 113,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q15",
+      "query": "Who owns the Lunar project?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Morgan Chen"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q15",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 453.8946999982727,
+      "answer": "The Lunar project owner is Morgan Chen.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F12> The Lunar project owner is Morgan Chen. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 227,
+      "observed_ids": [
+        "F12"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 92,
+      "output_tokens": 8,
+      "total_tokens": 100,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q16",
+      "query": "After how many days does Nimbus archive logs?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "30"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q16",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 594.7876999998698,
+      "answer": "Nimbus archives logs after 30 days.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F14> The Nimbus service archives logs after 30 days. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 235,
+      "observed_ids": [
+        "F14"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 98,
+      "output_tokens": 10,
+      "total_tokens": 108,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q17",
+      "query": "How often does the Orion dashboard refresh?",
+      "relevant_ids": [
+        "F15"
+      ],
+      "answers": [
+        "every five minutes",
+        "every 5 minutes"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q17",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 469.93449999899894,
+      "answer": "The Orion dashboard refreshes every five minutes.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F15> The Orion dashboard refreshes every five minutes. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 237,
+      "observed_ids": [
+        "F15"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 95,
+      "output_tokens": 9,
+      "total_tokens": 104,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q18",
+      "query": "What batch size trained the Quartz model?",
+      "relevant_ids": [
+        "F17"
+      ],
+      "answers": [
+        "64"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q18",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 670.822499998394,
+      "answer": "The Quartz model was trained with a batch size of 64.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F17> The Quartz model was trained with batch size 64. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 236,
+      "observed_ids": [
+        "F17"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 98,
+      "output_tokens": 14,
+      "total_tokens": 112,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q19",
+      "query": "How many times does River retry failed requests?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three",
+        "3"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q19",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 445.7914000013261,
+      "answer": "River retries failed requests three times.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F18> The River client retries failed requests three times. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 241,
+      "observed_ids": [
+        "F18"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 96,
+      "output_tokens": 7,
+      "total_tokens": 103,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q20",
+      "query": "Which paper template does Summit use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "ICLR"
+      ],
+      "seed_latency_ms": 6753.769899998588,
+      "conversation_id": "memory-ab-75d312e4a9134f75aa1f6ce495cf5ee0-probe-Q20",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 513.7817999984691,
+      "answer": "The Summit document uses the ICLR template.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 231,
+      "observed_ids": [
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 94,
+      "output_tokens": 9,
+      "total_tokens": 103,
+      "correct": true,
+      "status": "ok"
+    }
+  ]
+}

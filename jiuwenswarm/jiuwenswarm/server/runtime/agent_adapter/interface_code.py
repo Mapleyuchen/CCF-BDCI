@@ -84,6 +84,7 @@ from jiuwenswarm.agents.harness.code.rails import (
     PlanApprovalInterruptRail,
 )
 from jiuwenswarm.agents.harness.common.rails import (
+    EnhancedMemoryRail,
     ProjectMemoryRail,
     StructuredAskUserRail,
 )
@@ -91,6 +92,9 @@ from jiuwenswarm.agents.harness.common.rails.skill_retrieval_prompt_rail import 
     SkillRetrievalPromptRail,
 )
 from jiuwenswarm.agents.harness.common.memory.config import is_memory_enabled
+from jiuwenswarm.agents.harness.common.memory.experiment_config import (
+    code_memory_experiment_group,
+)
 from jiuwenswarm.agents.harness.common.tools import (
     SkillToolkit,
 )
@@ -519,7 +523,7 @@ class JiuwenSwarmCodeAdapter(JiuWenSwarmDeepAdapter):
         "JiuSwarmStreamEventRail", "SecurityRail",
         "PermissionInterruptRail",
         "ContextProcessorRail",
-        "SysOperationRail", "LspRail", "ProjectMemoryRail", "CodingMemoryRail",
+        "SysOperationRail", "LspRail", "ProjectMemoryRail", "EnhancedMemoryRail", "CodingMemoryRail",
         "MemoryForbiddenRail",
         "AgentModeRail", "StructuredAskUserRail", "ConfirmInterruptRail",
         "FileSystemRail",  # 别名
@@ -537,7 +541,7 @@ class JiuwenSwarmCodeAdapter(JiuWenSwarmDeepAdapter):
         super().__init__()
         # Code 模式专属 rails — 父类不定义这些属性
         self._lsp_rail: LspRail | None = None
-        self._project_memory_rail: ProjectMemoryRail | None = None
+        self._project_memory_rail: ProjectMemoryRail | EnhancedMemoryRail | None = None
         self._coding_memory_rail: CodingMemoryRail | None = None
         self._worktree_rail: WorktreeRail | None = None
         # 单点 source-of-truth, 让 sysop_builder 的"主写入根"分支
@@ -1522,7 +1526,11 @@ class JiuwenSwarmCodeAdapter(JiuWenSwarmDeepAdapter):
                 self._build_session_messaging_route_rail,
             ),
             _RailBuildInfo("_lsp_rail", self._build_lsp_rail_via_config),
-            _RailBuildInfo("_project_memory_rail", self._build_project_memory_rail),
+            _RailBuildInfo(
+                "_project_memory_rail",
+                self._build_project_memory_rail,
+                {"config_base": config_base},
+            ),
             *self._permission_interrupt_rail_infos(config_base),
             _RailBuildInfo("_code_filesystem_rail", self._build_filesystem_rail),
             _RailBuildInfo("_coding_memory_rail", self._build_coding_memory_rail),
@@ -1738,20 +1746,29 @@ class JiuwenSwarmCodeAdapter(JiuWenSwarmDeepAdapter):
             logger.warning("[JiuwenSwarmCodeAdapter] CodingMemoryRail create failed: %s", exc)
             return None
 
-    def _build_project_memory_rail(self) -> ProjectMemoryRail | None:
-        """Build ProjectMemoryRail to auto-load JIUWENSWARM.md / CLAUDE.md etc.
+    def _build_project_memory_rail(
+        self, config_base: dict[str, Any] | None = None,
+    ) -> ProjectMemoryRail | EnhancedMemoryRail | None:
+        """Build the selected memory Rail for the code Agent.
 
-        Code 模式专属 — 受 modes.code.memory.enabled 开关控制。
-        确保能检索到 /init 命令创建 JIUWENSWARM.md 的目录（当前工作目录）。
+        Code 模式专属，受 modes.code.memory.enabled 控制。两组均使用同一项目目录。
         """
-        config_base = self._active_code_config()
+        config_base = config_base if config_base is not None else self._active_code_config()
+        group = code_memory_experiment_group(config_base)
         # 检查 memory 开关
         if not is_memory_enabled("code", config_base):
-            logger.info("[JiuwenSwarmCodeAdapter] ProjectMemoryRail disabled by modes.code.memory.enabled")
+            logger.info("[JiuwenSwarmCodeAdapter] Memory Rail disabled by modes.code.memory.enabled")
             return None
 
         try:
             workspace = self._project_dir or self._workspace_dir or "./"
+            if group == "enhanced":
+                rail = EnhancedMemoryRail(workspace=workspace)
+                logger.info(
+                    "[JiuwenSwarmCodeAdapter] EnhancedMemoryRail create success "
+                    "(workspace=%s)", workspace,
+                )
+                return rail
             language = self._resolve_runtime_language()
             raw_additional_dirs = self._instance_overrides.get(
                 "project_memory_additional_directories",
@@ -2124,14 +2141,24 @@ class JiuwenSwarmCodeAdapter(JiuWenSwarmDeepAdapter):
                     mode,
                 )
 
-        # code 模式保留 ProjectMemoryRail；若缺失则补充注册
+        # Code mode retains exactly the selected experiment memory Rail.
+        selected_rail_type = (
+            EnhancedMemoryRail
+            if code_memory_experiment_group(self._active_code_config()) == "enhanced"
+            else ProjectMemoryRail
+        )
+        if self._project_memory_rail is not None and not isinstance(
+            self._project_memory_rail, selected_rail_type
+        ):
+            await self._instance.unregister_rail(self._project_memory_rail)
+            self._project_memory_rail = None
         if self._project_memory_rail is None:
             self._project_memory_rail = self._build_project_memory_rail()
             if self._project_memory_rail is not None:
                 await self._instance.register_rail(self._project_memory_rail)
                 logger.info(
-                    "[JiuwenSwarmCodeAdapter] ProjectMemoryRail (re)registered for %s",
-                    mode,
+                    "[JiuwenSwarmCodeAdapter] %s (re)registered for %s",
+                    type(self._project_memory_rail).__name__, mode,
                 )
 
         # code 模式保留 CodingMemoryRail；若缺失则补充注册
@@ -2296,7 +2323,7 @@ class JiuwenSwarmCodeAdapter(JiuWenSwarmDeepAdapter):
         )
 
         # ProjectMemoryRail 语言同步 + trusted_dirs 注入
-        if self._project_memory_rail is not None:
+        if isinstance(self._project_memory_rail, ProjectMemoryRail):
             self._project_memory_rail.set_workspace_path(project_workspace)
             self._project_memory_rail.set_language(resolved_language)
             # trusted_dirs 来自 CLI 端的 trusted_dirs / workspace-dir，
@@ -2312,7 +2339,7 @@ class JiuwenSwarmCodeAdapter(JiuWenSwarmDeepAdapter):
 
         # code 模式始终走 _update_rails_for_mode 的 code 逻辑
         await self._update_rails_for_mode(runtime_config.mode)
-        if self._project_memory_rail is not None:
+        if isinstance(self._project_memory_rail, ProjectMemoryRail):
             self._project_memory_rail.set_workspace_path(project_workspace)
         await self._set_user_interaction_enabled(runtime_config.supports_user_interaction)
         await self._update_tools_for_mode(runtime_config.mode, runtime_config.session_id, runtime_config.request_id)

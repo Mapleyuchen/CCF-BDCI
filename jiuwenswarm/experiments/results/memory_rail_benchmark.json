@@ -1,0 +1,743 @@
+{
+  "benchmark": "JiuwenSwarm memory context recall (no LLM)",
+  "dataset_sha256": "90f4446ab7bc44c7dc525761367a3fdd3a0305ce6c2e0bef254803a66de6e350",
+  "python": "3.13.12",
+  "settings": {
+    "context_chars": 600,
+    "top_k": 10,
+    "repeats": 3
+  },
+  "summary": {
+    "project_memory_rail": {
+      "mean_recall": 0.2,
+      "mean_context_chars": 600,
+      "median_latency_ms": 1.9018000002688495,
+      "n": 15
+    },
+    "multi_level_hybrid": {
+      "mean_recall": 1.0,
+      "mean_context_chars": 567.8,
+      "median_latency_ms": 0.13970000145491213,
+      "n": 15
+    }
+  },
+  "records": [
+    {
+      "system": "project_memory_rail",
+      "repeat": 0,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [
+        "F01"
+      ],
+      "recall": 1.0,
+      "context_chars": 600,
+      "latency_ms": 1.9178000002284534,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 0,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "hits": [
+        "F01"
+      ],
+      "recall": 1.0,
+      "context_chars": 556,
+      "latency_ms": 0.18110000019078143,
+      "context": "<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F05> The Echo API limits requests to 120 per minute.\n<FACT:F06> The Falcon team meets every Tuesday at 10 AM.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F08> The Harbor backup job runs every six hours.\n<FACT:F09> The Iris application uses Redis for session storage.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 0,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.8430000000080327,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 0,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F09",
+        "F11",
+        "F14",
+        "F19"
+      ],
+      "hits": [
+        "F09"
+      ],
+      "recall": 1.0,
+      "context_chars": 553,
+      "latency_ms": 0.13970000145491213,
+      "context": "<FACT:F09> The Iris application uses Redis for session storage.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F14> The Nimbus service archives logs after 30 days.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F05> The Echo API limits requests to 120 per minute.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 0,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.8689999997150153,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 0,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "observed_ids": [
+        "F01",
+        "F04",
+        "F07",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F15",
+        "F19"
+      ],
+      "hits": [
+        "F13"
+      ],
+      "recall": 1.0,
+      "context_chars": 539,
+      "latency_ms": 0.1498000001447508,
+      "context": "<FACT:F13> The Maple dataset contains 2400 labeled examples.\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F10> The Juniper repository requires two code reviewers.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F12> The Lunar project owner is Morgan Chen.\n<FACT:F15> The Orion dashboard refreshes every five minutes.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 0,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.9763000000239117,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 0,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "observed_ids": [
+        "F01",
+        "F04",
+        "F07",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F15",
+        "F16",
+        "F19"
+      ],
+      "hits": [
+        "F16"
+      ],
+      "recall": 1.0,
+      "context_chars": 597,
+      "latency_ms": 0.1388000000588363,
+      "context": "<FACT:F16> The Pine release is scheduled for November 18.\n<FACT:F12> The Lunar project owner is Morgan Chen.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F10> The Juniper repository requires two code reviewers.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F13> The Maple dataset contains 2400 labeled examples.\n<FACT:F15> The Orion dashboard refreshes every five minutes.\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 0,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.8321000006835675,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 0,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "observed_ids": [
+        "F03",
+        "F04",
+        "F07",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F16",
+        "F19",
+        "F20"
+      ],
+      "hits": [
+        "F20"
+      ],
+      "recall": 1.0,
+      "context_chars": 594,
+      "latency_ms": 0.14940000073693227,
+      "context": "<FACT:F20> The Terra database encrypts backups with AES-256.\n<FACT:F09> The Iris application uses Redis for session storage.\n<FACT:F16> The Pine release is scheduled for November 18.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F10> The Juniper repository requires two code reviewers.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F12> The Lunar project owner is Morgan Chen.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 1,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [
+        "F01"
+      ],
+      "recall": 1.0,
+      "context_chars": 600,
+      "latency_ms": 1.9155999998474726,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 1,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "hits": [
+        "F01"
+      ],
+      "recall": 1.0,
+      "context_chars": 556,
+      "latency_ms": 0.1367999993817648,
+      "context": "<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F05> The Echo API limits requests to 120 per minute.\n<FACT:F06> The Falcon team meets every Tuesday at 10 AM.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F08> The Harbor backup job runs every six hours.\n<FACT:F09> The Iris application uses Redis for session storage.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 1,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.872900000307709,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 1,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F09",
+        "F11",
+        "F14",
+        "F19"
+      ],
+      "hits": [
+        "F09"
+      ],
+      "recall": 1.0,
+      "context_chars": 553,
+      "latency_ms": 0.13140000010025688,
+      "context": "<FACT:F09> The Iris application uses Redis for session storage.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F14> The Nimbus service archives logs after 30 days.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F05> The Echo API limits requests to 120 per minute.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 1,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.809299999877112,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 1,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "observed_ids": [
+        "F01",
+        "F04",
+        "F07",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F15",
+        "F19"
+      ],
+      "hits": [
+        "F13"
+      ],
+      "recall": 1.0,
+      "context_chars": 539,
+      "latency_ms": 0.13729999955103267,
+      "context": "<FACT:F13> The Maple dataset contains 2400 labeled examples.\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F10> The Juniper repository requires two code reviewers.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F12> The Lunar project owner is Morgan Chen.\n<FACT:F15> The Orion dashboard refreshes every five minutes.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 1,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.8220999991171993,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 1,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "observed_ids": [
+        "F01",
+        "F04",
+        "F07",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F15",
+        "F16",
+        "F19"
+      ],
+      "hits": [
+        "F16"
+      ],
+      "recall": 1.0,
+      "context_chars": 597,
+      "latency_ms": 0.1365000007353956,
+      "context": "<FACT:F16> The Pine release is scheduled for November 18.\n<FACT:F12> The Lunar project owner is Morgan Chen.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F10> The Juniper repository requires two code reviewers.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F13> The Maple dataset contains 2400 labeled examples.\n<FACT:F15> The Orion dashboard refreshes every five minutes.\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 1,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.9572000001062406,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 1,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "observed_ids": [
+        "F03",
+        "F04",
+        "F07",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F16",
+        "F19",
+        "F20"
+      ],
+      "hits": [
+        "F20"
+      ],
+      "recall": 1.0,
+      "context_chars": 594,
+      "latency_ms": 0.19269999938842375,
+      "context": "<FACT:F20> The Terra database encrypts backups with AES-256.\n<FACT:F09> The Iris application uses Redis for session storage.\n<FACT:F16> The Pine release is scheduled for November 18.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F10> The Juniper repository requires two code reviewers.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F12> The Lunar project owner is Morgan Chen.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 2,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [
+        "F01"
+      ],
+      "recall": 1.0,
+      "context_chars": 600,
+      "latency_ms": 1.9743000011658296,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 2,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "hits": [
+        "F01"
+      ],
+      "recall": 1.0,
+      "context_chars": 556,
+      "latency_ms": 0.13779999972030055,
+      "context": "<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F05> The Echo API limits requests to 120 per minute.\n<FACT:F06> The Falcon team meets every Tuesday at 10 AM.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F08> The Harbor backup job runs every six hours.\n<FACT:F09> The Iris application uses Redis for session storage.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 2,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.791400000001886,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 2,
+      "question_id": "Q02",
+      "query": "Which service uses Redis session storage?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F09",
+        "F11",
+        "F14",
+        "F19"
+      ],
+      "hits": [
+        "F09"
+      ],
+      "recall": 1.0,
+      "context_chars": 553,
+      "latency_ms": 0.13029999900027178,
+      "context": "<FACT:F09> The Iris application uses Redis for session storage.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F14> The Nimbus service archives logs after 30 days.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F05> The Echo API limits requests to 120 per minute.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 2,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 1.9018000002688495,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 2,
+      "question_id": "Q03",
+      "query": "How many labeled examples are in the Maple dataset?",
+      "relevant_ids": [
+        "F13"
+      ],
+      "observed_ids": [
+        "F01",
+        "F04",
+        "F07",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F15",
+        "F19"
+      ],
+      "hits": [
+        "F13"
+      ],
+      "recall": 1.0,
+      "context_chars": 539,
+      "latency_ms": 0.1542999998491723,
+      "context": "<FACT:F13> The Maple dataset contains 2400 labeled examples.\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F10> The Juniper repository requires two code reviewers.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F12> The Lunar project owner is Morgan Chen.\n<FACT:F15> The Orion dashboard refreshes every five minutes.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 2,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 2.164400000765454,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 2,
+      "question_id": "Q04",
+      "query": "When is the Pine release scheduled?",
+      "relevant_ids": [
+        "F16"
+      ],
+      "observed_ids": [
+        "F01",
+        "F04",
+        "F07",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F15",
+        "F16",
+        "F19"
+      ],
+      "hits": [
+        "F16"
+      ],
+      "recall": 1.0,
+      "context_chars": 597,
+      "latency_ms": 0.14200000077835284,
+      "context": "<FACT:F16> The Pine release is scheduled for November 18.\n<FACT:F12> The Lunar project owner is Morgan Chen.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F10> The Juniper repository requires two code reviewers.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F13> The Maple dataset contains 2400 labeled examples.\n<FACT:F15> The Orion dashboard refreshes every five minutes.\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n"
+    },
+    {
+      "system": "project_memory_rail",
+      "repeat": 2,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "hits": [],
+      "recall": 0.0,
+      "context_chars": 600,
+      "latency_ms": 2.0129999993514502,
+      "context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\jiuwenswarm-memory-benchmark-lzcg3ei0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys to t\n\n<!-- project memory truncated (> max_chars) -->\n"
+    },
+    {
+      "system": "multi_level_hybrid",
+      "repeat": 2,
+      "question_id": "Q05",
+      "query": "What encryption does the Terra database use for backups?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "observed_ids": [
+        "F03",
+        "F04",
+        "F07",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F16",
+        "F19",
+        "F20"
+      ],
+      "hits": [
+        "F20"
+      ],
+      "recall": 1.0,
+      "context_chars": 594,
+      "latency_ms": 0.1733999997668434,
+      "context": "<FACT:F20> The Terra database encrypts backups with AES-256.\n<FACT:F09> The Iris application uses Redis for session storage.\n<FACT:F16> The Pine release is scheduled for November 18.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F19> The Summit document uses the ICLR template.\n<FACT:F04> The Delta project deploys to the Frankfurt region.\n<FACT:F07> The Grove pipeline exports metrics to Prometheus.\n<FACT:F10> The Juniper repository requires two code reviewers.\n<FACT:F11> The Kestrel experiment uses seed number 417.\n<FACT:F12> The Lunar project owner is Morgan Chen.\n"
+    }
+  ]
+}

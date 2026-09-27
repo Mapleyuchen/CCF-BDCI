@@ -1,0 +1,266 @@
+{
+  "kind": "adapted_longmemeval_self_test",
+  "official_longmemeval_score": false,
+  "dataset_sha256": "af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
+  "source_url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+  "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+  "source_citation": "Wu et al., LongMemEval, ICLR 2025, arXiv:2410.10813",
+  "selection_rule": "Sort eligible single-session-user questions by question_id; take the first 20. Each has exactly one has_answer turn of 20-250 characters, a 4-70 character string answer present in that turn but absent from the question, and at least 19 same-history non-answer turns of 20-250 characters that omit the answer. Sample 19 distractors deterministically and shuffle all 20 turns.",
+  "scoring_note": "Answer accuracy uses a provisional accepted-answer substring check. Inspect raw answers or use a separately documented judge before publication.",
+  "settings": {
+    "model_name": "deterministic-self-test",
+    "context_chars": 600,
+    "top_k": 10,
+    "episodes": 2,
+    "turns_per_episode": 20,
+    "max_iterations": 1,
+    "tools": []
+  },
+  "summary": {
+    "baseline": {
+      "valid": 2,
+      "failed": 0,
+      "accuracy": 0,
+      "mean_evidence_recall": 0.0,
+      "mean_memory_chars": 599,
+      "mean_input_tokens": 20,
+      "mean_output_tokens": 3,
+      "mean_total_tokens": 23,
+      "mean_latency_ms": 102.77539999970031
+    },
+    "enhanced": {
+      "valid": 2,
+      "failed": 0,
+      "accuracy": 1,
+      "mean_evidence_recall": 1.0,
+      "mean_memory_chars": 536.5,
+      "mean_input_tokens": 20,
+      "mean_output_tokens": 3,
+      "mean_total_tokens": 23,
+      "mean_latency_ms": 8.895099999790546
+    },
+    "paired": {
+      "n": 2,
+      "unique_questions": 2,
+      "repeats": 1,
+      "accuracy_gain": 1,
+      "evidence_recall_gain": 1.0
+    },
+    "by_repeat": [
+      {
+        "repeat": 0,
+        "paired_questions": 2,
+        "baseline_accuracy": 0,
+        "enhanced_accuracy": 1
+      }
+    ],
+    "resource_totals": {
+      "baseline": {
+        "query_tokens": 46,
+        "seed_tokens": 0,
+        "all_tokens": 46,
+        "tokens_per_valid_question_including_seed": 23.0,
+        "seed_model_calls": 0
+      },
+      "enhanced": {
+        "query_tokens": 46,
+        "seed_tokens": 920,
+        "all_tokens": 966,
+        "tokens_per_valid_question_including_seed": 483.0,
+        "seed_model_calls": 40
+      }
+    }
+  },
+  "runs": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "0862e8bf"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 206.9132000015088,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 400,
+      "seed_output_tokens": 60,
+      "seed_total_tokens": 460,
+      "source_question_id": "0862e8bf"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 176.477299999533,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 400,
+      "seed_output_tokens": 60,
+      "seed_total_tokens": 460,
+      "source_question_id": "118b2229"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "118b2229"
+    }
+  ],
+  "records": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "0862e8bf",
+      "query": "What is the name of my cat?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Luna"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-db24f5c9c1d94280b3fe7e6036bc62bb-probe-0862e8bf",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 101.84230000049865,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-cjj9fxmg\\case-000-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/22 (Mon) 10:46] user: I think my posture could use some improvement. I've noticed I tend to slouch a bit when I'm tired. Do you have any specific exercises or tips to help me maintain a tall, upright posture\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 599,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 20,
+      "output_tokens": 3,
+      "total_tokens": 23,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "0862e8bf",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "0862e8bf",
+      "query": "What is the name of my cat?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Luna"
+      ],
+      "seed_latency_ms": 206.9132000015088,
+      "conversation_id": "memory-ab-ddba310d7fb34c5188122c3ecca3b96a-probe-0862e8bf",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 8.936500000345404,
+      "answer": "Luna",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F07> [2023/05/24 (Wed) 17:25] user: By the way, my cat's name is Luna, and she's been such a sweetie throughout all the changes we've been making to her environment. I'm just glad I can provide her with a happy and healthy home. Reply ACK.\nAssistant: ACK\n\n## Memory 10:\nUser: Remember this project fact: <FACT:F15> [2023/05/24 (Wed) 03:30] user: Remove all the spaces Reply ACK.\nAssistant: ACK",
+      "memory_chars": 550,
+      "observed_ids": [
+        "F07",
+        "F15"
+      ],
+      "complete_fact_ids": [
+        "F07",
+        "F15"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 20,
+      "output_tokens": 3,
+      "total_tokens": 23,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "0862e8bf",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "118b2229",
+      "query": "How long is my daily commute to work?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "45 minutes each way"
+      ],
+      "seed_latency_ms": 176.477299999533,
+      "conversation_id": "memory-ab-8a513085041b42ae8f491d2cb3797b0f-probe-118b2229",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 8.853699999235687,
+      "answer": "45 minutes each way",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F08> [2023/05/22 (Mon) 21:18] user: I've been listening to audiobooks during my daily commute, which takes 45 minutes each way. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F11> [2023/05/20 (Sat) 10:18] user: What is the best time to visit Bali for surfing, and what beaches are recommended for beginners? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 523,
+      "observed_ids": [
+        "F08",
+        "F11"
+      ],
+      "complete_fact_ids": [
+        "F08",
+        "F11"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 20,
+      "output_tokens": 3,
+      "total_tokens": 23,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "118b2229",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "118b2229",
+      "query": "How long is my daily commute to work?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "45 minutes each way"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-2b67e50d565e4c239208d9764fe55511-probe-118b2229",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 103.70849999890197,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-cjj9fxmg\\case-001-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/25 (Thu) 03:26] user: I've already taken a course on regression analysis on Coursera, but I'd like to explore more resources on the topic. Can you recommend any podcasts that discuss data science and machine\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 599,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 20,
+      "output_tokens": 3,
+      "total_tokens": 23,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "118b2229",
+      "question_type": "single-session-user"
+    }
+  ]
+}

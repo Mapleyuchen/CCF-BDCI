@@ -1,0 +1,75 @@
+{
+  "kind": "adapted_longmemeval_turn20_summary",
+  "official_longmemeval_score": false,
+  "dataset_sha256": "af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
+  "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+  "model_name": "qwen-plus",
+  "unique_questions": 20,
+  "budget_sweep": [
+    {
+      "context_chars": 600,
+      "source": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval_s_turn20_live.json",
+      "baseline": {
+        "correct": 0,
+        "accuracy": 0,
+        "evidence_found": 0,
+        "complete_evidence_recall": 0.0,
+        "mean_memory_chars": 599.7,
+        "query_tokens": 4686,
+        "seed_tokens": 0,
+        "all_tokens": 4686,
+        "tokens_per_question_including_seed": 234.3,
+        "seed_model_calls": 0,
+        "mean_query_latency_ms": 408.0265550002878,
+        "mean_end_to_end_latency_ms": 408.0265550002878
+      },
+      "enhanced": {
+        "correct": 13,
+        "accuracy": 0.65,
+        "evidence_found": 13,
+        "complete_evidence_recall": 0.65,
+        "mean_memory_chars": 497.75,
+        "query_tokens": 3864,
+        "seed_tokens": 97805,
+        "all_tokens": 101669,
+        "tokens_per_question_including_seed": 5083.45,
+        "seed_model_calls": 400,
+        "mean_query_latency_ms": 503.75684999999066,
+        "mean_end_to_end_latency_ms": 7375.6687849997425
+      }
+    },
+    {
+      "context_chars": 2400,
+      "source": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval_s_turn20_live_2400.json",
+      "baseline": {
+        "correct": 12,
+        "accuracy": 0.6,
+        "evidence_found": 11,
+        "complete_evidence_recall": 0.55,
+        "mean_memory_chars": 2399.85,
+        "query_tokens": 16877,
+        "seed_tokens": 0,
+        "all_tokens": 16877,
+        "tokens_per_question_including_seed": 843.85,
+        "seed_model_calls": 0,
+        "mean_query_latency_ms": 717.0077500000843,
+        "mean_end_to_end_latency_ms": 717.0077500000843
+      },
+      "enhanced": {
+        "correct": 19,
+        "accuracy": 0.95,
+        "evidence_found": 19,
+        "complete_evidence_recall": 0.95,
+        "mean_memory_chars": 2292.9,
+        "query_tokens": 14638,
+        "seed_tokens": 249398,
+        "all_tokens": 264036,
+        "tokens_per_question_including_seed": 13201.8,
+        "seed_model_calls": 400,
+        "mean_query_latency_ms": 601.4053299999432,
+        "mean_end_to_end_latency_ms": 7133.407969999916
+      }
+    }
+  ],
+  "scoring_limit": "Provisional answer-string match; manually audit raw answers before publication."
+}

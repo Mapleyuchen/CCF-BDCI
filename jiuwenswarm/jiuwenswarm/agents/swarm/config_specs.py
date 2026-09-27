@@ -58,6 +58,9 @@ from jiuwenswarm.agents.harness.team.team_runtime_inheritance import (
     resolve_model_config,
 )
 from jiuwenswarm.agents.swarm import registry
+from jiuwenswarm.agents.harness.common.memory.experiment_config import (
+    code_memory_experiment_group,
+)
 from jiuwenswarm.agents.swarm.providers import tools as _tools
 from jiuwenswarm.common.mode_matrix import (
     NEW_TEAM_CODE_NORMAL,
@@ -614,9 +617,21 @@ def _build_code_capability_specs(
     removed entirely: it would deadlock a teammate on any ASK-level tool call.
     """
     is_team_plan_leader = is_team_plan_mode(mode) and role == "leader"
+    memory_rail_name = (
+        registry.ENHANCED_MEMORY
+        if code_memory_experiment_group(config) == "enhanced"
+        else registry.CODE_PROJECT_MEMORY
+    )
 
     rails_specs: list[RailSpec] = [
-        RailSpec(type=name, params=_rail_params(name, config))
+        RailSpec(
+            type=memory_rail_name if name == registry.CODE_PROJECT_MEMORY else name,
+            params=(
+                {} if name == registry.CODE_PROJECT_MEMORY
+                and memory_rail_name == registry.ENHANCED_MEMORY
+                else _rail_params(name, config)
+            ),
+        )
         for name in _code_base_rail_names(role)
     ]
 

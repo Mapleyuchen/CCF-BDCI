@@ -126,6 +126,7 @@ RESPONSE_PROMPT = _builtin_rails.RESPONSE_PROMPT
 STREAM_EVENT = _builtin_rails.STREAM_EVENT
 AVATAR_PROMPT = _builtin_rails.AVATAR_PROMPT
 MULTIMODAL_IMAGE = _builtin_rails.MULTIMODAL_IMAGE
+ENHANCED_MEMORY = _builtin_rails.ENHANCED_MEMORY
 
 # Generic rails provided + registered by openjiuwen (referenced by bare name).
 SYS_OPERATION = _OJ_SYS_OPERATION
@@ -221,6 +222,7 @@ __all__ = [
     "SYS_OPERATION",
     "STREAM_EVENT",
     "MULTIMODAL_IMAGE",
+    "ENHANCED_MEMORY",
     "TASK_PLANNING",
     "SECURITY",
     "HEARTBEAT",

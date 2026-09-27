@@ -53,6 +53,8 @@ env/
 experiments/**/*.pkl
 experiments/**/*.npy
 experiments/**/*.h5
+/jiuwenswarm/experiments/data/public/
+/jiuwenswarm/experiments/results/.runtime/
 
 # API Keys
 config.yaml

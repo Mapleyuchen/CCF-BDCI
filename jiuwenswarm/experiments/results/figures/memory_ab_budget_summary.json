@@ -1,0 +1,233 @@
+{
+  "dataset_sha256": "d1db63c6266134ca54c28eb56762e75f35be8083ee8ab1babdecb7891ee636e8",
+  "model_name": "qwen-plus",
+  "unique_questions": 20,
+  "budget_sweep": [
+    {
+      "context_chars": 300,
+      "source": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent_memory_ab_300.json",
+      "baseline": {
+        "answered": 20,
+        "correct": 0,
+        "accuracy": 0,
+        "complete_fact_recall": 0.0,
+        "marker_only_hits": 0,
+        "mean_memory_chars": 218,
+        "mean_query_latency_ms": 338.1787850001274,
+        "seed_model_calls": 0,
+        "seed_total_tokens": 0,
+        "all_tokens": 1844,
+        "tokens_per_answer_including_seed": 92.2
+      },
+      "enhanced": {
+        "answered": 20,
+        "correct": 20,
+        "accuracy": 1,
+        "complete_fact_recall": 1.0,
+        "marker_only_hits": 0,
+        "mean_memory_chars": 236.3,
+        "mean_query_latency_ms": 563.1573649998245,
+        "seed_model_calls": 20,
+        "seed_total_tokens": 2217,
+        "all_tokens": 4351,
+        "tokens_per_answer_including_seed": 217.55
+      }
+    },
+    {
+      "context_chars": 600,
+      "source": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent_memory_ab_live_20.json",
+      "baseline": {
+        "answered": 20,
+        "correct": 3,
+        "accuracy": 0.15,
+        "complete_fact_recall": 0.15,
+        "marker_only_hits": 1,
+        "mean_memory_chars": 600,
+        "mean_query_latency_ms": 372.7154650000557,
+        "seed_model_calls": 0,
+        "seed_total_tokens": 0,
+        "all_tokens": 4088,
+        "tokens_per_answer_including_seed": 204.4
+      },
+      "enhanced": {
+        "answered": 20,
+        "correct": 20,
+        "accuracy": 1,
+        "complete_fact_recall": 1.0,
+        "marker_only_hits": 0,
+        "mean_memory_chars": 500.6,
+        "mean_query_latency_ms": 525.9765649998826,
+        "seed_model_calls": 20,
+        "seed_total_tokens": 3430,
+        "all_tokens": 6976,
+        "tokens_per_answer_including_seed": 348.8
+      }
+    },
+    {
+      "context_chars": 1200,
+      "source": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent_memory_ab_1200.json",
+      "baseline": {
+        "answered": 20,
+        "correct": 14,
+        "accuracy": 0.7,
+        "complete_fact_recall": 0.65,
+        "marker_only_hits": 1,
+        "mean_memory_chars": 1200,
+        "mean_query_latency_ms": 540.467510000235,
+        "seed_model_calls": 0,
+        "seed_total_tokens": 0,
+        "all_tokens": 7553,
+        "tokens_per_answer_including_seed": 377.65
+      },
+      "enhanced": {
+        "answered": 20,
+        "correct": 20,
+        "accuracy": 1,
+        "complete_fact_recall": 1.0,
+        "marker_only_hits": 0,
+        "mean_memory_chars": 1172.5,
+        "mean_query_latency_ms": 496.940910000194,
+        "seed_model_calls": 20,
+        "seed_total_tokens": 5885,
+        "all_tokens": 12968,
+        "tokens_per_answer_including_seed": 648.4
+      }
+    },
+    {
+      "context_chars": 2400,
+      "source": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent_memory_ab_2400.json",
+      "baseline": {
+        "answered": 20,
+        "correct": 20,
+        "accuracy": 1,
+        "complete_fact_recall": 1.0,
+        "marker_only_hits": 0,
+        "mean_memory_chars": 1515,
+        "mean_query_latency_ms": 588.7591150000844,
+        "seed_model_calls": 0,
+        "seed_total_tokens": 0,
+        "all_tokens": 9370,
+        "tokens_per_answer_including_seed": 468.5
+      },
+      "enhanced": {
+        "answered": 20,
+        "correct": 20,
+        "accuracy": 1,
+        "complete_fact_recall": 1.0,
+        "marker_only_hits": 0,
+        "mean_memory_chars": 1438.9,
+        "mean_query_latency_ms": 516.839875000187,
+        "seed_model_calls": 20,
+        "seed_total_tokens": 6631,
+        "all_tokens": 15160,
+        "tokens_per_answer_including_seed": 758.0
+      }
+    }
+  ],
+  "interpretation_limit": "Synthetic questions share one 20-fact project; budget points are single runs. Repeated prompts are not independent samples. The enhanced arm includes 20 model calls to write facts, whereas the baseline reads a file. The 300-character baseline is especially affected by section metadata. Complete-fact recall is recomputed from saved prompt text; older raw reports counted a truncated fact marker as evidence.",
+  "repeat_check": {
+    "context_chars": 600,
+    "repeats": 3,
+    "unique_questions": 20,
+    "source": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent_memory_ab_600_repeat3.json",
+    "by_repeat": [
+      {
+        "repeat": 0,
+        "paired_questions": 20,
+        "baseline_accuracy": 0.15,
+        "enhanced_accuracy": 1
+      },
+      {
+        "repeat": 1,
+        "paired_questions": 20,
+        "baseline_accuracy": 0.15,
+        "enhanced_accuracy": 1
+      },
+      {
+        "repeat": 2,
+        "paired_questions": 20,
+        "baseline_accuracy": 0.15,
+        "enhanced_accuracy": 1
+      }
+    ],
+    "baseline": {
+      "answered": 60,
+      "correct": 9,
+      "accuracy": 0.15,
+      "complete_fact_recall": 0.15,
+      "marker_only_hits": 3,
+      "mean_memory_chars": 600,
+      "mean_query_latency_ms": 357.1696716666641,
+      "seed_model_calls": 0,
+      "seed_total_tokens": 0,
+      "all_tokens": 12262,
+      "tokens_per_answer_including_seed": 204.36666666666667
+    },
+    "enhanced": {
+      "answered": 60,
+      "correct": 60,
+      "accuracy": 1,
+      "complete_fact_recall": 1.0,
+      "marker_only_hits": 0,
+      "mean_memory_chars": 500.6,
+      "mean_query_latency_ms": 575.8216883332958,
+      "seed_model_calls": 60,
+      "seed_total_tokens": 10290,
+      "all_tokens": 20929,
+      "tokens_per_answer_including_seed": 348.81666666666666
+    }
+  },
+  "order_sensitivity": {
+    "context_chars": 600,
+    "fact_order_seed": 2026,
+    "repeats": 3,
+    "unique_questions": 20,
+    "source": "F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\agent_memory_ab_600_shuffled_repeat3.json",
+    "by_repeat": [
+      {
+        "repeat": 0,
+        "paired_questions": 20,
+        "baseline_accuracy": 0.15,
+        "enhanced_accuracy": 1
+      },
+      {
+        "repeat": 1,
+        "paired_questions": 20,
+        "baseline_accuracy": 0.15,
+        "enhanced_accuracy": 1
+      },
+      {
+        "repeat": 2,
+        "paired_questions": 20,
+        "baseline_accuracy": 0.2,
+        "enhanced_accuracy": 1
+      }
+    ],
+    "baseline": {
+      "answered": 60,
+      "correct": 10,
+      "accuracy": 0.16666666666666666,
+      "complete_fact_recall": 0.16666666666666666,
+      "marker_only_hits": 2,
+      "mean_memory_chars": 599.6666666666666,
+      "mean_query_latency_ms": 371.6179416665909,
+      "seed_model_calls": 0,
+      "seed_total_tokens": 0,
+      "all_tokens": 12546,
+      "tokens_per_answer_including_seed": 209.1
+    },
+    "enhanced": {
+      "answered": 60,
+      "correct": 60,
+      "accuracy": 1,
+      "complete_fact_recall": 1.0,
+      "marker_only_hits": 0,
+      "mean_memory_chars": 501.9,
+      "mean_query_latency_ms": 540.5569849999969,
+      "seed_model_calls": 60,
+      "seed_total_tokens": 10277,
+      "all_tokens": 20873,
+      "tokens_per_answer_including_seed": 347.8833333333333
+    }
+  }
+}

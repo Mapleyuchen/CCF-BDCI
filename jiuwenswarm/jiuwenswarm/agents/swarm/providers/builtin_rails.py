@@ -38,6 +38,7 @@ from jiuwenswarm.agents.harness.common.rails.stream_event_rail import (
 from jiuwenswarm.agents.harness.common.rails.enhanced_memory_rail import (
     EnhancedMemoryRail,
 )
+from jiuwenswarm.agents.swarm.providers.code_rails import _project_dir
 
 # No-parameter swarm-owned rail type names; namespaced under "swarm.".
 RESPONSE_PROMPT = "swarm.response_prompt"
@@ -97,9 +98,9 @@ class EnhancedMemoryInput(ConstructionInput):
     """Construction inputs for the enhanced memory rail."""
 
     workspace: str = context_field(
-        attr="workspace",
+        resolver=_project_dir,
         default=".",
-        description="Workspace directory for memory storage.",
+        description="Code project directory, matching ProjectMemoryRail.",
     )
 
 
