@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "title": "Memory Retrieval under a Limited Context Budget",
+  "research_question": "How does memory retrieval affect answer accuracy and total model cost under equal context budgets?",
+  "anonymous": true,
+  "authors": [],
+  "methods": [
+    {
+      "id": "retrieval",
+      "title": "Memory Selection and Context Assembly",
+      "description": "Describe the implemented ranking signals, context budget, and memory write path. Separate implemented features from future work.",
+      "citation_ids": []
+    }
+  ],
+  "experiments": [
+    {
+      "id": "budget_sweep",
+      "title": "Context Budget Comparison",
+      "status": "planned",
+      "metrics": ["answer accuracy", "complete evidence recall", "tokens including memory writes"]
+    }
+  ]
+}
