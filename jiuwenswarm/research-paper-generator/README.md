@@ -73,7 +73,25 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模�
 
 第 4 位同学按 `file` 填写章节，不必更改主文件装配逻辑；摘要文件只填写摘要正文。用 `citation_map.json` 中的键写 `\citep{ref_...}` 或 `\citet{ref_...}`，不要自行重建引用键。Related Work 默认列出全部传入文献作为候选，并不代表已判定相关性或证据支持。
 
-为验证完整书目链路，骨架使用 `\nocite{*}` 展示候选书目，并有可见草稿提示。正文完成后应移除 `\nocite{*}`、Draft bibliography 段落及各章节占位文字，改用真实逐条引用。最终的语言、实验有效性、引用支持和提交规范检查仍由第 5 部分负责。
+为验证完整书目链路，骨架使用 `\nocite{*}` 展示候选书目，并有可见草稿提示。正文完成后应移除 `\nocite{*}`、Draft bibliography 段落及各章节占位文字，改用真实逐条引用。
+
+## 第 5 部分：质量检查
+
+`scripts/check_quality.py` 读取第 3 部分的输出目录，检查完整性、ICLR 版式和能从文件判断的写作问题。它不调用模型，也不判断实验结果是否成立。下面这些情况退出码为 1：占位文字、草稿页眉、`\nocite{*}`、缺失章节、`paper.tex` 没有 `\input` 某一节、对不上的结果文件哈希、未编译、编译之后又改了源文件、未解析引用、文献表里没有的引用键、brief 指定了引用却没写进对应章节、计划中的实验写出了提升百分比、Results 里的小数或百分数在结果文件中找不到、中文正文和 TODO。没有图只记警告。赛题不限制篇幅，页数只记在报告里，不作为失败。
+
+```powershell
+python jiuwenswarm/research-paper-generator/scripts/check_quality.py output/paper-framework-demo
+```
+
+报告写在该目录的 `quality_report.json`。`ready_for_submission` 为 true 只表示这些机械检查通过。人员 4 填完正文后应再跑一次。
+
+提交目录用另一条命令检查，报告写在该目录的上一级，避免把报告打进 zip：
+
+```powershell
+python jiuwenswarm/research-paper-generator/scripts/check_submission.py 团队名称
+```
+
+它核对赛题要求的 `paper/paper.pdf`、Access Token、三份技术文档、框架贡献链接、资源报告和 `code/`，并拒绝 `config.yaml`、`.env` 和看起来像真实密钥的赋值。Token 是否真评过这篇 PDF，仍要人工到 Stanford Agentic Reviewer 核对。
 
 模块不会改写原来的 `paper/`、根目录论文或已有实验结果。旧 `scripts/generate_paper.py` 仍是早期固定内容脚本，包含写死的实验数字和示例书目；第 3 部分应使用新的 `generate_framework.py`。
 
