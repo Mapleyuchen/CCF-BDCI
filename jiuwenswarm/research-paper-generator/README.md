@@ -1,12 +1,12 @@
-# 第 3 部分：论文框架生成
+# 论文框架、内容填充与质量检查（第 3 / 4 / 5 部分）
 
-本模块在没有其他模块、模型服务或 API Key 的情况下，可以生成 ICLR 论文骨架、结构化大纲和引用映射。使用 Python 3.11+ 标准库；生成 PDF 另需 PATH 中有 `pdflatex` 和 `bibtex`。
+其中第 3 部分在没有其他模块、模型服务或 API Key 的情况下，可以生成 ICLR 论文骨架、结构化大纲和引用映射。使用 Python 3.11+ 标准库；生成 PDF 另需 PATH 中有 `pdflatex` 和 `bibtex`。第 4 部分的模型写作与额外依赖见下文。
 
-**当前为规则规划器，不调用 LLM，不生成论文正文、实验数字或研究结论。** 主章节使用科研论文常见结构，方法与实验子章节根据输入生成。后续主 Agent 可以先组织研究说明，再调用本模块。尚未实现自主研究构思或主 Agent 的工具注册。
+**框架生成器是规则规划器，不调用 LLM，不生成论文正文、实验数字或研究结论。** 主章节使用科研论文常见结构，方法与实验子章节根据输入生成。后续主 Agent 可以先组织研究说明，再调用本模块。尚未实现自主研究构思或主 Agent 的工具注册。
 
 ## 立即运行
 
-在仓库根目录 `E:\rollup\CCF` 执行：
+在仓库根目录执行：
 
 ```powershell
 python jiuwenswarm/research-paper-generator/scripts/generate_framework.py --brief jiuwenswarm/research-paper-generator/examples/brief.json --literature jiuwenswarm/research-paper-generator/examples/literature.json --output output/paper-framework-demo --compile
@@ -74,6 +74,82 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模�
 第 4 位同学按 `file` 填写章节，不必更改主文件装配逻辑；摘要文件只填写摘要正文。用 `citation_map.json` 中的键写 `\citep{ref_...}` 或 `\citet{ref_...}`，不要自行重建引用键。Related Work 默认列出全部传入文献作为候选，并不代表已判定相关性或证据支持。
 
 为验证完整书目链路，骨架使用 `\nocite{*}` 展示候选书目，并有可见草稿提示。正文完成后应移除 `\nocite{*}`、Draft bibliography 段落及各章节占位文字，改用真实逐条引用。
+
+## 第 4 部分：根据实测数据填充内容
+
+`scripts/fill_content.py` 接收第 3 部分生成的目录，在**新目录**里填充八个章节、结果表、PNG/SVG/PDF 图和 BibTeX，保留原骨架及已有人工编辑。模型只返回英文段落 JSON；章节结构、LaTeX、引用键、实验数值和图表由程序生成。开启 `--compile` 后串联编译和第 5 部分检查，检查失败返回非零退出码。
+
+### Conda 环境与模型配置
+
+只运行论文流程需要 Python 3.11、Matplotlib、PyYAML 和 python-dotenv；不需要 Torch、CUDA、模型权重或完整 JiuwenSwarm 服务。PDF 编译仍使用系统的 `pdflatex` / `bibtex`。
+
+```powershell
+conda env create -f jiuwenswarm/research-paper-generator/environment.yml
+conda activate ccf-bdci
+```
+
+如果还要运行真实 DeepAgent 对照实验，在同一环境、仓库根目录执行 `python -m pip install -e ./jiuwenswarm` 安装完整项目。当前本机已安装这部分依赖，并验证没有安装 Torch/CUDA；`environment.yml` 保留的是论文流程所需的最小依赖集。
+
+示例配置 `examples/dashscope.yaml` 使用百炼北京地域的 OpenAI 兼容接口、`qwen-plus` 和环境变量 `DASHSCOPE_API_KEY`。使用其他地域时修改 `api_base`。也支持已有 JiuwenSwarm `models.defaults` / `models.default` 配置，以及 `--env-file` 显式加载本机凭据；不会将模型配置或密钥复制到论文目录。模型服务调用会产生费用。
+
+完整演示使用仓库已提交的两份真实 LongMemEval 改编实验记录，无需重新运行记忆实验：
+
+```powershell
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --output output/memory-paper-run --compile
+```
+
+命令依次执行框架生成、DashScope 正文生成、图表和书目生成、LaTeX 编译、质量检查。输入默认采用 `examples/memory-study.brief.json` 和 `memory-study.literature.json`；可通过 `--brief`、`--literature`、`--config` 替换。`--output` 必须是尚不存在的目录。
+
+可用 `--model qwen-turbo` 单独切换写作模型，不改变实验文件中的模型身份。若服务返回 `AllocationQuota.FreeTierOnly`，表示该模型的免费额度耗尽且账户禁止付费调用，需要调整百炼额度设置或选择账号下仍可用的模型。
+
+本机实跑时 `qwen-plus` 受上述额度限制；`qwen3.8-flash` 已完成一次调用生成正文并通过后续编译和检查。可在仓库根目录复跑（输出目录需换新）：
+
+```powershell
+conda activate ccf-bdci
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --model qwen3.8-flash --output output/next-paper --compile
+```
+
+单独接入第 3 部分已有骨架：
+
+```powershell
+python jiuwenswarm/research-paper-generator/scripts/fill_content.py output/my-framework --config jiuwenswarm/research-paper-generator/examples/dashscope.yaml --output output/my-filled-paper --compile
+```
+
+### 数据与正文约定
+
+- 支持 `live_model_experiment` 和 `adapted_longmemeval_live` 两种现有实验格式，必须包含 `settings`、`records`、`runs` 和数据集 SHA-256。旧模拟实验、`--self-test` 结果、只有汇总而没有逐题记录的文件会被拒绝。
+- 核对规划时的文件哈希，按 `(repeat, question_id)` 匹配两组；剔除任一组出错、历史未隔离或没有确认记忆注入的配对。准确率和证据召回从逐题记录重算，不信任旧 `summary`。完整事实是否召回仍以实验运行器的记录为依据，并非重新审阅事实文本或模型回答。
+- Token 计入查询和记忆写入，保留全部已记录尝试的成本，按有效配对数摊销。缺少 usage 时显示 `not reported`，不填零。重复题数与独立题数分别记录，不自动生成显著性声明。
+- 研究说明可增加 `writing_notes` 字符串数组及 `source_notes` 对象。后者将文献 ID 映射到经复核的来源摘要，让模型有依据描述 Related Work。仅有题名/作者时不能推断论文发现。
+- 模型返回 `{"sections": [{"id": "abstract", "paragraphs": ["..."], "subsections": []}, ...]}`。章节和子章节 ID 必须与大纲完全一致。
+- 实验数字必须使用 `[[metric:public_small.baseline.accuracy]]` 等已知指标标记，引用使用 `[[cite:longmemeval]]` 或已有引用键。程序解析并转义，拒绝未知指标、未知文献、手写数字、LaTeX 指令和占位文字。可修复的格式错误最多请求模型重写一次；HTTP 暂时错误最多重试两次。
+
+接入另一位同学已经写好的 Related Work 时，加 `--related-work reviewed-related-work.json`。格式为 `{"paragraphs": ["Reviewed English prose with [[cite:longmemeval]]."]}`；这些段落将原样进入校验和渲染，模型不会改写。文献 ID 需存在于第 3 部分交付的引用映射。
+
+### 输出与复核
+
+`write_paper.py` 输出 `framework/` 和 `paper/`；`fill_content.py` 直接输出论文目录。论文目录除第 3 部分文件外还有：
+
+| 文件 | 用途 |
+| --- | --- |
+| `sections/*.tex` | 已填充的正文、数据表和图引用 |
+| `figures/*.{png,svg,pdf}` | 从相同标准化数据生成的可导出图 |
+| `evidence/*.json` | 原始结果快照、重算指标、显示精度与哈希 |
+| `content.json` / `content_attempt_*.json` | 结构化正文与校验前的模型输出 |
+| `generation_request.json` | 发给写作模型的研究说明和结构化证据；不含模型凭据 |
+| `content_report.json` | 成功/失败状态、校验错误、模型调用耗时和 Token |
+| `paper.pdf` / `compile_report.json` | 开启编译后的论文和诊断 |
+| `quality_report.json` | 第 5 部分机械检查结果 |
+
+输出失败时保留报告及已收到的正文；修改保存的 JSON 后，可离线重新渲染到另一目录，无需重复付费：
+
+```powershell
+python jiuwenswarm/research-paper-generator/scripts/fill_content.py output/memory-paper-run/framework --content-json output/memory-paper-run/paper/content.json --output output/reviewed-paper --compile
+```
+
+若尚未产生 `content.json`，可选择 `content_attempt_1.json` 等已保存文件。内容默认标记 `human_review_required: true`。机械检查通过不代表论断、引用支持关系或实验设计已经通过学术审查。示例论文只描述小样本 L1 记忆问答；不是 LongMemEval 官方成绩，也不声称完成 L2/L3、跨重启持久化或团队实验。
+
+这条命令行流水线尚未注册为主 Agent 工具。仓库早期 `SKILL.md` 中的模拟实验和旧 `generate_paper.py` 命令不应作为新论文的数据/写作入口。
 
 ## 第 5 部分：质量检查
 

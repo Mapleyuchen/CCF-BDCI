@@ -1,0 +1,156 @@
+"""Fill a new copy of a framework, preserving the original handoff and evidence."""
+
+from __future__ import annotations
+
+from copy import deepcopy
+import json
+from pathlib import Path
+import re
+import shutil
+
+from paper_framework.citations import bibliography
+from paper_framework.compiler import compile_project
+from paper_quality.checker import check_project
+from .evidence import load_evidence, metric_catalog, read_json, sha256
+from .figures import figure_tex, make_figures, table_tex
+from .prose import build_messages, validate_content
+
+
+def write_json(path, value):
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def inside(root: Path, relative: str) -> Path:
+    path = (root / relative).resolve()
+    if not path.is_relative_to(root.resolve()):
+        raise ValueError(f"Framework file is outside its project: {relative}")
+    return path
+
+
+def fill_project(framework: Path, output: Path, *, model=None, content_json: Path | None = None,
+                 related_work: Path | None = None, compile_pdf=False) -> dict:
+    framework, output = framework.resolve(), output.resolve()
+    if output.exists() or output.is_relative_to(framework):
+        raise ValueError("Choose a new output directory outside the source framework; existing work is never overwritten")
+    outline = read_json(framework / "outline.json")
+    brief = read_json(framework / "brief.input.json")
+    citations = read_json(framework / "citation_map.json")
+    results = load_evidence(outline)
+    metrics = metric_catalog(results)
+    # Persist the exact displayed precision as well as full measurements for the quality checker.
+    for item in metrics.values():
+        item["display_value"] = float(item["text"].split()[0].rstrip("%")) if item["value"] is not None else None
+    source_notes = brief.get("source_notes", {})
+    if not isinstance(source_notes, dict):
+        raise ValueError("brief.source_notes must map source IDs to reviewed source summaries")
+    for key, value in source_notes.items():
+        if key not in citations["by_source_id"] or not isinstance(value, str):
+            raise ValueError(f"Source note must reference a known literature ID: {key}")
+    override = read_json(related_work) if related_work else None
+    if override is not None and (not isinstance(override, dict) or not isinstance(override.get("paragraphs"), list)):
+        raise ValueError("Related Work handoff must be an object with a paragraphs array")
+    if content_json is None and model is None:
+        raise ValueError("A configured model or --content-json is required")
+    files = ["paper.tex", "outline.json", "brief.input.json", "citation_map.json", "manifest.json",
+             "iclr2027_conference.sty", "iclr2027_conference.bst", "natbib.sty", "fancyhdr.sty"]
+    files += [section["file"] for section in outline["sections"]]
+    for relative in files:
+        if not inside(framework, relative).is_file():
+            raise ValueError(f"Missing framework file: {relative}")
+        inside(output, relative)
+    output.mkdir(parents=True)
+    report = {"schema_version": 1, "status": "running", "human_review_required": True,
+              "source_framework": str(framework), "source_outline_sha256": sha256(framework / "outline.json"),
+              "calls": [], "validation_errors": [], "figures": []}
+    try:
+        for relative in files:
+            target = inside(output, relative)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(inside(framework, relative), target)
+        (output / "evidence").mkdir()
+        for entry in outline["evidence"]:
+            target = output / "evidence" / (entry["id"] + ".json")
+            shutil.copy2(entry["resolved_path"], target)
+            if sha256(target) != entry["sha256"]:
+                raise ValueError("Evidence changed during copy")
+            entry["original_path"] = entry["resolved_path"]
+            entry["resolved_path"] = str(target)
+            entry["input_path"] = "evidence/" + target.name
+            entry["validation"] = "live_records_recomputed; human_review_required"
+        normalized = output / "evidence" / "normalized_results.json"
+        write_json(normalized, {"schema_version": 1, "results": results, "metrics": metrics,
+                                "display_policy": "Percentages to one decimal; average tokens and milliseconds to two decimals."})
+        outline["evidence"].append({"id": "content_normalized", "input_path": "evidence/normalized_results.json",
+                                    "resolved_path": str(normalized), "sha256": sha256(normalized),
+                                    "validation": "derived_from_hashed_live_records"})
+        write_json(output / "outline.json", outline)
+        messages = build_messages(outline, brief, citations, metrics, results, source_notes)
+        write_json(output / "generation_request.json", messages)
+        if content_json:
+            content = read_json(content_json)
+            report["content_input_sha256"] = sha256(content_json)
+            report["content_input_path"] = str(content_json.resolve())
+            prior_report = content_json.parent / "content_report.json"
+            if prior_report.is_file():
+                report["upstream_generation_report"] = {"path": str(prior_report.resolve()),
+                                                        "sha256": sha256(prior_report)}
+        else:
+            content = model.complete(messages)
+        allowed_names = [r["model_name"] for r in results]
+        # A bounded repair call corrects schema/tokens, not measured data.
+        for attempt in range(2):
+            if override is not None and isinstance(content.get("sections"), list):
+                for section in content["sections"]:
+                    if isinstance(section, dict) and section.get("id") == "related_work":
+                        section["paragraphs"] = deepcopy(override["paragraphs"])
+            write_json(output / f"content_attempt_{attempt + 1}.json", content)
+            try:
+                rendered = validate_content(content, outline, metrics, citations, allowed_names)
+                break
+            except ValueError as error:
+                report["validation_errors"].append(str(error))
+                if content_json or attempt == 1:
+                    raise
+                messages += [{"role": "assistant", "content": json.dumps(content)},
+                             {"role": "user", "content": "Correct the complete JSON, keeping all evidence unchanged. Validation error: " + str(error)}]
+                content = model.complete(messages)
+        write_json(output / "content.json", content)
+        for result in results:
+            rendered["results"] += table_tex(result, metrics) + figure_tex(result)
+        report["figures"] = make_figures(results, output / "figures")
+        for section in outline["sections"]:
+            inside(output, section["file"]).write_text(rendered[section["id"]], encoding="utf-8")
+            section["status"] = "generated_needs_human_review"
+        write_json(output / "outline.json", outline)
+        paper = (output / "paper.tex").read_text(encoding="utf-8")
+        paper = paper.replace(r"\lhead{Research paper framework -- draft}", r"\lhead{Research manuscript}")
+        paper = re.sub(r"\\paragraph\{Draft bibliography\.\}[^\n]*\n", "", paper)
+        paper = paper.replace(r"\nocite{*}", "")
+        # Avoid vertically stretched float-only pages while keeping ICLR margins/style.
+        layout = ("\\hypersetup{hidelinks}\n\\raggedbottom\n"
+                  "\\renewcommand{\\topfraction}{0.95}\n\\renewcommand{\\textfraction}{0.05}\n"
+                  "\\renewcommand{\\floatpagefraction}{0.8}\n"
+                  "\\makeatletter\n\\setlength{\\@fptop}{0pt}\n"
+                  "\\setlength{\\@fpsep}{14pt}\n\\setlength{\\@fpbot}{0pt plus 1fil}\n\\makeatother\n")
+        paper = paper.replace(r"\begin{document}", layout + r"\begin{document}")
+        (output / "paper.tex").write_text(paper, encoding="utf-8")
+        (output / "references.bib").write_text(bibliography(citations), encoding="utf-8")
+        manifest = read_json(output / "manifest.json")
+        manifest.update(artifact_kind="paper_content_draft", ready_for_submission=False,
+                        human_review_required=True, content_generator="evidence_grounded_v1")
+        write_json(output / "manifest.json", manifest)
+        if compile_pdf:
+            compile_project(output)
+        quality = check_project(output)
+        report["quality"] = quality["summary"]
+        report["mechanical_checks_passed"] = quality["ready_for_submission"]
+        report["status"] = "completed" if not compile_pdf or quality["ready_for_submission"] else "quality_failed"
+        return report
+    except Exception as error:
+        report["status"] = "failed"
+        report["error"] = str(error)
+        raise
+    finally:
+        if model is not None:
+            report["calls"] = model.calls
+        write_json(output / "content_report.json", report)

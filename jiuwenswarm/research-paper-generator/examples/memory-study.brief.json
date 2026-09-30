@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "title": "Memory Retrieval under Restricted Context: An Accuracy and Cost Study",
+  "research_question": "How do file-based project memory and hybrid retrieval compare in answer accuracy and total model cost under equal context-character budgets?",
+  "anonymous": true,
+  "methods": [
+    {
+      "id": "baseline",
+      "title": "File-Based Project Memory",
+      "description": "The baseline is the actual ProjectMemoryRail. Facts are written to an isolated JIUWENSWARM.md file. Its prompt includes file metadata and is truncated to the full-section character budget. Both arms receive the same facts, questions, model, system prompt and no tools. This is not a retrieval-augmented embedding baseline.",
+      "citation_ids": []
+    },
+    {
+      "id": "retrieval",
+      "title": "Hybrid Selection from Working Memory",
+      "description": "EnhancedMemoryRail writes completed user-assistant exchanges to process-local L1 memory. The experiment uses lexical Jaccard similarity combined with temporal decay, access frequency and importance, rather than learned embeddings. Selected memories are assembled under the same full-section character budget. The architecture has L2/L3 classes, but this Rail does not route writes there, persist them across process restarts or synchronize a team. MemGPT is conceptual context, not an implemented or tested baseline.",
+      "citation_ids": ["memgpt"]
+    },
+    {
+      "id": "protocol",
+      "title": "Isolation and Cost Accounting",
+      "description": "Each public-data question has its own fact episode and fresh agents. Baseline writes facts to disk; enhanced performs model-backed memory-writing conversations. The formal question uses a new conversation ID. The runner verifies isolated query history and actual memory injection, alternates arm order across questions, and records both query usage and memory-write usage. Latency including writes is amortized over paired observations. Correctness is accepted-answer string matching; evidence recall requires the complete target fact to survive prompt truncation.",
+      "citation_ids": ["longmemeval"]
+    }
+  ],
+  "experiments": [
+    {
+      "id": "public_small",
+      "title": "Restricted Context Budget",
+      "status": "completed",
+      "result_path": "../../experiments/results/longmemeval_s_turn20_live.json",
+      "metrics": ["answer accuracy", "complete evidence recall", "total tokens including writes", "latency"]
+    },
+    {
+      "id": "public_large",
+      "title": "Expanded Context Budget",
+      "status": "completed",
+      "result_path": "../../experiments/results/longmemeval_s_turn20_live_2400.json",
+      "metrics": ["answer accuracy", "complete evidence recall", "total tokens including writes", "latency"]
+    }
+  ],
+  "source_notes": {
+    "longmemeval": "Verified source: https://arxiv.org/abs/2410.10813, abstract. LongMemEval evaluates long-term conversational memory including extraction, cross-session reasoning, temporal reasoning, updating and abstention. Its design distinguishes indexing, retrieval and reading. This project only adapts a narrow subset and cannot claim coverage of that full evaluation.",
+    "memgpt": "Verified source: https://arxiv.org/abs/2310.08560, abstract. MemGPT draws on operating-system memory hierarchies to manage information beyond an LLM context window. It investigates document analysis and multi-session conversation. It motivates memory management conceptually; the present study neither implements nor empirically compares MemGPT."
+  },
+  "writing_notes": [
+    "Describe a small empirical study of the current implementation, not a novel proven multi-level memory system.",
+    "Both budgets use the same independent questions from an adapted LongMemEval-S single-session-user slice. Histories are converted into fixed fact episodes with a target answer turn and distractor turns. This is not the official benchmark task.",
+    "The smaller budget disadvantages the baseline through truncation and file metadata overhead. Discuss this confound explicitly.",
+    "At the larger budget, baseline answer accuracy exceeds complete-evidence recall because a partial fact can still contain the answer.",
+    "Emphasize total write-plus-query cost. No error bars or significance claims are justified by one run per budget. These experiments do not validate the automatic paper writer itself."
+  ]
+}

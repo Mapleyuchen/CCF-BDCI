@@ -1,0 +1,21 @@
+[
+  {
+    "id": "longmemeval",
+    "title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory",
+    "authors": ["Di Wu", "Hongwei Wang", "Wenhao Yu", "Yuwei Zhang", "Kai-Wei Chang", "Dong Yu"],
+    "year": 2025,
+    "journal": "International Conference on Learning Representations",
+    "arxiv_id": "2410.10813",
+    "url": "https://arxiv.org/abs/2410.10813",
+    "metadata_note": "Authors, title and ICLR 2025 venue checked against the arXiv abstract page on 2026-09-30."
+  },
+  {
+    "id": "memgpt",
+    "title": "MemGPT: Towards LLMs as Operating Systems",
+    "authors": ["Charles Packer", "Sarah Wooders", "Kevin Lin", "Vivian Fang", "Shishir G. Patil", "Ion Stoica", "Joseph E. Gonzalez"],
+    "year": 2023,
+    "arxiv_id": "2310.08560",
+    "url": "https://arxiv.org/abs/2310.08560",
+    "metadata_note": "Authors and title checked against arXiv on 2026-09-30; year denotes initial preprint."
+  }
+]

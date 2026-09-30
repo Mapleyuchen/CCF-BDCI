@@ -4,6 +4,8 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![JiuwenSwarm](https://img.shields.io/badge/JiuwenSwarm-enhanced-green.svg)](https://github.com/openJiuwen-ai/jiuwenswarm)
 
+最新生成论文（2026-09-30）：[paper_memory_study_20260930.pdf](paper_memory_study_20260930.pdf)。该版本基于已记录的实验数据，由 DashScope 辅助填充正文并生成图表和参考文献；生成流程见[论文生成模块说明](jiuwenswarm/research-paper-generator/README.md)。论文仍需人工审核，原有 [paper_iclr2027.pdf](paper_iclr2027.pdf) 单独保留。
+
 ## 📖 项目简介
 
 本项目为CCF BDCI 2026比赛开发，实现了基于JiuwenSwarm框架的**多层次Agent记忆引擎增强系统**，并集成**科研论文自动生成**功能。

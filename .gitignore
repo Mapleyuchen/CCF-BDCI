@@ -27,6 +27,9 @@ venv/
 ENV/
 env/
 
+# Local generated papers, API run logs and installation diagnostics
+/output/
+
 # IDE
 .vscode/
 .idea/
