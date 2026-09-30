@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "title": "What Does Retrieved Memory Buy? Accuracy, Evidence and Write Cost",
+  "research_question": "How do file-based project memory and hybrid retrieval compare in answer accuracy and total model cost under equal context-character budgets?",
+  "anonymous": true,
+  "methods": [
+    {
+      "id": "baseline",
+      "title": "File-Based Project Memory",
+      "description": "The baseline is the actual ProjectMemoryRail. Facts are written to an isolated JIUWENSWARM.md file. Its prompt includes file metadata and is truncated to the full-section character budget. Both arms receive the same facts, questions, model, system prompt and no tools. This is not a retrieval-augmented embedding baseline.",
+      "citation_ids": []
+    },
+    {
+      "id": "retrieval",
+      "title": "Hybrid Selection from Working Memory",
+      "description": "EnhancedMemoryRail writes completed user-assistant exchanges to process-local L1 memory. The experiment uses lexical Jaccard similarity combined with temporal decay, access frequency and importance, rather than learned embeddings. Selected memories are assembled under the same full-section character budget. The architecture has L2/L3 classes, but this Rail does not route writes there, persist them across process restarts or synchronize a team. MemGPT is conceptual context, not an implemented or tested baseline.",
+      "citation_ids": [
+        "memgpt"
+      ]
+    },
+    {
+      "id": "protocol",
+      "title": "Isolation and Cost Accounting",
+      "description": "Each public-data question has its own fact episode and fresh agents. Baseline writes facts to disk; enhanced performs model-backed memory-writing conversations. The formal question uses a new conversation ID. The runner verifies isolated query history and actual memory injection, alternates arm order across questions, and records both query usage and memory-write usage. Latency including writes is amortized over paired observations. Correctness is accepted-answer string matching; evidence recall requires the complete target fact to survive prompt truncation.",
+      "citation_ids": [
+        "longmemeval"
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "id": "public_small",
+      "title": "Restricted Context Budget",
+      "status": "completed",
+      "result_path": "../../experiments/results/longmemeval_s_turn20_live.json",
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "total tokens including writes",
+        "latency"
+      ]
+    },
+    {
+      "id": "public_large",
+      "title": "Expanded Context Budget",
+      "status": "completed",
+      "result_path": "../../experiments/results/longmemeval_s_turn20_live_2400.json",
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "total tokens including writes",
+        "latency"
+      ]
+    }
+  ],
+  "source_notes": {
+    "memgpt": "Verified arXiv abstract: virtual context management inspired by operating-system hierarchies moves information across memory tiers; demonstrations include document analysis and multi-session chat. Our fixed L1 Rail does not implement its autonomous virtual-memory controller.",
+    "longmemeval": "Verified arXiv abstract: LongMemEval evaluates extraction, multi-session reasoning, temporal reasoning, updates and abstention; it separates indexing, retrieval and reading. The submitted small single-session-user adaptation covers only a narrow slice, not the official full benchmark.",
+    "generative_agents": "Verified arXiv abstract: natural-language experience records are synthesized into reflections and dynamically retrieved for planning behavior in an interactive simulation. This study neither implements reflection/planning nor tests social behavior; distinguish record retrieval from that broader architecture.",
+    "lost_middle": "Verified arXiv abstract: relevant information position affects multi-document QA and key-value retrieval in long contexts, with middle positions often harder. This motivates attention to information access but does not establish that our observed prefix truncation is caused by the same phenomenon.",
+    "memorybank": "Verified arXiv abstract: MemoryBank supports retrieval and updates for sustained personalized interaction, with forgetting and reinforcement influenced by elapsed time and importance. Our temporal ranking is a simple heuristic, not a replication of MemoryBank or its companionship evaluation.",
+    "amem": "Verified arXiv abstract: A-MEM creates structured notes and dynamically links and evolves memories, inspired by Zettelkasten organization. Our fixed lexical ranking lacks autonomous linking and evolution; no empirical comparison to A-MEM was run."
+  },
+  "writing_notes": [
+    "Describe a small empirical study of the current implementation, not a novel proven multi-level memory system.",
+    "Both budgets use the same independent questions from an adapted LongMemEval-S single-session-user slice. Histories are converted into fixed fact episodes with a target answer turn and distractor turns. This is not the official benchmark task.",
+    "The smaller budget disadvantages the baseline through truncation and file metadata overhead. Discuss this confound explicitly.",
+    "At the larger budget, baseline answer accuracy exceeds complete-evidence recall because a partial fact can still contain the answer.",
+    "Emphasize total write-plus-query cost. No repeated-run error bars or significance claims are justified by one run per budget. These experiments do not validate the automatic paper writer itself.",
+    "Frame the work as an auditable systems study. Main contribution is exposing the accuracy versus memory-construction cost tradeoff, not a novel state-of-the-art retrieval algorithm.",
+    "Form three research questions: quality under equal full-section budgets; association of complete evidence with answers; total write-plus-query cost. Answer them using the paired records.",
+    "Use all six sources meaningfully, organized into memory control/organization, evidence access, and evaluation. Do not copy the unrelated VLM sample paper.",
+    "A richer analytic appendix and descriptive Wilson intervals are now generated. Old note against error bars refers to repeated-run variability; do not confuse the two.",
+    "No offline retrieval ablation has been performed. Explicitly distinguish budget sensitivity from component ablation. Whole-item packing and different format overhead remain confounds.",
+    "Avoid generic statements about isolating all effects: models and facts are matched, but construction protocol and formatting differ."
+  ],
+  "writing_profile": "research",
+  "method_specification": {
+    "implementation": "jiuwenswarm_l1_v1",
+    "lexical_score": "Jaccard over lowercase regex word tokens of length greater than one; zero for empty sets.",
+    "ranking": "0.4 lexical + 0.3 time decay + 0.2 capped log access frequency + 0.1 importance.",
+    "time_decay": "2^(-age_seconds/86400).",
+    "frequency": "min(log(1+access_count)/log(101),1).",
+    "storage": "Process-local L1: capacity 20, TTL 3600 seconds. No cross-restart persistence.",
+    "packing": "Consider top 10 ranked candidates. Each displayed exchange is capped at 500 characters. Greedily append the WHOLE formatted item if it fits with the section header; otherwise skip it and continue. Baseline takes a prefix including its file metadata.",
+    "writing": "Fact seed prompts request ACK; stored entries contain user prompt plus assistant response. No learned summarizer or semantic embedding.",
+    "statistics": "95% Wilson accuracy intervals over selected questions only, not variability across repeated model runs. Paired outcome counts and answer/evidence mismatches derived from valid records.",
+    "assets": "Renderer adds audited equations, protocol table, AI-generated methodology schematic, a cost decomposition figure, question-level heatmap, full question-ID audit and three deterministic diagnostic cases."
+  }
+}

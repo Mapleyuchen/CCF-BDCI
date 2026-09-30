@@ -60,7 +60,7 @@ def load_model_config(path: Path, env_file: Path | None = None) -> dict:
         raise ValueError("timeout must be between 0 and 600 seconds")
     request = entry.get("model_config_obj") or {}
     return {"client": client, "request": {
-        key: request[key] for key in ("temperature", "max_tokens", "top_p", "enable_thinking") if key in request}}
+        key: request[key] for key in ("temperature", "max_tokens", "top_p", "enable_thinking", "thinking_budget", "reasoning_effort") if key in request}}
 
 
 class JsonModel:
@@ -108,6 +108,9 @@ class JsonModel:
                 if attempt < 2:
                     time.sleep(2 ** attempt)
                     continue
+                self.calls.append({"model": client["model_name"], "error_code": "connection_failed",
+                                   "elapsed_seconds": round(time.monotonic() - started, 3),
+                                   "http_attempts": attempt + 1, "usage": None})
                 raise ValueError("Model API connection failed or timed out") from None
         usage = data.get("usage") or {}
         self.calls.append({"model": data.get("model", client["model_name"]),

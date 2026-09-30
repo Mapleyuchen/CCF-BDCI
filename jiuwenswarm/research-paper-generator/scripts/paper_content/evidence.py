@@ -34,6 +34,16 @@ def optional_sum(values):
     return sum(values) if values and all(v is not None for v in values) else None
 
 
+def wilson_interval(correct, n):
+    """Descriptive 95% binomial interval, not uncertainty over repeated model runs."""
+    z = 1.959963984540054
+    p = correct / n
+    denominator = 1 + z * z / n
+    center = (p + z * z / (2 * n)) / denominator
+    radius = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / denominator
+    return max(0, center - radius), min(1, center + radius)
+
+
 def normalize_result(path: Path, evidence_id: str, title: str) -> dict:
     """Adapters for the two live Agent A/B formats in experiments/."""
     data = read_json(path)
@@ -113,13 +123,37 @@ def normalize_result(path: Path, evidence_id: str, title: str) -> dict:
             "end_to_end_latency_ms": end_to_end,
             "excluded_records": len(all_rows[group]) - len(rows),
         }
+        low, high = wilson_interval(groups[group]["correct"], len(rows))
+        groups[group]["tokens_per_correct"] = (total_tokens / groups[group]["correct"]
+                                               if total_tokens is not None and groups[group]["correct"] else None)
+        groups[group].update(accuracy_ci_low=low, accuracy_ci_high=high,
+                             correct_without_full_evidence=sum(r["correct"] and r["evidence_recall"] < 1 for r in rows),
+                             wrong_with_full_evidence=sum(not r["correct"] and r["evidence_recall"] == 1 for r in rows))
+    outcomes = {"both_correct": 0, "enhanced_only": 0, "baseline_only": 0, "both_wrong": 0}
+    cases = []
+    for key in paired:
+        left, right = (indexed[g][key] for g in GROUPS)
+        outcome = ("both_correct" if left["correct"] and right["correct"] else
+                   "enhanced_only" if right["correct"] else "baseline_only" if left["correct"] else "both_wrong")
+        outcomes[outcome] += 1
+        cases.append({"question_id": key[1], "repeat": key[0], "outcome": outcome,
+                      "query": left["query"], "accepted_answers": left["answers"],
+                      **{g: {k: indexed[g][key].get(k) for k in
+                             ("answer", "correct", "evidence_recall", "memory_chars", "total_tokens")}
+                         for g in GROUPS}})
     return {
         "id": evidence_id, "title": title, "kind": data["kind"], "model_name": model,
         "dataset_sha256": dataset_hash, "source_sha256": sha256(path),
         "context_chars": budget, "unique_questions": len({key[1] for key in paired}),
         "paired_observations": len(paired), "repeats": len({key[0] for key in paired}),
-        "groups": groups,
+        "groups": groups, "paired_outcomes": outcomes, "observed_cases": cases,
+        "accuracy_interval": {"method": "Wilson", "confidence": 0.95, "confidence_percent": 95,
+                              "interpretation": "Descriptive binomial interval, not repeated-run uncertainty"},
         "accuracy_gain_pp": (groups["enhanced"]["accuracy"] - groups["baseline"]["accuracy"]) * 100,
+        "total_token_ratio": (groups['enhanced']['all_tokens'] / groups['baseline']['all_tokens']
+                              if groups['baseline']['all_tokens'] and groups['enhanced']['all_tokens'] is not None else None),
+        "cost_per_correct_ratio": (groups['enhanced']['tokens_per_correct'] / groups['baseline']['tokens_per_correct']
+                                   if groups['baseline']['tokens_per_correct'] and groups['enhanced']['tokens_per_correct'] is not None else None),
         "protocol": {
             key: settings[key] for key in ("top_k", "turns_per_episode", "max_iterations", "tools", "model_request")
             if key in settings
@@ -161,15 +195,18 @@ def metric_catalog(results: list[dict]) -> dict:
     catalog = {}
     for result in results:
         prefix = result["id"]
-        for name in ("context_chars", "unique_questions", "paired_observations", "repeats", "accuracy_gain_pp"):
+        for name in ("context_chars", "unique_questions", "paired_observations", "repeats", "accuracy_gain_pp", "total_token_ratio", "cost_per_correct_ratio"):
             value = result[name]
-            text = f"{value:g} percentage points" if name == "accuracy_gain_pp" else f"{value:g}"
+            text = ("not reported" if value is None else f"{value:g} percentage points" if name == "accuracy_gain_pp"
+                    else f"{value:.2f}" if name.endswith('ratio') else f"{value:g}")
             catalog[f"{prefix}.{name}"] = {"value": value, "text": text}
         for group, stats in result["groups"].items():
             for name, value in stats.items():
                 text = "not reported" if value is None else (
-                    f"{value * 100:.1f}%" if name in ("accuracy", "evidence_recall") else
-                    f"{value:.2f}" if name in ("tokens_per_question", "query_latency_ms", "end_to_end_latency_ms")
+                    f"{value * 100:.1f}%" if name in ("accuracy", "evidence_recall", "accuracy_ci_low", "accuracy_ci_high") else
+                    f"{value:.2f}" if name in ("tokens_per_question", "tokens_per_correct", "query_latency_ms", "end_to_end_latency_ms")
                     else f"{value:g}")
                 catalog[f"{prefix}.{group}.{name}"] = {"value": value, "text": text}
+        for name, value in result.get("paired_outcomes", {}).items():
+            catalog[f"{prefix}.paired.{name}"] = {"value": value, "text": str(value)}
     return catalog

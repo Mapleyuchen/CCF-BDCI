@@ -1,0 +1,31 @@
+# Verified against Model Studio documentation on 2026-09-30.
+models:
+  defaults:
+    - is_default: true
+      model_client_config:
+        client_provider: OpenAI
+        api_base: ${DASHSCOPE_BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}
+        api_key: ${DASHSCOPE_API_KEY}
+        model_name: qwen3.8-max
+        timeout: 600
+      model_config_obj:
+        temperature: 0.2
+        max_tokens: 22000
+        enable_thinking: false
+# arXiv metadata is public: no arXiv API key is required.
+arxiv:
+  api_url: https://export.arxiv.org/api/query
+  user_agent: CCF-BDCI-PaperResearch/2.0 (research metadata client)
+  interval_seconds: 3.1
+  timeout_seconds: 60
+images:
+  provider: dashscope
+  # Native image protocol; not /compatible-mode/v1/chat/completions.
+  base_url: ${DASHSCOPE_IMAGE_BASE_URL:-https://dashscope.aliyuncs.com/api/v1}
+  api_key: ${DASHSCOPE_API_KEY}
+  model: qwen-image-3.0-pro
+  size: 2688*1536
+  prompt_extend: false
+  watermark: false
+  n: 1
+  prompt_file: ../prompts/methodology.txt

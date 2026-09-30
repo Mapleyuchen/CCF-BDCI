@@ -1,271 +1,52 @@
-# CCF BDCI 2026 - 基于JiuwenSwarm的Agent科研论文自动生成系统
+# CCF BDCI 2026：JiuwenSwarm 记忆实验与论文生成
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![JiuwenSwarm](https://img.shields.io/badge/JiuwenSwarm-enhanced-green.svg)](https://github.com/openJiuwen-ai/jiuwenswarm)
+项目包含记忆增强 Rail、真实 Agent 对照实验，以及从证据、文献到 ICLR PDF 的论文流水线。
 
-最新生成论文（2026-09-30）：[paper_memory_study_20260930.pdf](paper_memory_study_20260930.pdf)。该版本基于已记录的实验数据，由 DashScope 辅助填充正文并生成图表和参考文献；生成流程见[论文生成模块说明](jiuwenswarm/research-paper-generator/README.md)。论文仍需人工审核，原有 [paper_iclr2027.pdf](paper_iclr2027.pdf) 单独保留。
+最新研究版论文：[paper_memory_research_20260930.pdf](paper_memory_research_20260930.pdf)。本版使用 DashScope `qwen3.8-max` 规划、撰写、审阅和修订，方法图使用百炼 `qwen-image-3.0-pro`；实验图表由原始记录计算。旧版 [paper_memory_study_20260930.pdf](paper_memory_study_20260930.pdf) 和 [paper_iclr2027.pdf](paper_iclr2027.pdf) 单独保留。
 
-## 📖 项目简介
+## 当前已完成的流程
 
-本项目为CCF BDCI 2026比赛开发，实现了基于JiuwenSwarm框架的**多层次Agent记忆引擎增强系统**，并集成**科研论文自动生成**功能。
+| 模块 | 实际能力 |
+| --- | --- |
+| 文献 | arXiv HTTPS API、字段查询/ID 查询、三秒限流、Atom 缓存与来源记录；当前研究引用六篇真实来源 |
+| 实验 | openJiuwen DeepAgent 的文件记忆与 L1 检索记忆配对比较，检查历史隔离及实际提示词注入 |
+| 框架 | 规则规划八章节、ICLR 样式、文献去重与稳定引用键、输入哈希 |
+| 内容 | 四阶段模型写作、已知数值/引用标记、方法图、公式、成本图、逐题诊断与附录 |
+| 检查 | LaTeX/BibTeX 编译、文件与引用完整性、数值来源、格式检查；仍需人工学术审阅 |
 
-**研究主题**：Multi-Level Memory Architecture for Intelligent Agents: A Hybrid Retrieval Approach
+这是一条可直接运行的 CLI 流水线，尚未注册为主聊天 Agent 的工具。既有 L2/L3 与团队同步代码不等于已经完成对应实验。
 
-## 🌟 核心创新
+## 真实实验范围
 
-### 1. 三层记忆架构
-- **L1 Working Memory**：短期对话上下文（20条，1小时TTL）
-- **L2 Task Memory**：任务执行历史（100条，7天TTL）
-- **L3 Project Memory**：长期知识存储（无限容量，持久化）
+论文依据两份已保存的 `qwen-plus` 结果。每个预算使用同一组二十道 LongMemEval 改编问题，单次运行；不是官方基准成绩，也不是组件消融。
 
-### 2. 混合检索引擎
-结合4种检索信号：
-- 语义相似度（Jaccard/Embedding）
-- 时间衰减（指数函数）
-- 访问频率（对数归一化）
-- 重要性评分（用户设定）
+| 记忆字符预算 | 文件基线准确率 | 检索 L1 准确率 | 基线总 Token | 检索总 Token（含写入） |
+| --- | --- | --- | --- | --- |
+| 600 | 0/20 | 13/20 | 4,686 | 101,669 |
+| 2400 | 12/20 | 19/20 | 16,877 | 264,036 |
 
-### 3. 团队记忆同步
-- 增量同步机制
-- 冲突检测与解决
-- 访问权限控制
+检索组的写入开销很高；两组的格式和构建方式也不同，不能把差异完全归因于排序算法。Wilson 区间只提供描述性不确定性，不能代替重复实验或显著性检验。旧演示脚本的固定提升百分比不作为本项目的实测结论。
 
-### 4. 端到端自动化
-从文献调研到论文成稿的全流程自动化：
-- 文献自动检索（arXiv API）
-- 实验自动执行（基线+增强系统）
-- 结果自动分析（对比+消融实验）
-- 论文自动生成（ICLR格式）
+## 本机运行
 
-## 📊 性能提升
-
-| 任务类型 | 指标 | Baseline | Enhanced | 提升 |
-|---------|------|----------|----------|------|
-| 单轮对话 | F1-Score | 89.0% | 93.0% | **+4.5%** |
-| 多步骤 | 完成率 | 90.0% | 100.0% | **+11.1%** |
-| 多步骤 | 连贯性 | 72.9% | 88.3% | **+21.1%** |
-| 跨会话 | 保留率 | 75.0% | 87.0% | **+16.0%** |
-| 跨会话 | 一致性 | 62.0% | 83.0% | **+33.9%** |
-
-**平均性能提升：11.82%** | **最大提升：33.9%**
-
-## 🚀 快速开始
-
-### 环境要求
-- Python 3.11+
-- Git
-- LaTeX（用于编译论文）
-
-### 安装
-
-```bash
-# 1. 克隆项目
-git clone https://github.com/Mapleyuchen/CCF-BDCI.git
-cd CCF-BDCI
-
-# 2. 安装JiuwenSwarm
-cd jiuwenswarm
-pip install -e .
-
-# 3. 配置API密钥
-# 编辑 ~/.jiuwenswarm/config/config.yaml
-# 配置你的LLM API密钥（支持OpenAI、Anthropic、DeepSeek等）
+```powershell
+conda env create -f jiuwenswarm/research-paper-generator/environment.yml
+conda activate ccf-bdci
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --output output/my-research-paper --compile
 ```
 
-### 验证安装
+已有环境时直接激活。设置 `DASHSCOPE_API_KEY`，并安装系统 LaTeX（`pdflatex`、`bibtex`）。论文流程无需 Torch、CUDA 或本地模型权重；默认使用已保存的方法图。重新出图和论文的完整入口：
 
-```bash
-# 测试核心模块
-python -c "from jiuwenswarm.agents.harness.common.memory.multi_level_memory import MultiLevelMemory; print('✅ 成功')"
-python -c "from jiuwenswarm.agents.harness.common.memory.retrieval_engine import HybridRetrievalEngine; print('✅ 成功')"
-python -c "from jiuwenswarm.agents.harness.common.rails.enhanced_memory_rail import EnhancedMemoryRail; print('✅ 成功')"
+```powershell
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --generate-methodology --output output/my-paper-with-new-image --compile
 ```
 
-## 📁 项目结构
+默认配置：[dashscope-research.yaml](jiuwenswarm/research-paper-generator/examples/dashscope-research.yaml)。只引用环境变量，不含密钥。arXiv 无需 Key。详见 [API/环境/恢复说明](jiuwenswarm/research-paper-generator/references/api_workflow.md)、[输入与输出约定](jiuwenswarm/research-paper-generator/README.md)、[项目 SKILL](jiuwenswarm/research-paper-generator/SKILL.md)。
 
-```
-CCF-BDCI/
-├── README.md                           # 本文件
-├── COLLABORATOR_GUIDE.md               # 协作者指南 ⭐
-├── PLAN.md                             # 实施计划
-├── STAGE2_COMPLETION_REPORT.md         # 第二阶段报告
-├── PROJECT_STATUS_AND_NEXT_STEPS.md    # 项目状态
-│
-├── jiuwenswarm/                        # 主项目目录
-│   ├── jiuwenswarm/                    # 核心改进模块
-│   │   ├── agents/harness/common/
-│   │   │   ├── memory/
-│   │   │   │   ├── multi_level_memory.py          # 多层次记忆 ⭐
-│   │   │   │   └── retrieval_engine.py            # 混合检索 ⭐
-│   │   │   ├── rails/
-│   │   │   │   ├── enhanced_memory_rail.py        # 增强Rail ⭐
-│   │   │   │   └── __init__.py
-│   │   │   └── tools/
-│   │   │       └── memory_compression_tool.py     # 记忆压缩 ⭐
-│   │   └── agents/harness/team/rails/
-│   │       └── team_memory_sync_rail.py           # 团队同步 ⭐
-│   │
-│   ├── research-paper-generator/       # 论文生成Skill
-│   │   ├── SKILL.md
-│   │   └── scripts/
-│   │       ├── literature_search.py
-│   │       ├── run_baseline_experiments.py
-│   │       ├── run_enhanced_experiments.py
-│   │       ├── compare_results.py
-│   │       └── generate_paper.py
-│   │
-│   ├── experiments/                    # 实验数据
-│   │   ├── baseline/results.json
-│   │   ├── enhanced/results.json
-│   │   └── comparison/comparison.json
-│   │
-│   ├── paper/                          # 论文输出
-│   │   ├── paper.pdf                   # 最终论文
-│   │   └── paper.tex
-│   │
-│   └── docs/                           # 技术文档
-│       ├── architecture.md
-│       ├── module_call.md
-│       ├── innovation.md
-│       └── INTEGRATION_GUIDE.md        # 集成指南 ⭐
-│
-└── iclr-2027-style-files/              # 论文模板
+```powershell
+python -m unittest discover -s jiuwenswarm/research-paper-generator/tests -v
 ```
 
-## 💻 使用示例
+完整 Agent 实验另需 `python -m pip install -e ./jiuwenswarm`；参考 [实验协议](jiuwenswarm/experiments/LONGMEMEVAL_TURN20.md)。更换写作模型不会重跑实验。
 
-### 1. 启用增强记忆系统
-
-**方式一：配置文件**
-```yaml
-# config.yaml
-agent:
-  rails:
-    - type: swarm.enhanced_memory
-      params:
-        workspace: ~/.jiuwenswarm/memory
-        enable_hybrid_retrieval: true
-        max_context_items: 10
-```
-
-**方式二：代码集成**
-```python
-from jiuwenswarm.agents.harness.common.rails.enhanced_memory_rail import EnhancedMemoryRail
-
-memory_rail = EnhancedMemoryRail(
-    workspace="/path/to/workspace",
-    enable_hybrid_retrieval=True
-)
-agent.register_rail(memory_rail)
-```
-
-### 2. 运行完整实验流程
-
-```bash
-cd jiuwenswarm
-
-# 1. 基线实验
-python research-paper-generator/scripts/run_baseline_experiments.py \
-  --output-dir experiments/baseline
-
-# 2. 增强系统实验
-python research-paper-generator/scripts/run_enhanced_experiments.py \
-  --output-dir experiments/enhanced
-
-# 3. 对比分析
-python research-paper-generator/scripts/compare_results.py \
-  --baseline experiments/baseline/results.json \
-  --enhanced experiments/enhanced/results.json
-
-# 4. 生成论文
-python research-paper-generator/scripts/generate_paper.py \
-  --comparison experiments/comparison/comparison.json
-```
-
-### 3. 编译论文
-
-```bash
-cd paper
-pdflatex paper.tex
-bibtex paper
-pdflatex paper.tex
-pdflatex paper.tex
-```
-
-## 📚 文档
-
-- **[协作者指南](COLLABORATOR_GUIDE.md)** - 团队协作工作流、任务分配
-- **[集成指南](jiuwenswarm/docs/INTEGRATION_GUIDE.md)** - 详细的集成说明
-- **[模块调用说明](jiuwenswarm/docs/module_call.md)** - API使用文档
-- **[系统架构](jiuwenswarm/docs/architecture.md)** - 架构设计文档
-- **[创新点详解](jiuwenswarm/docs/innovation.md)** - 技术创新说明
-
-## 🎯 项目状态
-
-### 完成度：100%
-
-- ✅ **第一阶段**（核心实现）：多层次记忆系统、混合检索引擎、团队同步、记忆压缩
-- ✅ **第二阶段**（实验验证）：4类任务实验、对比分析、论文撰写
-- ✅ **第三阶段**（Agent自动化）：EnhancedMemoryRail集成、系统注册、端到端验证
-
-### 代码统计
-
-```
-总代码量: ~2800行
-
-核心模块:
-├── multi_level_memory.py           450行
-├── retrieval_engine.py             400行
-├── team_memory_sync_rail.py        350行
-├── memory_compression_tool.py      300行
-├── enhanced_memory_rail.py         280行
-└── research-paper-generator/       800行
-
-文档: 8个MD文件
-测试: 290行
-```
-
-## 🤝 如何贡献
-
-我们欢迎任何形式的贡献！详见 **[协作者指南](COLLABORATOR_GUIDE.md)**
-
-### 贡献流程
-1. Fork 本项目
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'feat: Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
-
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
-
-## 👥 团队
-
-- **项目维护者**：[@Mapleyuchen](https://github.com/Mapleyuchen)
-- **学校**：同济大学
-- **比赛**：CCF BDCI 2026
-
-## 🙏 致谢
-
-- [openJiuwen](https://github.com/openJiuwen-ai/jiuwenswarm) - 提供优秀的多智能体框架
-- CCF BDCI 组委会 - 组织精彩的比赛
-- 开源社区 - 持续的支持和贡献
-
-## 📞 联系我们
-
-- **GitHub Issues**: [https://github.com/Mapleyuchen/CCF-BDCI/issues](https://github.com/Mapleyuchen/CCF-BDCI/issues)
-- **邮箱**: [待填写]
-
-## 🔗 相关链接
-
-- [JiuwenSwarm 官方文档](https://openjiuwen.com/zh/jiuwenswarm)
-- [ICLR 2027 论文格式](https://iclr.cc/Conferences/2027/AuthorGuide)
-- [CCF BDCI 官网](https://www.datafountain.cn/competitions)
-
----
-
-**⭐ 如果这个项目对你有帮助，欢迎 Star！**
-
-**最后更新**: 2026年9月24日
+提交材料保留真实模型调用、实验记录、源代码和哈希。正式参赛还需队伍名称、针对最终 PDF 的 Reviewer Token、上游贡献 PR 和人工复核；本地机械检查通过不代表这些材料已经齐全。

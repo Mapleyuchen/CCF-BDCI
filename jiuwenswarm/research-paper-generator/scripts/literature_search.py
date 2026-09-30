@@ -1,182 +1,126 @@
 #!/usr/bin/env python3
-# coding: utf-8
-"""
-文献检索脚本
-使用arXiv API检索相关学术论文
-"""
-
-import requests
-import json
-import time
-import xml.etree.ElementTree as ET
-from typing import List, Dict
-from pathlib import Path
+"""Public arXiv metadata retrieval with caching, rate limiting and provenance."""
+from __future__ import annotations
 import argparse
+import hashlib
+import json
+from pathlib import Path
+import re
+import time
+from datetime import datetime, timezone
+from urllib.parse import urlencode, urlparse
+from urllib.request import Request, urlopen
+from urllib.error import URLError
+import xml.etree.ElementTree as ET
 
 
 class ArxivSearcher:
-    """arXiv论文检索器"""
+    BASE_URL = 'https://export.arxiv.org/api/query'
 
-    BASE_URL = "http://export.arxiv.org/api/query"
+    def __init__(self, config=None, cache_dir=Path('output/arxiv-cache')):
+        config = config or {}
+        self.url = config.get('api_url', self.BASE_URL)
+        if urlparse(self.url).scheme != 'https' or urlparse(self.url).hostname not in {'export.arxiv.org', 'arxiv.org'}:
+            raise ValueError('Use the official HTTPS arXiv metadata endpoint')
+        self.user_agent = config.get('user_agent', 'CCF-BDCI-PaperResearch/2.0')
+        self.interval = max(3.0, float(config.get('interval_seconds', 3.1)))
+        self.timeout = float(config.get('timeout_seconds', 60))
+        self.cache = Path(cache_dir)
+        self.last_request = 0.0
+        self.requests = []
 
-    def __init__(self):
-        self.session = requests.Session()
+    def _fetch(self, parameters):
+        url = self.url + '?' + urlencode(parameters)
+        path = self.cache / (hashlib.sha256(url.encode()).hexdigest() + '.xml')
+        cached = path.is_file()
+        if cached:
+            raw = path.read_bytes()
+        else:
+            for attempt in range(3):
+                time.sleep(max(0, self.interval - (time.monotonic() - self.last_request)))
+                self.last_request = time.monotonic()
+                try:
+                    with urlopen(Request(url, headers={'User-Agent': self.user_agent}), timeout=self.timeout) as response:
+                        raw = response.read(10_000_000)
+                    self._parse_arxiv_response(raw)
+                    break
+                except (URLError, TimeoutError, OSError):
+                    if attempt == 2:
+                        raise ValueError('arXiv request failed; check network/proxy or use cached metadata') from None
+                    time.sleep(self.interval * (attempt + 1))
+            self.cache.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(raw)
+        self.requests.append({'url': url, 'retrieved_at': datetime.now(timezone.utc).isoformat(),
+                              'from_cache': cached, 'atom_sha256': hashlib.sha256(raw).hexdigest()})
+        return self._parse_arxiv_response(raw)
 
-    def search(self, query: str, max_results: int = 20,
-               start: int = 0) -> List[Dict]:
-        """检索论文
+    def search(self, query, max_results=20, start=0):
+        if not query or not 1 <= max_results <= 200:
+            raise ValueError('Supply a query and max_results between 1 and 200')
+        query = query if re.search(r'\b(?:all|ti|au|abs|cat):', query) else 'all:"' + query.replace('"', '') + '"'
+        return self._fetch({'search_query': query, 'start': start, 'max_results': max_results,
+                            'sortBy': 'relevance', 'sortOrder': 'descending'})
 
-        Args:
-            query: 检索关键词
-            max_results: 返回结果数量
-            start: 起始位置
+    def fetch_ids(self, ids):
+        if not ids or any(not re.fullmatch(r'\d{4}\.\d{4,5}(?:v\d+)?', x) for x in ids):
+            raise ValueError('Supply comma-separated modern arXiv IDs')
+        return self._fetch({'id_list': ','.join(ids), 'max_results': len(ids)})
 
-        Returns:
-            论文列表
-        """
-        params = {
-            "search_query": f"all:{query}",
-            "start": start,
-            "max_results": max_results,
-            "sortBy": "relevance",
-            "sortOrder": "descending"
-        }
-
+    def _parse_arxiv_response(self, raw):
+        ns = {'a': 'http://www.w3.org/2005/Atom'}
         try:
-            response = self.session.get(self.BASE_URL, params=params, timeout=30)
-            response.raise_for_status()
-
-            papers = self._parse_arxiv_response(response.text)
-            return papers
-
-        except Exception as e:
-            print(f"检索失败: {e}")
-            return []
-
-    def _parse_arxiv_response(self, xml_text: str) -> List[Dict]:
-        """解析arXiv API返回的XML"""
+            root = ET.fromstring(raw)
+        except ET.ParseError:
+            raise ValueError('arXiv returned invalid Atom XML') from None
         papers = []
-
-        try:
-            root = ET.fromstring(xml_text)
-
-            # arXiv使用Atom命名空间
-            ns = {"atom": "http://www.w3.org/2005/Atom"}
-
-            for entry in root.findall("atom:entry", ns):
-                paper = {}
-
-                # 提取基本信息
-                title_elem = entry.find("atom:title", ns)
-                paper["title"] = title_elem.text.strip() if title_elem is not None else ""
-
-                summary_elem = entry.find("atom:summary", ns)
-                paper["abstract"] = summary_elem.text.strip() if summary_elem is not None else ""
-
-                # 作者
-                authors = []
-                for author in entry.findall("atom:author", ns):
-                    name_elem = author.find("atom:name", ns)
-                    if name_elem is not None:
-                        authors.append(name_elem.text.strip())
-                paper["authors"] = authors
-
-                # 链接
-                for link in entry.findall("atom:link", ns):
-                    if link.get("title") == "pdf":
-                        paper["pdf_url"] = link.get("href")
-                    elif link.get("rel") == "alternate":
-                        paper["url"] = link.get("href")
-
-                # 发布时间
-                published_elem = entry.find("atom:published", ns)
-                if published_elem is not None:
-                    paper["published"] = published_elem.text.strip()
-
-                # arXiv ID
-                id_elem = entry.find("atom:id", ns)
-                if id_elem is not None:
-                    paper["arxiv_id"] = id_elem.text.split("/")[-1]
-
-                papers.append(paper)
-
-        except Exception as e:
-            print(f"解析XML失败: {e}")
-
+        for entry in root.findall('a:entry', ns):
+            source_id = entry.findtext('a:id', '', ns)
+            if '/api/errors' in source_id:
+                raise ValueError('arXiv rejected the query')
+            arxiv_id = source_id.rsplit('/', 1)[-1]
+            if not arxiv_id:
+                continue
+            published = entry.findtext('a:published', '', ns)
+            papers.append({'id': re.sub(r'v\d+$', '', arxiv_id), 'arxiv_id': arxiv_id,
+                           'title': ' '.join(entry.findtext('a:title', '', ns).split()),
+                           'authors': [a.findtext('a:name', '', ns) for a in entry.findall('a:author', ns)],
+                           'published': published, 'year': int(published[:4]),
+                           'abstract': ' '.join(entry.findtext('a:summary', '', ns).split()),
+                           'url': 'https://arxiv.org/abs/' + arxiv_id,
+                           'pdf_url': 'https://arxiv.org/pdf/' + arxiv_id})
         return papers
 
-    def search_multiple_queries(self, queries: List[str],
-                               max_per_query: int = 10) -> List[Dict]:
-        """检索多个关键词"""
-        all_papers = []
-
-        for query in queries:
-            print(f"检索: {query}")
-            papers = self.search(query, max_results=max_per_query)
-            all_papers.extend(papers)
-            print(f"  找到 {len(papers)} 篇论文")
-            time.sleep(1)  # 避免请求过快
-
-        # 去重（基于arxiv_id）
-        unique_papers = {}
-        for paper in all_papers:
-            arxiv_id = paper.get("arxiv_id")
-            if arxiv_id and arxiv_id not in unique_papers:
-                unique_papers[arxiv_id] = paper
-
-        return list(unique_papers.values())
+    def search_multiple_queries(self, queries, max_per_query=10):
+        papers = [p for query in queries for p in self.search(query, max_per_query)]
+        return list({p['id']: p for p in papers}.values())
 
 
 def main():
-    parser = argparse.ArgumentParser(description="检索arXiv论文")
-    parser.add_argument("--query", type=str, required=True, help="检索关键词")
-    parser.add_argument("--max-results", type=int, default=20, help="最大结果数")
-    parser.add_argument("--output", type=str, default="references/literature.json",
-                       help="输出文件路径")
-
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--query')
+    group.add_argument('--ids', help='Comma-separated arXiv IDs')
+    parser.add_argument('--max-results', type=int, default=20)
+    parser.add_argument('--config', type=Path)
+    parser.add_argument('--cache-dir', type=Path, default=Path('output/arxiv-cache'))
+    parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-
-    # 创建检索器
-    searcher = ArxivSearcher()
-
-    # 扩展检索关键词
-    base_query = args.query
-    queries = [
-        base_query,
-        f"{base_query} architecture",
-        f"{base_query} system",
-        f"{base_query} framework"
-    ]
-
-    print(f"开始检索论文...")
-    print(f"基础关键词: {base_query}")
-    print(f"目标数量: {args.max_results}\n")
-
-    # 执行检索
-    papers = searcher.search_multiple_queries(
-        queries,
-        max_per_query=args.max_results // len(queries)
-    )
-
-    print(f"\n总共找到 {len(papers)} 篇不重复的论文")
-
-    # 保存结果
-    output_path = Path(args.output)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(papers, f, ensure_ascii=False, indent=2)
-
-    print(f"结果已保存到: {output_path}")
-
-    # 显示前几篇
-    print("\n前5篇论文:")
-    for i, paper in enumerate(papers[:5], 1):
-        print(f"\n{i}. {paper.get('title', 'N/A')}")
-        print(f"   作者: {', '.join(paper.get('authors', [])[:3])}")
-        print(f"   发布: {paper.get('published', 'N/A')[:10]}")
-        print(f"   链接: {paper.get('url', 'N/A')}")
+    try:
+        config = {}
+        if args.config:
+            import yaml
+            config = (yaml.safe_load(args.config.read_text(encoding='utf-8')) or {}).get('arxiv', {})
+        searcher = ArxivSearcher(config, args.cache_dir)
+        papers = searcher.fetch_ids(args.ids.split(',')) if args.ids else searcher.search(args.query, args.max_results)
+        if not papers:
+            raise ValueError('No papers returned; an empty search is not a completed literature review')
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(papers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        args.output.with_suffix('.provenance.json').write_text(json.dumps(searcher.requests, indent=2) + '\n', encoding='utf-8')
+        print(f'Fetched {len(papers)} sources: {args.output}')
+    except (ValueError, OSError) as error:
+        parser.exit(2, f'Literature retrieval failed: {error}\n')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

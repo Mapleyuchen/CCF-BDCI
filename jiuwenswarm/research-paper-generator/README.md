@@ -1,5 +1,7 @@
 # 论文框架、内容填充与质量检查（第 3 / 4 / 5 部分）
 
+当前研究版入口与配置见 [API 调用说明](references/api_workflow.md) 和 [SKILL](SKILL.md)。默认使用 DashScope `qwen3.8-max` 完成规划、初稿、审阅、修订，使用百炼 `qwen-image-3.0-pro` 生成 Methodology 图；arXiv 元数据检索不需要 Key。研究版增加方法公式、Wilson 区间、逐题诊断、写入/查询成本拆分和可审计附录。以下框架输入与内容 JSON 约定继续适用。
+
 其中第 3 部分在没有其他模块、模型服务或 API Key 的情况下，可以生成 ICLR 论文骨架、结构化大纲和引用映射。使用 Python 3.11+ 标准库；生成 PDF 另需 PATH 中有 `pdflatex` 和 `bibtex`。第 4 部分的模型写作与额外依赖见下文。
 
 **框架生成器是规则规划器，不调用 LLM，不生成论文正文、实验数字或研究结论。** 主章节使用科研论文常见结构，方法与实验子章节根据输入生成。后续主 Agent 可以先组织研究说明，再调用本模块。尚未实现自主研究构思或主 Agent 的工具注册。
@@ -90,7 +92,7 @@ conda activate ccf-bdci
 
 如果还要运行真实 DeepAgent 对照实验，在同一环境、仓库根目录执行 `python -m pip install -e ./jiuwenswarm` 安装完整项目。当前本机已安装这部分依赖，并验证没有安装 Torch/CUDA；`environment.yml` 保留的是论文流程所需的最小依赖集。
 
-示例配置 `examples/dashscope.yaml` 使用百炼北京地域的 OpenAI 兼容接口、`qwen-plus` 和环境变量 `DASHSCOPE_API_KEY`。使用其他地域时修改 `api_base`。也支持已有 JiuwenSwarm `models.defaults` / `models.default` 配置，以及 `--env-file` 显式加载本机凭据；不会将模型配置或密钥复制到论文目录。模型服务调用会产生费用。
+当前配置 `examples/dashscope-research.yaml` 使用百炼北京地域的文本兼容接口、`qwen3.8-max` 和环境变量 `DASHSCOPE_API_KEY`。`examples/dashscope.yaml` 保留为基础版及实验配置。使用其他地域时同时调整地址、密钥和模型。支持 `--env-file` 显式加载本机凭据；不会将模型配置或密钥复制到论文目录。模型服务调用会产生费用。
 
 完整演示使用仓库已提交的两份真实 LongMemEval 改编实验记录，无需重新运行记忆实验：
 
@@ -98,7 +100,7 @@ conda activate ccf-bdci
 python jiuwenswarm/research-paper-generator/scripts/write_paper.py --output output/memory-paper-run --compile
 ```
 
-命令依次执行框架生成、DashScope 正文生成、图表和书目生成、LaTeX 编译、质量检查。输入默认采用 `examples/memory-study.brief.json` 和 `memory-study.literature.json`；可通过 `--brief`、`--literature`、`--config` 替换。`--output` 必须是尚不存在的目录。
+命令依次执行框架生成、DashScope 规划/正文/审阅/修订、图表和书目生成、LaTeX 编译、质量检查。输入默认采用 `examples/memory-research.brief.json` 和 `memory-research.literature.json`；可通过 `--brief`、`--literature`、`--config` 替换。`--output` 必须是尚不存在的目录。默认配图来自仓库已审阅资产；加 `--generate-methodology` 才会新调用图像 API，或用 `--methodology-image` 接入自己检查过的 PNG。
 
 可用 `--model qwen-turbo` 单独切换写作模型，不改变实验文件中的模型身份。若服务返回 `AllocationQuota.FreeTierOnly`，表示该模型的免费额度耗尽且账户禁止付费调用，需要调整百炼额度设置或选择账号下仍可用的模型。
 
@@ -149,7 +151,7 @@ python jiuwenswarm/research-paper-generator/scripts/fill_content.py output/memor
 
 若尚未产生 `content.json`，可选择 `content_attempt_1.json` 等已保存文件。内容默认标记 `human_review_required: true`。机械检查通过不代表论断、引用支持关系或实验设计已经通过学术审查。示例论文只描述小样本 L1 记忆问答；不是 LongMemEval 官方成绩，也不声称完成 L2/L3、跨重启持久化或团队实验。
 
-这条命令行流水线尚未注册为主 Agent 工具。仓库早期 `SKILL.md` 中的模拟实验和旧 `generate_paper.py` 命令不应作为新论文的数据/写作入口。
+这条命令行流水线尚未注册为主 Agent 工具。`SKILL.md` 已更新为真实 API 与证据流程；旧 `generate_paper.py` 和模拟实验脚本不应作为新论文的数据/写作入口。
 
 ## 第 5 部分：质量检查
 

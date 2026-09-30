@@ -28,12 +28,16 @@ def inside(root: Path, relative: str) -> Path:
 
 
 def fill_project(framework: Path, output: Path, *, model=None, content_json: Path | None = None,
-                 related_work: Path | None = None, compile_pdf=False) -> dict:
+                 related_work: Path | None = None, compile_pdf=False, methodology_image: Path | None = None,
+                 resume_from: Path | None = None) -> dict:
     framework, output = framework.resolve(), output.resolve()
     if output.exists() or output.is_relative_to(framework):
         raise ValueError("Choose a new output directory outside the source framework; existing work is never overwritten")
     outline = read_json(framework / "outline.json")
     brief = read_json(framework / "brief.input.json")
+    research = brief.get("writing_profile") == "research"
+    if research and brief.get("method_specification", {}).get("implementation") != "jiuwenswarm_l1_v1":
+        raise ValueError("Research assets require the audited jiuwenswarm_l1_v1 method specification")
     citations = read_json(framework / "citation_map.json")
     results = load_evidence(outline)
     metrics = metric_catalog(results)
@@ -94,6 +98,9 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
             if prior_report.is_file():
                 report["upstream_generation_report"] = {"path": str(prior_report.resolve()),
                                                         "sha256": sha256(prior_report)}
+        elif research:
+            from .editorial import draft_and_review
+            content = draft_and_review(model, messages, output, resume_from)
         else:
             content = model.complete(messages)
         allowed_names = [r["model_name"] for r in results]
@@ -116,8 +123,25 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
                 content = model.complete(messages)
         write_json(output / "content.json", content)
         for result in results:
-            rendered["results"] += table_tex(result, metrics) + figure_tex(result)
-        report["figures"] = make_figures(results, output / "figures")
+            rendered["results"] += table_tex(result, metrics)
+            if not research:
+                rendered["results"] += figure_tex(result)
+        if research:
+            from .research_assets import attach_research_assets, FORMALIZATION
+            method_tex, diagnostic_tex, files = attach_research_assets(results, output, methodology_image)
+            rendered["method"] = rendered["method"].replace(r"\subsection", method_tex + r"\subsection", 1)
+            rendered["method"] += "\n\\FloatBarrier\n" + FORMALIZATION + "\n\\FloatBarrier\n"
+            rendered["results"] += diagnostic_tex + "\n\\FloatBarrier\n"
+            report["figures"] = files
+            report["methodology_image_sha256"] = sha256(output / "figures/methodology.png")
+            report["editorial_checks"] = {
+                "prose_words": len(re.findall(r"\b[A-Za-z][A-Za-z'-]*\b", " ".join(
+                    p for s in content['sections'] for b in [s] + s['subsections'] for p in b['paragraphs']))),
+                "reference_count": len(citations['entries']), "method_equations": 3,
+                "question_level_appendix": True, "research_validity_requires_human_review": True,
+            }
+        else:
+            report["figures"] = make_figures(results, output / "figures")
         for section in outline["sections"]:
             inside(output, section["file"]).write_text(rendered[section["id"]], encoding="utf-8")
             section["status"] = "generated_needs_human_review"
@@ -126,6 +150,11 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
         paper = paper.replace(r"\lhead{Research paper framework -- draft}", r"\lhead{Research manuscript}")
         paper = re.sub(r"\\paragraph\{Draft bibliography\.\}[^\n]*\n", "", paper)
         paper = paper.replace(r"\nocite{*}", "")
+        if research:
+            paper = paper.replace(r"\begin{document}", "\\usepackage{placeins}\n\\begin{document}")
+            paper = paper.replace(r"\bibliography{references}",
+                                  r"{\small\setlength{\bibsep}{3pt}\bibliography{references}}")
+            paper = paper.replace(r"\end{document}", "\\input{appendix.tex}\n\\end{document}")
         # Avoid vertically stretched float-only pages while keeping ICLR margins/style.
         layout = ("\\hypersetup{hidelinks}\n\\raggedbottom\n"
                   "\\renewcommand{\\topfraction}{0.95}\n\\renewcommand{\\textfraction}{0.05}\n"
@@ -137,7 +166,7 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
         (output / "references.bib").write_text(bibliography(citations), encoding="utf-8")
         manifest = read_json(output / "manifest.json")
         manifest.update(artifact_kind="paper_content_draft", ready_for_submission=False,
-                        human_review_required=True, content_generator="evidence_grounded_v1")
+                        human_review_required=True, content_generator="reviewed_research_v2" if research else "evidence_grounded_v1")
         write_json(output / "manifest.json", manifest)
         if compile_pdf:
             compile_project(output)

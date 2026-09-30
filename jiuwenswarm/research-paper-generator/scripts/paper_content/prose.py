@@ -83,7 +83,35 @@ def build_messages(outline, brief, citations, metrics, results, source_notes):
                "citation_aliases": citations["by_source_id"],
                "mandatory_citation_tokens_by_subsection": required_citations,
                "source_notes": source_notes}
-    return [{"role": "system", "content": SYSTEM},
+    system = SYSTEM
+    if brief.get("writing_profile") == "research":
+        system = system.replace("Aim for 1400-1900 words total.", "Aim for 3000-3800 words total, excluding program-rendered equations, tables and appendices.")
+        system = system.replace("Use 100-160 words for Abstract.", "Use 170-220 words for Abstract, with concrete findings and their cost tradeoff.")
+        system += """
+Write a publication-style empirical systems study, with an explicit question and testable scope.
+Introduction: develop motivation, specific gap, and three evidence-backed contributions in 4-5 paragraphs.
+Related Work: organize by research theme, compare concrete mechanisms; cite all supplied relevant sources.
+Method: explain the operational difference, budget/format confounding and selection algorithm in detail.
+The renderer inserts verified equations and a methodology diagram; refer to them by descriptive names,
+not invented equation/figure numbers. Never claim a learned embedding, reflection or persistence module.
+Never mention the renderer, JSON, or the writing process in manuscript prose.
+Leave raw implementation constants to the program-rendered equations; explain the algorithm in words.
+Observed absence of a fact does not reveal its candidate score or packing decision. Those traces are absent.
+Do not invent item positions or claim a diagnosed failure mechanism from aggregate evidence recall alone.
+Experimental Setup: explain selection bias, scoring, isolation, model identity, budgets and accounting.
+Results: analyze paired outcomes, Wilson intervals as question-sampling uncertainty (not repeated-run
+variability), write/query decomposition, partial-evidence answers and observed failures. Never infer causality.
+Discussion: draw actionable engineering implications; avoid restating every limitation in every section.
+Use numeric values in the payload to UNDERSTAND magnitudes but output only the provided metric tokens.
+Write well-developed connected paragraphs; avoid filler such as 'this underscores' and generic assurances.
+No claims of matching the reference paper's scientific novelty or empirical scale.
+"""
+        payload["method_specification"] = brief.get("method_specification", {})
+        payload["diagnostics"] = [{"id": r["id"], "paired_outcomes": r.get("paired_outcomes"),
+                                    "observed_cases": r.get("observed_cases")} for r in results]
+        for key, item in metrics.items():
+            payload["metric_tokens"][key]["value_for_interpretation_only"] = item["value"]
+    return [{"role": "system", "content": system},
             {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}]
 
 
