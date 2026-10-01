@@ -1,5 +1,7 @@
 # 论文框架、内容填充与质量检查（第 3 / 4 / 5 部分）
 
+2026-10-01 接口联调与离线复现结果见 [联调报告](INTEGRATION_REPORT.md)。新增证据快照随项目交接，以及 `write_paper.py --content-json` 单命令离线入口。
+
 当前研究版入口与配置见 [API 调用说明](references/api_workflow.md) 和 [SKILL](SKILL.md)。默认使用 DashScope `qwen3.8-max` 完成规划、初稿、审阅、修订，使用百炼 `qwen-image-3.0-pro` 生成 Methodology 图；arXiv 元数据检索不需要 Key。研究版增加方法公式、Wilson 区间、逐题诊断、写入/查询成本拆分和可审计附录。以下框架输入与内容 JSON 约定继续适用。
 
 其中第 3 部分在没有其他模块、模型服务或 API Key 的情况下，可以生成 ICLR 论文骨架、结构化大纲和引用映射。使用 Python 3.11+ 标准库；生成 PDF 另需 PATH 中有 `pdflatex` 和 `bibtex`。第 4 部分的模型写作与额外依赖见下文。
@@ -40,7 +42,9 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模�
 
 方法、实验的 `id` 在各自数组内唯一，使用小写字母开头及小写字母、数字、下划线、短横线。它们生成稳定的章节标签。`citation_ids` 是文献的显式 `id` 或规范 ID，例如 `arxiv:2310.08560`、`doi:10.xxxx/xxx`；引用不存在的 ID 会报错。
 
-`status` 默认 `planned`。计划实验仅产生实验设置子章节，并列出待补数据。`completed` 必须附上存在的 `result_path`，其路径**相对原始 brief 文件所在目录**解析。模块记录结果文件路径和 SHA-256，生成“待证据复核”的结果子章节；不会读取数值生成结论，也不会把文件存在当作实验有效的证明。
+`status` 默认 `planned`。计划实验仅产生实验设置子章节，并列出待补数据。`completed` 必须附上存在的 `result_path`，其路径**相对原始 brief 文件所在目录**解析。模块记录 SHA-256，并将当时的原始文件复制到 `evidence/raw/`；复制后再次核对哈希。结果子章节标记为“待证据复核”，不会根据文件存在生成结论。
+
+新证据记录的 `project_path` 相对当前论文工程解析，跨目录、跨电脑交接时以此为准。`original_path`、原始 `input_path` 只用于来源追踪；`resolved_path` 为生成时的快照绝对路径，保留给旧调用方。第 4、5 部分优先读取项目内快照，快照缺失或被修改时拒绝使用，不回退到旧电脑上的文件。生成后原始实验文件的后续变化不会改变这份已规划的证据；要采用新结果，应重新生成框架。旧的绝对路径工程仍可在原路径有效时读取，交接前建议重新生成。
 
 这允许第 2 位同学继续使用自己的结果格式。第 3 部分只约定实验描述和文件关联，不要求对方先改实验脚本。输入给正文的实验结果由第 4 位同学解析。
 
@@ -64,6 +68,7 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模�
   citation_map.json         规范元数据、原始 ID -> 引用键、去重来源索引
   references.bib            从输入生成的 BibTeX
   brief.input.json          研究说明快照（结果相对路径仍以原始 brief 为基准）
+  evidence/raw/*.json        已完成实验的原始快照，随框架一起交接
   manifest.json             输入/样式哈希、draft 状态和待补信息
   HANDOFF.md                内容填充注意事项
   *.sty / *.bst             仓库现有 ICLR 样式依赖
@@ -101,6 +106,14 @@ python jiuwenswarm/research-paper-generator/scripts/write_paper.py --output outp
 ```
 
 命令依次执行框架生成、DashScope 规划/正文/审阅/修订、图表和书目生成、LaTeX 编译、质量检查。输入默认采用 `examples/memory-research.brief.json` 和 `memory-research.literature.json`；可通过 `--brief`、`--literature`、`--config` 替换。`--output` 必须是尚不存在的目录。默认配图来自仓库已审阅资产；加 `--generate-methodology` 才会新调用图像 API，或用 `--methodology-image` 接入自己检查过的 PNG。
+
+**队友已经交付正文时，可用一条命令离线复现完整论文，无需 Key 或模型配置：**
+
+```powershell
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --content-json jiuwenswarm/research-paper-generator/examples/memory-research.content.json --output output/memory-paper-offline --compile
+```
+
+该命令仍会生成新框架、校验原始实验、重算指标、生成图表与 BibTeX、编译并检查 PDF，但不调用文本或图像 API。`--content-json` 与 `--config` 互斥，也不能同时指定 `--model`、`--env-file`、`--generate-methodology`、`--resume-from`；可搭配经过审阅的 `--methodology-image`、`--related-work`。正文必须与传入 brief 的章节 ID 和文献映射匹配。
 
 可用 `--model qwen-turbo` 单独切换写作模型，不改变实验文件中的模型身份。若服务返回 `AllocationQuota.FreeTierOnly`，表示该模型的免费额度耗尽且账户禁止付费调用，需要调整百炼额度设置或选择账号下仍可用的模型。
 
@@ -181,4 +194,4 @@ python -m unittest discover -s jiuwenswarm/research-paper-generator/tests -v
 
 离线测试覆盖缺失数据、证据路径与哈希、引用键与去重、元数据冲突、LaTeX 文本转义、跨工作目录运行、拒绝覆盖和编译失败。检测到 LaTeX 时还会执行实际编译测试，检查正文引用交接、无书目和非匿名模式、未知引用拦截；未安装时跳过这两项。
 
-真实编译使用 `pdflatex -> bibtex（有书目时）-> pdflatex -> pdflatex`，关闭 shell escape；命令错误和未解析引用会导致非零退出码。编译通过仅表示工程有效，不表示论文内容已完成。
+真实编译使用 `pdflatex -> bibtex（有书目时）-> pdflatex -> pdflatex`，关闭 shell escape。若长论文仍提示交叉引用变化，最多再运行两轮 LaTeX；引用持续不稳定、命令错误或未解析引用均返回非零退出码。编译通过仅表示工程有效，不表示论文内容已完成。

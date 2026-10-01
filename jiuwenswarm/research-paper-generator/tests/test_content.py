@@ -103,7 +103,8 @@ class ContentTests(unittest.TestCase):
             normalize_result(self.write("bad.json", self.data), "trial", "Trial")
 
     def test_hash_change_fails_before_creating_output(self):
-        self.result.write_text("{}")
+        snapshot = self.root / "framework" / self.outline["evidence"][0]["project_path"]
+        snapshot.write_text("{}")
         with self.assertRaisesRegex(ValueError, "changed"):
             fill_project(self.root / "framework", self.root / "filled", content_json=self.write("content.json", self.content))
         self.assertFalse((self.root / "filled").exists())

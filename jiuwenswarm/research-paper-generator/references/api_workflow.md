@@ -91,8 +91,18 @@ python jiuwenswarm/research-paper-generator/scripts/write_paper.py --resume-from
 
 仅重排已有正文，不再付费：
 
+从已提交的研究说明、文献、实验和保存正文开始，一条命令离线联调第 3 / 4 / 5 部分：
+
+```powershell
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --content-json jiuwenswarm/research-paper-generator/examples/memory-research.content.json --output output/research-offline --compile
+```
+
+此模式不读取模型配置、不加载凭据，也不调用图像 API；不要搭配在线生成或恢复参数。已有框架可继续使用以下命令：
+
 ```powershell
 python jiuwenswarm/research-paper-generator/scripts/fill_content.py output/research-new/framework --content-json output/research-new/paper/content.json --methodology-image output/methodology-new.png --output output/research-typeset --compile
 ```
+
+新框架自带 `evidence/raw/` 快照。交接时复制整个框架目录，不能只复制 `outline.json` 或 `sections/`；内容填充与质量检查按 `project_path` 解析证据，且仍然校验哈希。已填充论文的 `evidence/` 同样支持整个工程迁移。
 
 论文写作调用与实验调用分开记账。本次研究依据仍是两份已保存的 qwen-plus 实验；重新写论文不等于重跑实验。质量检查通过也不代表取得比赛评审 Token、论文达到样例的实验规模，或已获人工学术认可。

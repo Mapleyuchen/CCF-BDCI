@@ -11,6 +11,8 @@ import json
 import re
 from pathlib import Path
 
+from paper_framework.evidence import evidence_path
+
 REQUIRED_SECTIONS = (
     "abstract",
     "introduction",
@@ -156,9 +158,12 @@ def _check_completeness(project, paper_tex, outline, section_text, citation_map,
         if not isinstance(record, dict):
             continue
         evidence_id = str(record.get("id", "unknown"))
-        recorded = record.get("resolved_path")
+        recorded = record.get("project_path", record.get("resolved_path"))
         expected_hash = record.get("sha256")
-        path = Path(recorded) if isinstance(recorded, str) else None
+        try:
+            path = evidence_path(record, project)
+        except (ValueError, OSError):
+            path = None
         if path is None or not path.is_file():
             _add(checks, check_id="completeness_evidence_missing", category="completeness", severity="error",
                  passed=False, message=f"Result file for {evidence_id} is not at the recorded path.",
@@ -173,7 +178,7 @@ def _check_completeness(project, paper_tex, outline, section_text, citation_map,
     _check_inputs(paper_tex, outline, checks)
     _check_subsections(outline, section_text, checks)
     _check_citations(project, outline, section_text, citation_map, checks)
-    _check_result_claims(outline, section_text, checks)
+    _check_result_claims(project, outline, section_text, checks)
 
 
 def _check_inputs(paper_tex, outline, checks):
@@ -256,7 +261,7 @@ def _check_citations(project, outline, section_text, citation_map, checks):
              message="Bibliography entries have neither a DOI nor an arXiv id: " + ", ".join(weak))
 
 
-def _check_result_claims(outline, section_text, checks):
+def _check_result_claims(project, outline, section_text, checks):
     if not isinstance(outline, dict):
         return
     results = _uncommented(section_text.get("results", ""))
@@ -273,8 +278,11 @@ def _check_result_claims(outline, section_text, checks):
         return
     allowed = set()
     for record in evidence:
-        path = Path(record["resolved_path"]) if isinstance(record.get("resolved_path"), str) else None
-        if path is not None and path.is_file():
+        try:
+            path = evidence_path(record, project)
+        except (ValueError, OSError):
+            continue
+        if path.is_file() and hashlib.sha256(path.read_bytes()).hexdigest() == record.get("sha256"):
             allowed.update(_numbers_in_file(path))
     claims = _claim_numbers(results)
     if not claims:

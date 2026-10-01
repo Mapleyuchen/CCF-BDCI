@@ -42,8 +42,16 @@ def compile_project(project: Path, timeout: int = 120) -> Path:
             run([bibtex, "paper"])
         run(command)
         run(command)
-        log = (project / "paper.log").read_text(encoding="utf-8", errors="replace")
-        report["warnings"] = [line for line in log.splitlines() if "Warning" in line or "Overfull" in line]
+        for extra_pass in range(3):
+            log = (project / "paper.log").read_text(encoding="utf-8", errors="replace")
+            report["warnings"] = [line for line in log.splitlines() if "Warning" in line or "Overfull" in line]
+            needs_rerun = re.search(
+                r"Label\(s\) may have changed|Rerun to get (?:cross-references|/PageLabels)|rerunfilecheck Warning: File", log)
+            if not needs_rerun:
+                break
+            if extra_pass == 2:
+                raise ValueError(f"Cross-references did not stabilize after five LaTeX passes; see {report_path}")
+            run(command)
         if re.search(r"(?:Citation|Reference).*undefined|There were undefined (?:references|citations)", log):
             raise ValueError(f"Unresolved citations or references; see {report_path}")
         if not (project / "paper.pdf").is_file():

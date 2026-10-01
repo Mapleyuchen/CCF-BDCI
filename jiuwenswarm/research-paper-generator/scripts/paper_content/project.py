@@ -10,6 +10,7 @@ import shutil
 
 from paper_framework.citations import bibliography
 from paper_framework.compiler import compile_project
+from paper_framework.evidence import evidence_path
 from paper_quality.checker import check_project
 from .evidence import load_evidence, metric_catalog, read_json, sha256
 from .figures import figure_tex, make_figures, table_tex
@@ -39,7 +40,7 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
     if research and brief.get("method_specification", {}).get("implementation") != "jiuwenswarm_l1_v1":
         raise ValueError("Research assets require the audited jiuwenswarm_l1_v1 method specification")
     citations = read_json(framework / "citation_map.json")
-    results = load_evidence(outline)
+    results = load_evidence(outline, framework)
     metrics = metric_catalog(results)
     # Persist the exact displayed precision as well as full measurements for the quality checker.
     for item in metrics.values():
@@ -74,17 +75,20 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
         (output / "evidence").mkdir()
         for entry in outline["evidence"]:
             target = output / "evidence" / (entry["id"] + ".json")
-            shutil.copy2(entry["resolved_path"], target)
+            source = evidence_path(entry, framework)
+            shutil.copy2(source, target)
             if sha256(target) != entry["sha256"]:
                 raise ValueError("Evidence changed during copy")
-            entry["original_path"] = entry["resolved_path"]
+            entry.setdefault("original_path", str(source))
             entry["resolved_path"] = str(target)
             entry["input_path"] = "evidence/" + target.name
+            entry["project_path"] = "evidence/" + target.name
             entry["validation"] = "live_records_recomputed; human_review_required"
         normalized = output / "evidence" / "normalized_results.json"
         write_json(normalized, {"schema_version": 1, "results": results, "metrics": metrics,
                                 "display_policy": "Percentages to one decimal; average tokens and milliseconds to two decimals."})
         outline["evidence"].append({"id": "content_normalized", "input_path": "evidence/normalized_results.json",
+                                    "project_path": "evidence/normalized_results.json",
                                     "resolved_path": str(normalized), "sha256": sha256(normalized),
                                     "validation": "derived_from_hashed_live_records"})
         write_json(output / "outline.json", outline)

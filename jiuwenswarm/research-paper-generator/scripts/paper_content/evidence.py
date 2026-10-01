@@ -9,6 +9,8 @@ import re
 import statistics
 from pathlib import Path
 
+from paper_framework.evidence import evidence_path
+
 LIVE_KINDS = {"live_model_experiment", "adapted_longmemeval_live"}
 GROUPS = ("baseline", "enhanced")
 
@@ -171,7 +173,7 @@ def normalize_result(path: Path, evidence_id: str, title: str) -> dict:
     }
 
 
-def load_evidence(outline: dict) -> list[dict]:
+def load_evidence(outline: dict, project: Path | None = None) -> list[dict]:
     entries = outline.get("evidence", [])
     if not entries:
         raise ValueError("Content filling requires completed live experiment evidence")
@@ -184,7 +186,7 @@ def load_evidence(outline: dict) -> list[dict]:
         if not re.fullmatch(r"[a-z][a-z0-9_-]*", eid) or eid in seen:
             raise ValueError("Invalid or duplicate evidence ID")
         seen.add(eid)
-        path = Path(entry["resolved_path"])
+        path = evidence_path(entry, project)
         if not path.is_file() or sha256(path) != entry.get("sha256"):
             raise ValueError(f"Evidence changed or missing since framework generation: {eid}")
         results.append(normalize_result(path, eid, titles.get(eid, eid)))

@@ -72,6 +72,7 @@ def generate_project(brief_path: Path, output: Path, literature_path: Path | Non
         source_paths["literature"] = literature_path.resolve()
     manifest = {
         "schema_version": 1, "artifact_kind": "paper_framework_draft", "ready_for_submission": False,
+        "evidence_path_policy": "project_relative_snapshot_v1",
         "inputs": {key: {"filename": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
                    for key, path in source_paths.items()},
         "style_sha256": {name: hashlib.sha256((template_dir / name).read_bytes()).hexdigest() for name in STYLE_FILES},
@@ -82,6 +83,16 @@ def generate_project(brief_path: Path, output: Path, literature_path: Path | Non
     with tempfile.TemporaryDirectory(prefix=".framework-", dir=output.parent) as temporary:
         staged = Path(temporary) / "project"
         (staged / "sections").mkdir(parents=True)
+        for entry in outline["evidence"]:
+            source = Path(entry["resolved_path"])
+            relative = f"evidence/raw/{entry['id']}.json"
+            target = staged / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
+            if hashlib.sha256(target.read_bytes()).hexdigest() != entry["sha256"]:
+                raise ValueError(f"Evidence changed during snapshot: {entry['id']}")
+            entry.update(original_path=str(source), project_path=relative,
+                         resolved_path=str(output / relative))
         for section in outline["sections"]:
             (staged / section["file"]).write_text(_section_tex(section), encoding="utf-8")
         (staged / "paper.tex").write_text(tex, encoding="utf-8")
@@ -95,7 +106,8 @@ def generate_project(brief_path: Path, output: Path, literature_path: Path | Non
         (staged / "HANDOFF.md").write_text(
             "# Paper framework draft\n\n"
             "Fill sections/*.tex using outline.json. Do not edit measured results into the planner.\n"
-            "Result file hashes record provenance, not scientific validity. Resolve input_path relative to the original brief.\n"
+            "Result hashes record provenance, not scientific validity. Read project_path relative to this project.\n"
+            "Evidence snapshots travel with the framework. original_path and input_path are source provenance only.\n"
             "Use citation_map.json to select citation keys; verify each source and claim before citing it.\n"
             "Remove draft placeholders, the Draft bibliography paragraph, and \\nocite{*} before final review.\n"
             "Keep paper.tex and sections/*.tex changes: regeneration requires a new output directory.\n"

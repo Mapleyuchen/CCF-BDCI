@@ -164,6 +164,33 @@ class FrameworkTests(unittest.TestCase):
         self.assertFalse(report["success"])
         self.assertIn("LaTeX error", report["commands"][0]["output_tail"])
 
+    def test_compiler_waits_for_stable_references_and_bounds_retries(self):
+        self.generate()
+        project = self.root / "paper"
+        for stable_after in (4, 99):
+            calls = []
+
+            def simulate(command, **kwargs):
+                calls.append(command)
+                (project / "paper.aux").write_text("", encoding="utf-8")
+                (project / "paper.pdf").write_bytes(b"%PDF-test")
+                (project / "paper.log").write_text(
+                    "LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right."
+                    if len(calls) < stable_after else "Output written on paper.pdf (1 page).", encoding="utf-8")
+                return subprocess.CompletedProcess(command, 0, "", "")
+
+            with patch("paper_framework.compiler.shutil.which", return_value="tool"), \
+                    patch("paper_framework.compiler.subprocess.run", side_effect=simulate):
+                if stable_after == 4:
+                    compile_project(project)
+                    self.assertEqual(len(calls), 4)
+                else:
+                    with self.assertRaisesRegex(ValueError, "did not stabilize"):
+                        compile_project(project)
+                    self.assertEqual(len(calls), 5)
+                    report = json.loads((project / "compile_report.json").read_text())
+                    self.assertFalse(report["success"])
+
     @unittest.skipUnless(shutil.which("pdflatex") and shutil.which("bibtex"), "LaTeX tools not installed")
     def test_real_bibtex_and_citation_survive_content_handoff(self):
         self.generate(self.literature)

@@ -14,7 +14,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--brief", type=Path, default=module / "examples/memory-research.brief.json")
     parser.add_argument("--literature", type=Path, default=module / "examples/memory-research.literature.json")
-    parser.add_argument("--config", type=Path, default=module / "examples/dashscope-research.yaml")
+    source = parser.add_mutually_exclusive_group()
+    source.add_argument("--config", type=Path, help="Live writer configuration; defaults to examples/dashscope-research.yaml")
+    source.add_argument("--content-json", type=Path, help="Replay saved prose offline; no model configuration or API calls")
     parser.add_argument("--model", help="Override the writing model only; experimental model identities are preserved")
     parser.add_argument("--env-file", type=Path)
     parser.add_argument("--related-work", type=Path)
@@ -27,19 +29,28 @@ def main():
     try:
         if args.output.exists():
             raise ValueError("Output directory already exists; select a new run directory")
-        config = load_model_config(args.config, args.env_file)
+        if args.content_json:
+            if args.model or args.env_file or args.generate_methodology or args.resume_from:
+                raise ValueError("--content-json cannot be combined with --model, --env-file, --generate-methodology or --resume-from")
+            if not args.content_json.is_file():
+                raise ValueError(f"Saved content file does not exist: {args.content_json}")
+            model = None
+        else:
+            config = load_model_config(args.config or module / "examples/dashscope-research.yaml", args.env_file)
+            if args.model:
+                config["client"]["model_name"] = args.model
+            model = JsonModel(config)
         if args.generate_methodology and args.methodology_image:
             raise ValueError("Choose --generate-methodology or --methodology-image")
         if args.generate_methodology:
             from generate_methodology import generate
             args.methodology_image = args.output / "image-api" / "methodology.png"
-            generate(args.config, args.methodology_image)
-        if args.model:
-            config["client"]["model_name"] = args.model
-        model = JsonModel(config)
+            generate(args.config or module / "examples/dashscope-research.yaml", args.methodology_image)
         generate_project(args.brief, args.output / "framework", args.literature)
-        print("Framework ready; validating experiment records and requesting model prose...", flush=True)
+        action = "rendering saved prose offline" if args.content_json else "requesting model prose"
+        print(f"Framework ready; validating experiment records and {action}...", flush=True)
         report = fill_project(args.output / "framework", args.output / "paper", model=model,
+                              content_json=args.content_json,
                               related_work=args.related_work, compile_pdf=args.compile_pdf,
                               methodology_image=args.methodology_image, resume_from=args.resume_from)
         print(f"Content: {args.output.resolve() / 'paper'}", flush=True)

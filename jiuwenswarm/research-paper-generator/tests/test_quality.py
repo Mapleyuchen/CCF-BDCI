@@ -151,7 +151,9 @@ class QualityTests(unittest.TestCase):
         evidence = self.write("actual.json", {"accuracy": 0.25})
         self.brief["experiments"][0].update(status="completed", result_path="actual.json")
         self.generate()
-        evidence.write_text('{"accuracy": 0.9}', encoding="utf-8")
+        outline = json.loads((self.root / "paper/outline.json").read_text(encoding="utf-8"))
+        snapshot = self.root / "paper" / outline["evidence"][0]["project_path"]
+        snapshot.write_text('{"accuracy": 0.9}', encoding="utf-8")
         method = self.root / "paper/sections/method.tex"
         method.write_text(method.read_text(encoding="utf-8") + "\n\\includegraphics{figures/missing.png}\n",
                           encoding="utf-8")
