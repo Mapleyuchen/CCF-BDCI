@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import re
 import shutil
+import time
 
 from paper_framework.citations import bibliography
 from paper_framework.compiler import compile_project
@@ -30,7 +31,11 @@ def inside(root: Path, relative: str) -> Path:
 
 def fill_project(framework: Path, output: Path, *, model=None, content_json: Path | None = None,
                  related_work: Path | None = None, compile_pdf=False, methodology_image: Path | None = None,
-                 resume_from: Path | None = None) -> dict:
+                 resume_from: Path | None = None, illustration_manifest: Path | None = None,
+                 writing_mode="fast") -> dict:
+    started = time.monotonic()
+    if writing_mode not in {"fast", "reviewed"} or (resume_from and writing_mode != "reviewed"):
+        raise ValueError("Choose fast or reviewed writing; editorial resume requires reviewed mode")
     framework, output = framework.resolve(), output.resolve()
     if output.exists() or output.is_relative_to(framework):
         raise ValueError("Choose a new output directory outside the source framework; existing work is never overwritten")
@@ -42,6 +47,15 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
     citations = read_json(framework / "citation_map.json")
     results = load_evidence(outline, framework)
     metrics = metric_catalog(results)
+    illustrations = None
+    if illustration_manifest:
+        if methodology_image:
+            raise ValueError("Choose an illustration manifest or a legacy methodology image")
+        from paper_illustration.pipeline import load_bundle, build_context
+        illustrations = load_bundle(illustration_manifest)
+        identity = read_json(illustration_manifest.parent / "input.json")
+        if identity["context"] != build_context(framework):
+            raise ValueError("Illustrations do not match the current research brief and evidence")
     # Persist the exact displayed precision as well as full measurements for the quality checker.
     for item in metrics.values():
         item["display_value"] = float(item["text"].split()[0].rstrip("%")) if item["value"] is not None else None
@@ -66,7 +80,8 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
     output.mkdir(parents=True)
     report = {"schema_version": 1, "status": "running", "human_review_required": True,
               "source_framework": str(framework), "source_outline_sha256": sha256(framework / "outline.json"),
-              "calls": [], "validation_errors": [], "figures": []}
+              "calls": [], "validation_errors": [], "figures": [],
+              "writing_mode": "offline" if content_json else writing_mode}
     try:
         for relative in files:
             target = inside(output, relative)
@@ -92,7 +107,11 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
                                     "resolved_path": str(normalized), "sha256": sha256(normalized),
                                     "validation": "derived_from_hashed_live_records"})
         write_json(output / "outline.json", outline)
-        messages = build_messages(outline, brief, citations, metrics, results, source_notes)
+        if illustrations:
+            from paper_illustration.pipeline import copy_bundle
+            copy_bundle(illustration_manifest, output / "illustrations")
+            report["illustration_manifest_sha256"] = sha256(output / "illustrations/manifest.json")
+        messages = build_messages(outline, brief, citations, metrics, results, source_notes, illustrations)
         write_json(output / "generation_request.json", messages)
         if content_json:
             content = read_json(content_json)
@@ -102,11 +121,19 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
             if prior_report.is_file():
                 report["upstream_generation_report"] = {"path": str(prior_report.resolve()),
                                                         "sha256": sha256(prior_report)}
-        elif research:
+        elif research and writing_mode == "reviewed":
             from .editorial import draft_and_review
             content = draft_and_review(model, messages, output, resume_from)
         else:
-            content = model.complete(messages)
+            print("Writing manuscript in one pass (no model review)...", flush=True)
+            original_request = dict(model.config["request"])
+            model.config["request"].pop("thinking_budget", None)
+            model.config["request"].pop("reasoning_effort", None)
+            model.config["request"].update(enable_thinking=False, max_tokens=14000)
+            try:
+                content = model.complete(messages)
+            finally:
+                model.config["request"] = original_request
         allowed_names = [r["model_name"] for r in results]
         # A bounded repair call corrects schema/tokens, not measured data.
         for attempt in range(2):
@@ -116,7 +143,7 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
                         section["paragraphs"] = deepcopy(override["paragraphs"])
             write_json(output / f"content_attempt_{attempt + 1}.json", content)
             try:
-                rendered = validate_content(content, outline, metrics, citations, allowed_names)
+                rendered = validate_content(content, outline, metrics, citations, allowed_names, illustrations)
                 break
             except ValueError as error:
                 report["validation_errors"].append(str(error))
@@ -132,12 +159,14 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
                 rendered["results"] += figure_tex(result)
         if research:
             from .research_assets import attach_research_assets, FORMALIZATION
-            method_tex, diagnostic_tex, files = attach_research_assets(results, output, methodology_image)
+            method_tex, diagnostic_tex, files = attach_research_assets(results, output, methodology_image,
+                                                                       include_methodology=not illustrations)
             rendered["method"] = rendered["method"].replace(r"\subsection", method_tex + r"\subsection", 1)
             rendered["method"] += "\n\\FloatBarrier\n" + FORMALIZATION + "\n\\FloatBarrier\n"
             rendered["results"] += diagnostic_tex + "\n\\FloatBarrier\n"
             report["figures"] = files
-            report["methodology_image_sha256"] = sha256(output / "figures/methodology.png")
+            if not illustrations:
+                report["methodology_image_sha256"] = sha256(output / "figures/methodology.png")
             report["editorial_checks"] = {
                 "prose_words": len(re.findall(r"\b[A-Za-z][A-Za-z'-]*\b", " ".join(
                     p for s in content['sections'] for b in [s] + s['subsections'] for p in b['paragraphs']))),
@@ -146,6 +175,27 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
             }
         else:
             report["figures"] = make_figures(results, output / "figures")
+        if illustrations:
+            from paper_framework.citations import latex_text
+            seen_sections = set()
+            (output / "figures").mkdir(exist_ok=True)
+            for figure in illustrations["figures"]:
+                name = figure["id"] + ".png"
+                shutil.copy2(output / "illustrations" / figure["image"], output / "figures" / name)
+                report["figures"].append(name)
+                tex = ("\n\\begin{figure}[htbp]\n\\centering\n"
+                       + r"\includegraphics[width=\linewidth,height=0.32\textheight,keepaspectratio]{figures/" + name + "}\n"
+                       + r"\caption{" + latex_text(figure["caption"]) + "}\n"
+                       + r"\label{fig:" + figure["id"] + "}\\end{figure}\n")
+                section = figure["section"]
+                if section not in seen_sections and r"\subsection" in rendered[section]:
+                    rendered[section] = rendered[section].replace(r"\subsection", tex + r"\subsection", 1)
+                elif section == "method" and r"\subsection{Budget and cost formalization}" in rendered[section]:
+                    rendered[section] = rendered[section].replace(r"\subsection{Budget and cost formalization}",
+                        tex + r"\subsection{Budget and cost formalization}", 1)
+                else:
+                    rendered[section] += tex
+                seen_sections.add(section)
         for section in outline["sections"]:
             inside(output, section["file"]).write_text(rendered[section["id"]], encoding="utf-8")
             section["status"] = "generated_needs_human_review"
@@ -170,7 +220,7 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
         (output / "references.bib").write_text(bibliography(citations), encoding="utf-8")
         manifest = read_json(output / "manifest.json")
         manifest.update(artifact_kind="paper_content_draft", ready_for_submission=False,
-                        human_review_required=True, content_generator="reviewed_research_v2" if research else "evidence_grounded_v1")
+                        human_review_required=True, content_generator=("reviewed_research_v2" if writing_mode == "reviewed" else "one_pass_research_v3") if research else "evidence_grounded_v1")
         write_json(output / "manifest.json", manifest)
         if compile_pdf:
             compile_project(output)
@@ -186,4 +236,7 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
     finally:
         if model is not None:
             report["calls"] = model.calls
+        report["elapsed_seconds"] = round(time.monotonic() - started, 3)
+        report["new_text_calls"] = sum(not c.get("reused_from_previous_run") for c in report["calls"])
+        report["new_text_tokens"] = sum((c.get("usage") or {}).get("total_tokens") or 0 for c in report["calls"] if not c.get("reused_from_previous_run"))
         write_json(output / "content_report.json", report)

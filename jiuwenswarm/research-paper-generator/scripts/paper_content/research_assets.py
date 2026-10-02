@@ -69,7 +69,7 @@ Aggregate & Match question IDs; count writes once per run; preserve excluded att
 '''
 
 
-def attach_research_assets(results, output, methodology_image=None):
+def attach_research_assets(results, output, methodology_image=None, *, include_methodology=True):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -79,10 +79,11 @@ def attach_research_assets(results, output, methodology_image=None):
     figures = output / 'figures'
     figures.mkdir(exist_ok=True)
     image = methodology_image or MODULE / 'assets/methodology-v2.png'
-    if not image.is_file():
+    if include_methodology and not image.is_file():
         raise ValueError('Research profile requires a reviewed methodology image')
-    shutil.copy2(image, figures / 'methodology.png')
-    outputs = ['methodology.png']
+    if include_methodology:
+        shutil.copy2(image, figures / 'methodology.png')
+    outputs = ['methodology.png'] if include_methodology else []
     figure = r'''
 \begin{figure}[htbp]
 \centering\includegraphics[width=\linewidth]{figures/methodology.png}
@@ -92,6 +93,8 @@ each arm's own formatting overhead. This schematic illustrates the audited imple
 it is not an experimental result.}
 \label{fig:methodology}\end{figure}
 '''
+    if not include_methodology:
+        figure = ''
     # One overview replaces repetitive per-budget charts in the research profile.
     colors = ['#355C7D', '#168F86']
     fig, axes = plt.subplots(1, 2, figsize=(7.5, 3.0), layout='constrained')
@@ -197,12 +200,18 @@ A correct answer without complete evidence is visible as a mismatch within a col
             r'\textbf{Accepted answer:} '+latex_text('; '.join(c['accepted_answers'])),
             r'\textbf{File answer:} '+latex_text(str(c['baseline']['answer'])),
             r'\textbf{Retrieved answer:} '+latex_text(str(c['enhanced']['answer']))]
+    illustration_note = (
+        'The methodology schematic is AI-generated and checked against the implementation; '
+        if include_methodology else
+        'The conceptual diagrams are AI-generated from source-linked method specifications. '
+        'Their design contracts, prompts and declared review status are included; '
+        'human scientific review remains required. ')
     appendix += [r'\section{Artifact and generation provenance}',
                  'The submission includes the adapted data, original write/query records, normalization '
                  'code, citation metadata and a hashed source snapshot. Writing assistance uses a separate '
-                 'model from the experimental query model. Its plan, draft, critique, revision and usage '
+                 'model from the experimental query model. Its actual requests, generated text and usage '
                  'are saved separately; none of those calls contributes to the experimental accuracy. '
-                 'The methodology schematic is AI-generated and checked against the implementation; '
-                 'all empirical plots and tables are rendered programmatically from the recorded data.']
+                 + illustration_note +
+                 'All empirical plots and tables are rendered programmatically from the recorded data.']
     (output/'appendix.tex').write_text('\n\n'.join(appendix)+'\n',encoding='utf-8')
     return figure, diagnostic, outputs

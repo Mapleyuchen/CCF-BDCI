@@ -7,7 +7,7 @@ import re
 
 from paper_framework.citations import latex_text
 
-TOKEN = re.compile(r"\[\[(metric|cite):([^\[\]]+)\]\]")
+TOKEN = re.compile(r"\[\[(metric|cite|figure):([^\[\]]+)\]\]")
 NUMERIC = re.compile(r"(?<![A-Za-z])\d+(?:\.\d+)?(?:\s*%)?")
 FORBIDDEN = re.compile(r"\b(?:TODO|FIXME|TBD|lorem ipsum)\b|\[To be written|[\u4e00-\u9fff]", re.I)
 
@@ -40,7 +40,7 @@ The renderer adds measured tables, charts, headings and bibliography; you write 
 """
 
 
-def build_messages(outline, brief, citations, metrics, results, source_notes):
+def build_messages(outline, brief, citations, metrics, results, source_notes, illustrations=None):
     shape = {"sections": [{"id": section["id"], "paragraphs": ["English prose"],
                            "subsections": [{"id": child["id"], "paragraphs": ["English prose"]}
                                            for child in section["subsections"]]}
@@ -111,11 +111,23 @@ No claims of matching the reference paper's scientific novelty or empirical scal
                                     "observed_cases": r.get("observed_cases")} for r in results]
         for key, item in metrics.items():
             payload["metric_tokens"][key]["value_for_interpretation_only"] = item["value"]
+    if illustrations:
+        payload["planned_illustrations"] = [{key: figure[key] for key in
+            ("id", "section", "title", "purpose", "takeaway", "caption", "explanation")}
+            for figure in illustrations["figures"]]
+        system += """
+The provided illustrations have been designed from this study. Their recorded review status may
+be unreviewed; do not claim that their scientific correctness has been certified.
+Refer to EVERY illustration in its assigned section using [[figure:EXACT_ID]] tokens.
+Explain what the reader should learn from its visual structure, not just that it exists.
+Do not assign figure numbers or call schematic elements measured traces. The renderer
+resolves figure references and inserts images and captions. Avoid duplicating captions.
+"""
     return [{"role": "system", "content": system},
             {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}]
 
 
-def render_paragraph(text, metrics, citations, allowed_names=()):
+def render_paragraph(text, metrics, citations, allowed_names=(), figure_ids=()):
     if not isinstance(text, str) or not text.strip() or len(text) > 16000:
         raise ValueError("Paragraphs must be non-empty strings under 16000 characters")
     if FORBIDDEN.search(text) or "\\" in text:
@@ -150,6 +162,10 @@ def render_paragraph(text, metrics, citations, allowed_names=()):
             if key not in metrics:
                 raise ValueError(f"Unknown measurement token: {key}")
             pieces.append(latex_text(metrics[key]["text"]))
+        elif kind == "figure":
+            if key not in figure_ids:
+                raise ValueError(f"Unknown figure token: {key}")
+            pieces.append(r"Figure~\ref{fig:" + key + "}")
         else:
             key = citations["by_source_id"].get(key, key)
             if key not in valid_keys:
@@ -162,7 +178,7 @@ def render_paragraph(text, metrics, citations, allowed_names=()):
     return "".join(pieces)
 
 
-def validate_content(content, outline, metrics, citations, allowed_names=()):
+def validate_content(content, outline, metrics, citations, allowed_names=(), illustrations=None):
     if not isinstance(content, dict) or not isinstance(content.get("sections"), list):
         raise ValueError("Content must contain a sections array")
     sections = content["sections"]
@@ -171,6 +187,8 @@ def validate_content(content, outline, metrics, citations, allowed_names=()):
     if [s.get("id") for s in sections] != [s["id"] for s in outline["sections"]]:
         raise ValueError("Content must contain the exact eight outline section IDs in order")
     rendered, errors = {}, []
+    figures = illustrations.get("figures", []) if illustrations else []
+    figure_ids = {f["id"] for f in figures}
     for section, plan in zip(sections, outline["sections"]):
         children = section.get("subsections")
         if (not isinstance(children, list) or any(not isinstance(c, dict) for c in children)
@@ -190,7 +208,7 @@ def validate_content(content, outline, metrics, citations, allowed_names=()):
             rendered_paragraphs = []
             for index, paragraph in enumerate(paragraphs):
                 try:
-                    rendered_paragraphs.append(render_paragraph(paragraph, metrics, citations, allowed_names))
+                    rendered_paragraphs.append(render_paragraph(paragraph, metrics, citations, allowed_names, figure_ids))
                 except ValueError as error:
                     errors.append(f"{spec['id']} paragraph {index + 1}: {error}")
             joined = "\n\n".join(rendered_paragraphs)
@@ -205,6 +223,9 @@ def validate_content(content, outline, metrics, citations, allowed_names=()):
                     errors.append(f"Result subsection does not reference its evidence: {eid}; insert [[metric:{eid}.baseline.accuracy]] and [[metric:{eid}.enhanced.accuracy]]")
             lines.append(joined)
         rendered[plan["id"]] = "\n\n".join(lines) + "\n"
+        for figure in figures:
+            if figure["section"] == plan["id"] and (r"\ref{fig:" + figure["id"] + "}") not in rendered[plan["id"]]:
+                errors.append(f"Missing illustration explanation in {plan['id']}: use [[figure:{figure['id']}]] in a relevant paragraph")
     if errors:
         raise ValueError("; ".join(errors[:12]))
     if citations["entries"] and not any(r"\citep{" in text for text in rendered.values()):

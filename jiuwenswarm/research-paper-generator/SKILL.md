@@ -5,7 +5,7 @@ description: Generate and revise an evidence-grounded ICLR manuscript from compl
 
 # Evidence-grounded paper workflow
 
-Run commands from the repository root. See [API workflow](references/api_workflow.md) for endpoints, environment variables, model choice, image tasks, arXiv configuration and recovery commands. See [module README](README.md) for brief, literature and content schemas.
+Run commands from the repository root. See [API workflow](references/api_workflow.md) for endpoints, environment variables, model choice, image tasks, arXiv configuration and recovery commands. See [illustration agent](references/illustration_agent.md) for research analysis, diagram contracts, visual review and replay. See [module README](README.md) for brief, literature and content schemas.
 
 ## Establish the evidence
 
@@ -17,15 +17,16 @@ Run commands from the repository root. See [API workflow](references/api_workflo
 ## Generate and revise
 
 ```powershell
-python jiuwenswarm/research-paper-generator/scripts/generate_methodology.py --output output/methodology-new.png
-python jiuwenswarm/research-paper-generator/scripts/write_paper.py --methodology-image output/methodology-new.png --output output/research-new --compile
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --generate-illustrations --max-figures 2 --output output/research-new --compile
 ```
 
-The default writer is DashScope `qwen3.8-max`. The four saved stages are plan, draft, critical review and revision. The image model is DashScope `qwen-image-3.0-pro`. Use its diagram only after checking arrows, labels and correspondence to the real implementation. Results plots come from Matplotlib and experiment records, never from image generation.
+The default is fast: one DashScope `qwen3.8-max` call combines research analysis, source-linked diagram design and final compact prompts. Each diagram has at most seven nodes, an acyclic graph and an exact text whitelist. Submit one `qwen-image-3.0-pro` task per figure, concurrently; do not automatically review or redraw. Save prompts, task provenance, hashes, elapsed time and returned usage. Mark the result `generated_unreviewed`; code validation is not visual certification. Results plots come from Matplotlib and experiment records, never from image generation.
+
+Default writing uses one manuscript call, with at most one repair only for a concrete schema/token failure. The writer explains every figure using `[[figure:ID]]`. Two diagrams normally require two text requests and two image tasks total. `--illustration-manifest <run>/illustrations/manifest.json` reuses a recorded bundle, including offline `--content-json` replay. Changed evidence or artifact hashes fail validation. Only explicit `--review-mode reviewed` enables model design/visual reviews and the four writing stages; redraw additionally requires `--max-redraws 1` or `2`. The low-level `generate_methodology.py --prompt ...` remains a debugging entry point.
 
 The writer returns section JSON. Numbers and citations use known `[[metric:...]]` / `[[cite:...]]` tokens; the renderer owns LaTeX, equations, tables, references and numeric formatting. Do not weaken validation to accept fabricated metrics. Model review does not replace scientific review.
 
-For an interrupted writing run, pass `--resume-from <old-run>/paper` and a new output directory. Saved stages are reused only when manuscript instructions and evidence match. For image tasks, use `--resume-task` with the saved task ID; do not automatically create a duplicate paid task. Never silently fall back to another provider or a placeholder image.
+For an interrupted reviewed writing run, pass `--review-mode reviewed --resume-from <old-run>/paper` and a new output directory. Saved stages require identical instructions and evidence. For illustration-stage resume use `--illustration-resume-from`; for low-level image tasks use `--resume-task`. Never create a duplicate paid task automatically or silently fall back to a placeholder/provider.
 
 For purely offline rendering, use `fill_content.py --content-json` with saved validated prose and the reviewed image; see the API guide. Keep credentials in environment variables or an explicitly chosen private env file, never in outputs or submission materials.
 

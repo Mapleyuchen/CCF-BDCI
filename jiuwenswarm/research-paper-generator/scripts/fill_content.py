@@ -20,6 +20,8 @@ def main():
     parser.add_argument("--model", help="Override the writing model from --config")
     parser.add_argument("--related-work", type=Path, help="Reviewed JSON paragraphs using [[cite:source_id]] tokens")
     parser.add_argument("--methodology-image", type=Path)
+    parser.add_argument("--illustration-manifest", type=Path, help="Recorded diagram bundle for offline or live writing")
+    parser.add_argument("--review-mode", choices=("fast", "reviewed"), default="fast")
     parser.add_argument("--compile", action="store_true", dest="compile_pdf")
     args = parser.parse_args()
     try:
@@ -31,7 +33,8 @@ def main():
         model = JsonModel(config) if config else None
         report = fill_project(args.framework, args.output, model=model, content_json=args.content_json,
                               related_work=args.related_work, compile_pdf=args.compile_pdf,
-                              methodology_image=args.methodology_image)
+                              methodology_image=args.methodology_image, illustration_manifest=args.illustration_manifest,
+                              writing_mode=args.review_mode)
     except (ValueError, OSError, KeyError, TypeError) as error:
         parser.exit(2, f"Content generation failed: {error}\n")
     print(json.dumps(report, ensure_ascii=True, indent=2))
