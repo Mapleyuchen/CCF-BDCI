@@ -59,6 +59,8 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
     files = ["paper.tex", "outline.json", "brief.input.json", "citation_map.json", "manifest.json",
              "iclr2027_conference.sty", "iclr2027_conference.bst", "natbib.sty", "fancyhdr.sty"]
     files += [section["file"] for section in outline["sections"]]
+    files += [name for name in ("HANDOFF.md", "research_plan.json", "RESEARCH_HANDOFF.md")
+              if (framework / name).is_file()]
     for relative in files:
         if not inside(framework, relative).is_file():
             raise ValueError(f"Missing framework file: {relative}")

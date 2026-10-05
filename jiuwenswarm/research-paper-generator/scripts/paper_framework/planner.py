@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from .citations import required_text
+from .research import build_research_plan
 
 
 def _objects(value: object, label: str) -> list[dict]:
@@ -31,6 +32,9 @@ def plan_outline(brief: object, citations: dict, base_dir: Path) -> dict:
     question = required_text(brief.get("research_question"), "brief.research_question")
     methods = _objects(brief.get("methods", []), "methods")
     experiments = _objects(brief.get("experiments", []), "experiments")
+    has_research_plan = any(key in brief for key in ("research_questions", "review_concerns")) or any(
+        any(key in experiment for key in ("protocol", "purpose", "research_question_ids", "evidence_requirements", "limitations"))
+        for experiment in experiments)
     authors = brief.get("authors", [])
     if not isinstance(authors, list):
         raise ValueError("authors must be an array of strings")
@@ -85,6 +89,8 @@ def plan_outline(brief: object, citations: dict, base_dir: Path) -> dict:
             "status": status, "citation_keys": [],
         })
         if status == "planned":
+            if experiment.get("result_path"):
+                raise ValueError(f"Planned experiment {experiment['id']} must not supply result_path; mark completed only after execution")
             warnings.append(f"Experiment {experiment['id']} is planned; no result subsection generated.")
             continue
         source = required_text(experiment.get("result_path"), "completed experiment.result_path")
@@ -103,7 +109,33 @@ def plan_outline(brief: object, citations: dict, base_dir: Path) -> dict:
         warnings.append("No completed experiment evidence supplied; result claims must remain empty.")
     section("discussion", "Discussion and Limitations", "Explain scope, confounders, missing evaluations, and resource tradeoffs.")
     section("conclusion", "Conclusion", "Answer the research question using only reviewed results.")
-    return {"schema_version": 1, "planner": "deterministic_rules_v1", "title": title,
+    outline = {"schema_version": 1, "planner": "deterministic_rules_v1", "title": title,
             "research_question": question, "anonymous": anonymous, "authors": authors,
             "sections": sections, "evidence": evidence, "warnings": warnings,
             "citation_policy": "Candidates only; presence does not establish support for any claim."}
+    if has_research_plan:
+        plan = build_research_plan(_objects(brief.get("research_questions", []), "research_questions"),
+                                   _objects(brief.get("review_concerns", []), "review_concerns"), experiments)
+        outline["research_plan"] = plan
+        outline["planner"] = "deterministic_rules_v2"
+        by_section = {item["id"]: item for item in sections}
+        for item in plan["research_questions"]:
+            by_section["introduction"]["subsections"].append({
+                "id": "rq_" + item["id"], "title": item["title"], "goal": item["question"],
+                "status": "needs_content", "citation_keys": [], "experiment_ids": item["experiment_ids"],
+            })
+            if not item["experiment_ids"]:
+                warnings.append(f"Research question {item['id']} has no linked experiment.")
+        for child, experiment in zip(setup["subsections"], plan["experiments"]):
+            child.update(protocol=experiment["protocol"], research_question_ids=experiment["research_question_ids"],
+                         evidence_requirements=experiment["evidence_requirements"], purpose=experiment["purpose"])
+            child["goal"] += (". Protocol fields are declared metadata; verify them against actual execution. "
+                              + ("This experiment has not run. Describe only a future protocol; no findings."
+                                 if experiment["status"] == "planned" else "Evidence is supplied but needs scientific review."))
+            if experiment["missing_protocol_fields"]:
+                warnings.append(f"Experiment {experiment['id']} protocol needs: " + ", ".join(experiment["missing_protocol_fields"]))
+        for concern in plan["review_concerns"]:
+            warnings.append(f"Review concern {concern['id']}: {concern['status']}.")
+        by_section["discussion"]["goal"] += " Address these unresolved review concerns: " + "; ".join(
+            item["description"] for item in plan["review_concerns"])
+    return outline

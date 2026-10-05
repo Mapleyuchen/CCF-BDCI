@@ -84,6 +84,16 @@ def build_messages(outline, brief, citations, metrics, results, source_notes):
                "mandatory_citation_tokens_by_subsection": required_citations,
                "source_notes": source_notes}
     system = SYSTEM
+    if "research_plan" in outline:
+        payload["research_plan"] = outline["research_plan"]
+        system += """
+The research_plan separates declared protocols from observed evidence. Planned experiments have NOT run.
+Describe their setup as future work; never turn their budgets, repetitions or sample sizes into measurements.
+Use only supplied metric tokens for measured quantities; describe unexecuted protocol quantities qualitatively.
+Initial pilot observations cannot establish the outcomes of new comparisons, ablations or reuse experiments.
+Neither a completed flag nor a reviewer-to-experiment mapping means a criticism is resolved.
+Explain missing protocol fields and unresolved concerns. Do not claim official benchmark compliance from a plan.
+"""
     if brief.get("writing_profile") == "research":
         system = system.replace("Aim for 1400-1900 words total.", "Aim for 3000-3800 words total, excluding program-rendered equations, tables and appendices.")
         system = system.replace("Use 100-160 words for Abstract.", "Use 170-220 words for Abstract, with concrete findings and their cost tradeoff.")

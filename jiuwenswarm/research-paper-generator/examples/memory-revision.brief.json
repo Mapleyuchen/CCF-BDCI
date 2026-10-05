@@ -1,0 +1,662 @@
+{
+  "schema_version": 1,
+  "anonymous": true,
+  "methods": [
+    {
+      "id": "baseline",
+      "title": "File-Based Project Memory",
+      "description": "The baseline is the actual ProjectMemoryRail. Facts are written to an isolated JIUWENSWARM.md file. Its prompt includes file metadata and is truncated to the full-section character budget. Both arms receive the same facts, questions, model, system prompt and no tools. This is not a retrieval-augmented embedding baseline.",
+      "citation_ids": []
+    },
+    {
+      "id": "retrieval",
+      "title": "Hybrid Selection from Working Memory",
+      "description": "EnhancedMemoryRail writes completed user-assistant exchanges to process-local L1 memory. The experiment uses lexical Jaccard similarity combined with temporal decay, access frequency and importance, rather than learned embeddings. Selected memories are assembled under the same full-section character budget. The architecture has L2/L3 classes, but this Rail does not route writes there, persist them across process restarts or synchronize a team. MemGPT is conceptual context, not an implemented or tested baseline.",
+      "citation_ids": [
+        "memgpt"
+      ]
+    },
+    {
+      "id": "protocol",
+      "title": "Isolation and Cost Accounting",
+      "description": "Each public-data question has its own fact episode and fresh agents. Baseline writes facts to disk; enhanced performs model-backed memory-writing conversations. The formal question uses a new conversation ID. The runner verifies isolated query history and actual memory injection, alternates arm order across questions, and records both query usage and memory-write usage. Latency including writes is amortized over paired observations. Correctness is accepted-answer string matching; evidence recall requires the complete target fact to survive prompt truncation.",
+      "citation_ids": [
+        "longmemeval"
+      ]
+    }
+  ],
+  "source_notes": {
+    "memgpt": "Verified arXiv abstract: virtual context management inspired by operating-system hierarchies moves information across memory tiers; demonstrations include document analysis and multi-session chat. Our fixed L1 Rail does not implement its autonomous virtual-memory controller.",
+    "longmemeval": "Verified arXiv abstract: LongMemEval evaluates extraction, multi-session reasoning, temporal reasoning, updates and abstention; it separates indexing, retrieval and reading. The submitted small single-session-user adaptation covers only a narrow slice, not the official full benchmark.",
+    "generative_agents": "Verified arXiv abstract: natural-language experience records are synthesized into reflections and dynamically retrieved for planning behavior in an interactive simulation. This study neither implements reflection/planning nor tests social behavior; distinguish record retrieval from that broader architecture.",
+    "lost_middle": "Verified arXiv abstract: relevant information position affects multi-document QA and key-value retrieval in long contexts, with middle positions often harder. This motivates attention to information access but does not establish that our observed prefix truncation is caused by the same phenomenon.",
+    "memorybank": "Verified arXiv abstract: MemoryBank supports retrieval and updates for sustained personalized interaction, with forgetting and reinforcement influenced by elapsed time and importance. Our temporal ranking is a simple heuristic, not a replication of MemoryBank or its companionship evaluation.",
+    "amem": "Verified arXiv abstract: A-MEM creates structured notes and dynamically links and evolves memories, inspired by Zettelkasten organization. Our fixed lexical ranking lacks autonomous linking and evolution; no empirical comparison to A-MEM was run."
+  },
+  "title": "Evaluating Memory Retrieval: Evidence Quality and Lifecycle Cost",
+  "research_question": "Under matched token budgets and controlled memory representations, how do selection and construction affect answer quality and lifecycle cost across repeated queries?",
+  "research_questions": [
+    {
+      "id": "quality",
+      "title": "Quality under Matched Budgets",
+      "question": "How does answer and evidence quality compare against stronger baselines with identical representations, formatting and token accounting?"
+    },
+    {
+      "id": "attribution",
+      "title": "Attributing Component Effects",
+      "question": "Which differences remain when selection, representation and construction are varied separately?"
+    },
+    {
+      "id": "lifecycle",
+      "title": "Lifecycle Cost under Memory Reuse",
+      "question": "How does measured write-plus-query cost change when a constructed memory serves multiple distinct queries?"
+    }
+  ],
+  "writing_notes": [
+    "This is a revision plan, not a completed revised paper. Frame the contribution as an auditable empirical systems evaluation, without claiming a novel retrieval algorithm.",
+    "Existing public_small and public_large files remain pilot observations with character budgets, different construction and formatting, and a single run per budget. They cannot answer the new controlled research questions.",
+    "All new experiments are planned. Proposed token budgets, repetition counts and reuse counts are design choices, not observed measurements or approved experimental scale.",
+    "Confirm tokenizer and model versions, dataset revision and sample size, scorer version and statistical implementation with the experiment owner before running. Missing fields are deliberately omitted and reported.",
+    "The benchmark-protocol replication is a task to implement and verify, not a claim of current official LongMemEval compliance.",
+    "Do not claim significance, a break-even point, better generalization, or resolution of reviewer concerns before new evidence is reviewed.",
+    "Keep the existing implemented-method descriptions separate from candidate baselines and changes proposed in experiment protocols.",
+    "Use the general content renderer until new multi-arm and repeated-query evidence parsers and assets are implemented. The existing research assets describe only the audited L1 pilot."
+  ],
+  "experiments": [
+    {
+      "id": "public_small",
+      "title": "Pilot: Restricted Context Budget",
+      "status": "completed",
+      "result_path": "../../experiments/results/longmemeval_s_turn20_live.json",
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "total tokens including writes",
+        "latency"
+      ],
+      "purpose": "pilot",
+      "research_question_ids": [
+        "quality",
+        "lifecycle"
+      ],
+      "limitations": [
+        "Character budgets and different memory formatting do not establish a fair token-matched retrieval comparison.",
+        "Construction, representation and selection change together; no component attribution.",
+        "One run per budget on the same selected questions; not a multi-query memory-reuse or official benchmark experiment."
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "characters",
+          "values": [
+            600
+          ],
+          "scope": "Full injected memory section, including headers and metadata.",
+          "packing": "File prefix versus whole formatted selected exchanges; not matched."
+        },
+        "dataset": {
+          "name": "Adapted LongMemEval-S",
+          "split": "Selected single-session-user slice",
+          "version": "sha256:af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
+          "adaptation": "Fixed fact episodes derived from selected questions; not the official full protocol.",
+          "sample_size": 20
+        },
+        "baselines": [
+          "ProjectMemoryRail prefix including file metadata",
+          "EnhancedMemoryRail hybrid lexical selection"
+        ],
+        "controlled_variables": [
+          "facts",
+          "questions",
+          "query_model",
+          "system_prompt",
+          "tools"
+        ],
+        "changed_variables": [
+          "construction",
+          "representation",
+          "selection",
+          "packing"
+        ],
+        "repeats": 1,
+        "scoring": {
+          "method": "Accepted-answer string matching; complete target fact recall.",
+          "review": "Correctness labels and evidence annotations still require scientific review."
+        },
+        "statistics": {
+          "unit": "Selected question; budgets reuse the same question set.",
+          "method": "Descriptive paired counts; no repeated-run inference."
+        }
+      },
+      "evidence_requirements": [
+        "Verify saved per-question records and write/query usage; preserve original hashes."
+      ]
+    },
+    {
+      "id": "public_large",
+      "title": "Pilot: Expanded Context Budget",
+      "status": "completed",
+      "result_path": "../../experiments/results/longmemeval_s_turn20_live_2400.json",
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "total tokens including writes",
+        "latency"
+      ],
+      "purpose": "pilot",
+      "research_question_ids": [
+        "quality",
+        "lifecycle"
+      ],
+      "limitations": [
+        "Character budgets and different memory formatting do not establish a fair token-matched retrieval comparison.",
+        "Construction, representation and selection change together; no component attribution.",
+        "One run per budget on the same selected questions; not a multi-query memory-reuse or official benchmark experiment."
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "characters",
+          "values": [
+            2400
+          ],
+          "scope": "Full injected memory section, including headers and metadata.",
+          "packing": "File prefix versus whole formatted selected exchanges; not matched."
+        },
+        "dataset": {
+          "name": "Adapted LongMemEval-S",
+          "split": "Selected single-session-user slice",
+          "version": "sha256:af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
+          "adaptation": "Fixed fact episodes derived from selected questions; not the official full protocol.",
+          "sample_size": 20
+        },
+        "baselines": [
+          "ProjectMemoryRail prefix including file metadata",
+          "EnhancedMemoryRail hybrid lexical selection"
+        ],
+        "controlled_variables": [
+          "facts",
+          "questions",
+          "query_model",
+          "system_prompt",
+          "tools"
+        ],
+        "changed_variables": [
+          "construction",
+          "representation",
+          "selection",
+          "packing"
+        ],
+        "repeats": 1,
+        "scoring": {
+          "method": "Accepted-answer string matching; complete target fact recall.",
+          "review": "Correctness labels and evidence annotations still require scientific review."
+        },
+        "statistics": {
+          "unit": "Selected question; budgets reuse the same question set.",
+          "method": "Descriptive paired counts; no repeated-run inference."
+        }
+      },
+      "evidence_requirements": [
+        "Verify saved per-question records and write/query usage; preserve original hashes."
+      ]
+    },
+    {
+      "id": "fair_baselines",
+      "title": "Token-Matched Baselines and Shared Representation",
+      "status": "planned",
+      "purpose": "comparison",
+      "research_question_ids": [
+        "quality"
+      ],
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "write and query tokens",
+        "end-to-end latency"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            512,
+            1024,
+            2048
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
+        },
+        "dataset": {
+          "name": "LongMemEval",
+          "split": "Predeclared shared question IDs and categories",
+          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
+        },
+        "baselines": [
+          "Identical canonical memory items with prefix selection",
+          "Identical canonical memory items with recency selection",
+          "Identical canonical memory items with lexical Jaccard selection",
+          "Identical canonical memory items with BM25 selection (requires implementation)",
+          "Identical canonical memory items with current hybrid selection"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path"
+        ],
+        "changed_variables": [
+          "selector"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
+          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
+        },
+        "statistics": {
+          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
+          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Verify equal candidate item hashes, wrapper and token limits across all arms; report actual token utilization."
+      ]
+    },
+    {
+      "id": "selection_ablation",
+      "title": "Selection Ablation with Fixed Memory Items",
+      "status": "planned",
+      "purpose": "ablation",
+      "research_question_ids": [
+        "attribution"
+      ],
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "write and query tokens",
+        "end-to-end latency"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            512,
+            1024,
+            2048
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
+        },
+        "dataset": {
+          "name": "LongMemEval",
+          "split": "Predeclared shared question IDs and categories",
+          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
+        },
+        "baselines": [
+          "Full current hybrid ranker",
+          "Hybrid ranker with the recency contribution removed; other terms unchanged"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path"
+        ],
+        "changed_variables": [
+          "recency_contribution"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
+          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
+        },
+        "statistics": {
+          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
+          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Freeze memory age and access state before every paired ranking; log score components. Add other component removals as separate experiments."
+      ]
+    },
+    {
+      "id": "representation_ablation",
+      "title": "Representation Ablation with Fixed Selection",
+      "status": "planned",
+      "purpose": "ablation",
+      "research_question_ids": [
+        "attribution"
+      ],
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "write and query tokens",
+        "end-to-end latency"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            512,
+            1024,
+            2048
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
+        },
+        "dataset": {
+          "name": "LongMemEval",
+          "split": "Predeclared shared question IDs and categories",
+          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
+        },
+        "baselines": [
+          "Raw canonical facts",
+          "Stored exchange text reconstructed offline from the same facts; no new model-backed write calls"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path",
+          "source_facts",
+          "selector"
+        ],
+        "changed_variables": [
+          "representation"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
+          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
+        },
+        "statistics": {
+          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
+          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Preserve source fact IDs and representation hashes; report how serialization changes packing and evidence availability."
+      ]
+    },
+    {
+      "id": "construction_ablation",
+      "title": "Construction Cost with Matched Memory Content",
+      "status": "planned",
+      "purpose": "ablation",
+      "research_question_ids": [
+        "attribution",
+        "lifecycle"
+      ],
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "write and query tokens",
+        "end-to-end latency"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            512,
+            1024,
+            2048
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
+        },
+        "dataset": {
+          "name": "LongMemEval",
+          "split": "Predeclared shared question IDs and categories",
+          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
+        },
+        "baselines": [
+          "Direct insertion of a frozen canonical memory",
+          "Model-backed acquisition followed by the same canonical representation; verify identical content before comparison"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "selector"
+        ],
+        "changed_variables": [
+          "write_path"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
+          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
+        },
+        "statistics": {
+          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
+          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "If canonical content hashes differ, exclude the pair from construction-only attribution and report the mismatch; do not silently relabel it as controlled."
+      ]
+    },
+    {
+      "id": "memory_reuse",
+      "title": "Amortized Cost across Distinct Queries",
+      "status": "planned",
+      "purpose": "amortization",
+      "research_question_ids": [
+        "lifecycle"
+      ],
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "write and query tokens",
+        "end-to-end latency"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            512,
+            1024,
+            2048
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
+        },
+        "dataset": {
+          "name": "LongMemEval",
+          "split": "Predeclared shared question IDs and categories",
+          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
+        },
+        "baselines": [
+          "Fixed canonical memory and hybrid selector across reuse counts"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path",
+          "selector"
+        ],
+        "changed_variables": [
+          "queries_per_memory"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
+          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
+        },
+        "statistics": {
+          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
+          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
+        },
+        "reuse": {
+          "queries_per_memory": [
+            1,
+            5,
+            10,
+            20
+          ],
+          "construction_cost_policy": "Measure one construction per memory instance and count it once: total = write + sum(query); per-query = total / query count. Freeze query-side mutation. Report failures and all usage; distinguish observed totals from extrapolation."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Provide memory_instance_id and the exact distinct query sequence. Repeating isolated single-query pilot runs does not satisfy memory reuse."
+      ]
+    },
+    {
+      "id": "protocol_replication",
+      "title": "Repeated Runs, Scoring Audit and Benchmark Alignment",
+      "status": "planned",
+      "purpose": "replication",
+      "research_question_ids": [
+        "quality"
+      ],
+      "metrics": [
+        "answer accuracy",
+        "complete evidence recall",
+        "write and query tokens",
+        "end-to-end latency"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            512,
+            1024,
+            2048
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
+        },
+        "dataset": {
+          "name": "LongMemEval",
+          "split": "Predeclared shared question IDs and categories",
+          "adaptation": "Follow a pinned benchmark protocol and scorer; enumerate deviations explicitly. An adapted pilot cannot be labelled an official score."
+        },
+        "baselines": [
+          "Identical canonical memory items with prefix selection",
+          "Identical canonical memory items with recency selection",
+          "Identical canonical memory items with lexical Jaccard selection",
+          "Identical canonical memory items with BM25 selection (requires implementation)",
+          "Identical canonical memory items with current hybrid selection"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path"
+        ],
+        "changed_variables": [
+          "selector"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
+          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
+        },
+        "statistics": {
+          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
+          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Pin and verify benchmark data, protocol, scorer and selected task categories before running. Preserve question-level paired outcomes across repeats."
+      ]
+    }
+  ],
+  "review_concerns": [
+    {
+      "id": "fairness",
+      "title": "Weak Baseline and Budget Confounding",
+      "description": "Match token accounting, representation and formatting; compare against stronger selectors before attributing gains to retrieval.",
+      "experiment_ids": [
+        "fair_baselines"
+      ]
+    },
+    {
+      "id": "attribution",
+      "title": "Construction, Representation and Selection Confounds",
+      "description": "Change one component per ablation and preserve control traces; budget sensitivity alone is not a component ablation.",
+      "experiment_ids": [
+        "selection_ablation",
+        "representation_ablation",
+        "construction_ablation"
+      ]
+    },
+    {
+      "id": "amortization",
+      "title": "Unmeasured Memory Reuse",
+      "description": "Measure multiple distinct queries against one built memory and count construction once.",
+      "experiment_ids": [
+        "memory_reuse"
+      ]
+    },
+    {
+      "id": "robustness",
+      "title": "Small Single-Run Sample and Scoring Limitations",
+      "description": "Predeclare a broader evaluation, repeat runs, review scoring, account for dependence and verify benchmark protocol alignment.",
+      "experiment_ids": [
+        "protocol_replication"
+      ]
+    },
+    {
+      "id": "contribution",
+      "title": "Limited Algorithmic Novelty",
+      "description": "Scope the contribution as a controlled and reproducible lifecycle-cost study. Better prose does not create a new retrieval algorithm, and these experiments do not guarantee acceptance.",
+      "experiment_ids": [
+        "fair_baselines",
+        "construction_ablation",
+        "memory_reuse"
+      ]
+    }
+  ]
+}

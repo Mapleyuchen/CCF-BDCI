@@ -8,6 +8,8 @@
 
 **框架生成器是规则规划器，不调用 LLM，不生成论文正文、实验数字或研究结论。** 主章节使用科研论文常见结构，方法与实验子章节根据输入生成。后续主 Agent 可以先组织研究说明，再调用本模块。尚未实现自主研究构思或主 Agent 的工具注册。
 
+针对测试平台反馈的修订版框架与第 2 / 4 / 5 部分交接说明见 [研究修订接口](references/research_revision.md)。`examples/memory-revision.brief.json` 保留两份初步实验，并增加六项计划实验；新增结果需由实验模块实际运行后交付。
+
 ## 立即运行
 
 在仓库根目录执行：
@@ -39,10 +41,14 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模�
 | `authors` | 否 | 作者姓名字符串数组；非匿名时必填 |
 | `methods` | 否 | 方法对象数组；每项有 `id`、`title`，可选 `description`、`citation_ids` |
 | `experiments` | 否 | 实验对象数组；每项有 `id`、`title`，可选 `status`、`metrics`、`result_path` |
+| `research_questions` | 否 | 研究问题数组：`id/title/question`，用于生成引言子章节并关联实验 |
+| `review_concerns` | 否 | 评审问题数组：`id/title/description/experiment_ids`，记录仍待证据或科学复核的问题 |
 
 方法、实验的 `id` 在各自数组内唯一，使用小写字母开头及小写字母、数字、下划线、短横线。它们生成稳定的章节标签。`citation_ids` 是文献的显式 `id` 或规范 ID，例如 `arxiv:2310.08560`、`doi:10.xxxx/xxx`；引用不存在的 ID 会报错。
 
 `status` 默认 `planned`。计划实验仅产生实验设置子章节，并列出待补数据。`completed` 必须附上存在的 `result_path`，其路径**相对原始 brief 文件所在目录**解析。模块记录 SHA-256，并将当时的原始文件复制到 `evidence/raw/`；复制后再次核对哈希。结果子章节标记为“待证据复核”，不会根据文件存在生成结论。
+
+`planned` 实验不能同时提供非空 `result_path`，避免状态与证据矛盾。实验可选增加 `purpose`、`research_question_ids`、`protocol`、`evidence_requirements`、`limitations`。协议字段、缺失信息处理和示例见 [修订接口](references/research_revision.md)；不使用这些字段时保持原有八章结构和子章节 ID。
 
 新证据记录的 `project_path` 相对当前论文工程解析，跨目录、跨电脑交接时以此为准。`original_path`、原始 `input_path` 只用于来源追踪；`resolved_path` 为生成时的快照绝对路径，保留给旧调用方。第 4、5 部分优先读取项目内快照，快照缺失或被修改时拒绝使用，不回退到旧电脑上的文件。生成后原始实验文件的后续变化不会改变这份已规划的证据；要采用新结果，应重新生成框架。旧的绝对路径工程仍可在原路径有效时读取，交接前建议重新生成。
 
@@ -65,6 +71,8 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模�
   paper.tex                 主文件及章节装配
   sections/*.tex            8 个主章节的可填写文件
   outline.json              每节目标、状态、子章节、候选引用与证据关联
+  research_plan.json        使用修订字段时生成：协议、研究问题关联和待补证据
+  RESEARCH_HANDOFF.md        使用修订字段时生成：可直接交给队友的任务说明
   citation_map.json         规范元数据、原始 ID -> 引用键、去重来源索引
   references.bib            从输入生成的 BibTeX
   brief.input.json          研究说明快照（结果相对路径仍以原始 brief 为基准）

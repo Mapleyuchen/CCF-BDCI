@@ -11,6 +11,7 @@ from pathlib import Path
 
 from .citations import bibliography, build_citations, latex_text
 from .planner import plan_outline
+from .research import handoff_markdown
 
 ROOT = Path(__file__).resolve().parents[4]
 DEFAULT_TEMPLATE = ROOT / "iclr-2027-style-files" / "iclr2027"
@@ -98,6 +99,10 @@ def generate_project(brief_path: Path, output: Path, literature_path: Path | Non
         (staged / "paper.tex").write_text(tex, encoding="utf-8")
         (staged / "references.bib").write_text(bibliography(citations), encoding="utf-8")
         _write_json(staged / "outline.json", outline)
+        if "research_plan" in outline:
+            _write_json(staged / "research_plan.json", outline["research_plan"])
+            (staged / "RESEARCH_HANDOFF.md").write_text(handoff_markdown(outline["research_plan"]), encoding="utf-8")
+            manifest["research_plan"] = {"path": "research_plan.json", "scientific_review_required": True}
         _write_json(staged / "citation_map.json", citations)
         _write_json(staged / "manifest.json", manifest)
         _write_json(staged / "brief.input.json", brief)
@@ -108,6 +113,7 @@ def generate_project(brief_path: Path, output: Path, literature_path: Path | Non
             "Fill sections/*.tex using outline.json. Do not edit measured results into the planner.\n"
             "Result hashes record provenance, not scientific validity. Read project_path relative to this project.\n"
             "Evidence snapshots travel with the framework. original_path and input_path are source provenance only.\n"
+            "If present, read research_plan.json and RESEARCH_HANDOFF.md for planned protocols and unresolved review concerns.\n"
             "Use citation_map.json to select citation keys; verify each source and claim before citing it.\n"
             "Remove draft placeholders, the Draft bibliography paragraph, and \\nocite{*} before final review.\n"
             "Keep paper.tex and sections/*.tex changes: regeneration requires a new output directory.\n"
