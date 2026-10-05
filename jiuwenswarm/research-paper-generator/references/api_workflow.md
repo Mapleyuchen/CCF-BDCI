@@ -24,7 +24,7 @@ $env:DASHSCOPE_API_KEY = [Environment]::GetEnvironmentVariable('DASHSCOPE_API_KE
 | 步骤 | 接口 / 模型 | 程序与记录 |
 | --- | --- | --- |
 | 文献元数据 | GET `https://export.arxiv.org/api/query`，无需 Key | `literature_search.py`，Atom 缓存及 `.provenance.json` |
-| 规划、初稿、审阅、修订 | POST `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions`，`qwen3.8-max` | `write_paper.py` → `paper_content/editorial.py` → `model.py`；阶段 JSON、usage、耗时 |
+| 一次配图规划、一次正文 | POST `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions`，`qwen3.8-max` | `write_paper.py` → `paper_illustration/pipeline.py` / `paper_content/project.py` → `model.py`；JSON、usage、耗时 |
 | Methodology 配图 | POST `https://dashscope.aliyuncs.com/api/v1/services/aigc/image-generation/generation`，`qwen-image-3.0-pro` | `generate_methodology.py`；`X-DashScope-Async: enable` |
 | 查询图像任务 | GET `https://dashscope.aliyuncs.com/api/v1/tasks/{task_id}` | 每五秒查询同一任务；成功后立即下载临时图片 URL |
 | 实测数据、图表、排版 | 本地 Python / Matplotlib / LaTeX | 不调用图像模型绘制实验数值 |
@@ -59,6 +59,14 @@ python jiuwenswarm/research-paper-generator/scripts/literature_search.py --ids 2
 
 ## 生成方法图
 
+2026-10-02 起，使用[配图 Agent](illustration_agent.md)：一次分析研究内容并设计逐图节点、关系、布局和提示词；多图并行、每图一次生成。默认关闭模型审阅和重绘。
+
+```powershell
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --generate-illustrations --max-figures 2 --output output/illustrated-paper-new --compile
+```
+
+文本使用配置中的 `qwen3.8-max`，正常两图流程共两次文本请求和两个图像任务。仅显式 `--review-mode reviewed` 才增加设计/视觉审阅及正文复审；视觉输入协议见[官方多模态接口说明](https://help.aliyun.com/en/model-studio/qwen-api-via-openai-chat-completions)。每次生图调用原生异步接口。无新增大型依赖，下方固定提示词命令保留为底层调试入口。
+
 ```powershell
 python jiuwenswarm/research-paper-generator/scripts/generate_methodology.py --output output/methodology-new.png
 ```
@@ -81,12 +89,12 @@ python jiuwenswarm/research-paper-generator/scripts/generate_methodology.py --re
 python jiuwenswarm/research-paper-generator/scripts/write_paper.py --methodology-image output/methodology-new.png --output output/research-new --compile
 ```
 
-也可用 `--generate-methodology` 在写作前调用图像接口；默认不带此参数时使用仓库已保存并检查过的配图。研究模式保存 `editorial_plan.json`、`editorial_draft.json`、`editorial_review.json`、`editorial_revision.json`。为避免非流式请求的长思考过程触发网关超时，各阶段保留旗舰模型，但关闭 thinking，规划/审阅最多 6000 输出 Token，正文最多 16000；请求设置和消耗进入报告。最多一次正文格式修复。
+`--generate-methodology` 是 `--generate-illustrations` 的兼容别名。不带生成参数且不提供图包时，仍保留旧版已保存配图路径。默认 fast 模式关闭 thinking，配图规划最多 6500 输出 Token，正文最多 14000；最多一次针对代码报错的正文格式修复。耗时、返回 usage 与调用数写入报告。图包如实标记为未经模型视觉审阅。仅 `--review-mode reviewed` 保留四阶段写作及其阶段 JSON。
 
 恢复中断的阶段，必须保持输入一致，并选一个新输出目录：
 
 ```powershell
-python jiuwenswarm/research-paper-generator/scripts/write_paper.py --resume-from output/research-new/paper --output output/research-resumed --compile
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --review-mode reviewed --resume-from output/research-new/paper --output output/research-resumed --compile
 ```
 
 仅重排已有正文，不再付费：
