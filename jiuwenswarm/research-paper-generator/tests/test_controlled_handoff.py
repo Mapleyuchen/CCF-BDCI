@@ -110,7 +110,7 @@ class ControlledHandoffTests(unittest.TestCase):
         self.assertEqual([r["context_tokens"] for r in primary], [512, 1024, 2048])
         self.assertTrue(all(r["accuracy_gain_pp"] < 0 for r in primary))
         self.assertTrue(all(r["group_labels"] == {"baseline": "bm25", "enhanced": "hybrid"} for r in primary))
-        self.assertEqual(report["review_queues"][0]["missing_decision"], 239)
+        self.assertEqual(report["review_queues"][0]["missing_decision"], 0)
         self.assertTrue(report["scientific_review_required"])
         self.assertNotIn("writing_profile", brief)
         outline_path = framework / "outline.json"

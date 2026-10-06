@@ -111,7 +111,7 @@ def curate(source, report, output):
         ("mechanistic_analysis.tex", "prose", "appendix", "Diagnostic interpretation; check case evidence and avoid stronger causal attribution."),
         ("mechanistic_cases.json", "statistics", "appendix", "Question-level diagnostic cases supporting the upstream interpretation."),
         ("judge_sensitivity.json", "statistics", "appendix", "Partial secondary-judge sensitivity, not human accuracy or full second-model rescoring."),
-        ("model_disagreement_review.json", "review_queue", "handoff", "Unresolved model disagreements: human reviewer/decision/notes still needed."),
+        ("model_disagreement_review.json", "review_queue", "handoff", "239 model disagreements with member-5 boolean decisions. Main scores still use the primary judge."),
         ("EXPERIMENT_HANDOFF.md", "documentation", "handoff", "Original experimental handoff and scope restrictions."),
     ):
         add(Path(name).stem.lower(), name, report / name, kind, placement, purpose)

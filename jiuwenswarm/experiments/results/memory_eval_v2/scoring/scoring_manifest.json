@@ -7,7 +7,7 @@
   "valid_solver_trials": 6516,
   "audit_questions": 966,
   "judge_disagreements": 239,
-  "human_adjudications_completed": 0,
+  "human_adjudications_completed": 239,
   "human_review_required": true,
   "official_longmemeval_score": false,
   "note": "Original task-specific LongMemEval prompts; substituted Qwen judge and strict yes/no parser. Cache identical question-answer judgments, not repeated solver generations."

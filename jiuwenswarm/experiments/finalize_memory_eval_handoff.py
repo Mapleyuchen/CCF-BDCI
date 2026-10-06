@@ -86,7 +86,7 @@ def main():
             protocol["scoring"] = dict(
                 method="Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary " + scoring["primary_judge_model"] + "; secondary audit " + scoring["secondary_judge_model"] + ".",
                 version=dependencies["longmemeval_commit"] + "; scorer SHA256=" + dependencies["scorer_sha256"],
-                review=f"{scoring['audit_questions']} distinct responses audited; {scoring['judge_disagreements']} model disagreements. Human adjudication remains pending; main results retain the predeclared primary judge. Full scoring metadata is in the traced result export.")
+                review=f"{scoring['audit_questions']} distinct responses audited; {scoring['judge_disagreements']} model disagreements; {scoring.get('human_adjudications_completed', 0)} human decisions recorded. Main results retain the predeclared primary judge. Full scoring metadata is in the traced result export.")
             protocol["statistics"] = dict(unit="Memory episode, averaging repeats within memory", method=summary["inference"])
             if experiment["id"] == "representation_ablation":
                 experiment["limitations"].append("The selector algorithm is fixed, but exchange formatting changes lexical features and token packing. This intervention does not isolate packing alone.")

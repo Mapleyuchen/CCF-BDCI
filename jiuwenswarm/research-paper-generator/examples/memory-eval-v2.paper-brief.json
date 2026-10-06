@@ -124,7 +124,7 @@
         "scoring": {
           "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
           "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
-          "review": "966 distinct responses audited; 239 model disagreements. Human adjudication remains pending; main results retain the predeclared primary judge. Full scoring metadata is in the traced result export."
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
         },
         "statistics": {
           "unit": "Memory episode, averaging repeats within memory",
@@ -216,7 +216,7 @@
         "scoring": {
           "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
           "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
-          "review": "966 distinct responses audited; 239 model disagreements. Human adjudication remains pending; main results retain the predeclared primary judge. Full scoring metadata is in the traced result export."
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
         },
         "statistics": {
           "unit": "Memory episode, averaging repeats within memory",
@@ -308,7 +308,7 @@
         "scoring": {
           "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
           "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
-          "review": "966 distinct responses audited; 239 model disagreements. Human adjudication remains pending; main results retain the predeclared primary judge. Full scoring metadata is in the traced result export."
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
         },
         "statistics": {
           "unit": "Memory episode, averaging repeats within memory",
@@ -401,7 +401,7 @@
         "scoring": {
           "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
           "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
-          "review": "966 distinct responses audited; 239 model disagreements. Human adjudication remains pending; main results retain the predeclared primary judge. Full scoring metadata is in the traced result export."
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
         },
         "statistics": {
           "unit": "Memory episode, averaging repeats within memory",
@@ -491,7 +491,7 @@
         "scoring": {
           "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
           "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
-          "review": "966 distinct responses audited; 239 model disagreements. Human adjudication remains pending; main results retain the predeclared primary judge. Full scoring metadata is in the traced result export."
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
         },
         "statistics": {
           "unit": "Memory episode, averaging repeats within memory",
@@ -582,7 +582,7 @@
         "scoring": {
           "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
           "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
-          "review": "966 distinct responses audited; 239 model disagreements. Human adjudication remains pending; main results retain the predeclared primary judge. Full scoring metadata is in the traced result export."
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
         },
         "statistics": {
           "unit": "Memory episode, averaging repeats within memory",
@@ -672,7 +672,7 @@
         "scoring": {
           "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
           "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
-          "review": "966 distinct responses audited; 239 model disagreements. Human adjudication remains pending; main results retain the predeclared primary judge. Full scoring metadata is in the traced result export."
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
         },
         "statistics": {
           "unit": "Memory episode, averaging repeats within memory",
@@ -866,7 +866,7 @@
       "kind": "prose",
       "placement": "handoff",
       "path": "../../experiments/results/memory_eval_v2/report/experimental_methods.tex",
-      "sha256": "9472c524f2750fcc631d18664e6dd3681bd23894f2fd28d68e28e13cb8f8ee7b",
+      "sha256": "14b499ed51a95e3b96933c4827189bb4df0c9cc4e1c4dcf186e0580ceba594ac",
       "purpose": "Verified upstream protocol prose to adapt to the manuscript's section structure and citation keys.",
       "experiment_ids": []
     },
@@ -916,8 +916,8 @@
       "kind": "review_queue",
       "placement": "handoff",
       "path": "../../experiments/results/memory_eval_v2/report/model_disagreement_review.json",
-      "sha256": "c304a7ed7515353cb0bdca57c9a2a1a472a441835f5cd409e6af0d08eda46c28",
-      "purpose": "Unresolved model disagreements: human reviewer/decision/notes still needed.",
+      "sha256": "ce17c3e07cc8147e6393d82865e5a5eb62b2533196b137c4866158f294842e6c",
+      "purpose": "239 model disagreements with member-5 boolean decisions. Main scores still use the primary judge.",
       "experiment_ids": []
     },
     {
@@ -926,7 +926,7 @@
       "kind": "documentation",
       "placement": "handoff",
       "path": "../../experiments/results/memory_eval_v2/report/EXPERIMENT_HANDOFF.md",
-      "sha256": "ec3ff19a76810fed3cde4eb4d77fe5b3e8be36cd6a5125e717dd967afe971986",
+      "sha256": "332f8c8effea2d9a69f142a9087a6ac8132fc3e3d1b94d57248884816e0ed4b4",
       "purpose": "Original experimental handoff and scope restrictions.",
       "experiment_ids": []
     },
@@ -936,8 +936,8 @@
       "kind": "review_queue",
       "placement": "handoff",
       "path": "../../experiments/results/memory_eval_v2/scoring/blinded_adjudication_queue.json",
-      "sha256": "b2076a46fc1e33cd365b4e609aefd2ddce9d32f9be59c6bfa0fac8af97915a9a",
-      "purpose": "Full audit queue. Keep human decisions pending; model agreement is not human review.",
+      "sha256": "bf460590f6dfb53bea10ffa569b479abc13765a7236ae28ac1d410fa4793f0c1",
+      "purpose": "Full audit queue. The 239 model disagreements have member-5 decisions; the sampled agreements remain unreviewed. Model agreement is not human review.",
       "experiment_ids": []
     },
     {

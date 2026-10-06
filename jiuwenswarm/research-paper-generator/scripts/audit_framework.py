@@ -57,7 +57,7 @@ def audit_project(project):
                 if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
                     raise ValueError(f"Review queue must be an array of objects: {item['id']}")
                 report["review_queues"].append({"id": item["id"], "items": len(rows),
-                    "missing_decision": sum(not row.get("decision") for row in rows),
+                    "missing_decision": sum(type(row.get("decision")) is not bool or not row.get("reviewer") for row in rows),
                     "note": "Queues may overlap. Filled decisions still require reviewer/provenance verification."})
         metrics = metric_catalog(results)
         write(project / "metric_catalog.json", metrics)
