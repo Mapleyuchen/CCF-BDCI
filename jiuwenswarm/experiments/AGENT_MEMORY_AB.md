@@ -1,5 +1,7 @@
 # 记忆 Rail 的 Agent 对照实验
 
+> 此文及对应结果保留为旧 pilot。针对评审意见的 Token 公平对照、消融、复用及统计方案见 [MEMORY_EVAL_V2.md](MEMORY_EVAL_V2.md)；不得将两版数据混为一个实验。
+
 运行器：[agent_memory_ab.py](agent_memory_ab.py)。它使用真实的 openjiuwen `DeepAgent`、JiuwenSwarm 的 `ProjectMemoryRail` / `EnhancedMemoryRail` 和同一个模型配置。为了单独测记忆，它关闭工具调用与任务循环；这是 **Agent 记忆问答实验**，不是整套论文生成流程或 Code Team 实验。
 
 ## 数据和控制条件

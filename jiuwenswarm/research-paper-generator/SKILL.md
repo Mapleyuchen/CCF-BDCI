@@ -9,6 +9,9 @@ Run commands from the repository root. See [API workflow](references/api_workflo
 
 ## Establish the evidence
 
+- Revised experiments live in `experiments/MEMORY_EVAL_V2.md`. After the entire scored run validates, `finalize_memory_eval_handoff.py` produces `examples/memory-eval-v2.brief.json` and self-contained `controlled_memory_eval_live` comparisons. Use that brief with the **general** renderer; the legacy L1 research-profile assets are incompatible with its token budgets and frozen full-history bank. If these files are absent, treat the revision experiments as unfinished, never substitute pilot values.
+- The v2 adapter verifies semantic-label provenance and recomputes memory-cluster intervals, including failed questions in the denominator. It preserves selector names and `context_tokens`; it does not interpret token caps as `context_chars`. Reuse uses measured distinct-query prefixes. Human adjudication remains required, and the substituted judge/subset protocol is not an official LongMemEval score.
+
 - Use `examples/memory-research.brief.json` and `memory-research.literature.json` for the current study. The research profile is specific to the audited `jiuwenswarm_l1_v1` implementation; do not reuse its equations or schematic for another implementation without revising `research_assets.py`.
 - Inputs must be live `records` and `runs` with model identity, dataset hash, isolated question history and verified memory injection. `paper_content/evidence.py` recomputes paired metrics and includes recorded memory-write cost. Do not substitute legacy simulated output or self-test results.
 - Current evidence is a selected twenty-question slice at two budgets, with one run per budget, using qwen-plus. Changing the writing model does not re-run these experiments or change their model identity. Budget sensitivity is not component ablation; L2/L3 persistence and team synchronization have not been evaluated.

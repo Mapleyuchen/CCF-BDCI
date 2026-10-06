@@ -1,5 +1,7 @@
 # 公开记忆基准：LongMemEval-S 的 20 轮改编实验
 
+> 此20题改编实验保留为 pilot / micro 机制控制。新版完整历史、分层QA、全500历史检索和统计交接见 [MEMORY_EVAL_V2.md](MEMORY_EVAL_V2.md)。公平检索结论应使用新版正式数据。
+
 本实验使用 [LongMemEval 作者仓库](https://github.com/xiaowu0162/LongMemEval)发布的
 [LongMemEval-S cleaned 数据](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned)。
 原始数据文件位于本地 `data/public/longmemeval_s_cleaned.json`，已被 Git 忽略。

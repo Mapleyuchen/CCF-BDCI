@@ -7,7 +7,7 @@ Implements intelligent memory retrieval using multiple relevance signals:
 - Access frequency (logarithmic normalization)
 - Importance score (user-assigned weight)
 
-Achieves 21.4% improvement in retrieval accuracy over baseline methods.
+Experimental claims must be supported by the versioned records in experiments/.
 
 Author: CCF BDCI 2026 Team
 Date: 2026-09-23
@@ -117,20 +117,32 @@ class HybridRetrievalEngine:
         Score = w_s * S_sem + w_t * S_temp + w_f * S_freq + w_i * S_imp
         """
         # Compute individual scores
-        semantic_score = self._semantic_similarity(query, memory.content)
-        temporal_score = self._temporal_score(memory)
-        frequency_score = self._frequency_score(memory)
-        importance_score = memory.importance
+        return self.score_components(query, memory)["total"]
 
-        # Weighted combination
-        total_score = (
-            self.weights.semantic * semantic_score +
-            self.weights.temporal * temporal_score +
-            self.weights.frequency * frequency_score +
-            self.weights.importance * importance_score
-        )
+    def score_components(
+        self, query: str, memory: MemoryItem, *, reference_time: float | None = None,
+    ) -> Dict[str, float]:
+        """Expose each contribution; a fixed clock permits reproducible ablations.
 
-        return total_score
+        A None clock retains the production age_seconds behavior. Evaluation can
+        use the original question timestamp without advancing a historical trace
+        according to wall-clock execution order.
+        """
+        semantic = self._semantic_similarity(query, memory.content)
+        age = memory.age_seconds() if reference_time is None else max(0.0, reference_time - memory.timestamp)
+        temporal = 0.5 ** (age / self.temporal_halflife)
+        frequency = self._frequency_score(memory)
+        importance = memory.importance
+        return {
+            "semantic": semantic, "temporal": temporal,
+            "frequency": frequency, "importance": importance,
+            "semantic_contribution": self.weights.semantic * semantic,
+            "temporal_contribution": self.weights.temporal * temporal,
+            "frequency_contribution": self.weights.frequency * frequency,
+            "importance_contribution": self.weights.importance * importance,
+            "total": (self.weights.semantic * semantic + self.weights.temporal * temporal
+                      + self.weights.frequency * frequency + self.weights.importance * importance),
+        }
 
     def _semantic_similarity(self, query: str, content: str) -> float:
         """

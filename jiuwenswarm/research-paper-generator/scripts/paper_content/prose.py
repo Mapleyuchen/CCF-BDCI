@@ -33,7 +33,8 @@ Discuss each evidence item in its result subsection, using at least one accuracy
 Include total token cost INCLUDING memory writes; do not imply that query latency is end-to-end latency.
 Discuss missing measurements, exclusions, negative results, small samples and confounders.
 No unsupported significance, causal, novelty, state-of-the-art or generalization claims.
-Avoid the words significant, significantly, superiority and superior; no significance test was run.
+Only discuss statistical tests when explicit test results are supplied. Do not use
+significant, significantly, superiority or superior without the appropriate predeclared corrected test.
 An adapted LongMemEval slice is not an official benchmark score. Never claim L2/L3 or team evaluation.
 Do not use raw percent signs or URLs. Citation years are supplied by the renderer.
 The renderer adds measured tables, charts, headings and bibliography; you write the prose only.
@@ -52,7 +53,8 @@ def build_messages(outline, brief, citations, metrics, results, source_notes, il
             baseline, enhanced = (result["groups"][g][name] for g in ("baseline", "enhanced"))
             direction = "unknown" if baseline is None or enhanced is None else (
                 "higher" if enhanced > baseline else "lower" if enhanced < baseline else "equal")
-            findings.append(f"Enhanced {name} is {direction} relative to baseline in {result['id']}.")
+            labels = result.get("group_labels", {"baseline": "Baseline", "enhanced": "Enhanced"})
+            findings.append(f"{labels['enhanced']} {name} is {direction} relative to {labels['baseline']} in {result['id']}.")
         experiment_context.append({key: result[key] for key in ("id", "title", "model_name", "limitations")})
         experiment_context[-1]["direction_checks"] = findings
     # Values are resolved by the renderer. Giving prose models the numeric values

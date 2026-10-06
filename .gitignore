@@ -29,6 +29,7 @@ env/
 
 # Local generated papers, API run logs and installation diagnostics
 /output/
+/jiuwenswarm/research-paper-generator/output/memory-eval-v2-framework/
 
 # IDE
 .vscode/
@@ -58,6 +59,28 @@ experiments/**/*.npy
 experiments/**/*.h5
 /jiuwenswarm/experiments/data/public/
 /jiuwenswarm/experiments/results/.runtime/
+/jiuwenswarm/experiments/results/**/.work/
+/jiuwenswarm/experiments/results/artifact-profile/
+/jiuwenswarm/experiments/results/memory_eval_v2_self_test*/
+/jiuwenswarm/experiments/results/memory_eval_v2_smoke/
+/jiuwenswarm/experiments/results/memory_eval_v2_live_pilot/
+/jiuwenswarm/experiments/results/memory_eval_v2_rate_limit_preflight/
+/jiuwenswarm/experiments/results/memory_eval_v2_chunk_preflight/
+/jiuwenswarm/experiments/results/memory_eval_v2_ablation_preflight/
+/jiuwenswarm/experiments/results/memory_eval_v2_retrieval_preflight/
+/jiuwenswarm/experiments/results/memory_eval_v2_retrieval/
+/jiuwenswarm/experiments/results/memory_eval_v2_retrieval_full/
+
+# Formal experiment: keep the consolidated handoff, not per-call caches.
+/jiuwenswarm/experiments/results/memory_eval_v2/*
+!/jiuwenswarm/experiments/results/memory_eval_v2/report/
+!/jiuwenswarm/experiments/results/memory_eval_v2/run_manifest.json
+!/jiuwenswarm/experiments/results/memory_eval_v2/environment.json
+!/jiuwenswarm/experiments/results/memory_eval_v2/scoring/
+/jiuwenswarm/experiments/results/memory_eval_v2/scoring/*
+!/jiuwenswarm/experiments/results/memory_eval_v2/scoring/scoring_manifest.json
+!/jiuwenswarm/experiments/results/memory_eval_v2/scoring/blinded_adjudication_queue.json
+/jiuwenswarm/experiments/results/memory_eval_v2_retrieval_final/
 
 # API Keys
 config.yaml

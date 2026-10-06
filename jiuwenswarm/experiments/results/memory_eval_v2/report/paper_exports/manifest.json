@@ -1,0 +1,93 @@
+{
+  "kind": "controlled_memory_eval_paper_exports",
+  "files": [
+    {
+      "path": "full_512_prefix-bm25.json",
+      "sha256": "46ee0f61c830e4f6ec59f8ab877b556ccddeaaa0fc643c9ea5d2cc54e5ce9ba2"
+    },
+    {
+      "path": "full_512_recency-bm25.json",
+      "sha256": "9abe4936635eb2d1802310e5a5ca65c9ab576b9d1bebecfac5ff59ca78f40583"
+    },
+    {
+      "path": "full_512_jaccard-bm25.json",
+      "sha256": "b8031981a0acf82b49857097d24fd99fb3e974ac371859da3db589dfceea079e"
+    },
+    {
+      "path": "full_512_hybrid-bm25.json",
+      "sha256": "c422e0883d4bf72bce4277462950eab92bbd15a15fdf8addd1851d098eda91ab"
+    },
+    {
+      "path": "full_512_hybrid-hybrid_no_time.json",
+      "sha256": "579afc1556204f7a27aacf6e87dc3295213a82214e6419563222bdc90cf39044"
+    },
+    {
+      "path": "full_1024_prefix-bm25.json",
+      "sha256": "6064963f162ca34bc7ce97258c26b19fc3b108d874e8e59e25fd1ca63a3f93e5"
+    },
+    {
+      "path": "full_1024_recency-bm25.json",
+      "sha256": "1dfdb0711aee479a2904b41664c88fed69606fb66ed2beff5e63c44e5cb515d1"
+    },
+    {
+      "path": "full_1024_jaccard-bm25.json",
+      "sha256": "eba93cb6622d04774752dbd60299f685c34df0a6884980d59e6229fb840be42d"
+    },
+    {
+      "path": "full_1024_hybrid-bm25.json",
+      "sha256": "3aec9b433317da585a5df4aa1d498c228b50fda8a1cffc9d2ddd25914eef9fa8"
+    },
+    {
+      "path": "full_1024_hybrid-hybrid_no_time.json",
+      "sha256": "bd188ed9196c7d3c825f8d9fd6b27a8c12a0cad46fab098a981706164e75e04d"
+    },
+    {
+      "path": "full_2048_prefix-bm25.json",
+      "sha256": "32e51632f6225edf0d9770ff347e1d095416500aa548a73acc9d64469773dbab"
+    },
+    {
+      "path": "full_2048_recency-bm25.json",
+      "sha256": "07335804c57d9ced7424d9418b54611a14de9fe7399a2fab01d90ace6722b082"
+    },
+    {
+      "path": "full_2048_jaccard-bm25.json",
+      "sha256": "1a086496172af18da55ae65109ee6511fac5391e81388cc79ace11e3cb5f73a9"
+    },
+    {
+      "path": "full_2048_hybrid-bm25.json",
+      "sha256": "fb0d00320a6e2d493bed005710ac681047545e0ea970cacaf3416c7f81616a9b"
+    },
+    {
+      "path": "full_2048_hybrid-hybrid_no_time.json",
+      "sha256": "38475098d44f284d1260834eefe1c59bf10c3b78511251b72c725e107081f942"
+    },
+    {
+      "path": "micro_512_hybrid_exchange-hybrid_raw.json",
+      "sha256": "4c7b1ccf03bceb44668ed4a3e4c8c8c41c7494914d89c0501801395f93365ea1"
+    },
+    {
+      "path": "micro_512_hybrid_model_ack-hybrid_raw.json",
+      "sha256": "cc4fd48897d9d9f25837d52b1f1bbd1ae5a636157f134de4e6badc64631ea883"
+    },
+    {
+      "path": "micro_1024_hybrid_exchange-hybrid_raw.json",
+      "sha256": "2ced1137bc66b44ae4736ee2523543af9b16761df4934f932334370f6d15eb9a"
+    },
+    {
+      "path": "micro_1024_hybrid_model_ack-hybrid_raw.json",
+      "sha256": "e8ba823d9f219ee6a5fe5c747422b992c60df8e7c3423a1f1391392b3a8960eb"
+    },
+    {
+      "path": "micro_2048_hybrid_exchange-hybrid_raw.json",
+      "sha256": "bb33243c3766e481b1b41831db33229954d0a1f71fc02c4662f6b9c9058d23b6"
+    },
+    {
+      "path": "micro_2048_hybrid_model_ack-hybrid_raw.json",
+      "sha256": "158fda9b9fd1fe47831352fbd5655d5e3e916c23c124a879adbdb2bcf4d10e98"
+    },
+    {
+      "path": "reuse_512_hybrid_model_ack-hybrid_raw.json",
+      "sha256": "032aafc004b6268e7c026f1a65c0f066a975621ad8452d35407bb91d3ec11089"
+    }
+  ]
+}

@@ -9,8 +9,8 @@ intelligent agents across different temporal scopes:
 - L3 Project Memory: Long-term persistent knowledge (TTL: ∞, Capacity: ∞)
 
 Key Innovation:
-Hybrid retrieval algorithm combines semantic similarity, temporal decay,
-access frequency, and importance for 21.4% accuracy improvement over baseline.
+Hybrid retrieval combines lexical similarity, temporal decay, access frequency,
+and importance. Performance claims require recorded experiments.
 
 Author: CCF BDCI 2026 Team
 Date: 2026-09-23

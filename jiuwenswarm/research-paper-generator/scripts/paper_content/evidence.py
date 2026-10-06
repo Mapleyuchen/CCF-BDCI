@@ -11,7 +11,7 @@ from pathlib import Path
 
 from paper_framework.evidence import evidence_path
 
-LIVE_KINDS = {"live_model_experiment", "adapted_longmemeval_live"}
+LIVE_KINDS = {"live_model_experiment", "adapted_longmemeval_live", "controlled_memory_eval_live"}
 GROUPS = ("baseline", "enhanced")
 
 
@@ -51,6 +51,9 @@ def normalize_result(path: Path, evidence_id: str, title: str) -> dict:
     data = read_json(path)
     if not isinstance(data, dict) or data.get("kind") not in LIVE_KINDS:
         raise ValueError(f"{path.name}: expected a live Agent A/B result; legacy/simulated/self-test data is not evidence")
+    if data["kind"] == "controlled_memory_eval_live":
+        from .controlled_evidence import normalize_controlled
+        return normalize_controlled(data, path, evidence_id, title)
     records, runs = data.get("records"), data.get("runs")
     if not isinstance(records, list) or not records or not isinstance(runs, list) or not runs:
         raise ValueError(f"{path.name}: records and memory-write runs are required")
@@ -197,15 +200,18 @@ def metric_catalog(results: list[dict]) -> dict:
     catalog = {}
     for result in results:
         prefix = result["id"]
-        for name in ("context_chars", "unique_questions", "paired_observations", "repeats", "accuracy_gain_pp", "total_token_ratio", "cost_per_correct_ratio"):
+        for name in ("context_chars", "context_tokens", "unique_questions", "paired_observations", "repeats", "accuracy_gain_pp", "total_token_ratio", "cost_per_correct_ratio", "accuracy_difference_ci_low_pp", "accuracy_difference_ci_high_pp", "paired_p_two_sided", "paired_p_holm"):
+            if name not in result:
+                continue
             value = result[name]
-            text = ("not reported" if value is None else f"{value:g} percentage points" if name == "accuracy_gain_pp"
+            text = ("not reported" if value is None else f"{value:g} percentage points" if name.endswith("_pp")
+                    else f"{value:.4f}" if name.startswith("paired_p_")
                     else f"{value:.2f}" if name.endswith('ratio') else f"{value:g}")
             catalog[f"{prefix}.{name}"] = {"value": value, "text": text}
         for group, stats in result["groups"].items():
             for name, value in stats.items():
                 text = "not reported" if value is None else (
-                    f"{value * 100:.1f}%" if name in ("accuracy", "evidence_recall", "accuracy_ci_low", "accuracy_ci_high") else
+                    f"{value * 100:.1f}%" if name in ("accuracy", "evidence_recall", "accuracy_ci_low", "accuracy_ci_high", "evidence_turn_recall_any_fragment", "annotated_evidence_character_coverage", "all_annotated_evidence_turns_complete") else
                     f"{value:.2f}" if name in ("tokens_per_question", "tokens_per_correct", "query_latency_ms", "end_to_end_latency_ms")
                     else f"{value:g}")
                 catalog[f"{prefix}.{group}.{name}"] = {"value": value, "text": text}

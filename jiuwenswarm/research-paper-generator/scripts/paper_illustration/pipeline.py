@@ -38,7 +38,8 @@ def build_context(framework):
         catalog[f"note.{index}"] = note
     for result in results:
         catalog["result." + result["id"]] = {key: result[key] for key in
-            ("title", "model_name", "context_chars", "limitations", "groups", "paired_outcomes") if key in result}
+            ("title", "model_name", "context_chars", "context_tokens", "group_labels",
+             "limitations", "groups", "paired_outcomes", "comparison") if key in result}
     return {"title": brief["title"], "research_question": brief["research_question"],
             "source_catalog": catalog,
             "evidence_sha256": {item["id"]: item["sha256"] for item in outline["evidence"]}}

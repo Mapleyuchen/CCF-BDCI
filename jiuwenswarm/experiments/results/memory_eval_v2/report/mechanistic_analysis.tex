@@ -1,0 +1,11 @@
+\subsection{Why a Fixed Freshness Weight Can Displace Relevant History}
+In this replay protocol, memory timestamps are the original conversation timestamps and the reference clock is the question date. Frequency and importance are fixed, so pairwise order under the existing hybrid is determined by
+\[
+S_i = 0.4 J(q,m_i) + 0.3 D_i + C,
+\]
+where $J$ is lexical Jaccard similarity and $D$ is the implemented temporal decay. A relevant older record outranks a fresher record only if
+\[
+0.4(J_{\mathrm{old}}-J_{\mathrm{fresh}})
+> 0.3(D_{\mathrm{fresh}}-D_{\mathrm{old}}).
+\]
+Thus a query-independent freshness gap can outweigh a positive lexical relevance gap. Removing only the temporal term tests this mechanism while preserving source content, representation and packing. This is an explanation of the existing score, not a novel retrieval algorithm or a tuned replacement. The saved explanatory cases use a disclosed deterministic example-selection rule; they do not add independent evidence to the paired statistical tests. Bulk ingestion that assigns all records a new timestamp is a different scenario and is not evaluated here.
