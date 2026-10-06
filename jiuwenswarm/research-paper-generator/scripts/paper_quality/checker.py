@@ -12,6 +12,7 @@ import re
 from pathlib import Path
 
 from paper_framework.evidence import evidence_path
+from paper_framework.materials import verify_materials
 
 REQUIRED_SECTIONS = (
     "abstract",
@@ -69,6 +70,14 @@ def check_project(project: Path) -> dict:
     paper_tex = paper.read_text(encoding="utf-8")
     section_text = _section_text(project, outline, checks)
     _check_completeness(project, paper_tex, outline, section_text, citation_map, checks)
+    if isinstance(outline, dict) and outline.get("supporting_materials"):
+        try:
+            verify_materials(outline, project)
+            material_error = None
+        except (ValueError, OSError, KeyError) as error:
+            material_error = str(error)
+        _add(checks, check_id="completeness_supporting_materials", category="completeness", severity="error",
+             passed=material_error is None, message=material_error or "Supporting material snapshots match their recorded hashes.")
     _check_format(project, paper_tex, outline, citation_map, checks)
     _check_typography(project, checks)
     _check_grammar(section_text, checks)

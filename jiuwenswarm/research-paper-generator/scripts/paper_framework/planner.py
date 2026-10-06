@@ -8,6 +8,7 @@ from pathlib import Path
 
 from .citations import required_text
 from .research import build_research_plan
+from .materials import plan_materials
 
 
 def _objects(value: object, label: str) -> list[dict]:
@@ -97,8 +98,11 @@ def plan_outline(brief: object, citations: dict, base_dir: Path) -> dict:
         path = (base_dir / source).resolve()
         if not path.is_file():
             raise ValueError(f"Result file does not exist: {source}")
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        if "result_sha256" in experiment and experiment["result_sha256"] != digest:
+            raise ValueError(f"Result file differs from the declared handoff hash: {experiment['id']}")
         evidence.append({"id": experiment["id"], "input_path": source, "resolved_path": str(path),
-                         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                         "sha256": digest,
                          "validation": "file_exists_and_hashed_only"})
         results["subsections"].append({
             "id": f"result_{experiment['id']}", "title": experiment["title"],
@@ -113,6 +117,10 @@ def plan_outline(brief: object, citations: dict, base_dir: Path) -> dict:
             "research_question": question, "anonymous": anonymous, "authors": authors,
             "sections": sections, "evidence": evidence, "warnings": warnings,
             "citation_policy": "Candidates only; presence does not establish support for any claim."}
+    if "supporting_materials" in brief:
+        outline["supporting_materials"] = plan_materials(
+            _objects(brief["supporting_materials"], "supporting_materials"), base_dir,
+            {e["id"] for e in experiments})
     if has_research_plan:
         plan = build_research_plan(_objects(brief.get("research_questions", []), "research_questions"),
                                    _objects(brief.get("review_concerns", []), "review_concerns"), experiments)

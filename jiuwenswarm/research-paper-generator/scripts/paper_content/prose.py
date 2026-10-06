@@ -57,6 +57,10 @@ def build_messages(outline, brief, citations, metrics, results, source_notes, il
             findings.append(f"{labels['enhanced']} {name} is {direction} relative to {labels['baseline']} in {result['id']}.")
         experiment_context.append({key: result[key] for key in ("id", "title", "model_name", "limitations")})
         experiment_context[-1]["direction_checks"] = findings
+        if result.get("kind") == "controlled_memory_eval_live":
+            experiment_context[-1].update(group_labels=result["group_labels"],
+                                           comparison=result["comparison"], accuracy_interval=result["accuracy_interval"],
+                                           budget_unit=result["budget_unit"], human_review_required=True)
     # Values are resolved by the renderer. Giving prose models the numeric values
     # encourages them to copy and round them instead of using the evidence tokens.
     token_descriptions = {}
@@ -86,6 +90,11 @@ def build_messages(outline, brief, citations, metrics, results, source_notes, il
                "mandatory_citation_tokens_by_subsection": required_citations,
                "source_notes": source_notes}
     system = SYSTEM
+    if outline.get("supporting_materials"):
+        payload["supporting_materials"] = [{key: item[key] for key in
+            ("id", "title", "kind", "purpose", "placement", "experiment_ids", "project_path", "sha256")}
+            for item in outline["supporting_materials"]]
+        system += "\nSupporting materials are an index for human integration, not supplied numerical evidence. Do not infer numbers from their titles or paths.\n"
     if "research_plan" in outline:
         payload["research_plan"] = outline["research_plan"]
         system += """
@@ -157,7 +166,7 @@ def render_paragraph(text, metrics, citations, allowed_names=(), figure_ids=()):
                   lambda match: match[1] + " repeat" if metrics.get(match[2], {}).get("value") == 1 else match[0], text)
     stripped = TOKEN.sub("", text)
     for name in sorted(set(allowed_names), key=len, reverse=True):
-        stripped = stripped.replace(name, "")
+        stripped = re.sub(r"(?<!\w)" + re.escape(name) + r"(?!\w)", "", stripped, flags=re.I)
     stripped = re.sub(r"\bL[123]\b", "", stripped)
     stripped = re.sub(r"\bSHA-?256\b", "", stripped)
     if NUMERIC.search(stripped) or "%" in stripped:

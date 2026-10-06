@@ -2,6 +2,8 @@
 
 2026-10-01 接口联调与离线复现结果见 [联调报告](INTEGRATION_REPORT.md)。新增证据快照随项目交接，以及 `write_paper.py --content-json` 单命令离线入口。
 
+2026-10-06 已接入同学 2 的实测 v2 交接，见 [v2 框架交接报告](V2_HANDOFF_REPORT.md)。新版默认 brief 为 `examples/memory-eval-v2.paper-brief.json`，覆盖三个 Token 预算下的主比较，并携带补充对照、图表和待人工复核材料。
+
 当前研究版入口与配置见 [API 调用说明](references/api_workflow.md) 和 [SKILL](SKILL.md)。默认使用 DashScope `qwen3.8-max` 完成规划、初稿、审阅、修订，使用百炼 `qwen-image-3.0-pro` 生成 Methodology 图；arXiv 元数据检索不需要 Key。研究版增加方法公式、Wilson 区间、逐题诊断、写入/查询成本拆分和可审计附录。以下框架输入与内容 JSON 约定继续适用。
 
 其中第 3 部分在没有其他模块、模型服务或 API Key 的情况下，可以生成 ICLR 论文骨架、结构化大纲和引用映射。使用 Python 3.11+ 标准库；生成 PDF 另需 PATH 中有 `pdflatex` 和 `bibtex`。第 4 部分的模型写作与额外依赖见下文。
@@ -43,6 +45,7 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模�
 | `experiments` | 否 | 实验对象数组；每项有 `id`、`title`，可选 `status`、`metrics`、`result_path` |
 | `research_questions` | 否 | 研究问题数组：`id/title/question`，用于生成引言子章节并关联实验 |
 | `review_concerns` | 否 | 评审问题数组：`id/title/description/experiment_ids`，记录仍待证据或科学复核的问题 |
+| `supporting_materials` | 否 | 配套材料数组：`id/title/path/kind/purpose`，可选 `placement/experiment_ids/sha256`；详见 v2 交接报告 |
 
 方法、实验的 `id` 在各自数组内唯一，使用小写字母开头及小写字母、数字、下划线、短横线。它们生成稳定的章节标签。`citation_ids` 是文献的显式 `id` 或规范 ID，例如 `arxiv:2310.08560`、`doi:10.xxxx/xxx`；引用不存在的 ID 会报错。
 
@@ -73,6 +76,8 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模�
   outline.json              每节目标、状态、子章节、候选引用与证据关联
   research_plan.json        使用修订字段时生成：协议、研究问题关联和待补证据
   RESEARCH_HANDOFF.md        使用修订字段时生成：可直接交给队友的任务说明
+  MATERIALS.md              配套材料索引、用途和建议版面位置
+  supporting/*             配套材料的哈希快照，随目录交接
   citation_map.json         规范元数据、原始 ID -> 引用键、去重来源索引
   references.bib            从输入生成的 BibTeX
   brief.input.json          研究说明快照（结果相对路径仍以原始 brief 为基准）
@@ -107,18 +112,18 @@ conda activate ccf-bdci
 
 当前配置 `examples/dashscope-research.yaml` 使用百炼北京地域的文本兼容接口、`qwen3.8-max` 和环境变量 `DASHSCOPE_API_KEY`。`examples/dashscope.yaml` 保留为基础版及实验配置。使用其他地域时同时调整地址、密钥和模型。支持 `--env-file` 显式加载本机凭据；不会将模型配置或密钥复制到论文目录。模型服务调用会产生费用。
 
-完整演示使用仓库已提交的两份真实 LongMemEval 改编实验记录，无需重新运行记忆实验：
+默认写作使用仓库已提交的 v2 公平对照记录，无需重新运行记忆实验；写作本身仍会调用模型：
 
 ```powershell
 python jiuwenswarm/research-paper-generator/scripts/write_paper.py --output output/memory-paper-run --compile
 ```
 
-命令依次执行框架生成、DashScope 规划/正文/审阅/修订、图表和书目生成、LaTeX 编译、质量检查。输入默认采用 `examples/memory-research.brief.json` 和 `memory-research.literature.json`；可通过 `--brief`、`--literature`、`--config` 替换。`--output` 必须是尚不存在的目录。默认配图来自仓库已审阅资产；加 `--generate-methodology` 才会新调用图像 API，或用 `--methodology-image` 接入自己检查过的 PNG。
+命令执行框架生成、模型正文、图表和书目生成、LaTeX 编译、质量检查。输入默认采用 `examples/memory-eval-v2.paper-brief.json` 和 `memory-research.literature.json`；可通过 `--brief`、`--literature`、`--config` 替换。`--output` 必须是尚不存在的目录。默认 fast 写作；完整审阅需 `--review-mode reviewed`。v2 使用通用 renderer 和实测图表，原 L1 research profile 仅用于显式重放旧稿。`supporting/` 中的上游图表/段落按 `MATERIALS.md` 交给第 4 部分整合，不会自动拼入正文。
 
 **队友已经交付正文时，可用一条命令离线复现完整论文，无需 Key 或模型配置：**
 
 ```powershell
-python jiuwenswarm/research-paper-generator/scripts/write_paper.py --content-json jiuwenswarm/research-paper-generator/examples/memory-research.content.json --output output/memory-paper-offline --compile
+python jiuwenswarm/research-paper-generator/scripts/write_paper.py --brief jiuwenswarm/research-paper-generator/examples/memory-research.brief.json --content-json jiuwenswarm/research-paper-generator/examples/memory-research.content.json --output output/memory-paper-offline --compile
 ```
 
 该命令仍会生成新框架、校验原始实验、重算指标、生成图表与 BibTeX、编译并检查 PDF，但不调用文本或图像 API。`--content-json` 与 `--config` 互斥，也不能同时指定 `--model`、`--env-file`、`--generate-methodology`、`--resume-from`；可搭配经过审阅的 `--methodology-image`、`--related-work`。正文必须与传入 brief 的章节 ID 和文献映射匹配。

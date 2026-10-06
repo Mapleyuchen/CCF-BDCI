@@ -12,6 +12,7 @@ import time
 from paper_framework.citations import bibliography
 from paper_framework.compiler import compile_project
 from paper_framework.evidence import evidence_path
+from paper_framework.materials import verify_materials, copy_materials
 from paper_quality.checker import check_project
 from .evidence import load_evidence, metric_catalog, read_json, sha256
 from .figures import figure_tex, make_figures, table_tex
@@ -46,6 +47,7 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
         raise ValueError("Research assets require the audited jiuwenswarm_l1_v1 method specification")
     citations = read_json(framework / "citation_map.json")
     results = load_evidence(outline, framework)
+    verify_materials(outline, framework)
     metrics = metric_catalog(results)
     illustrations = None
     if illustration_manifest:
@@ -73,7 +75,7 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
     files = ["paper.tex", "outline.json", "brief.input.json", "citation_map.json", "manifest.json",
              "iclr2027_conference.sty", "iclr2027_conference.bst", "natbib.sty", "fancyhdr.sty"]
     files += [section["file"] for section in outline["sections"]]
-    files += [name for name in ("HANDOFF.md", "research_plan.json", "RESEARCH_HANDOFF.md")
+    files += [name for name in ("HANDOFF.md", "research_plan.json", "RESEARCH_HANDOFF.md", "MATERIALS.md")
               if (framework / name).is_file()]
     for relative in files:
         if not inside(framework, relative).is_file():
@@ -85,6 +87,7 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
               "calls": [], "validation_errors": [], "figures": [],
               "writing_mode": "offline" if content_json else writing_mode}
     try:
+        copy_materials(outline, output, output, framework)
         for relative in files:
             target = inside(output, relative)
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -137,6 +140,7 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
             finally:
                 model.config["request"] = original_request
         allowed_names = [r["model_name"] for r in results]
+        allowed_names += [name for r in results for name in r.get("group_labels", {}).values()]
         # A bounded repair call corrects schema/tokens, not measured data.
         for attempt in range(2):
             if override is not None and isinstance(content.get("sections"), list):

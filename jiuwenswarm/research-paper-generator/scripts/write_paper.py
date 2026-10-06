@@ -12,7 +12,8 @@ from paper_framework.project import generate_project
 def main():
     module = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
-    revised_brief = module / "examples/memory-eval-v2.brief.json"
+    curated_brief = module / "examples/memory-eval-v2.paper-brief.json"
+    revised_brief = curated_brief if curated_brief.is_file() else module / "examples/memory-eval-v2.brief.json"
     default_brief = revised_brief if revised_brief.is_file() else module / "examples/memory-research.brief.json"
     parser.add_argument("--brief", type=Path, default=default_brief,
                         help="Prefer the completed v2 experimental handoff when present; explicit --brief replays older studies")
