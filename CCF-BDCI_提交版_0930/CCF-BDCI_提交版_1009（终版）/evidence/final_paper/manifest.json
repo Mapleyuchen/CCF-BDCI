@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "paper_content_draft",
+  "ready_for_submission": false,
+  "inputs": {
+    "brief": {
+      "filename": "memory-research.brief.json",
+      "sha256": "50d0aa3304a836cdc4962655619742f94c1b0a0c91e8bd0df82b664af8381b07"
+    },
+    "literature": {
+      "filename": "memory-research.literature.json",
+      "sha256": "8af18f39d8c0d7e6f598892caaa65389bb3ad9be1289b67cd0cd5bc4a051a4ea"
+    }
+  },
+  "style_sha256": {
+    "iclr2027_conference.sty": "8b95c366961d2a59db1dce332e20f8d721febb37c4ed2c030b651b2f531432ae",
+    "iclr2027_conference.bst": "197ad2cfb04152d92ac4574404bff746017fb5035b7ca93a970c8dc52fd25865",
+    "fancyhdr.sty": "b2fe599152ac8018b4fb9fd15d23a2a4333edc43b6289200afa3199b13048f54",
+    "natbib.sty": "086e8f22ceb634025a3a48a423b1cd4a9417ab00243f520c02a77f97c263ee2c"
+  },
+  "warnings": [],
+  "human_review_required": true,
+  "content_generator": "reviewed_research_v2"
+}

@@ -1,0 +1,30 @@
+{
+  "offline_replay_succeeded": true,
+  "compared_files": [
+    "paper.tex",
+    "appendix.tex",
+    "references.bib",
+    "sections\\abstract.tex",
+    "sections\\conclusion.tex",
+    "sections\\discussion.tex",
+    "sections\\experiments.tex",
+    "sections\\introduction.tex",
+    "sections\\method.tex",
+    "sections\\related_work.tex",
+    "sections\\results.tex",
+    "figures/methodology.png",
+    "figures/quality_cost_overview.png",
+    "figures/question_audit.png"
+  ],
+  "mismatches": [],
+  "image_task_recovery_succeeded": true,
+  "api_call_created_new_image": false,
+  "tests_passed": 58,
+  "quality": {
+    "passed": 75,
+    "errors": 0,
+    "warnings": 0,
+    "info": 0
+  },
+  "source_commit": "c92aa710aed3678867e535d68cd4274b826adc0c"
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "status": "completed",
+  "human_review_required": true,
+  "source_framework": "D:\\同济大四\\数据挖掘\\CCF BDCI\\CCF-BDCI_提交版_0930\\CCF-BDCI_提交版_1009\\CCF-BDCI_runs\\ctls-framework-test",
+  "source_outline_sha256": "0ee77afcb11d5afedf77dd1de61d966354166b49fed199c7ef9c3d644c7ead5d",
+  "calls": [],
+  "validation_errors": [],
+  "figures": [
+    "methodology.png",
+    "quality_cost_overview.pdf",
+    "quality_cost_overview.png",
+    "quality_cost_overview.svg",
+    "question_audit.pdf",
+    "question_audit.png",
+    "question_audit.svg"
+  ],
+  "writing_mode": "offline",
+  "content_input_sha256": "5275d2923e466721f828827417dd90e647af04e18171f9c5df47b0f5b8e68882",
+  "content_input_path": "D:\\同济大四\\数据挖掘\\CCF BDCI\\CCF-BDCI_提交版_0930\\CCF-BDCI_提交版_1009\\CCF-BDCI_runs\\ctls-content-adapted.json",
+  "methodology_image_sha256": "7c33aabf738bc3b56cbc464a1ac347ff47949a41ae84649adcb9732e25915f05",
+  "editorial_checks": {
+    "prose_words": 3697,
+    "reference_count": 6,
+    "method_equations": 3,
+    "question_level_appendix": true,
+    "research_validity_requires_human_review": true
+  },
+  "quality": {
+    "passed": 78,
+    "errors": 0,
+    "warnings": 0,
+    "info": 0
+  },
+  "mechanical_checks_passed": true,
+  "elapsed_seconds": 9.062,
+  "new_text_calls": 0,
+  "new_text_tokens": 0
+}

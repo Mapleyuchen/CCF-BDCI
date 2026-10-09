@@ -1,0 +1,99 @@
+\section{Mechanism: Why the Temporal Term Shifts Ranking}
+
+\label{sec:mechanism}
+
+A negative result is only useful if it comes with an explanation, and the controlled
+design permits one because the score is inspectable. This section explains why the
+deployed hybrid loses to a lexical baseline, using the recorded score decomposition
+rather than a post-hoc narrative. The analysis describes the existing scoring function;
+it does not propose a tuned replacement, and the illustrative case below follows a
+disclosed deterministic selection rule rather than being chosen to support the
+argument.
+
+\subsection{The pairwise condition}
+
+\label{sec:mech_condition}
+
+In the replay protocol the memory timestamps are the original conversation timestamps
+and the reference clock is the question date. Frequency and importance are fixed in
+the controlled comparison, so pairwise order under the deployed hybrid is determined by
+
+\begin{equation}
+  S_i = 0.4\,J(q,m_i) + 0.3\,D_i + C,
+  \label{eq:mech_score}
+\end{equation}
+
+where $J$ is lexical Jaccard similarity, $D$ is the implemented temporal decay, and $C$
+collects the constant frequency and importance contributions. A relevant older record
+outranks a fresher record precisely when
+
+\begin{equation}
+  0.4\,(J_{\mathrm{old}} - J_{\mathrm{fresh}})
+  \;>\; 0.3\,(D_{\mathrm{fresh}} - D_{\mathrm{old}}).
+  \label{eq:mech_ineq}
+\end{equation}
+
+Equation~\ref{eq:mech_ineq} is the whole mechanism in one line. The left side is the
+lexical advantage of the older, more relevant record; the right side is the freshness
+advantage of the newer, less relevant record. Because the temporal term is
+query-independent, the right side does not depend on what is being asked. The deployed
+weights make the comparison acute: with $w_s=0.4$ and $w_t=0.3$, a record must be more
+than roughly three-quarters again as lexically similar as its fresher competitor before
+its relevance advantage can be expected to dominate a full-range freshness gap. When
+decay is close to saturated, $D_{\mathrm{fresh}}-D_{\mathrm{old}}$ can approach $0.3$
+in weighted units while the lexical gap is bounded by $0.4$ in the best case and is
+typically much smaller, since Jaccard overlap between a short question and a long
+segment is low for every candidate.
+
+\subsection{Consequences for the bank}
+
+\label{sec:mech_consequences}
+
+Three consequences follow, and all three are visible in the recorded data. First, the
+deficit should be largest where the query is lexically specific and the relevant fact is
+old, which is the single-session-user stratum; that is where the measured gap is widest,
+with BM25 at 100.0\% and the hybrid at 11.1\%. Second, removing only the temporal term
+should recover most of the loss while leaving everything else intact, and it does:
+hybrid minus hybrid\_no\_time is $-24.2$, $-27.0$ and $-33.3$ points at the three
+budgets, with Holm-adjusted $p\le 0.0022$ throughout. Third, the evidence-hit rate
+should fall with the accuracy rate, because the items displaced from the prompt are
+exactly the relevant older ones; that is what the 18.1\% against 75.0\% comparison at
+512 tokens shows.
+
+The mechanism also explains the shape of the budget trend. One might expect extra
+budget to rescue the hybrid, but it does not, because the temporal term reorders the
+candidate list at every budget rather than merely truncating it. Adding tokens lets the
+hybrid include more items, and the items it prefers to include are still the fresher
+ones. The absolute accuracy therefore stays near 33--37\% at all three budgets while
+BM25 stays near 66--71\%.
+
+\FloatBarrier
+
+\subsection{A recorded illustrative case}
+
+\label{sec:mech_case}
+
+The recorded cases use a deterministic example-selection rule and do not add
+independent evidence to the paired tests; they exist to show the mechanism operating on
+real records rather than on a constructed example. The pattern they illustrate is one in
+which a question's gold evidence lies in an older session while a newer session shares
+surface vocabulary with the question, so lexical similarity and recency point at
+different records. Under Equation~\ref{eq:mech_ineq} the newer record wins the
+comparison even though it does not contain the answer, the delivered context omits the
+gold evidence, and the resulting answer is incorrect. Removing the temporal term, or
+replacing Jaccard with BM25, changes which record is selected and which evidence reaches
+the prompt, which is why the same candidate bank yields different accuracy under
+different ordering rules. The appendix lists the recorded cases with their session
+identifiers so that the selection can be checked against the raw records.
+
+It is worth being explicit about what this explanation does not establish. Equation
+~\ref{eq:mech_ineq} is an account of the existing score, not a claim that the weights
+were badly chosen in some objective sense; the weights are the implementation's
+defaults and were not fitted on the evaluation questions. The replay uses original source
+timestamps and the question date rather than assigning a common ingestion timestamp, and
+bulk ingestion that stamps every record with the same time is a different scenario that
+this experiment does not evaluate. Frequency and importance are held fixed, so the
+analysis isolates the interaction of lexical relevance and temporal decay rather than the
+full four-term score.
+
+\FloatBarrier

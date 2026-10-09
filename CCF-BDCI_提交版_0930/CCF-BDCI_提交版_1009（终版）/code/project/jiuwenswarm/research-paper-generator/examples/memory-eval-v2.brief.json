@@ -1,0 +1,663 @@
+{
+  "schema_version": 1,
+  "anonymous": true,
+  "methods": [
+    {
+      "id": "baseline",
+      "title": "Frozen Memory and Matched Token Packing",
+      "citation_ids": [],
+      "description": "Full source histories are retained in a read-only single-layer bank, segmented losslessly into at most 256 pinned Qwen3 BPE tokens per turn segment. All selectors use the same source records, timestamps, metadata, memory wrapper and whole-item first-fit overflow policy under 512/1024/2048 tokens. This removes the pilot's extra file path formatting penalty. The controlled full-history bank is distinct from the legacy production Rail's 20-entry L1 capacity."
+    },
+    {
+      "id": "retrieval",
+      "title": "Stronger Selectors and Isolated Controls",
+      "citation_ids": [
+        "memgpt"
+      ],
+      "description": "Compare prefix, recency, lexical Jaccard, BM25 and existing hybrid. BM25 uses k1=1.2, b=0.75, positive idf. Remove only the weighted temporal contribution for selection ablation. Frequency is fixed at zero and importance at 0.5, so hybrid_no_time and Jaccard provide a sanity equivalence check. Representation changes only deterministic raw versus ACK exchange formatting in the adapted 20-item micro workload. Real EnhancedMemoryRail model-ACK acquisition is followed by canonicalization to exactly identical source records and solver prompts, isolating write-path overhead rather than learned extraction quality. No new algorithm or L2/L3 behavior is claimed."
+    },
+    {
+      "id": "protocol",
+      "title": "Repeated Real Agent Evaluation and Memory Reuse",
+      "citation_ids": [
+        "longmemeval"
+      ],
+      "description": "The 84-question stratified LongMemEval-S subset spans six question types plus abstention, with three actual solver calls per question/arm/budget and isolated conversation IDs. Full 500-history retrieval is separate from QA. Real DeepAgents use qwen-plus-2025-12-01, temperature zero, no tools, and one iteration. The pinned official task-specific grading prompts use qwen3-max-2026-01-23, with a second fixed-model audit and pending blinded human adjudication. Average repeats within each memory episode; stratified cluster bootstrap and paired cluster sign-flip tests with Holm correction. Eight synthetic banks each serve twenty distinct questions after a single build; actual query prefixes measure write amortization. Query wall time includes rate-gate waiting and excludes preprocessing; call latency and queue waiting are logged separately."
+    }
+  ],
+  "source_notes": {
+    "memgpt": "Verified arXiv abstract: virtual context management inspired by operating-system hierarchies moves information across memory tiers; demonstrations include document analysis and multi-session chat. Our fixed L1 Rail does not implement its autonomous virtual-memory controller.",
+    "longmemeval": "Verified author paper/repository: LongMemEval evaluates extraction, multi-session reasoning, temporal reasoning, updates and abstention, separating indexing, retrieval and reading. Our pinned cleaned S source is retained in full; QA is a fixed-hash balanced 84-question subset, while retrieval uses all 500 histories. Segmented records and a substituted Qwen judge are explicit deviations, not an official score.",
+    "generative_agents": "Verified arXiv abstract: natural-language experience records are synthesized into reflections and dynamically retrieved for planning behavior in an interactive simulation. This study neither implements reflection/planning nor tests social behavior; distinguish record retrieval from that broader architecture.",
+    "lost_middle": "Verified arXiv abstract: relevant information position affects multi-document QA and key-value retrieval in long contexts, with middle positions often harder. This motivates attention to information access but does not establish that our observed prefix truncation is caused by the same phenomenon.",
+    "memorybank": "Verified arXiv abstract: MemoryBank supports retrieval and updates for sustained personalized interaction, with forgetting and reinforcement influenced by elapsed time and importance. Our temporal ranking is a simple heuristic, not a replication of MemoryBank or its companionship evaluation.",
+    "amem": "Verified arXiv abstract: A-MEM creates structured notes and dynamically links and evolves memories, inspired by Zettelkasten organization. Our fixed lexical ranking lacks autonomous linking and evolution; no empirical comparison to A-MEM was run."
+  },
+  "title": "Evaluating Memory Retrieval: Evidence Quality and Lifecycle Cost",
+  "research_question": "Under matched token budgets and controlled memory representations, how do selection and construction affect answer quality and lifecycle cost across repeated queries?",
+  "research_questions": [
+    {
+      "id": "quality",
+      "title": "Quality under Matched Budgets",
+      "question": "How does answer and evidence quality compare against stronger baselines with identical representations, formatting and token accounting?"
+    },
+    {
+      "id": "attribution",
+      "title": "Attributing Component Effects",
+      "question": "Which differences remain when selection, representation and construction are varied separately?"
+    },
+    {
+      "id": "lifecycle",
+      "title": "Lifecycle Cost under Memory Reuse",
+      "question": "How does measured write-plus-query cost change when a constructed memory serves multiple distinct queries?"
+    }
+  ],
+  "writing_notes": [
+    "Completed v2 experimental evidence is supplied, but human scoring review remains required. Do not claim a guaranteed reviewer-score improvement or scientific approval.",
+    "Use the general content renderer with the controlled_memory_eval_live adapter. Do not use the legacy jiuwenswarm_l1_v1 research profile's character-budget equations or diagrams.",
+    "Lead with the token-matched BM25 comparison, including negative or inconclusive differences. Pilot character-budget results belong in historical limitations, not as principal evidence of retrieval quality.",
+    "Fair-baselines and protocol-replication use the same 84 questions at different budgets; repeated calls and budgets are not independent tasks. Full 500-history retrieval is not 500-question answer accuracy.",
+    "Selection, representation and construction controls have different scopes. Representation/construction micro data cannot establish causal gains on the full-history workload.",
+    "Eight synthetic banks share templates. Reuse curves are measured distinct-query prefixes, not evidence for long-term natural memory generalization.",
+    "The production EnhancedMemoryRail still has 20 L1 entries. The frozen full-history bank does not demonstrate production persistence, multi-layer memory or team synchronization.",
+    "Figures and tables are generated from actual traced data. Report semantically judged accuracy, evidence-session hit definition, memory-cluster intervals and corrected tests without inventing algorithm novelty."
+  ],
+  "experiments": [
+    {
+      "id": "fair_baselines",
+      "title": "Token-Matched Baselines and Shared Representation",
+      "status": "completed",
+      "purpose": "comparison",
+      "research_question_ids": [
+        "quality"
+      ],
+      "metrics": [
+        "semantic answer accuracy",
+        "evidence-session recall",
+        "annotated-turn recall (any fragment)",
+        "annotated-turn character coverage",
+        "complete annotated-turn coverage",
+        "write-plus-query tokens",
+        "query latency including scheduling"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            1024
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218; tokenizer.json SHA256=aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        "dataset": {
+          "name": "LongMemEval-S full history subset",
+          "split": "Predeclared evaluation",
+          "version": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+          "sample_size": 84,
+          "adaptation": "Full history source is retained. QA is a balanced subset and uses a substituted Qwen judge. Micro and synthetic reuse remain separate mechanism/cost controls; see experiment evidence limitations."
+        },
+        "baselines": [
+          "Identical canonical memory items with prefix selection",
+          "Identical canonical memory items with recency selection",
+          "Identical canonical memory items with lexical Jaccard selection",
+          "Identical canonical memory items with BM25 selection",
+          "Identical canonical memory items with current hybrid selection"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path"
+        ],
+        "changed_variables": [
+          "selector"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Mean of repeated generations per memory, then stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction over all prespecified full/micro comparisons."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Verify equal candidate item hashes, wrapper and token limits across all arms; report actual token utilization."
+      ],
+      "result_path": "../../experiments/results/memory_eval_v2/report/paper_exports/full_1024_hybrid-bm25.json",
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed."
+      ]
+    },
+    {
+      "id": "selection_ablation",
+      "title": "Selection Ablation with Fixed Memory Items",
+      "status": "completed",
+      "purpose": "ablation",
+      "research_question_ids": [
+        "attribution"
+      ],
+      "metrics": [
+        "semantic answer accuracy",
+        "evidence-session recall",
+        "annotated-turn recall (any fragment)",
+        "annotated-turn character coverage",
+        "complete annotated-turn coverage",
+        "write-plus-query tokens",
+        "query latency including scheduling"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            1024
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218; tokenizer.json SHA256=aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        "dataset": {
+          "name": "LongMemEval-S full history subset",
+          "split": "Predeclared evaluation",
+          "version": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+          "sample_size": 84,
+          "adaptation": "Full history source is retained. QA is a balanced subset and uses a substituted Qwen judge. Micro and synthetic reuse remain separate mechanism/cost controls; see experiment evidence limitations."
+        },
+        "baselines": [
+          "Full current hybrid ranker",
+          "Hybrid ranker with the recency contribution removed; other terms unchanged"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path"
+        ],
+        "changed_variables": [
+          "recency_contribution"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Mean of repeated generations per memory, then stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction over all prespecified full/micro comparisons."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Freeze memory age and access state before every paired ranking; log score components. Add other component removals as separate experiments."
+      ],
+      "result_path": "../../experiments/results/memory_eval_v2/report/paper_exports/full_1024_hybrid-hybrid_no_time.json",
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed."
+      ]
+    },
+    {
+      "id": "representation_ablation",
+      "title": "Representation Ablation with Fixed Selection",
+      "status": "completed",
+      "purpose": "ablation",
+      "research_question_ids": [
+        "attribution"
+      ],
+      "metrics": [
+        "semantic answer accuracy",
+        "required fact-item recall",
+        "write-plus-query tokens",
+        "query latency including scheduling"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            1024
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218; tokenizer.json SHA256=aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        "dataset": {
+          "name": "Adapted 20-item micro workload",
+          "split": "Predeclared evaluation",
+          "version": "af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
+          "sample_size": 20,
+          "adaptation": "Full history source is retained. QA is a balanced subset and uses a substituted Qwen judge. Micro and synthetic reuse remain separate mechanism/cost controls; see experiment evidence limitations."
+        },
+        "baselines": [
+          "Raw canonical facts",
+          "Stored exchange text reconstructed offline from the same facts; no new model-backed write calls"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path",
+          "source_facts",
+          "selector"
+        ],
+        "changed_variables": [
+          "representation"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Mean of repeated generations per memory, then stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction over all prespecified full/micro comparisons."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Preserve source fact IDs and representation hashes; report how serialization changes packing and evidence availability."
+      ],
+      "result_path": "../../experiments/results/memory_eval_v2/report/paper_exports/micro_1024_hybrid_exchange-hybrid_raw.json",
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed.",
+        "The selector algorithm is fixed, but exchange formatting changes lexical features and token packing. This intervention does not isolate packing alone."
+      ]
+    },
+    {
+      "id": "construction_ablation",
+      "title": "Construction Cost with Matched Memory Content",
+      "status": "completed",
+      "purpose": "ablation",
+      "research_question_ids": [
+        "attribution",
+        "lifecycle"
+      ],
+      "metrics": [
+        "semantic answer accuracy",
+        "required fact-item recall",
+        "write-plus-query tokens",
+        "query latency including scheduling"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            1024
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218; tokenizer.json SHA256=aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        "dataset": {
+          "name": "Adapted 20-item micro workload",
+          "split": "Predeclared evaluation",
+          "version": "af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
+          "sample_size": 20,
+          "adaptation": "Full history source is retained. QA is a balanced subset and uses a substituted Qwen judge. Micro and synthetic reuse remain separate mechanism/cost controls; see experiment evidence limitations."
+        },
+        "baselines": [
+          "Direct insertion of a frozen canonical memory",
+          "Model-backed acquisition followed by the same canonical representation; verify identical content before comparison"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "selector"
+        ],
+        "changed_variables": [
+          "write_path"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Mean of repeated generations per memory, then stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction over all prespecified full/micro comparisons."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "If canonical content hashes differ, exclude the pair from construction-only attribution and report the mismatch; do not silently relabel it as controlled."
+      ],
+      "result_path": "../../experiments/results/memory_eval_v2/report/paper_exports/micro_1024_hybrid_model_ack-hybrid_raw.json",
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed."
+      ]
+    },
+    {
+      "id": "memory_reuse",
+      "title": "Amortized Cost across Distinct Queries",
+      "status": "completed",
+      "purpose": "amortization",
+      "research_question_ids": [
+        "lifecycle"
+      ],
+      "metrics": [
+        "semantic answer accuracy",
+        "required fact-item recall",
+        "write-plus-query tokens",
+        "query latency including scheduling"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            512
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218; tokenizer.json SHA256=aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        "dataset": {
+          "name": "Synthetic entity/value variants",
+          "split": "Predeclared evaluation",
+          "version": "d1db63c6266134ca54c28eb56762e75f35be8083ee8ab1babdecb7891ee636e8",
+          "sample_size": 8,
+          "adaptation": "Full history source is retained. QA is a balanced subset and uses a substituted Qwen judge. Micro and synthetic reuse remain separate mechanism/cost controls; see experiment evidence limitations."
+        },
+        "baselines": [
+          "Hybrid with direct canonical insertion",
+          "Hybrid with real model-ACK acquisition and identical canonical read content"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "selector"
+        ],
+        "changed_variables": [
+          "write_path",
+          "observed_distinct_query_prefix_length"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Mean of repeated generations per memory, then stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction over all prespecified full/micro comparisons."
+        },
+        "reuse": {
+          "queries_per_memory": [
+            1,
+            5,
+            10,
+            20
+          ],
+          "construction_cost_policy": "Measure one construction per memory instance and count it once: total = write + sum(query); per-query = total / query count. Freeze query-side mutation. Report failures and all usage; distinguish observed totals from extrapolation."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Provide memory_instance_id and the exact distinct query sequence. Repeating isolated single-query pilot runs does not satisfy memory reuse."
+      ],
+      "result_path": "../../experiments/results/memory_eval_v2/report/paper_exports/reuse_512_hybrid_model_ack-hybrid_raw.json",
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed."
+      ]
+    },
+    {
+      "id": "protocol_replication",
+      "title": "Repeated Runs, Scoring Audit and Benchmark Alignment",
+      "status": "completed",
+      "purpose": "replication",
+      "research_question_ids": [
+        "quality"
+      ],
+      "metrics": [
+        "semantic answer accuracy",
+        "evidence-session recall",
+        "annotated-turn recall (any fragment)",
+        "annotated-turn character coverage",
+        "complete annotated-turn coverage",
+        "write-plus-query tokens",
+        "query latency including scheduling"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            2048
+          ],
+          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
+          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218; tokenizer.json SHA256=aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        "dataset": {
+          "name": "LongMemEval-S full history subset",
+          "split": "Predeclared evaluation",
+          "version": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+          "sample_size": 84,
+          "adaptation": "Full history source is retained. QA is a balanced subset and uses a substituted Qwen judge. Micro and synthetic reuse remain separate mechanism/cost controls; see experiment evidence limitations."
+        },
+        "baselines": [
+          "Identical canonical memory items with prefix selection",
+          "Identical canonical memory items with recency selection",
+          "Identical canonical memory items with lexical Jaccard selection",
+          "Identical canonical memory items with BM25 selection",
+          "Identical canonical memory items with current hybrid selection"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path"
+        ],
+        "changed_variables": [
+          "selector"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23; secondary audit qwen-plus-2025-12-01.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc; scorer SHA256=ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "review": "966 distinct responses audited; 239 model disagreements now have member-5 boolean decisions. The remaining sampled agreements are still unreviewed. Main results retain the predeclared primary judge and were not recomputed from these decisions."
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Mean of repeated generations per memory, then stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction over all prespecified full/micro comparisons."
+        }
+      },
+      "evidence_requirements": [
+        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
+        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
+        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
+        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
+        "Pin and verify benchmark data, protocol, scorer and selected task categories before running. Preserve question-level paired outcomes across repeats."
+      ],
+      "result_path": "../../experiments/results/memory_eval_v2/report/paper_exports/full_2048_hybrid-bm25.json",
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed."
+      ]
+    }
+  ],
+  "review_concerns": [
+    {
+      "id": "fairness",
+      "title": "Weak Baseline and Budget Confounding",
+      "description": "Match token accounting, representation and formatting; compare against stronger selectors before attributing gains to retrieval.",
+      "experiment_ids": [
+        "fair_baselines"
+      ]
+    },
+    {
+      "id": "attribution",
+      "title": "Construction, Representation and Selection Confounds",
+      "description": "Change one component per ablation and preserve control traces; budget sensitivity alone is not a component ablation.",
+      "experiment_ids": [
+        "selection_ablation",
+        "representation_ablation",
+        "construction_ablation"
+      ]
+    },
+    {
+      "id": "amortization",
+      "title": "Unmeasured Memory Reuse",
+      "description": "Measure multiple distinct queries against one built memory and count construction once.",
+      "experiment_ids": [
+        "memory_reuse"
+      ]
+    },
+    {
+      "id": "robustness",
+      "title": "Small Single-Run Sample and Scoring Limitations",
+      "description": "Predeclare a broader evaluation, repeat runs, review scoring, account for dependence and verify benchmark protocol alignment.",
+      "experiment_ids": [
+        "protocol_replication"
+      ]
+    },
+    {
+      "id": "contribution",
+      "title": "Limited Algorithmic Novelty",
+      "description": "Scope the contribution as a controlled and reproducible lifecycle-cost study. Better prose does not create a new retrieval algorithm, and these experiments do not guarantee acceptance.",
+      "experiment_ids": [
+        "fair_baselines",
+        "construction_ablation",
+        "memory_reuse"
+      ]
+    }
+  ]
+}

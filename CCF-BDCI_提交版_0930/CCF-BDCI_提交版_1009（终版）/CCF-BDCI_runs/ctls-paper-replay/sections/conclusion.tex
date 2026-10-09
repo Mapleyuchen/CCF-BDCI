@@ -1,0 +1,9 @@
+\section{Conclusion}
+
+\label{sec:conclusion}
+
+The deployed hybrid selector is outperformed by BM25 by -36.1111 percentage points, -29.3651 percentage points, and -33.7302 percentage points at the three evaluated token budgets, all surviving Holm correction. The temporal dominance condition explains this: a fixed query-independent freshness weight can outweigh a positive lexical relevance advantage, displacing relevant older records in the ranking.
+
+CTLS (Contrastive Tier-Based Lexical Selection) addresses this failure by construction. By partitioning candidates into a lexically relevant tier and a lexically absent tier before applying any temporal scoring, CTLS provably eliminates temporal dominance: no zero-overlap item can outrank a positive-overlap item regardless of freshness gap or weight values. The hybrid\_no\_time ablation, which recovers most of the deficit empirically, is the theoretical limit case of CTLS on queries where all candidates have positive overlap. CTLS generalizes this fix while preserving temporal decay as a within-tier tiebreaker.
+
+The practical contribution is a zero-cost selector substitution backed by a formal Non-Dominance Property. CTLS requires no model calls, no embedding model, and no learned parameters. It leaves construction cost, write amortization, and per-query token counts unchanged. The controlled comparison, mechanism analysis, and formal property together provide the foundation needed to implement and evaluate CTLS as a drop-in replacement for the deployed hybrid.

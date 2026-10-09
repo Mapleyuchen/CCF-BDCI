@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{iclr2027_conference,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+
+\title{CTLS: Contrastive Tier-Based Lexical Selection Eliminates Temporal Dominance in Agent Memory Retrieval}
+\author{Anonymous Authors}
+
+
+\usepackage{placeins}
+\hypersetup{hidelinks}
+\raggedbottom
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.8}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{14pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+\begin{document}
+\maketitle
+% Override the bundled style's submission/acceptance header for this draft.
+\lhead{Research manuscript}
+\begin{abstract}
+\input{sections/abstract.tex}
+\end{abstract}
+
+\input{sections/introduction.tex}
+\input{sections/related_work.tex}
+\input{sections/method.tex}
+\input{sections/experiments.tex}
+\input{sections/results.tex}
+\input{sections/discussion.tex}
+\input{sections/conclusion.tex}
+
+% Remove nocite when real claim-level citations have been inserted.
+
+\bibliographystyle{iclr2027_conference}
+{\small\setlength{\bibsep}{3pt}\bibliography{references}}
+\input{appendix.tex}
+\end{document}

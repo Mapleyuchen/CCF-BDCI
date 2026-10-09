@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "title": "A-MEM: Agentic Memory for LLM Agents",
+      "authors": [
+        "Wujiang Xu",
+        "Zujie Liang",
+        "Kai Mei",
+        "Hang Gao",
+        "Juntao Tan",
+        "Yongfeng Zhang"
+      ],
+      "year": "2025",
+      "arxiv_id": "2502.12110",
+      "doi": null,
+      "url": "https://arxiv.org/abs/2502.12110v11",
+      "journal": "arXiv preprint",
+      "source_ids": [
+        "amem",
+        "arxiv:2502.12110"
+      ],
+      "source_indices": [
+        5
+      ],
+      "verification": "supplied_metadata_not_independently_verified",
+      "id": "arxiv:2502.12110",
+      "cite_key": "ref_1aacba116cbe3c5b"
+    },
+    {
+      "title": "Generative Agents: Interactive Simulacra of Human Behavior",
+      "authors": [
+        "Joon Sung Park",
+        "Joseph C. O'Brien",
+        "Carrie J. Cai",
+        "Meredith Ringel Morris",
+        "Percy Liang",
+        "Michael S. Bernstein"
+      ],
+      "year": "2023",
+      "arxiv_id": "2304.03442",
+      "doi": null,
+      "url": "https://arxiv.org/abs/2304.03442v2",
+      "journal": "arXiv preprint",
+      "source_ids": [
+        "arxiv:2304.03442",
+        "generative_agents"
+      ],
+      "source_indices": [
+        4
+      ],
+      "verification": "supplied_metadata_not_independently_verified",
+      "id": "arxiv:2304.03442",
+      "cite_key": "ref_6e953134a3c04402"
+    },
+    {
+      "title": "MemoryBank: Enhancing Large Language Models with Long-Term Memory",
+      "authors": [
+        "Wanjun Zhong",
+        "Lianghong Guo",
+        "Qiqi Gao",
+        "He Ye",
+        "Yanlin Wang"
+      ],
+      "year": "2023",
+      "arxiv_id": "2305.10250",
+      "doi": null,
+      "url": "https://arxiv.org/abs/2305.10250v3",
+      "journal": "arXiv preprint",
+      "source_ids": [
+        "arxiv:2305.10250",
+        "memorybank"
+      ],
+      "source_indices": [
+        3
+      ],
+      "verification": "supplied_metadata_not_independently_verified",
+      "id": "arxiv:2305.10250",
+      "cite_key": "ref_713e886950406893"
+    },
+    {
+      "title": "MemGPT: Towards LLMs as Operating Systems",
+      "authors": [
+        "Charles Packer",
+        "Sarah Wooders",
+        "Kevin Lin",
+        "Vivian Fang",
+        "Shishir G. Patil",
+        "Ion Stoica",
+        "Joseph E. Gonzalez"
+      ],
+      "year": "2023",
+      "arxiv_id": "2310.08560",
+      "doi": null,
+      "url": "https://arxiv.org/abs/2310.08560v2",
+      "journal": "arXiv preprint",
+      "source_ids": [
+        "arxiv:2310.08560",
+        "memgpt"
+      ],
+      "source_indices": [
+        1
+      ],
+      "verification": "supplied_metadata_not_independently_verified",
+      "id": "arxiv:2310.08560",
+      "cite_key": "ref_959d6858d034c6e1"
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "authors": [
+        "Nelson F. Liu",
+        "Kevin Lin",
+        "John Hewitt",
+        "Ashwin Paranjape",
+        "Michele Bevilacqua",
+        "Fabio Petroni",
+        "Percy Liang"
+      ],
+      "year": "2023",
+      "arxiv_id": "2307.03172",
+      "doi": null,
+      "url": "https://arxiv.org/abs/2307.03172v3",
+      "journal": "arXiv preprint",
+      "source_ids": [
+        "arxiv:2307.03172",
+        "lost_middle"
+      ],
+      "source_indices": [
+        0
+      ],
+      "verification": "supplied_metadata_not_independently_verified",
+      "id": "arxiv:2307.03172",
+      "cite_key": "ref_9dbf664b6954efbc"
+    },
+    {
+      "title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory",
+      "authors": [
+        "Di Wu",
+        "Hongwei Wang",
+        "Wenhao Yu",
+        "Yuwei Zhang",
+        "Kai-Wei Chang",
+        "Dong Yu"
+      ],
+      "year": "2024",
+      "arxiv_id": "2410.10813",
+      "doi": null,
+      "url": "https://arxiv.org/abs/2410.10813v2",
+      "journal": "arXiv preprint",
+      "source_ids": [
+        "arxiv:2410.10813",
+        "longmemeval"
+      ],
+      "source_indices": [
+        2
+      ],
+      "verification": "supplied_metadata_not_independently_verified",
+      "id": "arxiv:2410.10813",
+      "cite_key": "ref_ab2c226739f2f52a"
+    }
+  ],
+  "by_source_id": {
+    "arxiv:2307.03172": "ref_9dbf664b6954efbc",
+    "lost_middle": "ref_9dbf664b6954efbc",
+    "arxiv:2310.08560": "ref_959d6858d034c6e1",
+    "memgpt": "ref_959d6858d034c6e1",
+    "arxiv:2410.10813": "ref_ab2c226739f2f52a",
+    "longmemeval": "ref_ab2c226739f2f52a",
+    "arxiv:2305.10250": "ref_713e886950406893",
+    "memorybank": "ref_713e886950406893",
+    "arxiv:2304.03442": "ref_6e953134a3c04402",
+    "generative_agents": "ref_6e953134a3c04402",
+    "amem": "ref_1aacba116cbe3c5b",
+    "arxiv:2502.12110": "ref_1aacba116cbe3c5b"
+  }
+}

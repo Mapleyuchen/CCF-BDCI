@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "human_review_required": true,
+  "source_framework": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\output\\paper-research-max-v2\\framework",
+  "source_outline_sha256": "85a5fe69a19eaa667420edda8c627122730bec4fb5a212450c9a2efa8821ee61",
+  "calls": [
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 227.282,
+      "http_attempts": 2,
+      "usage": {
+        "prompt_tokens": 14707,
+        "completion_tokens": 5290,
+        "total_tokens": 19997
+      },
+      "stage": "editorial_plan"
+    },
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 493.468,
+      "http_attempts": 3,
+      "usage": {
+        "prompt_tokens": 19770,
+        "completion_tokens": 6314,
+        "total_tokens": 26084
+      },
+      "stage": "editorial_draft"
+    }
+  ],
+  "validation_errors": [],
+  "figures": [],
+  "error": "Model API connection failed or timed out"
+}

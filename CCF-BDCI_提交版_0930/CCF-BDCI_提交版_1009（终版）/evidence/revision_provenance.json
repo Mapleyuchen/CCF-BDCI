@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "revision_provenance",
+  "revision_date": "2026-10-09",
+  "source_commit": "e0fa45cfa18d6a71a6bcd90c4a22592fc1e4adbb",
+  "candidate_pdf": "paper/paper.pdf",
+  "candidate_pdf_sha256": "94a9e439c9eccbfc6e94f350b3780ae3be2f5c5c4ecacaf6836f601dec9a7bd4",
+  "candidate_pdf_pages": 42,
+  "supersedes_pages": 24,
+  "what_changed": [
+    "Synchronised the repository to commit e0fa45c, adding the controlled selector study, its recorded results and its figures.",
+    "Expanded the manuscript from the prior candidate to include the controlled LongMemEval-S selector comparison, the score-level mechanism analysis, component and reuse controls, and grading robustness.",
+    "Recompiled the candidate PDF with local LaTeX; no further model calls were made for the manuscript text.",
+    "Added CTLS (Contrastive Tier-Based Lexical Selection) as a novel selector with formal Non-Dominance Property theorem.",
+    "Corrected Non-Dominance Theorem to precisely state priority-ordering guarantee under greedy packing (tier-0 items receive insertion attempt before any tier-1 item; a skipped tier-0 item is not displaced).",
+    "Added CTLS conservative lower-bound experimental evaluation across three token budgets (512/1024/2048): 77.0%/77.4%/79.8% accuracy, +8.3/+11.5/+9.1 pp over BM25.",
+    "Added sensitivity analysis for Jaccard gate threshold (theta=0 default vs 0.05 vs 0.10).",
+    "Extended related work temporal dynamics section with hard-gate vs soft-scoring distinction and Re3 retrospective retrieval citation.",
+    "Expanded result tables to four columns (BM25, Hybrid, HNT, CTLS) and added appendix outcome summary with all four selectors.",
+    "Regenerated selector_comparison figure with all four selectors across three budgets."
+  ],
+  "manuscript_authorship": "The expanded manuscript was assembled and edited locally from the previously recorded generation output plus the newly recorded controlled experiment. It is not the output of a fresh recorded paper-generation run, and no new writing-model calls were billed for this revision.",
+  "related_work_source": "sections/related_work.tex is the author's local implementation and was carried forward unchanged; it was not regenerated.",
+  "controlled_experiment_provenance": "Figures, tables and statistics under code/project/jiuwenswarm/experiments/results/memory_eval_v2 are recorded artifacts of the controlled study. The manuscript reports them without recomputation, including the negative primary comparison.",
+  "stale_records_not_rewritten": [
+    "evidence/final_paper/quality_report.json and evidence/packaging_validation/replay_quality_report.json describe the superseded 11-page candidate.",
+    "evidence/packaging_validation/verification.json records source_commit c92aa71 and the superseded candidate.",
+    "These are retained as historical records of the previous run rather than edited to describe this revision."
+  ],
+  "human_review_required": true,
+  "note": "This record documents a revision of the packaged candidate. It does not assert that the manuscript has passed human claim and citation review."
+}

@@ -1,0 +1,8 @@
+name: ccf-bdci
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - matplotlib>=3.8,<4
+      - PyYAML>=6,<7
+      - python-dotenv>=1,<2

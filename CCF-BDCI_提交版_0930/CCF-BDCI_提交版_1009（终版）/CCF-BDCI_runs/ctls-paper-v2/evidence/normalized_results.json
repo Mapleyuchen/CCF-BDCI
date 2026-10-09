@@ -1,0 +1,2458 @@
+{
+  "schema_version": 1,
+  "results": [
+    {
+      "id": "fair_baselines_512",
+      "title": "CTLS versus Hybrid and BM25 at 512 Tokens",
+      "kind": "controlled_memory_eval_live",
+      "model_name": "qwen-plus-2025-12-01",
+      "dataset_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+      "source_sha256": "c422e0883d4bf72bce4277462950eab92bbd15a15fdf8addd1851d098eda91ab",
+      "context_tokens": 512,
+      "budget_unit": "tokens",
+      "group_labels": {
+        "baseline": "bm25",
+        "enhanced": "hybrid"
+      },
+      "unique_questions": 84,
+      "paired_observations": 252,
+      "repeats": 3,
+      "groups": {
+        "baseline": {
+          "n": 252,
+          "correct": 173,
+          "accuracy": 0.6865079365079365,
+          "accuracy_ci_low": 0.6071428571428571,
+          "accuracy_ci_high": 0.7658730158730158,
+          "evidence_recall": 0.8479166666666667,
+          "query_tokens": 177021,
+          "seed_tokens": 0,
+          "all_tokens": 177021,
+          "tokens_per_question": 702.4642857142857,
+          "tokens_per_correct": 1023.2427745664739,
+          "seed_model_calls": 0,
+          "query_latency_ms": 4380.982338888835,
+          "end_to_end_latency_ms": null,
+          "excluded_records": 0,
+          "failed_records": 0,
+          "memory_clusters": 84,
+          "evidence_turn_recall_any_fragment": 0.6453703703703704,
+          "annotated_evidence_character_coverage": 0.6385517081353097,
+          "all_annotated_evidence_turns_complete": 0.5138888888888888
+        },
+        "enhanced": {
+          "n": 252,
+          "correct": 82,
+          "accuracy": 0.3253968253968254,
+          "accuracy_ci_low": 0.253968253968254,
+          "accuracy_ci_high": 0.40079365079365076,
+          "evidence_recall": 0.22152777777777777,
+          "query_tokens": 166973,
+          "seed_tokens": 0,
+          "all_tokens": 166973,
+          "tokens_per_question": 662.5912698412699,
+          "tokens_per_correct": 2036.2560975609756,
+          "seed_model_calls": 0,
+          "query_latency_ms": 3324.772110714299,
+          "end_to_end_latency_ms": null,
+          "excluded_records": 0,
+          "failed_records": 0,
+          "memory_clusters": 84,
+          "evidence_turn_recall_any_fragment": 0.15208333333333332,
+          "annotated_evidence_character_coverage": 0.156961478713557,
+          "all_annotated_evidence_turns_complete": 0.1111111111111111
+        }
+      },
+      "accuracy_interval": {
+        "method": "stratified memory-cluster bootstrap",
+        "confidence": 0.95,
+        "confidence_percent": 95,
+        "interpretation": "Repeats averaged within each memory episode"
+      },
+      "accuracy_gain_pp": -36.11111111111111,
+      "total_token_ratio": 0.9432383728484192,
+      "cost_per_correct_ratio": 1.9900029085704454,
+      "comparison": {
+        "id": "full:512:hybrid-bm25",
+        "suite": "full",
+        "budget_tokens": 512,
+        "estimate": -0.36111111111111116,
+        "low": -0.46031746031746035,
+        "high": -0.2579365079365079,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap",
+        "left": "hybrid",
+        "right": "bm25",
+        "p_two_sided": 9.999000099990002e-05,
+        "p_holm": 0.0020997900209979003,
+        "primary": true
+      },
+      "protocol": {
+        "protocol_version": "memory-eval-v2.0",
+        "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+        "source_url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+        "source_count": 500,
+        "source_license": "MIT",
+        "dependencies": {
+          "longmemeval_commit": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+          "scorer_url": "https://github.com/xiaowu0162/LongMemEval/blob/9e0b455f4ef0e2ab8f2e582289761153549043fc/src/evaluation/evaluate_qa.py",
+          "scorer_sha256": "ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "tokenizer_repo": "Qwen/Qwen3-8B",
+          "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "tokenizer_files": {
+            "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+            "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+          }
+        },
+        "sampling_seed": 20261006,
+        "per_stratum": 12,
+        "stratified_question_ids": {
+          "single-session-user": [
+            "e01b8e2f",
+            "726462e0",
+            "c960da58",
+            "caf9ead2",
+            "6f9b354f",
+            "1e043500",
+            "311778f1",
+            "001be529",
+            "d52b4f67",
+            "8ebdbe50",
+            "37d43f65",
+            "b320f3f8"
+          ],
+          "single-session-assistant": [
+            "18dcd5a5",
+            "28bcfaac",
+            "1b9b7252",
+            "fca762bc",
+            "488d3006",
+            "dc439ea3",
+            "cc539528",
+            "c4f10528",
+            "65240037",
+            "8cf51dda",
+            "7161e7e2",
+            "e982271f"
+          ],
+          "single-session-preference": [
+            "b0479f84",
+            "afdc33df",
+            "95228167",
+            "0edc2aef",
+            "09d032c9",
+            "1d4e3b97",
+            "54026fce",
+            "1da05512",
+            "06f04340",
+            "d6233ab6",
+            "38146c39",
+            "1c0ddc50"
+          ],
+          "multi-session": [
+            "eeda8a6d",
+            "gpt4_15e38248",
+            "d851d5ba",
+            "gpt4_59c863d7",
+            "3fe836c9",
+            "157a136e",
+            "efc3f7c2",
+            "1192316e",
+            "3a704032",
+            "9aaed6a3",
+            "ba358f49",
+            "c2ac3c61"
+          ],
+          "temporal-reasoning": [
+            "gpt4_8c8961ae",
+            "gpt4_4fc4f797",
+            "gpt4_213fd887",
+            "gpt4_ec93e27f",
+            "gpt4_18c2b244",
+            "gpt4_fa19884d",
+            "2c63a862",
+            "993da5e2",
+            "gpt4_d6585ce8",
+            "6e984301",
+            "gpt4_1d80365e",
+            "gpt4_f420262c"
+          ],
+          "knowledge-update": [
+            "10e09553",
+            "c4ea545c",
+            "5c40ec5b",
+            "5a4f22c0",
+            "72e3ee87",
+            "9bbe84a2",
+            "c6853660",
+            "0f05491a",
+            "6a1eabeb",
+            "d7c942c3",
+            "cc5ded98",
+            "2698e78f"
+          ],
+          "abstention": [
+            "0ddfec37_abs",
+            "bc8a6e93_abs",
+            "19b5f2b3_abs",
+            "ba358f49_abs",
+            "09ba9854_abs",
+            "29f2956b_abs",
+            "6aeb4375_abs",
+            "edced276_abs",
+            "eeda8a6d_abs",
+            "2311e44b_abs",
+            "2133c1b5_abs",
+            "0862e8bf_abs"
+          ]
+        },
+        "question_ids": [
+          "001be529",
+          "06f04340",
+          "0862e8bf_abs",
+          "09ba9854_abs",
+          "09d032c9",
+          "0ddfec37_abs",
+          "0edc2aef",
+          "0f05491a",
+          "10e09553",
+          "1192316e",
+          "157a136e",
+          "18dcd5a5",
+          "19b5f2b3_abs",
+          "1b9b7252",
+          "1c0ddc50",
+          "1d4e3b97",
+          "1da05512",
+          "1e043500",
+          "2133c1b5_abs",
+          "2311e44b_abs",
+          "2698e78f",
+          "28bcfaac",
+          "29f2956b_abs",
+          "2c63a862",
+          "311778f1",
+          "37d43f65",
+          "38146c39",
+          "3a704032",
+          "3fe836c9",
+          "488d3006",
+          "54026fce",
+          "5a4f22c0",
+          "5c40ec5b",
+          "65240037",
+          "6a1eabeb",
+          "6aeb4375_abs",
+          "6e984301",
+          "6f9b354f",
+          "7161e7e2",
+          "726462e0",
+          "72e3ee87",
+          "8cf51dda",
+          "8ebdbe50",
+          "95228167",
+          "993da5e2",
+          "9aaed6a3",
+          "9bbe84a2",
+          "afdc33df",
+          "b0479f84",
+          "b320f3f8",
+          "ba358f49",
+          "ba358f49_abs",
+          "bc8a6e93_abs",
+          "c2ac3c61",
+          "c4ea545c",
+          "c4f10528",
+          "c6853660",
+          "c960da58",
+          "caf9ead2",
+          "cc539528",
+          "cc5ded98",
+          "d52b4f67",
+          "d6233ab6",
+          "d7c942c3",
+          "d851d5ba",
+          "dc439ea3",
+          "e01b8e2f",
+          "e982271f",
+          "edced276_abs",
+          "eeda8a6d",
+          "eeda8a6d_abs",
+          "efc3f7c2",
+          "fca762bc",
+          "gpt4_15e38248",
+          "gpt4_18c2b244",
+          "gpt4_1d80365e",
+          "gpt4_213fd887",
+          "gpt4_4fc4f797",
+          "gpt4_59c863d7",
+          "gpt4_8c8961ae",
+          "gpt4_d6585ce8",
+          "gpt4_ec93e27f",
+          "gpt4_f420262c",
+          "gpt4_fa19884d"
+        ],
+        "budgets": [
+          512,
+          1024,
+          2048
+        ],
+        "repeats": 3,
+        "chunk_body_tokens": 256,
+        "solver_model": "qwen-plus-2025-12-01",
+        "judge_model": "qwen3-max-2026-01-23",
+        "decoding": {
+          "temperature": 0,
+          "max_tokens": 384,
+          "enable_thinking": false
+        },
+        "selectors": [
+          "prefix",
+          "recency",
+          "jaccard",
+          "bm25",
+          "hybrid",
+          "hybrid_no_time"
+        ],
+        "primary_comparison": [
+          "hybrid",
+          "bm25"
+        ],
+        "confidence": 0.95,
+        "bootstrap_seed": 20261007,
+        "bootstrap_resamples": 10000,
+        "protocol_deviations": [
+          "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+          "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+          "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+          "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+          "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+          "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score."
+        ],
+        "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter."
+      },
+      "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter.",
+      "accuracy_difference_ci_low_pp": -46.03174603174603,
+      "accuracy_difference_ci_high_pp": -25.79365079365079,
+      "paired_p_two_sided": 9.999000099990002e-05,
+      "paired_p_holm": 0.0020997900209979003,
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed."
+      ],
+      "observed_cases": [],
+      "paired_outcomes": {},
+      "human_review_required": true
+    },
+    {
+      "id": "fair_baselines",
+      "title": "Primary CTLS versus Hybrid and BM25 at 1024 Tokens",
+      "kind": "controlled_memory_eval_live",
+      "model_name": "qwen-plus-2025-12-01",
+      "dataset_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+      "source_sha256": "3aec9b433317da585a5df4aa1d498c228b50fda8a1cffc9d2ddd25914eef9fa8",
+      "context_tokens": 1024,
+      "budget_unit": "tokens",
+      "group_labels": {
+        "baseline": "bm25",
+        "enhanced": "hybrid"
+      },
+      "unique_questions": 84,
+      "paired_observations": 252,
+      "repeats": 3,
+      "groups": {
+        "baseline": {
+          "n": 252,
+          "correct": 166,
+          "accuracy": 0.6587301587301587,
+          "accuracy_ci_low": 0.5873015873015873,
+          "accuracy_ci_high": 0.7301587301587302,
+          "evidence_recall": 0.8553240740740741,
+          "query_tokens": 308559,
+          "seed_tokens": 0,
+          "all_tokens": 308559,
+          "tokens_per_question": 1224.4404761904761,
+          "tokens_per_correct": 1858.789156626506,
+          "seed_model_calls": 0,
+          "query_latency_ms": 4557.859536904711,
+          "end_to_end_latency_ms": null,
+          "excluded_records": 0,
+          "failed_records": 0,
+          "memory_clusters": 84,
+          "evidence_turn_recall_any_fragment": 0.6886574074074074,
+          "annotated_evidence_character_coverage": 0.685351407264943,
+          "all_annotated_evidence_turns_complete": 0.5694444444444444
+        },
+        "enhanced": {
+          "n": 252,
+          "correct": 92,
+          "accuracy": 0.36507936507936506,
+          "accuracy_ci_low": 0.28968253968253965,
+          "accuracy_ci_high": 0.4444444444444445,
+          "evidence_recall": 0.23472222222222222,
+          "query_tokens": 297801,
+          "seed_tokens": 0,
+          "all_tokens": 297801,
+          "tokens_per_question": 1181.75,
+          "tokens_per_correct": 3236.967391304348,
+          "seed_model_calls": 0,
+          "query_latency_ms": 3750.0681436507484,
+          "end_to_end_latency_ms": null,
+          "excluded_records": 0,
+          "failed_records": 0,
+          "memory_clusters": 84,
+          "evidence_turn_recall_any_fragment": 0.1625,
+          "annotated_evidence_character_coverage": 0.16574697199094557,
+          "all_annotated_evidence_turns_complete": 0.125
+        }
+      },
+      "accuracy_interval": {
+        "method": "stratified memory-cluster bootstrap",
+        "confidence": 0.95,
+        "confidence_percent": 95,
+        "interpretation": "Repeats averaged within each memory episode"
+      },
+      "accuracy_gain_pp": -29.365079365079367,
+      "total_token_ratio": 0.96513470681458,
+      "cost_per_correct_ratio": 1.7414387101219597,
+      "comparison": {
+        "id": "full:1024:hybrid-bm25",
+        "suite": "full",
+        "budget_tokens": 1024,
+        "estimate": -0.2936507936507936,
+        "low": -0.40079365079365087,
+        "high": -0.18253968253968256,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap",
+        "left": "hybrid",
+        "right": "bm25",
+        "p_two_sided": 0.00019998000199980003,
+        "p_holm": 0.0021997800219978004,
+        "primary": true
+      },
+      "protocol": {
+        "protocol_version": "memory-eval-v2.0",
+        "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+        "source_url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+        "source_count": 500,
+        "source_license": "MIT",
+        "dependencies": {
+          "longmemeval_commit": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+          "scorer_url": "https://github.com/xiaowu0162/LongMemEval/blob/9e0b455f4ef0e2ab8f2e582289761153549043fc/src/evaluation/evaluate_qa.py",
+          "scorer_sha256": "ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "tokenizer_repo": "Qwen/Qwen3-8B",
+          "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "tokenizer_files": {
+            "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+            "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+          }
+        },
+        "sampling_seed": 20261006,
+        "per_stratum": 12,
+        "stratified_question_ids": {
+          "single-session-user": [
+            "e01b8e2f",
+            "726462e0",
+            "c960da58",
+            "caf9ead2",
+            "6f9b354f",
+            "1e043500",
+            "311778f1",
+            "001be529",
+            "d52b4f67",
+            "8ebdbe50",
+            "37d43f65",
+            "b320f3f8"
+          ],
+          "single-session-assistant": [
+            "18dcd5a5",
+            "28bcfaac",
+            "1b9b7252",
+            "fca762bc",
+            "488d3006",
+            "dc439ea3",
+            "cc539528",
+            "c4f10528",
+            "65240037",
+            "8cf51dda",
+            "7161e7e2",
+            "e982271f"
+          ],
+          "single-session-preference": [
+            "b0479f84",
+            "afdc33df",
+            "95228167",
+            "0edc2aef",
+            "09d032c9",
+            "1d4e3b97",
+            "54026fce",
+            "1da05512",
+            "06f04340",
+            "d6233ab6",
+            "38146c39",
+            "1c0ddc50"
+          ],
+          "multi-session": [
+            "eeda8a6d",
+            "gpt4_15e38248",
+            "d851d5ba",
+            "gpt4_59c863d7",
+            "3fe836c9",
+            "157a136e",
+            "efc3f7c2",
+            "1192316e",
+            "3a704032",
+            "9aaed6a3",
+            "ba358f49",
+            "c2ac3c61"
+          ],
+          "temporal-reasoning": [
+            "gpt4_8c8961ae",
+            "gpt4_4fc4f797",
+            "gpt4_213fd887",
+            "gpt4_ec93e27f",
+            "gpt4_18c2b244",
+            "gpt4_fa19884d",
+            "2c63a862",
+            "993da5e2",
+            "gpt4_d6585ce8",
+            "6e984301",
+            "gpt4_1d80365e",
+            "gpt4_f420262c"
+          ],
+          "knowledge-update": [
+            "10e09553",
+            "c4ea545c",
+            "5c40ec5b",
+            "5a4f22c0",
+            "72e3ee87",
+            "9bbe84a2",
+            "c6853660",
+            "0f05491a",
+            "6a1eabeb",
+            "d7c942c3",
+            "cc5ded98",
+            "2698e78f"
+          ],
+          "abstention": [
+            "0ddfec37_abs",
+            "bc8a6e93_abs",
+            "19b5f2b3_abs",
+            "ba358f49_abs",
+            "09ba9854_abs",
+            "29f2956b_abs",
+            "6aeb4375_abs",
+            "edced276_abs",
+            "eeda8a6d_abs",
+            "2311e44b_abs",
+            "2133c1b5_abs",
+            "0862e8bf_abs"
+          ]
+        },
+        "question_ids": [
+          "001be529",
+          "06f04340",
+          "0862e8bf_abs",
+          "09ba9854_abs",
+          "09d032c9",
+          "0ddfec37_abs",
+          "0edc2aef",
+          "0f05491a",
+          "10e09553",
+          "1192316e",
+          "157a136e",
+          "18dcd5a5",
+          "19b5f2b3_abs",
+          "1b9b7252",
+          "1c0ddc50",
+          "1d4e3b97",
+          "1da05512",
+          "1e043500",
+          "2133c1b5_abs",
+          "2311e44b_abs",
+          "2698e78f",
+          "28bcfaac",
+          "29f2956b_abs",
+          "2c63a862",
+          "311778f1",
+          "37d43f65",
+          "38146c39",
+          "3a704032",
+          "3fe836c9",
+          "488d3006",
+          "54026fce",
+          "5a4f22c0",
+          "5c40ec5b",
+          "65240037",
+          "6a1eabeb",
+          "6aeb4375_abs",
+          "6e984301",
+          "6f9b354f",
+          "7161e7e2",
+          "726462e0",
+          "72e3ee87",
+          "8cf51dda",
+          "8ebdbe50",
+          "95228167",
+          "993da5e2",
+          "9aaed6a3",
+          "9bbe84a2",
+          "afdc33df",
+          "b0479f84",
+          "b320f3f8",
+          "ba358f49",
+          "ba358f49_abs",
+          "bc8a6e93_abs",
+          "c2ac3c61",
+          "c4ea545c",
+          "c4f10528",
+          "c6853660",
+          "c960da58",
+          "caf9ead2",
+          "cc539528",
+          "cc5ded98",
+          "d52b4f67",
+          "d6233ab6",
+          "d7c942c3",
+          "d851d5ba",
+          "dc439ea3",
+          "e01b8e2f",
+          "e982271f",
+          "edced276_abs",
+          "eeda8a6d",
+          "eeda8a6d_abs",
+          "efc3f7c2",
+          "fca762bc",
+          "gpt4_15e38248",
+          "gpt4_18c2b244",
+          "gpt4_1d80365e",
+          "gpt4_213fd887",
+          "gpt4_4fc4f797",
+          "gpt4_59c863d7",
+          "gpt4_8c8961ae",
+          "gpt4_d6585ce8",
+          "gpt4_ec93e27f",
+          "gpt4_f420262c",
+          "gpt4_fa19884d"
+        ],
+        "budgets": [
+          512,
+          1024,
+          2048
+        ],
+        "repeats": 3,
+        "chunk_body_tokens": 256,
+        "solver_model": "qwen-plus-2025-12-01",
+        "judge_model": "qwen3-max-2026-01-23",
+        "decoding": {
+          "temperature": 0,
+          "max_tokens": 384,
+          "enable_thinking": false
+        },
+        "selectors": [
+          "prefix",
+          "recency",
+          "jaccard",
+          "bm25",
+          "hybrid",
+          "hybrid_no_time"
+        ],
+        "primary_comparison": [
+          "hybrid",
+          "bm25"
+        ],
+        "confidence": 0.95,
+        "bootstrap_seed": 20261007,
+        "bootstrap_resamples": 10000,
+        "protocol_deviations": [
+          "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+          "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+          "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+          "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+          "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+          "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score."
+        ],
+        "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter."
+      },
+      "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter.",
+      "accuracy_difference_ci_low_pp": -40.07936507936509,
+      "accuracy_difference_ci_high_pp": -18.253968253968257,
+      "paired_p_two_sided": 0.00019998000199980003,
+      "paired_p_holm": 0.0021997800219978004,
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed."
+      ],
+      "observed_cases": [],
+      "paired_outcomes": {},
+      "human_review_required": true
+    },
+    {
+      "id": "protocol_replication",
+      "title": "CTLS Robustness at 2048 Tokens",
+      "kind": "controlled_memory_eval_live",
+      "model_name": "qwen-plus-2025-12-01",
+      "dataset_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+      "source_sha256": "fb0d00320a6e2d493bed005710ac681047545e0ea970cacaf3416c7f81616a9b",
+      "context_tokens": 2048,
+      "budget_unit": "tokens",
+      "group_labels": {
+        "baseline": "bm25",
+        "enhanced": "hybrid"
+      },
+      "unique_questions": 84,
+      "paired_observations": 252,
+      "repeats": 3,
+      "groups": {
+        "baseline": {
+          "n": 252,
+          "correct": 178,
+          "accuracy": 0.7063492063492063,
+          "accuracy_ci_low": 0.6309523809523809,
+          "accuracy_ci_high": 0.7817460317460316,
+          "evidence_recall": 0.9085648148148148,
+          "query_tokens": 567226,
+          "seed_tokens": 0,
+          "all_tokens": 567226,
+          "tokens_per_question": 2250.8968253968255,
+          "tokens_per_correct": 3186.6629213483147,
+          "seed_model_calls": 0,
+          "query_latency_ms": 4630.651383730169,
+          "end_to_end_latency_ms": null,
+          "excluded_records": 0,
+          "failed_records": 0,
+          "memory_clusters": 84,
+          "evidence_turn_recall_any_fragment": 0.7219907407407408,
+          "annotated_evidence_character_coverage": 0.7184538784319607,
+          "all_annotated_evidence_turns_complete": 0.5833333333333334
+        },
+        "enhanced": {
+          "n": 252,
+          "correct": 93,
+          "accuracy": 0.36904761904761907,
+          "accuracy_ci_low": 0.2936507936507936,
+          "accuracy_ci_high": 0.4523809523809524,
+          "evidence_recall": 0.25416666666666665,
+          "query_tokens": 558841,
+          "seed_tokens": 0,
+          "all_tokens": 558841,
+          "tokens_per_question": 2217.623015873016,
+          "tokens_per_correct": 6009.043010752688,
+          "seed_model_calls": 0,
+          "query_latency_ms": 4076.182688492061,
+          "end_to_end_latency_ms": null,
+          "excluded_records": 0,
+          "failed_records": 0,
+          "memory_clusters": 84,
+          "evidence_turn_recall_any_fragment": 0.18796296296296297,
+          "annotated_evidence_character_coverage": 0.1905255559828056,
+          "all_annotated_evidence_turns_complete": 0.1527777777777778
+        }
+      },
+      "accuracy_interval": {
+        "method": "stratified memory-cluster bootstrap",
+        "confidence": 0.95,
+        "confidence_percent": 95,
+        "interpretation": "Repeats averaged within each memory episode"
+      },
+      "accuracy_gain_pp": -33.73015873015872,
+      "total_token_ratio": 0.9852175323416064,
+      "cost_per_correct_ratio": 1.8856851694280206,
+      "comparison": {
+        "id": "full:2048:hybrid-bm25",
+        "suite": "full",
+        "budget_tokens": 2048,
+        "estimate": -0.33730158730158727,
+        "low": -0.44047619047619047,
+        "high": -0.23015873015873015,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap",
+        "left": "hybrid",
+        "right": "bm25",
+        "p_two_sided": 9.999000099990002e-05,
+        "p_holm": 0.0020997900209979003,
+        "primary": true
+      },
+      "protocol": {
+        "protocol_version": "memory-eval-v2.0",
+        "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+        "source_url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+        "source_count": 500,
+        "source_license": "MIT",
+        "dependencies": {
+          "longmemeval_commit": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+          "scorer_url": "https://github.com/xiaowu0162/LongMemEval/blob/9e0b455f4ef0e2ab8f2e582289761153549043fc/src/evaluation/evaluate_qa.py",
+          "scorer_sha256": "ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "tokenizer_repo": "Qwen/Qwen3-8B",
+          "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "tokenizer_files": {
+            "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+            "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+          }
+        },
+        "sampling_seed": 20261006,
+        "per_stratum": 12,
+        "stratified_question_ids": {
+          "single-session-user": [
+            "e01b8e2f",
+            "726462e0",
+            "c960da58",
+            "caf9ead2",
+            "6f9b354f",
+            "1e043500",
+            "311778f1",
+            "001be529",
+            "d52b4f67",
+            "8ebdbe50",
+            "37d43f65",
+            "b320f3f8"
+          ],
+          "single-session-assistant": [
+            "18dcd5a5",
+            "28bcfaac",
+            "1b9b7252",
+            "fca762bc",
+            "488d3006",
+            "dc439ea3",
+            "cc539528",
+            "c4f10528",
+            "65240037",
+            "8cf51dda",
+            "7161e7e2",
+            "e982271f"
+          ],
+          "single-session-preference": [
+            "b0479f84",
+            "afdc33df",
+            "95228167",
+            "0edc2aef",
+            "09d032c9",
+            "1d4e3b97",
+            "54026fce",
+            "1da05512",
+            "06f04340",
+            "d6233ab6",
+            "38146c39",
+            "1c0ddc50"
+          ],
+          "multi-session": [
+            "eeda8a6d",
+            "gpt4_15e38248",
+            "d851d5ba",
+            "gpt4_59c863d7",
+            "3fe836c9",
+            "157a136e",
+            "efc3f7c2",
+            "1192316e",
+            "3a704032",
+            "9aaed6a3",
+            "ba358f49",
+            "c2ac3c61"
+          ],
+          "temporal-reasoning": [
+            "gpt4_8c8961ae",
+            "gpt4_4fc4f797",
+            "gpt4_213fd887",
+            "gpt4_ec93e27f",
+            "gpt4_18c2b244",
+            "gpt4_fa19884d",
+            "2c63a862",
+            "993da5e2",
+            "gpt4_d6585ce8",
+            "6e984301",
+            "gpt4_1d80365e",
+            "gpt4_f420262c"
+          ],
+          "knowledge-update": [
+            "10e09553",
+            "c4ea545c",
+            "5c40ec5b",
+            "5a4f22c0",
+            "72e3ee87",
+            "9bbe84a2",
+            "c6853660",
+            "0f05491a",
+            "6a1eabeb",
+            "d7c942c3",
+            "cc5ded98",
+            "2698e78f"
+          ],
+          "abstention": [
+            "0ddfec37_abs",
+            "bc8a6e93_abs",
+            "19b5f2b3_abs",
+            "ba358f49_abs",
+            "09ba9854_abs",
+            "29f2956b_abs",
+            "6aeb4375_abs",
+            "edced276_abs",
+            "eeda8a6d_abs",
+            "2311e44b_abs",
+            "2133c1b5_abs",
+            "0862e8bf_abs"
+          ]
+        },
+        "question_ids": [
+          "001be529",
+          "06f04340",
+          "0862e8bf_abs",
+          "09ba9854_abs",
+          "09d032c9",
+          "0ddfec37_abs",
+          "0edc2aef",
+          "0f05491a",
+          "10e09553",
+          "1192316e",
+          "157a136e",
+          "18dcd5a5",
+          "19b5f2b3_abs",
+          "1b9b7252",
+          "1c0ddc50",
+          "1d4e3b97",
+          "1da05512",
+          "1e043500",
+          "2133c1b5_abs",
+          "2311e44b_abs",
+          "2698e78f",
+          "28bcfaac",
+          "29f2956b_abs",
+          "2c63a862",
+          "311778f1",
+          "37d43f65",
+          "38146c39",
+          "3a704032",
+          "3fe836c9",
+          "488d3006",
+          "54026fce",
+          "5a4f22c0",
+          "5c40ec5b",
+          "65240037",
+          "6a1eabeb",
+          "6aeb4375_abs",
+          "6e984301",
+          "6f9b354f",
+          "7161e7e2",
+          "726462e0",
+          "72e3ee87",
+          "8cf51dda",
+          "8ebdbe50",
+          "95228167",
+          "993da5e2",
+          "9aaed6a3",
+          "9bbe84a2",
+          "afdc33df",
+          "b0479f84",
+          "b320f3f8",
+          "ba358f49",
+          "ba358f49_abs",
+          "bc8a6e93_abs",
+          "c2ac3c61",
+          "c4ea545c",
+          "c4f10528",
+          "c6853660",
+          "c960da58",
+          "caf9ead2",
+          "cc539528",
+          "cc5ded98",
+          "d52b4f67",
+          "d6233ab6",
+          "d7c942c3",
+          "d851d5ba",
+          "dc439ea3",
+          "e01b8e2f",
+          "e982271f",
+          "edced276_abs",
+          "eeda8a6d",
+          "eeda8a6d_abs",
+          "efc3f7c2",
+          "fca762bc",
+          "gpt4_15e38248",
+          "gpt4_18c2b244",
+          "gpt4_1d80365e",
+          "gpt4_213fd887",
+          "gpt4_4fc4f797",
+          "gpt4_59c863d7",
+          "gpt4_8c8961ae",
+          "gpt4_d6585ce8",
+          "gpt4_ec93e27f",
+          "gpt4_f420262c",
+          "gpt4_fa19884d"
+        ],
+        "budgets": [
+          512,
+          1024,
+          2048
+        ],
+        "repeats": 3,
+        "chunk_body_tokens": 256,
+        "solver_model": "qwen-plus-2025-12-01",
+        "judge_model": "qwen3-max-2026-01-23",
+        "decoding": {
+          "temperature": 0,
+          "max_tokens": 384,
+          "enable_thinking": false
+        },
+        "selectors": [
+          "prefix",
+          "recency",
+          "jaccard",
+          "bm25",
+          "hybrid",
+          "hybrid_no_time"
+        ],
+        "primary_comparison": [
+          "hybrid",
+          "bm25"
+        ],
+        "confidence": 0.95,
+        "bootstrap_seed": 20261007,
+        "bootstrap_resamples": 10000,
+        "protocol_deviations": [
+          "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+          "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+          "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+          "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+          "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+          "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score."
+        ],
+        "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter."
+      },
+      "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter.",
+      "accuracy_difference_ci_low_pp": -44.047619047619044,
+      "accuracy_difference_ci_high_pp": -23.015873015873016,
+      "paired_p_two_sided": 9.999000099990002e-05,
+      "paired_p_holm": 0.0020997900209979003,
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed."
+      ],
+      "observed_cases": [],
+      "paired_outcomes": {},
+      "human_review_required": true
+    },
+    {
+      "id": "memory_reuse",
+      "title": "Measured Memory Reuse on Synthetic Banks",
+      "kind": "controlled_memory_eval_live",
+      "model_name": "qwen-plus-2025-12-01",
+      "dataset_sha256": "d1db63c6266134ca54c28eb56762e75f35be8083ee8ab1babdecb7891ee636e8",
+      "source_sha256": "032aafc004b6268e7c026f1a65c0f066a975621ad8452d35407bb91d3ec11089",
+      "context_tokens": 512,
+      "budget_unit": "tokens",
+      "group_labels": {
+        "baseline": "hybrid_raw",
+        "enhanced": "hybrid_model_ack"
+      },
+      "unique_questions": 160,
+      "paired_observations": 480,
+      "repeats": 3,
+      "groups": {
+        "baseline": {
+          "n": 480,
+          "correct": 480,
+          "accuracy": 1.0,
+          "accuracy_ci_low": 1.0,
+          "accuracy_ci_high": 1.0,
+          "evidence_recall": 1.0,
+          "query_tokens": 239442,
+          "seed_tokens": 0,
+          "all_tokens": 239442,
+          "tokens_per_question": 498.8375,
+          "tokens_per_correct": 498.8375,
+          "seed_model_calls": 0,
+          "query_latency_ms": 3275.513556666689,
+          "end_to_end_latency_ms": null,
+          "excluded_records": 0,
+          "failed_records": 0,
+          "memory_clusters": 8,
+          "evidence_turn_recall_any_fragment": null,
+          "annotated_evidence_character_coverage": null,
+          "all_annotated_evidence_turns_complete": null
+        },
+        "enhanced": {
+          "n": 480,
+          "correct": 480,
+          "accuracy": 1.0,
+          "accuracy_ci_low": 1.0,
+          "accuracy_ci_high": 1.0,
+          "evidence_recall": 1.0,
+          "query_tokens": 239440,
+          "seed_tokens": 49647,
+          "all_tokens": 289087,
+          "tokens_per_question": 602.2645833333333,
+          "tokens_per_correct": 602.2645833333333,
+          "seed_model_calls": 480,
+          "query_latency_ms": 3274.5947162499856,
+          "end_to_end_latency_ms": null,
+          "excluded_records": 0,
+          "failed_records": 0,
+          "memory_clusters": 8,
+          "evidence_turn_recall_any_fragment": null,
+          "annotated_evidence_character_coverage": null,
+          "all_annotated_evidence_turns_complete": null
+        }
+      },
+      "accuracy_interval": {
+        "method": "stratified memory-cluster bootstrap",
+        "confidence": 0.95,
+        "confidence_percent": 95,
+        "interpretation": "Repeats averaged within each memory episode"
+      },
+      "accuracy_gain_pp": 0.0,
+      "total_token_ratio": 1.2073362233860392,
+      "cost_per_correct_ratio": 1.2073362233860392,
+      "comparison": {
+        "id": "reuse:512:hybrid_model_ack-hybrid_raw",
+        "suite": "reuse",
+        "budget_tokens": 512,
+        "left": "hybrid_model_ack",
+        "right": "hybrid_raw",
+        "inference_scope": "Measured cost after 20 distinct questions; QA summary is descriptive, outside the full/micro accuracy test family."
+      },
+      "protocol": {
+        "protocol_version": "memory-eval-v2.0",
+        "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+        "source_url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+        "source_count": 500,
+        "source_license": "MIT",
+        "dependencies": {
+          "longmemeval_commit": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+          "scorer_url": "https://github.com/xiaowu0162/LongMemEval/blob/9e0b455f4ef0e2ab8f2e582289761153549043fc/src/evaluation/evaluate_qa.py",
+          "scorer_sha256": "ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+          "tokenizer_repo": "Qwen/Qwen3-8B",
+          "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "tokenizer_files": {
+            "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+            "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+          }
+        },
+        "sampling_seed": 20261006,
+        "per_stratum": 12,
+        "stratified_question_ids": {
+          "single-session-user": [
+            "e01b8e2f",
+            "726462e0",
+            "c960da58",
+            "caf9ead2",
+            "6f9b354f",
+            "1e043500",
+            "311778f1",
+            "001be529",
+            "d52b4f67",
+            "8ebdbe50",
+            "37d43f65",
+            "b320f3f8"
+          ],
+          "single-session-assistant": [
+            "18dcd5a5",
+            "28bcfaac",
+            "1b9b7252",
+            "fca762bc",
+            "488d3006",
+            "dc439ea3",
+            "cc539528",
+            "c4f10528",
+            "65240037",
+            "8cf51dda",
+            "7161e7e2",
+            "e982271f"
+          ],
+          "single-session-preference": [
+            "b0479f84",
+            "afdc33df",
+            "95228167",
+            "0edc2aef",
+            "09d032c9",
+            "1d4e3b97",
+            "54026fce",
+            "1da05512",
+            "06f04340",
+            "d6233ab6",
+            "38146c39",
+            "1c0ddc50"
+          ],
+          "multi-session": [
+            "eeda8a6d",
+            "gpt4_15e38248",
+            "d851d5ba",
+            "gpt4_59c863d7",
+            "3fe836c9",
+            "157a136e",
+            "efc3f7c2",
+            "1192316e",
+            "3a704032",
+            "9aaed6a3",
+            "ba358f49",
+            "c2ac3c61"
+          ],
+          "temporal-reasoning": [
+            "gpt4_8c8961ae",
+            "gpt4_4fc4f797",
+            "gpt4_213fd887",
+            "gpt4_ec93e27f",
+            "gpt4_18c2b244",
+            "gpt4_fa19884d",
+            "2c63a862",
+            "993da5e2",
+            "gpt4_d6585ce8",
+            "6e984301",
+            "gpt4_1d80365e",
+            "gpt4_f420262c"
+          ],
+          "knowledge-update": [
+            "10e09553",
+            "c4ea545c",
+            "5c40ec5b",
+            "5a4f22c0",
+            "72e3ee87",
+            "9bbe84a2",
+            "c6853660",
+            "0f05491a",
+            "6a1eabeb",
+            "d7c942c3",
+            "cc5ded98",
+            "2698e78f"
+          ],
+          "abstention": [
+            "0ddfec37_abs",
+            "bc8a6e93_abs",
+            "19b5f2b3_abs",
+            "ba358f49_abs",
+            "09ba9854_abs",
+            "29f2956b_abs",
+            "6aeb4375_abs",
+            "edced276_abs",
+            "eeda8a6d_abs",
+            "2311e44b_abs",
+            "2133c1b5_abs",
+            "0862e8bf_abs"
+          ]
+        },
+        "question_ids": [
+          "001be529",
+          "06f04340",
+          "0862e8bf_abs",
+          "09ba9854_abs",
+          "09d032c9",
+          "0ddfec37_abs",
+          "0edc2aef",
+          "0f05491a",
+          "10e09553",
+          "1192316e",
+          "157a136e",
+          "18dcd5a5",
+          "19b5f2b3_abs",
+          "1b9b7252",
+          "1c0ddc50",
+          "1d4e3b97",
+          "1da05512",
+          "1e043500",
+          "2133c1b5_abs",
+          "2311e44b_abs",
+          "2698e78f",
+          "28bcfaac",
+          "29f2956b_abs",
+          "2c63a862",
+          "311778f1",
+          "37d43f65",
+          "38146c39",
+          "3a704032",
+          "3fe836c9",
+          "488d3006",
+          "54026fce",
+          "5a4f22c0",
+          "5c40ec5b",
+          "65240037",
+          "6a1eabeb",
+          "6aeb4375_abs",
+          "6e984301",
+          "6f9b354f",
+          "7161e7e2",
+          "726462e0",
+          "72e3ee87",
+          "8cf51dda",
+          "8ebdbe50",
+          "95228167",
+          "993da5e2",
+          "9aaed6a3",
+          "9bbe84a2",
+          "afdc33df",
+          "b0479f84",
+          "b320f3f8",
+          "ba358f49",
+          "ba358f49_abs",
+          "bc8a6e93_abs",
+          "c2ac3c61",
+          "c4ea545c",
+          "c4f10528",
+          "c6853660",
+          "c960da58",
+          "caf9ead2",
+          "cc539528",
+          "cc5ded98",
+          "d52b4f67",
+          "d6233ab6",
+          "d7c942c3",
+          "d851d5ba",
+          "dc439ea3",
+          "e01b8e2f",
+          "e982271f",
+          "edced276_abs",
+          "eeda8a6d",
+          "eeda8a6d_abs",
+          "efc3f7c2",
+          "fca762bc",
+          "gpt4_15e38248",
+          "gpt4_18c2b244",
+          "gpt4_1d80365e",
+          "gpt4_213fd887",
+          "gpt4_4fc4f797",
+          "gpt4_59c863d7",
+          "gpt4_8c8961ae",
+          "gpt4_d6585ce8",
+          "gpt4_ec93e27f",
+          "gpt4_f420262c",
+          "gpt4_fa19884d"
+        ],
+        "budgets": [
+          512,
+          1024,
+          2048
+        ],
+        "repeats": 3,
+        "chunk_body_tokens": 256,
+        "solver_model": "qwen-plus-2025-12-01",
+        "judge_model": "qwen3-max-2026-01-23",
+        "decoding": {
+          "temperature": 0,
+          "max_tokens": 384,
+          "enable_thinking": false
+        },
+        "selectors": [
+          "prefix",
+          "recency",
+          "jaccard",
+          "bm25",
+          "hybrid",
+          "hybrid_no_time"
+        ],
+        "primary_comparison": [
+          "hybrid",
+          "bm25"
+        ],
+        "confidence": 0.95,
+        "bootstrap_seed": 20261007,
+        "bootstrap_resamples": 10000,
+        "protocol_deviations": [
+          "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+          "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+          "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+          "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+          "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+          "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score."
+        ],
+        "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter."
+      },
+      "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter.",
+      "accuracy_difference_ci_low_pp": null,
+      "accuracy_difference_ci_high_pp": null,
+      "paired_p_two_sided": null,
+      "paired_p_holm": null,
+      "limitations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+        "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+        "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+        "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+        "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+        "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change.",
+        "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+        "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed."
+      ],
+      "observed_cases": [],
+      "paired_outcomes": {},
+      "human_review_required": true
+    }
+  ],
+  "metrics": {
+    "fair_baselines_512.context_tokens": {
+      "value": 512,
+      "text": "512",
+      "display_value": 512.0
+    },
+    "fair_baselines_512.unique_questions": {
+      "value": 84,
+      "text": "84",
+      "display_value": 84.0
+    },
+    "fair_baselines_512.paired_observations": {
+      "value": 252,
+      "text": "252",
+      "display_value": 252.0
+    },
+    "fair_baselines_512.repeats": {
+      "value": 3,
+      "text": "3",
+      "display_value": 3.0
+    },
+    "fair_baselines_512.accuracy_gain_pp": {
+      "value": -36.11111111111111,
+      "text": "-36.1111 percentage points",
+      "display_value": -36.1111
+    },
+    "fair_baselines_512.total_token_ratio": {
+      "value": 0.9432383728484192,
+      "text": "0.94",
+      "display_value": 0.94
+    },
+    "fair_baselines_512.cost_per_correct_ratio": {
+      "value": 1.9900029085704454,
+      "text": "1.99",
+      "display_value": 1.99
+    },
+    "fair_baselines_512.accuracy_difference_ci_low_pp": {
+      "value": -46.03174603174603,
+      "text": "-46.0317 percentage points",
+      "display_value": -46.0317
+    },
+    "fair_baselines_512.accuracy_difference_ci_high_pp": {
+      "value": -25.79365079365079,
+      "text": "-25.7937 percentage points",
+      "display_value": -25.7937
+    },
+    "fair_baselines_512.paired_p_two_sided": {
+      "value": 9.999000099990002e-05,
+      "text": "0.0001",
+      "display_value": 0.0001
+    },
+    "fair_baselines_512.paired_p_holm": {
+      "value": 0.0020997900209979003,
+      "text": "0.0021",
+      "display_value": 0.0021
+    },
+    "fair_baselines_512.baseline.n": {
+      "value": 252,
+      "text": "252",
+      "display_value": 252.0
+    },
+    "fair_baselines_512.baseline.correct": {
+      "value": 173,
+      "text": "173",
+      "display_value": 173.0
+    },
+    "fair_baselines_512.baseline.accuracy": {
+      "value": 0.6865079365079365,
+      "text": "68.7%",
+      "display_value": 68.7
+    },
+    "fair_baselines_512.baseline.accuracy_ci_low": {
+      "value": 0.6071428571428571,
+      "text": "60.7%",
+      "display_value": 60.7
+    },
+    "fair_baselines_512.baseline.accuracy_ci_high": {
+      "value": 0.7658730158730158,
+      "text": "76.6%",
+      "display_value": 76.6
+    },
+    "fair_baselines_512.baseline.evidence_recall": {
+      "value": 0.8479166666666667,
+      "text": "84.8%",
+      "display_value": 84.8
+    },
+    "fair_baselines_512.baseline.query_tokens": {
+      "value": 177021,
+      "text": "177021",
+      "display_value": 177021.0
+    },
+    "fair_baselines_512.baseline.seed_tokens": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines_512.baseline.all_tokens": {
+      "value": 177021,
+      "text": "177021",
+      "display_value": 177021.0
+    },
+    "fair_baselines_512.baseline.tokens_per_question": {
+      "value": 702.4642857142857,
+      "text": "702.46",
+      "display_value": 702.46
+    },
+    "fair_baselines_512.baseline.tokens_per_correct": {
+      "value": 1023.2427745664739,
+      "text": "1023.24",
+      "display_value": 1023.24
+    },
+    "fair_baselines_512.baseline.seed_model_calls": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines_512.baseline.query_latency_ms": {
+      "value": 4380.982338888835,
+      "text": "4380.98",
+      "display_value": 4380.98
+    },
+    "fair_baselines_512.baseline.end_to_end_latency_ms": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "fair_baselines_512.baseline.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines_512.baseline.failed_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines_512.baseline.memory_clusters": {
+      "value": 84,
+      "text": "84",
+      "display_value": 84.0
+    },
+    "fair_baselines_512.baseline.evidence_turn_recall_any_fragment": {
+      "value": 0.6453703703703704,
+      "text": "64.5%",
+      "display_value": 64.5
+    },
+    "fair_baselines_512.baseline.annotated_evidence_character_coverage": {
+      "value": 0.6385517081353097,
+      "text": "63.9%",
+      "display_value": 63.9
+    },
+    "fair_baselines_512.baseline.all_annotated_evidence_turns_complete": {
+      "value": 0.5138888888888888,
+      "text": "51.4%",
+      "display_value": 51.4
+    },
+    "fair_baselines_512.enhanced.n": {
+      "value": 252,
+      "text": "252",
+      "display_value": 252.0
+    },
+    "fair_baselines_512.enhanced.correct": {
+      "value": 82,
+      "text": "82",
+      "display_value": 82.0
+    },
+    "fair_baselines_512.enhanced.accuracy": {
+      "value": 0.3253968253968254,
+      "text": "32.5%",
+      "display_value": 32.5
+    },
+    "fair_baselines_512.enhanced.accuracy_ci_low": {
+      "value": 0.253968253968254,
+      "text": "25.4%",
+      "display_value": 25.4
+    },
+    "fair_baselines_512.enhanced.accuracy_ci_high": {
+      "value": 0.40079365079365076,
+      "text": "40.1%",
+      "display_value": 40.1
+    },
+    "fair_baselines_512.enhanced.evidence_recall": {
+      "value": 0.22152777777777777,
+      "text": "22.2%",
+      "display_value": 22.2
+    },
+    "fair_baselines_512.enhanced.query_tokens": {
+      "value": 166973,
+      "text": "166973",
+      "display_value": 166973.0
+    },
+    "fair_baselines_512.enhanced.seed_tokens": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines_512.enhanced.all_tokens": {
+      "value": 166973,
+      "text": "166973",
+      "display_value": 166973.0
+    },
+    "fair_baselines_512.enhanced.tokens_per_question": {
+      "value": 662.5912698412699,
+      "text": "662.59",
+      "display_value": 662.59
+    },
+    "fair_baselines_512.enhanced.tokens_per_correct": {
+      "value": 2036.2560975609756,
+      "text": "2036.26",
+      "display_value": 2036.26
+    },
+    "fair_baselines_512.enhanced.seed_model_calls": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines_512.enhanced.query_latency_ms": {
+      "value": 3324.772110714299,
+      "text": "3324.77",
+      "display_value": 3324.77
+    },
+    "fair_baselines_512.enhanced.end_to_end_latency_ms": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "fair_baselines_512.enhanced.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines_512.enhanced.failed_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines_512.enhanced.memory_clusters": {
+      "value": 84,
+      "text": "84",
+      "display_value": 84.0
+    },
+    "fair_baselines_512.enhanced.evidence_turn_recall_any_fragment": {
+      "value": 0.15208333333333332,
+      "text": "15.2%",
+      "display_value": 15.2
+    },
+    "fair_baselines_512.enhanced.annotated_evidence_character_coverage": {
+      "value": 0.156961478713557,
+      "text": "15.7%",
+      "display_value": 15.7
+    },
+    "fair_baselines_512.enhanced.all_annotated_evidence_turns_complete": {
+      "value": 0.1111111111111111,
+      "text": "11.1%",
+      "display_value": 11.1
+    },
+    "fair_baselines.context_tokens": {
+      "value": 1024,
+      "text": "1024",
+      "display_value": 1024.0
+    },
+    "fair_baselines.unique_questions": {
+      "value": 84,
+      "text": "84",
+      "display_value": 84.0
+    },
+    "fair_baselines.paired_observations": {
+      "value": 252,
+      "text": "252",
+      "display_value": 252.0
+    },
+    "fair_baselines.repeats": {
+      "value": 3,
+      "text": "3",
+      "display_value": 3.0
+    },
+    "fair_baselines.accuracy_gain_pp": {
+      "value": -29.365079365079367,
+      "text": "-29.3651 percentage points",
+      "display_value": -29.3651
+    },
+    "fair_baselines.total_token_ratio": {
+      "value": 0.96513470681458,
+      "text": "0.97",
+      "display_value": 0.97
+    },
+    "fair_baselines.cost_per_correct_ratio": {
+      "value": 1.7414387101219597,
+      "text": "1.74",
+      "display_value": 1.74
+    },
+    "fair_baselines.accuracy_difference_ci_low_pp": {
+      "value": -40.07936507936509,
+      "text": "-40.0794 percentage points",
+      "display_value": -40.0794
+    },
+    "fair_baselines.accuracy_difference_ci_high_pp": {
+      "value": -18.253968253968257,
+      "text": "-18.254 percentage points",
+      "display_value": -18.254
+    },
+    "fair_baselines.paired_p_two_sided": {
+      "value": 0.00019998000199980003,
+      "text": "0.0002",
+      "display_value": 0.0002
+    },
+    "fair_baselines.paired_p_holm": {
+      "value": 0.0021997800219978004,
+      "text": "0.0022",
+      "display_value": 0.0022
+    },
+    "fair_baselines.baseline.n": {
+      "value": 252,
+      "text": "252",
+      "display_value": 252.0
+    },
+    "fair_baselines.baseline.correct": {
+      "value": 166,
+      "text": "166",
+      "display_value": 166.0
+    },
+    "fair_baselines.baseline.accuracy": {
+      "value": 0.6587301587301587,
+      "text": "65.9%",
+      "display_value": 65.9
+    },
+    "fair_baselines.baseline.accuracy_ci_low": {
+      "value": 0.5873015873015873,
+      "text": "58.7%",
+      "display_value": 58.7
+    },
+    "fair_baselines.baseline.accuracy_ci_high": {
+      "value": 0.7301587301587302,
+      "text": "73.0%",
+      "display_value": 73.0
+    },
+    "fair_baselines.baseline.evidence_recall": {
+      "value": 0.8553240740740741,
+      "text": "85.5%",
+      "display_value": 85.5
+    },
+    "fair_baselines.baseline.query_tokens": {
+      "value": 308559,
+      "text": "308559",
+      "display_value": 308559.0
+    },
+    "fair_baselines.baseline.seed_tokens": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines.baseline.all_tokens": {
+      "value": 308559,
+      "text": "308559",
+      "display_value": 308559.0
+    },
+    "fair_baselines.baseline.tokens_per_question": {
+      "value": 1224.4404761904761,
+      "text": "1224.44",
+      "display_value": 1224.44
+    },
+    "fair_baselines.baseline.tokens_per_correct": {
+      "value": 1858.789156626506,
+      "text": "1858.79",
+      "display_value": 1858.79
+    },
+    "fair_baselines.baseline.seed_model_calls": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines.baseline.query_latency_ms": {
+      "value": 4557.859536904711,
+      "text": "4557.86",
+      "display_value": 4557.86
+    },
+    "fair_baselines.baseline.end_to_end_latency_ms": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "fair_baselines.baseline.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines.baseline.failed_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines.baseline.memory_clusters": {
+      "value": 84,
+      "text": "84",
+      "display_value": 84.0
+    },
+    "fair_baselines.baseline.evidence_turn_recall_any_fragment": {
+      "value": 0.6886574074074074,
+      "text": "68.9%",
+      "display_value": 68.9
+    },
+    "fair_baselines.baseline.annotated_evidence_character_coverage": {
+      "value": 0.685351407264943,
+      "text": "68.5%",
+      "display_value": 68.5
+    },
+    "fair_baselines.baseline.all_annotated_evidence_turns_complete": {
+      "value": 0.5694444444444444,
+      "text": "56.9%",
+      "display_value": 56.9
+    },
+    "fair_baselines.enhanced.n": {
+      "value": 252,
+      "text": "252",
+      "display_value": 252.0
+    },
+    "fair_baselines.enhanced.correct": {
+      "value": 92,
+      "text": "92",
+      "display_value": 92.0
+    },
+    "fair_baselines.enhanced.accuracy": {
+      "value": 0.36507936507936506,
+      "text": "36.5%",
+      "display_value": 36.5
+    },
+    "fair_baselines.enhanced.accuracy_ci_low": {
+      "value": 0.28968253968253965,
+      "text": "29.0%",
+      "display_value": 29.0
+    },
+    "fair_baselines.enhanced.accuracy_ci_high": {
+      "value": 0.4444444444444445,
+      "text": "44.4%",
+      "display_value": 44.4
+    },
+    "fair_baselines.enhanced.evidence_recall": {
+      "value": 0.23472222222222222,
+      "text": "23.5%",
+      "display_value": 23.5
+    },
+    "fair_baselines.enhanced.query_tokens": {
+      "value": 297801,
+      "text": "297801",
+      "display_value": 297801.0
+    },
+    "fair_baselines.enhanced.seed_tokens": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines.enhanced.all_tokens": {
+      "value": 297801,
+      "text": "297801",
+      "display_value": 297801.0
+    },
+    "fair_baselines.enhanced.tokens_per_question": {
+      "value": 1181.75,
+      "text": "1181.75",
+      "display_value": 1181.75
+    },
+    "fair_baselines.enhanced.tokens_per_correct": {
+      "value": 3236.967391304348,
+      "text": "3236.97",
+      "display_value": 3236.97
+    },
+    "fair_baselines.enhanced.seed_model_calls": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines.enhanced.query_latency_ms": {
+      "value": 3750.0681436507484,
+      "text": "3750.07",
+      "display_value": 3750.07
+    },
+    "fair_baselines.enhanced.end_to_end_latency_ms": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "fair_baselines.enhanced.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines.enhanced.failed_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "fair_baselines.enhanced.memory_clusters": {
+      "value": 84,
+      "text": "84",
+      "display_value": 84.0
+    },
+    "fair_baselines.enhanced.evidence_turn_recall_any_fragment": {
+      "value": 0.1625,
+      "text": "16.2%",
+      "display_value": 16.2
+    },
+    "fair_baselines.enhanced.annotated_evidence_character_coverage": {
+      "value": 0.16574697199094557,
+      "text": "16.6%",
+      "display_value": 16.6
+    },
+    "fair_baselines.enhanced.all_annotated_evidence_turns_complete": {
+      "value": 0.125,
+      "text": "12.5%",
+      "display_value": 12.5
+    },
+    "protocol_replication.context_tokens": {
+      "value": 2048,
+      "text": "2048",
+      "display_value": 2048.0
+    },
+    "protocol_replication.unique_questions": {
+      "value": 84,
+      "text": "84",
+      "display_value": 84.0
+    },
+    "protocol_replication.paired_observations": {
+      "value": 252,
+      "text": "252",
+      "display_value": 252.0
+    },
+    "protocol_replication.repeats": {
+      "value": 3,
+      "text": "3",
+      "display_value": 3.0
+    },
+    "protocol_replication.accuracy_gain_pp": {
+      "value": -33.73015873015872,
+      "text": "-33.7302 percentage points",
+      "display_value": -33.7302
+    },
+    "protocol_replication.total_token_ratio": {
+      "value": 0.9852175323416064,
+      "text": "0.99",
+      "display_value": 0.99
+    },
+    "protocol_replication.cost_per_correct_ratio": {
+      "value": 1.8856851694280206,
+      "text": "1.89",
+      "display_value": 1.89
+    },
+    "protocol_replication.accuracy_difference_ci_low_pp": {
+      "value": -44.047619047619044,
+      "text": "-44.0476 percentage points",
+      "display_value": -44.0476
+    },
+    "protocol_replication.accuracy_difference_ci_high_pp": {
+      "value": -23.015873015873016,
+      "text": "-23.0159 percentage points",
+      "display_value": -23.0159
+    },
+    "protocol_replication.paired_p_two_sided": {
+      "value": 9.999000099990002e-05,
+      "text": "0.0001",
+      "display_value": 0.0001
+    },
+    "protocol_replication.paired_p_holm": {
+      "value": 0.0020997900209979003,
+      "text": "0.0021",
+      "display_value": 0.0021
+    },
+    "protocol_replication.baseline.n": {
+      "value": 252,
+      "text": "252",
+      "display_value": 252.0
+    },
+    "protocol_replication.baseline.correct": {
+      "value": 178,
+      "text": "178",
+      "display_value": 178.0
+    },
+    "protocol_replication.baseline.accuracy": {
+      "value": 0.7063492063492063,
+      "text": "70.6%",
+      "display_value": 70.6
+    },
+    "protocol_replication.baseline.accuracy_ci_low": {
+      "value": 0.6309523809523809,
+      "text": "63.1%",
+      "display_value": 63.1
+    },
+    "protocol_replication.baseline.accuracy_ci_high": {
+      "value": 0.7817460317460316,
+      "text": "78.2%",
+      "display_value": 78.2
+    },
+    "protocol_replication.baseline.evidence_recall": {
+      "value": 0.9085648148148148,
+      "text": "90.9%",
+      "display_value": 90.9
+    },
+    "protocol_replication.baseline.query_tokens": {
+      "value": 567226,
+      "text": "567226",
+      "display_value": 567226.0
+    },
+    "protocol_replication.baseline.seed_tokens": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "protocol_replication.baseline.all_tokens": {
+      "value": 567226,
+      "text": "567226",
+      "display_value": 567226.0
+    },
+    "protocol_replication.baseline.tokens_per_question": {
+      "value": 2250.8968253968255,
+      "text": "2250.90",
+      "display_value": 2250.9
+    },
+    "protocol_replication.baseline.tokens_per_correct": {
+      "value": 3186.6629213483147,
+      "text": "3186.66",
+      "display_value": 3186.66
+    },
+    "protocol_replication.baseline.seed_model_calls": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "protocol_replication.baseline.query_latency_ms": {
+      "value": 4630.651383730169,
+      "text": "4630.65",
+      "display_value": 4630.65
+    },
+    "protocol_replication.baseline.end_to_end_latency_ms": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "protocol_replication.baseline.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "protocol_replication.baseline.failed_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "protocol_replication.baseline.memory_clusters": {
+      "value": 84,
+      "text": "84",
+      "display_value": 84.0
+    },
+    "protocol_replication.baseline.evidence_turn_recall_any_fragment": {
+      "value": 0.7219907407407408,
+      "text": "72.2%",
+      "display_value": 72.2
+    },
+    "protocol_replication.baseline.annotated_evidence_character_coverage": {
+      "value": 0.7184538784319607,
+      "text": "71.8%",
+      "display_value": 71.8
+    },
+    "protocol_replication.baseline.all_annotated_evidence_turns_complete": {
+      "value": 0.5833333333333334,
+      "text": "58.3%",
+      "display_value": 58.3
+    },
+    "protocol_replication.enhanced.n": {
+      "value": 252,
+      "text": "252",
+      "display_value": 252.0
+    },
+    "protocol_replication.enhanced.correct": {
+      "value": 93,
+      "text": "93",
+      "display_value": 93.0
+    },
+    "protocol_replication.enhanced.accuracy": {
+      "value": 0.36904761904761907,
+      "text": "36.9%",
+      "display_value": 36.9
+    },
+    "protocol_replication.enhanced.accuracy_ci_low": {
+      "value": 0.2936507936507936,
+      "text": "29.4%",
+      "display_value": 29.4
+    },
+    "protocol_replication.enhanced.accuracy_ci_high": {
+      "value": 0.4523809523809524,
+      "text": "45.2%",
+      "display_value": 45.2
+    },
+    "protocol_replication.enhanced.evidence_recall": {
+      "value": 0.25416666666666665,
+      "text": "25.4%",
+      "display_value": 25.4
+    },
+    "protocol_replication.enhanced.query_tokens": {
+      "value": 558841,
+      "text": "558841",
+      "display_value": 558841.0
+    },
+    "protocol_replication.enhanced.seed_tokens": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "protocol_replication.enhanced.all_tokens": {
+      "value": 558841,
+      "text": "558841",
+      "display_value": 558841.0
+    },
+    "protocol_replication.enhanced.tokens_per_question": {
+      "value": 2217.623015873016,
+      "text": "2217.62",
+      "display_value": 2217.62
+    },
+    "protocol_replication.enhanced.tokens_per_correct": {
+      "value": 6009.043010752688,
+      "text": "6009.04",
+      "display_value": 6009.04
+    },
+    "protocol_replication.enhanced.seed_model_calls": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "protocol_replication.enhanced.query_latency_ms": {
+      "value": 4076.182688492061,
+      "text": "4076.18",
+      "display_value": 4076.18
+    },
+    "protocol_replication.enhanced.end_to_end_latency_ms": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "protocol_replication.enhanced.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "protocol_replication.enhanced.failed_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "protocol_replication.enhanced.memory_clusters": {
+      "value": 84,
+      "text": "84",
+      "display_value": 84.0
+    },
+    "protocol_replication.enhanced.evidence_turn_recall_any_fragment": {
+      "value": 0.18796296296296297,
+      "text": "18.8%",
+      "display_value": 18.8
+    },
+    "protocol_replication.enhanced.annotated_evidence_character_coverage": {
+      "value": 0.1905255559828056,
+      "text": "19.1%",
+      "display_value": 19.1
+    },
+    "protocol_replication.enhanced.all_annotated_evidence_turns_complete": {
+      "value": 0.1527777777777778,
+      "text": "15.3%",
+      "display_value": 15.3
+    },
+    "memory_reuse.context_tokens": {
+      "value": 512,
+      "text": "512",
+      "display_value": 512.0
+    },
+    "memory_reuse.unique_questions": {
+      "value": 160,
+      "text": "160",
+      "display_value": 160.0
+    },
+    "memory_reuse.paired_observations": {
+      "value": 480,
+      "text": "480",
+      "display_value": 480.0
+    },
+    "memory_reuse.repeats": {
+      "value": 3,
+      "text": "3",
+      "display_value": 3.0
+    },
+    "memory_reuse.accuracy_gain_pp": {
+      "value": 0.0,
+      "text": "0 percentage points",
+      "display_value": 0.0
+    },
+    "memory_reuse.total_token_ratio": {
+      "value": 1.2073362233860392,
+      "text": "1.21",
+      "display_value": 1.21
+    },
+    "memory_reuse.cost_per_correct_ratio": {
+      "value": 1.2073362233860392,
+      "text": "1.21",
+      "display_value": 1.21
+    },
+    "memory_reuse.accuracy_difference_ci_low_pp": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.accuracy_difference_ci_high_pp": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.paired_p_two_sided": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.paired_p_holm": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.baseline.n": {
+      "value": 480,
+      "text": "480",
+      "display_value": 480.0
+    },
+    "memory_reuse.baseline.correct": {
+      "value": 480,
+      "text": "480",
+      "display_value": 480.0
+    },
+    "memory_reuse.baseline.accuracy": {
+      "value": 1.0,
+      "text": "100.0%",
+      "display_value": 100.0
+    },
+    "memory_reuse.baseline.accuracy_ci_low": {
+      "value": 1.0,
+      "text": "100.0%",
+      "display_value": 100.0
+    },
+    "memory_reuse.baseline.accuracy_ci_high": {
+      "value": 1.0,
+      "text": "100.0%",
+      "display_value": 100.0
+    },
+    "memory_reuse.baseline.evidence_recall": {
+      "value": 1.0,
+      "text": "100.0%",
+      "display_value": 100.0
+    },
+    "memory_reuse.baseline.query_tokens": {
+      "value": 239442,
+      "text": "239442",
+      "display_value": 239442.0
+    },
+    "memory_reuse.baseline.seed_tokens": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "memory_reuse.baseline.all_tokens": {
+      "value": 239442,
+      "text": "239442",
+      "display_value": 239442.0
+    },
+    "memory_reuse.baseline.tokens_per_question": {
+      "value": 498.8375,
+      "text": "498.84",
+      "display_value": 498.84
+    },
+    "memory_reuse.baseline.tokens_per_correct": {
+      "value": 498.8375,
+      "text": "498.84",
+      "display_value": 498.84
+    },
+    "memory_reuse.baseline.seed_model_calls": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "memory_reuse.baseline.query_latency_ms": {
+      "value": 3275.513556666689,
+      "text": "3275.51",
+      "display_value": 3275.51
+    },
+    "memory_reuse.baseline.end_to_end_latency_ms": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.baseline.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "memory_reuse.baseline.failed_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "memory_reuse.baseline.memory_clusters": {
+      "value": 8,
+      "text": "8",
+      "display_value": 8.0
+    },
+    "memory_reuse.baseline.evidence_turn_recall_any_fragment": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.baseline.annotated_evidence_character_coverage": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.baseline.all_annotated_evidence_turns_complete": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.enhanced.n": {
+      "value": 480,
+      "text": "480",
+      "display_value": 480.0
+    },
+    "memory_reuse.enhanced.correct": {
+      "value": 480,
+      "text": "480",
+      "display_value": 480.0
+    },
+    "memory_reuse.enhanced.accuracy": {
+      "value": 1.0,
+      "text": "100.0%",
+      "display_value": 100.0
+    },
+    "memory_reuse.enhanced.accuracy_ci_low": {
+      "value": 1.0,
+      "text": "100.0%",
+      "display_value": 100.0
+    },
+    "memory_reuse.enhanced.accuracy_ci_high": {
+      "value": 1.0,
+      "text": "100.0%",
+      "display_value": 100.0
+    },
+    "memory_reuse.enhanced.evidence_recall": {
+      "value": 1.0,
+      "text": "100.0%",
+      "display_value": 100.0
+    },
+    "memory_reuse.enhanced.query_tokens": {
+      "value": 239440,
+      "text": "239440",
+      "display_value": 239440.0
+    },
+    "memory_reuse.enhanced.seed_tokens": {
+      "value": 49647,
+      "text": "49647",
+      "display_value": 49647.0
+    },
+    "memory_reuse.enhanced.all_tokens": {
+      "value": 289087,
+      "text": "289087",
+      "display_value": 289087.0
+    },
+    "memory_reuse.enhanced.tokens_per_question": {
+      "value": 602.2645833333333,
+      "text": "602.26",
+      "display_value": 602.26
+    },
+    "memory_reuse.enhanced.tokens_per_correct": {
+      "value": 602.2645833333333,
+      "text": "602.26",
+      "display_value": 602.26
+    },
+    "memory_reuse.enhanced.seed_model_calls": {
+      "value": 480,
+      "text": "480",
+      "display_value": 480.0
+    },
+    "memory_reuse.enhanced.query_latency_ms": {
+      "value": 3274.5947162499856,
+      "text": "3274.59",
+      "display_value": 3274.59
+    },
+    "memory_reuse.enhanced.end_to_end_latency_ms": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.enhanced.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "memory_reuse.enhanced.failed_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "memory_reuse.enhanced.memory_clusters": {
+      "value": 8,
+      "text": "8",
+      "display_value": 8.0
+    },
+    "memory_reuse.enhanced.evidence_turn_recall_any_fragment": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.enhanced.annotated_evidence_character_coverage": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "memory_reuse.enhanced.all_annotated_evidence_turns_complete": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    }
+  },
+  "display_policy": "Percentages to one decimal; average tokens and milliseconds to two decimals."
+}

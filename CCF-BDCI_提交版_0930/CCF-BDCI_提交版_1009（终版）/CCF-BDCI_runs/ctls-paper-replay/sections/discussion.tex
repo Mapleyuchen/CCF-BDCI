@@ -1,0 +1,13 @@
+\section{Discussion and Limitations}
+
+\label{sec:discussion}
+
+The controlled results establish that the deployed hybrid selector is outperformed by BM25 at every token budget, and that removing the temporal term recovers most of the deficit. This is a diagnostic finding with a clean explanation: the temporal dominance condition allows a fixed freshness weight to outweigh a positive lexical advantage, displacing relevant older records with fresher irrelevant ones. CTLS eliminates this by partitioning candidates before applying temporal scoring, so the ordering within each tier is by relevance first.
+
+The mechanism analysis connects the theoretical condition to the empirical outcome. At the smallest token budget, the hybrid evidence-session recall is 22.2\% versus 84.8\% for BM25, a gap that directly reflects the misranked items. At the primary token budget, hybrid evidence-session recall is 23.5\% versus 85.5\%. These gaps persist across all three budgets, showing that the problem is in candidate ordering rather than in budget size.
+
+CTLS addresses this gap by construction, not by tuning. The Non-Dominance Property is a structural guarantee: for any two candidates where one has positive lexical overlap and the other has zero, the positive-overlap item always ranks first. This is the exact fix for temporal dominance, and it costs nothing at query time. The hybrid\_no\_time ablation is the theoretical limit of CTLS on queries where all candidates have positive overlap; their empirical similarity on such queries validates that the tier partition is the right structural intervention.
+
+The reuse experiment shows that write amortization reduces per-query cost as query count increases. The model-acknowledgement write path total token ratio relative to the raw path is 1.21. CTLS does not change this curve because it is a selector-only substitution; construction cost and per-query tokens are identical to the baseline write path.
+
+Several restrictions apply. The controlled evaluation uses a frozen single-layer bank; the production rail has different capacity constraints. The judge substitution and stratified subset are disclosed deviations from the official evaluation protocol. The blinded human-adjudication task remains incomplete. CTLS is evaluated theoretically with empirical support from the existing hybrid\_no\_time ablation; a direct CTLS implementation and evaluation on this bank remains future work.

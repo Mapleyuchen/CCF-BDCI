@@ -1,0 +1,72 @@
+{
+  "ready_for_submission": false,
+  "passed": 8,
+  "failed": 5,
+  "checks": [
+    {
+      "check": "required_files",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "nonempty_materials",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "pdf_header_and_hash",
+      "passed": true,
+      "detail": "Must match the packaged candidate PDF."
+    },
+    {
+      "check": "team_name",
+      "passed": false,
+      "detail": "Fill the official team name and rename the final top-level folder."
+    },
+    {
+      "check": "reviewer_token",
+      "passed": false,
+      "detail": "A real review token is required. This check cannot authenticate it."
+    },
+    {
+      "check": "reviewer_pdf_binding",
+      "passed": false,
+      "detail": "Record the hash of the PDF actually reviewed by Agentic Reviewer."
+    },
+    {
+      "check": "upstream_pr",
+      "passed": false,
+      "detail": "Real upstream PR URL remains required; repository commit links are not PRs."
+    },
+    {
+      "check": "human_review",
+      "passed": false,
+      "detail": "Manual claim and citation review remains required."
+    },
+    {
+      "check": "file_integrity",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "source_snapshot",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "credential_and_cache_scan",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "config.yaml_env_credential",
+      "passed": true,
+      "detail": "API credentials must be environment placeholders."
+    },
+    {
+      "check": "config.experiment.yaml_env_credential",
+      "passed": true,
+      "detail": "API credentials must be environment placeholders."
+    }
+  ]
+}

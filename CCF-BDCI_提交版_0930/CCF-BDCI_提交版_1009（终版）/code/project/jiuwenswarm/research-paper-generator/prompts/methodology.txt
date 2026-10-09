@@ -1,0 +1,24 @@
+Create a publication-quality scientific methodology diagram for an English ICLR paper. Wide landscape composition on a pure white background, perfectly legible black sans-serif text, restrained navy/teal/orange colors, flat vector-like shapes and thin precise arrows. No decorative artwork, gradients, 3D, photorealism, logos, chart data, invented equations, or watermark. High resolution. Content accuracy is more important than ornament.
+
+Diagram title: "Budget-matched memory evaluation"
+
+Left: a document stack labeled "Shared episode" with subtitle "20 facts + one question". Split its output into two separate horizontal lanes.
+
+Upper lane, pale blue, label "File baseline": three boxes connected strictly left-to-right:
+1. "Write facts to file" (small file icon)
+2. "Prefix + file headers" with small subtitle "Truncate to budget B"
+3. "Query model" with subtitle "Fresh conversation"
+Arrow from box 3 exits right, labeled "Answer + usage".
+
+Lower lane, pale teal, label "Retrieved L1 memory": three boxes connected strictly left-to-right:
+1. "Model-backed writes" with small subtitle "20 fact conversations"
+2. "Rank and pack L1" with two short subtitle lines "Lexical + recency + frequency + importance" and "Whole items within budget B"
+3. "Same query model" with subtitle "Fresh conversation"
+Arrow from box 3 exits right, labeled "Answer + usage".
+Small orange callout underneath lower box 1: "Count write cost".
+
+Right: both lane outputs converge on one grey box labeled "Paired audit" with three separate lines: "Answer match", "Complete evidence", "Write + query cost". The orange write-cost callout is attached only to the lower write box by one short vertical line. Do not draw any other orange line or arrow. The existing lower lane output carries write and query usage to the audit.
+
+At the bottom, a single unobtrusive line: "Same facts, model and character budget; different memory construction and formatting."
+
+Keep the two lanes visually balanced and generously spaced. All arrows must have clear direction and must not cross labels. Use ample padding around text, consistent box heights, concise labels exactly as supplied, and large readable type. Do not depict L2/L3 memory, embeddings, training, team synchronization or disk persistence for the retrieved L1 arm. This is a methodological schematic, not a measured results figure.

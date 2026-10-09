@@ -1,0 +1,74 @@
+\section{Experimental Setup}
+
+\label{sec:experiments}
+
+The controlled evaluation keeps the candidate bank, packing policy, token budgets, and model configuration identical across all selectors. Only the scoring function that orders candidates changes. This design makes score differences attributable to ranking rather than to representation, construction, or packing. The primary comparison is BM25 against the deployed hybrid; CTLS and hybrid\_no\_time are evaluated as additional selectors. Three complementary experiments address the three research questions: a selector quality comparison across three token budgets on the full stratified subset, a mechanism ablation that isolates the temporal term, and a write-amortization study that measures lifecycle cost independently of selector choice.
+
+\subsection{Data and Stratification}
+
+\label{sec:setup_data}
+
+The controlled evaluation uses a fixed-hash stratified subset of the cleaned LongMemEval-S benchmark. The subset spans twelve non-abstention questions from each of six task categories and twelve abstention questions, for a total of eighty-four memory episodes. The sampling seed is fixed and the stratification is deterministic, so the subset is exactly reproducible. All source sessions, user and assistant turns, timestamps, questions, and gold answers are retained without modification. Each turn is split losslessly into segments bounded by a fixed Qwen3 BPE token count so that no source character is discarded at segmentation time. The same frozen candidate bank, metadata, memory wrapper, and whole-item first-fit overflow policy are shared across all selectors and all token budgets.
+
+\subsection{Selectors and Ablations}
+
+\label{sec:setup_selectors}
+
+Six selectors draw from the same frozen bank: prefix (bank order, no scoring), recency (temporal decay only), Jaccard (lexical overlap only), the deployed hybrid (fixed-weight combination of all four terms), BM25 (probabilistic lexical score), and hybrid\_no\_time (hybrid with temporal weight set to zero, remaining weights renormalized). Frequency is held at zero and importance at a fixed value across all controlled selectors so that hybrid\_no\_time and Jaccard coincide as a sanity check. The primary comparison is BM25 against the deployed hybrid; hybrid\_no\_time is the ablation that isolates the temporal term. CTLS is evaluated theoretically in this paper; the direct experimental comparison of CTLS as a seventh selector is the recommended follow-up.
+
+\subsection{CTLS versus Hybrid and BM25 at the Smallest Token Budget}
+
+\label{sec:setup_fair_baselines_512}
+
+The smallest token budget condition uses all eighty-four stratified memory episodes with three answering calls per episode under isolated conversation IDs. All selectors share the frozen candidate bank, memory wrapper, and whole-item first-fit overflow policy at the smallest token cap. Only the scoring function ordering candidates changes. The answering model uses temperature zero, no tools, and one iteration. Metrics include semantic answer accuracy, evidence-session recall, annotated-turn recall (any fragment), complete annotated-turn coverage, write-plus-query tokens, and query latency including scheduling.
+
+\subsection{Primary Comparison at the Medium Token Budget}
+
+\label{sec:setup_fair_baselines}
+
+The primary budget condition uses the same eighty-four stratified memory episodes with three answering calls per episode. The frozen candidate bank, tokenizer, packing policy, and memory wrapper are identical to the smaller budget condition; only the context cap is larger. CTLS drains the relevant tier before the absent tier; the hybrid applies weights globally; BM25 uses standard probabilistic lexical scoring; hybrid\_no\_time sums remaining weighted terms without the temporal component. The primary comparison is BM25 against the deployed hybrid, with Holm correction across all prespecified full-history and micro accuracy comparisons.
+
+\subsection{Robustness at the Largest Token Budget}
+
+\label{sec:setup_protocol_replication}
+
+The largest budget condition uses the same eighty-four stratified memory episodes with three answering calls. At this budget nearly all tier-relevant items fit within the allowance, so the tier partition has less marginal impact than at tighter caps. This condition tests whether the hybrid deficit versus BM25 persists when budget is no longer a binding constraint on recall. The protocol is otherwise identical to the primary comparison.
+
+\subsection{Measured Memory Reuse on Synthetic Banks}
+
+\label{sec:setup_memory_reuse}
+
+The memory reuse experiment measures write amortization on synthetic entity/value bank variants, each serving multiple distinct queries after a single construction. The context budget matches the smallest token cap. Construction cost is counted once per memory instance; per-query cost decreases as the query count over a single bank increases. CTLS adds no construction overhead: it is a zero-cost selector substitution that leaves the write path unchanged. The reuse study addresses RQ3 by measuring whether per-query lifecycle cost falls with query count, independently of which selector is used.
+
+\subsection{Answer Model and Grading}
+
+\label{sec:setup_grading}
+
+The pinned original LongMemEval task-specific grading prompts are evaluated with a fixed primary judge model; strict yes/no parsing and arm-blind response keys replace substring grading. A second fixed model audits model disagreements and a deterministic ten-percent sample. The primary judge substitutes for the recommended GPT-4o judge in the original benchmark protocol; this substitution and the stratified subset are disclosed deviations from the official evaluation. Blinded human adjudication of model disagreements remains an open task before final paper submission.
+
+\subsection{Statistical Treatment}
+
+\label{sec:setup_stats}
+
+Three temperature-zero calls per memory episode are averaged within each episode to reduce generation variance before cluster-level inference. Stratified paired memory-cluster bootstrap intervals use ten thousand resamples with a fixed seed. Paired cluster sign-flip tests are corrected with the Holm procedure across all prespecified full-history and micro accuracy comparisons. Negative and inconclusive comparisons are retained in all reported tables rather than filtered. Because the question subset is a balanced stratified sample rather than a random draw from all five hundred histories, subset accuracy is not a naturally weighted score on the full benchmark and is not presented as one.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Summary of the three experimental designs. The designs are complementary and address separate research questions.}
+\label{tab:designs}
+\begin{tabular}{p{0.20\linewidth}p{0.36\linewidth}p{0.36\linewidth}}\toprule
+& Quality comparison & Reuse study \\\midrule
+Unit & 84 stratified memory episodes & 8 synthetic banks \\
+What varies & Selector scoring rule & Write path \\
+What is fixed & Bank, metadata, packing, budget & Selector, bank, packing, budget \\
+Inference & Cluster bootstrap, Holm tests & Per-query cost curves \\
+Main limitation & No direct CTLS evaluation & Template-based banks only \\
+\bottomrule\end{tabular}\end{table}
+
+\subsection{Full-History Retrieval Sweep}
+
+\label{sec:setup_fullhistory}
+
+In addition to the QA evaluation, all selectors are traced over the complete set of LongMemEval-S source histories under all three token budgets. This yields selector/budget traces covering the full benchmark source. The sweep measures delivery of annotated evidence without an answering model: evidence-session hit rates, annotated-turn recall (any selected fragment), annotated-character coverage, and complete annotated-turn coverage. Thirty abstention cases are excluded from the evidence recall denominators, leaving eligible non-abstention histories. This sweep is a retrieval-only analysis; it is reported in the supporting materials and used to confirm that the selector ordering established by QA accuracy is also visible in retrieval coverage metrics. No language model is called during this sweep, so its results cannot be interpreted as answer accuracy.
+
+\FloatBarrier

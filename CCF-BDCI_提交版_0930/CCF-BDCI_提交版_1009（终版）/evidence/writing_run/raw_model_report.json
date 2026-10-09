@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "human_review_required": true,
+  "source_framework": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\output\\paper-research-max-v3\\framework",
+  "source_outline_sha256": "85a5fe69a19eaa667420edda8c627122730bec4fb5a212450c9a2efa8821ee61",
+  "calls": [
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 227.282,
+      "http_attempts": 2,
+      "usage": {
+        "prompt_tokens": 14707,
+        "completion_tokens": 5290,
+        "total_tokens": 19997
+      },
+      "stage": "editorial_plan",
+      "reused_from_previous_run": true
+    },
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 493.468,
+      "http_attempts": 3,
+      "usage": {
+        "prompt_tokens": 19770,
+        "completion_tokens": 6314,
+        "total_tokens": 26084
+      },
+      "stage": "editorial_draft",
+      "reused_from_previous_run": true
+    },
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 30.438,
+      "http_attempts": 1,
+      "usage": {
+        "prompt_tokens": 20381,
+        "completion_tokens": 1163,
+        "total_tokens": 21544
+      },
+      "stage": "editorial_review",
+      "enable_thinking": false
+    },
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 242.015,
+      "http_attempts": 2,
+      "usage": {
+        "prompt_tokens": 22361,
+        "completion_tokens": 6303,
+        "total_tokens": 28664
+      },
+      "stage": "editorial_revision",
+      "enable_thinking": false
+    },
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 131.656,
+      "http_attempts": 1,
+      "usage": {
+        "prompt_tokens": 21948,
+        "completion_tokens": 6390,
+        "total_tokens": 28338
+      }
+    }
+  ],
+  "validation_errors": [
+    "method_retrieval paragraph 1: Numeric prose must use a [[metric:...]] token; found 3600; result_public_large paragraph 3: Numeric prose must use a [[metric:...]] token; found 7820; discussion paragraph 3: Numeric prose must use a [[metric:...]] token; found 500; discussion paragraph 5: Numeric prose must use a [[metric:...]] token; found 9.9; conclusion paragraph 1: Numeric prose must use a [[metric:...]] token; found 15.6",
+    "method_retrieval paragraph 1: Numeric prose must use a [[metric:...]] token; found 0.4"
+  ],
+  "figures": [],
+  "error": "method_retrieval paragraph 1: Numeric prose must use a [[metric:...]] token; found 0.4"
+}

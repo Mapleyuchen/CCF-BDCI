@@ -1,0 +1,1126 @@
+commit 74e5820ddb84464b54339e9a18679226866c9d8c
+Author:     yuanzhong-li <2450988@tongji.edu.cn>
+AuthorDate: Mon Sep 28 14:24:34 2026 +0800
+Commit:     yuanzhong-li <2450988@tongji.edu.cn>
+CommitDate: Mon Sep 28 14:24:34 2026 +0800
+
+    feat: add paper quality and submission checks
+    
+    Catch draft handoff gaps and contest-bundle mistakes before the team packs a submission.
+    
+    Co-authored-by: Cursor <cursoragent@cursor.com>
+
+diff --git a/jiuwenswarm/research-paper-generator/README.md b/jiuwenswarm/research-paper-generator/README.md
+index 6f980c7..a2d461a 100644
+--- a/jiuwenswarm/research-paper-generator/README.md
++++ b/jiuwenswarm/research-paper-generator/README.md
+@@ -73,7 +73,25 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模
+ 
+ 第 4 位同学按 `file` 填写章节，不必更改主文件装配逻辑；摘要文件只填写摘要正文。用 `citation_map.json` 中的键写 `\citep{ref_...}` 或 `\citet{ref_...}`，不要自行重建引用键。Related Work 默认列出全部传入文献作为候选，并不代表已判定相关性或证据支持。
+ 
+-为验证完整书目链路，骨架使用 `\nocite{*}` 展示候选书目，并有可见草稿提示。正文完成后应移除 `\nocite{*}`、Draft bibliography 段落及各章节占位文字，改用真实逐条引用。最终的语言、实验有效性、引用支持和提交规范检查仍由第 5 部分负责。
++为验证完整书目链路，骨架使用 `\nocite{*}` 展示候选书目，并有可见草稿提示。正文完成后应移除 `\nocite{*}`、Draft bibliography 段落及各章节占位文字，改用真实逐条引用。
++
++## 第 5 部分：质量检查
++
++`scripts/check_quality.py` 读取第 3 部分的输出目录，检查完整性、ICLR 版式和能从文件判断的写作问题。它不调用模型，也不判断实验结果是否成立。下面这些情况退出码为 1：占位文字、草稿页眉、`\nocite{*}`、缺失章节、`paper.tex` 没有 `\input` 某一节、对不上的结果文件哈希、未编译、编译之后又改了源文件、未解析引用、文献表里没有的引用键、brief 指定了引用却没写进对应章节、计划中的实验写出了提升百分比、Results 里的小数或百分数在结果文件中找不到、中文正文和 TODO。没有图只记警告。赛题不限制篇幅，页数只记在报告里，不作为失败。
++
++```powershell
++python jiuwenswarm/research-paper-generator/scripts/check_quality.py output/paper-framework-demo
++```
++
++报告写在该目录的 `quality_report.json`。`ready_for_submission` 为 true 只表示这些机械检查通过。人员 4 填完正文后应再跑一次。
++
++提交目录用另一条命令检查，报告写在该目录的上一级，避免把报告打进 zip：
++
++```powershell
++python jiuwenswarm/research-paper-generator/scripts/check_submission.py 团队名称
++```
++
++它核对赛题要求的 `paper/paper.pdf`、Access Token、三份技术文档、框架贡献链接、资源报告和 `code/`，并拒绝 `config.yaml`、`.env` 和看起来像真实密钥的赋值。Token 是否真评过这篇 PDF，仍要人工到 Stanford Agentic Reviewer 核对。
+ 
+ 模块不会改写原来的 `paper/`、根目录论文或已有实验结果。旧 `scripts/generate_paper.py` 仍是早期固定内容脚本，包含写死的实验数字和示例书目；第 3 部分应使用新的 `generate_framework.py`。
+ 
+diff --git a/jiuwenswarm/research-paper-generator/scripts/check_quality.py b/jiuwenswarm/research-paper-generator/scripts/check_quality.py
+new file mode 100644
+index 0000000..90e3833
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/check_quality.py
+@@ -0,0 +1,31 @@
++#!/usr/bin/env python3
++"""Check a paper-framework directory for completeness, format, and surface writing issues."""
++
++import argparse
++from pathlib import Path
++
++from paper_quality.checker import check_project
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("project", type=Path, help="Directory produced by generate_framework.py")
++    args = parser.parse_args()
++    try:
++        report = check_project(args.project)
++    except (ValueError, OSError) as error:
++        parser.exit(1, f"Error: {error}\n")
++    print(f"Quality report: {(args.project.resolve() / 'quality_report.json')}")
++    summary = report["summary"]
++    print(f"passed={summary['passed']} errors={summary['errors']} warnings={summary['warnings']}")
++    for item in report["checks"]:
++        if item["passed"]:
++            continue
++        where = f" [{item['target']}]" if item.get("target") else ""
++        print(f"{item['severity'].upper()} {item['id']}{where}: {item['message']}")
++    if not report["ready_for_submission"]:
++        parser.exit(1, "Not ready for submission.\n")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/jiuwenswarm/research-paper-generator/scripts/check_submission.py b/jiuwenswarm/research-paper-generator/scripts/check_submission.py
+new file mode 100644
+index 0000000..cdc9ef4
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/check_submission.py
+@@ -0,0 +1,31 @@
++#!/usr/bin/env python3
++"""Check a contest submission directory for required files and accidental secrets."""
++
++import argparse
++from pathlib import Path
++
++from paper_quality.submission import check_submission
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("bundle", type=Path, help="Unzipped team directory, not the zip itself")
++    args = parser.parse_args()
++    try:
++        report = check_submission(args.bundle)
++    except (ValueError, OSError) as error:
++        parser.exit(1, f"Error: {error}\n")
++    print(f"Submission report: {(args.bundle.resolve().parent / 'submission_report.json')}")
++    summary = report["summary"]
++    print(f"passed={summary['passed']} errors={summary['errors']} warnings={summary['warnings']}")
++    for item in report["checks"]:
++        if item["passed"]:
++            continue
++        where = f" [{item['target']}]" if item.get("target") else ""
++        print(f"{item['severity'].upper()} {item['id']}{where}: {item['message']}")
++    if not report["ready_for_submission"]:
++        parser.exit(1, "Submission bundle is incomplete.\n")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_quality/__init__.py b/jiuwenswarm/research-paper-generator/scripts/paper_quality/__init__.py
+new file mode 100644
+index 0000000..4fcd568
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_quality/__init__.py
+@@ -0,0 +1,5 @@
++"""Offline quality checks for a paper-framework project. No model or network calls."""
++
++from .checker import check_project
++
++__all__ = ["check_project"]
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_quality/checker.py b/jiuwenswarm/research-paper-generator/scripts/paper_quality/checker.py
+new file mode 100644
+index 0000000..0137e7b
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_quality/checker.py
+@@ -0,0 +1,572 @@
++"""Check completeness, ICLR format, and surface writing issues of a framework draft.
++
++The report records what can be decided from the project files. It does not
++judge whether an experiment result is scientifically valid.
++"""
++
++from __future__ import annotations
++
++import hashlib
++import json
++import re
++from pathlib import Path
++
++REQUIRED_SECTIONS = (
++    "abstract",
++    "introduction",
++    "related_work",
++    "method",
++    "experiments",
++    "results",
++    "discussion",
++    "conclusion",
++)
++SECTION_PLACEHOLDERS = (
++    "Draft placeholder",
++    "[To be written",
++    "TBD",
++    "to be done",
++    "fill in",
++    "[...]",
++    "待写",
++    "待补充",
++)
++DRAFT_BIBLIOGRAPHY = "Draft bibliography"
++NOCITE = r"\nocite{*}"
++DRAFT_BANNER = r"Research paper framework -- draft"
++CJK = re.compile(r"[\u4e00-\u9fff]")
++TOKEN = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
++REPEATED_WORD = re.compile(r"\b([A-Za-z]{3,})\s+\1\b", re.IGNORECASE)
++STUB_WORDS = re.compile(r"\b(?:TODO|FIXME|TBD|TK|lorem ipsum|xxx+)\b", re.IGNORECASE)
++LEAK_EMAIL = re.compile(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\\thanks\b", re.IGNORECASE)
++LEAK_GITHUB = re.compile(r"(?<![\w.])github\.com/[\w.-]+", re.IGNORECASE)
++SMART_QUOTES = re.compile("[“”‘’]")
++INCLUDE_GRAPHICS = re.compile(r"\\includegraphics(?:\[[^\]]*\])?\{([^{}]+)\}")
++PAGE_COUNT = re.compile(r"Output written on paper\.pdf \((\d+) page")
++CITE_COMMAND = re.compile(r"\\cite[a-zA-Z]*\s*\{([^{}]+)\}")
++BIB_ENTRY = re.compile(r"@\w+\s*\{\s*([^,\s]+)\s*,(.*?)(?=\n@|\Z)", re.S)
++CLAIM_NUMBER = re.compile(r"(?<![\w.])(\d+(?:\.\d+)?)\s*(?:\\%|%)|(?<![\w.])(\d+\.\d+)(?!\w)")
++PLANNED_CLAIM = re.compile(
++    r"(?:improved|improvement|increase[sd]?|gain)\s+by\s+\d|(?:\+\s*)?\d+(?:\.\d+)?\s*(?:\\%|%)",
++    re.IGNORECASE,
++)
++MIN_WORDS = 20
++MAX_PDF_BYTES = 10 * 1024 * 1024
++SOURCE_CLOCK_SKEW = 0.05
++
++
++def check_project(project: Path) -> dict:
++    """Write quality_report.json and return it. Findings do not raise."""
++    project = project.resolve()
++    paper = project / "paper.tex"
++    if not project.is_dir() or not paper.is_file():
++        raise ValueError(f"Not a paper project (missing paper.tex): {project}")
++    checks: list[dict] = []
++    outline = _load_json(project / "outline.json", checks, "outline.json")
++    citation_map = _load_json(project / "citation_map.json", checks, "citation_map.json")
++    paper_tex = paper.read_text(encoding="utf-8")
++    section_text = _section_text(project, outline, checks)
++    _check_completeness(project, paper_tex, outline, section_text, citation_map, checks)
++    _check_format(project, paper_tex, outline, citation_map, checks)
++    _check_typography(project, checks)
++    _check_grammar(section_text, checks)
++    report = {
++        "schema_version": 1,
++        "artifact_kind": "paper_quality_report",
++        "ready_for_submission": not any(item["severity"] == "error" and not item["passed"] for item in checks),
++        "summary": _summary(checks),
++        "checks": checks,
++    }
++    (project / "quality_report.json").write_text(
++        json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++    return report
++
++
++def _summary(checks: list[dict]) -> dict:
++    failed = [item for item in checks if not item["passed"]]
++    return {
++        "passed": sum(item["passed"] for item in checks),
++        "errors": sum(item["severity"] == "error" for item in failed),
++        "warnings": sum(item["severity"] == "warning" for item in failed),
++        "info": sum(item["severity"] == "info" for item in failed),
++    }
++
++
++def _add(checks, *, check_id, category, severity, passed, message, target=None):
++    item = {"id": check_id, "category": category, "severity": severity, "passed": passed, "message": message}
++    if target:
++        item["target"] = target
++    checks.append(item)
++
++
++def _load_json(path: Path, checks: list[dict], label: str):
++    if not path.is_file():
++        _add(checks, check_id="completeness_manifest", category="completeness", severity="error",
++             passed=False, message=f"Missing {label}. Generate the framework before review.", target=label)
++        return None
++    try:
++        return json.loads(path.read_text(encoding="utf-8-sig"))
++    except json.JSONDecodeError as error:
++        _add(checks, check_id="completeness_manifest", category="completeness", severity="error",
++             passed=False, message=f"{label} is not valid JSON: {error}", target=label)
++        return None
++
++
++def _section_text(project: Path, outline, checks: list[dict]) -> dict[str, str]:
++    found = {}
++    expected = {section["id"]: section["file"] for section in (outline or {}).get("sections", [])
++                if isinstance(section, dict) and "id" in section and "file" in section}
++    for section_id in REQUIRED_SECTIONS:
++        relative = expected.get(section_id, f"sections/{section_id}.tex")
++        path = project / relative
++        if path.is_file():
++            found[section_id] = path.read_text(encoding="utf-8")
++        else:
++            _add(checks, check_id="completeness_section_missing", category="completeness", severity="error",
++                 passed=False, message=f"Missing section file {relative}.", target=relative)
++    if outline and isinstance(outline.get("sections"), list):
++        ids = [section.get("id") for section in outline["sections"] if isinstance(section, dict)]
++        _add(checks, check_id="completeness_section_order", category="completeness",
++             severity="error", passed=ids == list(REQUIRED_SECTIONS),
++             message="outline.json sections follow the eight-section ICLR order." if ids == list(REQUIRED_SECTIONS)
++             else f"outline.json section order is {ids}; expected {list(REQUIRED_SECTIONS)}.")
++    return found
++
++
++def _check_completeness(project, paper_tex, outline, section_text, citation_map, checks):
++    for section_id, text in section_text.items():
++        hit = next((marker for marker in SECTION_PLACEHOLDERS if marker in text), None)
++        target = f"sections/{section_id}.tex"
++        if hit:
++            _add(checks, check_id="completeness_placeholder", category="completeness", severity="error",
++                 passed=False, message=f"Section still contains draft marker {hit!r}.", target=target)
++        else:
++            _add(checks, check_id="completeness_placeholder", category="completeness", severity="error",
++                 passed=True, message="Section has no draft placeholder.", target=target)
++    draft_bib = DRAFT_BIBLIOGRAPHY in paper_tex
++    nocite = NOCITE in paper_tex
++    _add(checks, check_id="completeness_draft_bibliography", category="completeness", severity="error",
++         passed=not draft_bib and not nocite,
++         message="Draft bibliography and \\nocite{*} are removed." if not draft_bib and not nocite
++         else "Remove the draft bibliography paragraph and \\nocite{*} after real citations are inserted.",
++         target="paper.tex")
++    if not isinstance(outline, dict):
++        return
++    for record in outline.get("evidence") or []:
++        if not isinstance(record, dict):
++            continue
++        evidence_id = str(record.get("id", "unknown"))
++        recorded = record.get("resolved_path")
++        expected_hash = record.get("sha256")
++        path = Path(recorded) if isinstance(recorded, str) else None
++        if path is None or not path.is_file():
++            _add(checks, check_id="completeness_evidence_missing", category="completeness", severity="error",
++                 passed=False, message=f"Result file for {evidence_id} is not at the recorded path.",
++                 target=str(recorded))
++            continue
++        actual = hashlib.sha256(path.read_bytes()).hexdigest()
++        matched = actual == expected_hash
++        _add(checks, check_id="completeness_evidence_hash", category="completeness", severity="error",
++             passed=matched, target=str(path),
++             message="Result file matches the hash recorded at planning time." if matched
++             else "Result file changed after planning. Regenerate the outline or review the new file before citing numbers.")
++    _check_inputs(paper_tex, outline, checks)
++    _check_subsections(outline, section_text, checks)
++    _check_citations(project, outline, section_text, citation_map, checks)
++    _check_result_claims(outline, section_text, checks)
++
++
++def _check_inputs(paper_tex, outline, checks):
++    if not isinstance(outline, dict):
++        return
++    active = _uncommented(paper_tex)
++    missing = []
++    for section in outline.get("sections") or []:
++        if not isinstance(section, dict) or "file" not in section:
++            continue
++        command = "\\input{" + section["file"] + "}"
++        if command not in active.replace(" ", ""):
++            missing.append(section["file"])
++    _add(checks, check_id="completeness_section_input", category="completeness", severity="error",
++         passed=not missing, target="paper.tex",
++         message="paper.tex inputs every outline section." if not missing
++         else "paper.tex does not input: " + ", ".join(missing))
++
++
++def _check_subsections(outline, section_text, checks):
++    if not isinstance(outline, dict):
++        return
++    missing = []
++    for section in outline.get("sections") or []:
++        if not isinstance(section, dict):
++            continue
++        text = _uncommented(section_text.get(section.get("id"), ""))
++        for child in section.get("subsections") or []:
++            if not isinstance(child, dict) or "id" not in child:
++                continue
++            label = "\\label{sec:" + child["id"] + "}"
++            title = child.get("title") or ""
++            if label not in text and (not title or title not in text):
++                missing.append(child["id"])
++    _add(checks, check_id="completeness_subsection", category="completeness", severity="error",
++         passed=not missing, target="sections",
++         message="Every planned subsection still appears in its section file." if not missing
++         else "Subsection labels or titles were removed: " + ", ".join(missing))
++
++
++def _check_citations(project, outline, section_text, citation_map, checks):
++    bib_path = project / "references.bib"
++    bib_text = bib_path.read_text(encoding="utf-8") if bib_path.is_file() else ""
++    bib_entries = _bibliography_entries(bib_text)
++    cited = _citation_keys(section_text)
++    unknown = sorted(key for key in cited if key not in bib_entries)
++    _add(checks, check_id="completeness_citation_unknown", category="completeness", severity="error",
++         passed=not unknown, target="references.bib",
++         message="Every citation key exists in references.bib." if not unknown
++         else "Citation keys missing from references.bib: " + ", ".join(unknown))
++    incomplete = [key for key, fields in bib_entries.items() if not {"author", "title", "year"} <= fields]
++    _add(checks, check_id="completeness_bib_fields", category="completeness", severity="error",
++         passed=not incomplete, target="references.bib",
++         message="Bibliography entries include author, title, and year." if not incomplete
++         else "Bibliography entries missing author, title, or year: " + ", ".join(incomplete))
++    entries = (citation_map or {}).get("entries") if isinstance(citation_map, dict) else None
++    cited_somewhere = bool(cited)
++    if entries and not cited_somewhere:
++        _add(checks, check_id="completeness_citation_used", category="completeness", severity="error",
++             passed=False, message="Literature was supplied, but no section contains a \\\\cite command.",
++             target="sections")
++    elif entries:
++        _add(checks, check_id="completeness_citation_used", category="completeness", severity="error",
++             passed=True, message="At least one supplied source is cited in the section files.")
++    required = _required_citation_keys(outline)
++    if not required:
++        _add(checks, check_id="completeness_assigned_citation", category="completeness", severity="error",
++             passed=True, message="The brief did not assign a citation key to a method section.")
++    else:
++        absent = sorted({key for key, target in required
++                         if key not in _citation_keys({target: section_text.get(target, "")})})
++        _add(checks, check_id="completeness_assigned_citation", category="completeness", severity="error",
++             passed=not absent, target="sections",
++             message="Method citation keys requested by the brief appear in that section." if not absent
++             else "Assigned citation keys are not used in their section: " + ", ".join(absent))
++    weak = [key for key, fields in bib_entries.items() if "doi" not in fields and "eprint" not in fields]
++    if weak:
++        _add(checks, check_id="completeness_citation_identity", category="completeness", severity="warning",
++             passed=False, target="references.bib",
++             message="Bibliography entries have neither a DOI nor an arXiv id: " + ", ".join(weak))
++
++
++def _check_result_claims(outline, section_text, checks):
++    if not isinstance(outline, dict):
++        return
++    results = _uncommented(section_text.get("results", ""))
++    evidence = [record for record in outline.get("evidence") or [] if isinstance(record, dict)]
++    planned = [child for section in outline.get("sections") or [] if isinstance(section, dict)
++               for child in section.get("subsections") or []
++               if isinstance(child, dict) and child.get("status") == "planned"]
++    if planned and not evidence and PLANNED_CLAIM.search(results):
++        _add(checks, check_id="completeness_planned_result", category="completeness", severity="error",
++             passed=False, target="sections/results.tex",
++             message="Results state a measured gain, but every experiment is still planned.")
++        return
++    if not evidence or any(marker in section_text.get("results", "") for marker in SECTION_PLACEHOLDERS):
++        return
++    allowed = set()
++    for record in evidence:
++        path = Path(record["resolved_path"]) if isinstance(record.get("resolved_path"), str) else None
++        if path is not None and path.is_file():
++            allowed.update(_numbers_in_file(path))
++    claims = _claim_numbers(results)
++    if not claims:
++        _add(checks, check_id="completeness_result_numbers", category="completeness", severity="warning",
++             passed=False, target="sections/results.tex",
++             message="A completed result file exists, but the results section states no decimal or percentage.")
++        return
++    unsupported = [claim for claim in claims if not _number_supported(claim, allowed)]
++    _add(checks, check_id="completeness_result_numbers", category="completeness", severity="error",
++         passed=not unsupported, target="sections/results.tex",
++         message="Measured numbers in Results match the completed result files." if not unsupported
++         else "Results mention numbers that are not in the completed result files: " + ", ".join(unsupported))
++
++
++def _required_citation_keys(outline):
++    if not isinstance(outline, dict):
++        return []
++    required = []
++    for section in outline.get("sections") or []:
++        if not isinstance(section, dict):
++            continue
++        # Related Work lists every supplied source as a candidate, not as a required citation.
++        if section.get("id") != "related_work":
++            for key in section.get("citation_keys") or []:
++                required.append((key, section["id"]))
++        for child in section.get("subsections") or []:
++            if isinstance(child, dict):
++                for key in child.get("citation_keys") or []:
++                    required.append((key, section["id"]))
++    return required
++
++
++def _citation_keys(section_text: dict[str, str]) -> set[str]:
++    keys = set()
++    for text in section_text.values():
++        for group in CITE_COMMAND.findall(_uncommented(text)):
++            keys.update(part.strip() for part in group.split(",") if part.strip())
++    return keys
++
++
++def _bibliography_entries(bib_text: str) -> dict[str, set[str]]:
++    entries = {}
++    for match in BIB_ENTRY.finditer(bib_text):
++        fields = {name.lower() for name in re.findall(r"(?m)^\s*(\w+)\s*=", match.group(2))}
++        entries[match.group(1)] = fields
++    return entries
++
++
++def _claim_numbers(text: str) -> list[str]:
++    found = []
++    for percent, decimal in CLAIM_NUMBER.findall(text):
++        found.append(percent or decimal)
++    return found
++
++
++def _numbers_in_file(path: Path) -> set[float]:
++    raw = path.read_text(encoding="utf-8", errors="replace")
++    values = set()
++    try:
++        _collect_numbers(json.loads(raw), values)
++    except json.JSONDecodeError:
++        values.update(float(match) for match in re.findall(r"\d+(?:\.\d+)?", raw))
++    return values
++
++
++def _collect_numbers(value, found: set[float]):
++    if isinstance(value, bool):
++        return
++    if isinstance(value, (int, float)):
++        found.add(float(value))
++    elif isinstance(value, dict):
++        for item in value.values():
++            _collect_numbers(item, found)
++    elif isinstance(value, list):
++        for item in value:
++            _collect_numbers(item, found)
++
++
++def _number_supported(claim: str, values: set[float]) -> bool:
++    number = float(claim)
++    return any(abs(number - value) < 1e-6 or abs(number - value * 100) < 0.2 for value in values)
++
++
++def _check_format(project, paper_tex, outline, citation_map, checks):
++    active = _uncommented(paper_tex)
++    uses_style = bool(re.search(r"\\usepackage(?:\[[^\]]*\])?\{[^}]*iclr2027_conference", active))
++    _add(checks, check_id="format_iclr_style", category="format", severity="error", passed=uses_style,
++         message="paper.tex loads iclr2027_conference." if uses_style else "paper.tex does not load iclr2027_conference.",
++         target="paper.tex")
++    for name in ("iclr2027_conference.sty", "iclr2027_conference.bst", "natbib.sty"):
++        exists = (project / name).is_file()
++        _add(checks, check_id="format_style_file", category="format", severity="error", passed=exists,
++             message=f"{name} is present." if exists else f"Missing style file {name}.", target=name)
++    anonymous = bool(outline.get("anonymous")) if isinstance(outline, dict) else True
++    final_copy = bool(re.search(r"\\iclrfinalcopy\b", active))
++    if anonymous:
++        author_ok = bool(re.search(r"\\author\{[^}]*Anonymous", active))
++        _add(checks, check_id="format_anonymous", category="format", severity="error",
++             passed=author_ok and not final_copy, target="paper.tex",
++             message="Anonymous submission keeps Anonymous authors and leaves \\iclrfinalcopy unset."
++             if author_ok and not final_copy else
++             "Anonymous brief still shows a camera-ready author block or \\iclrfinalcopy.")
++    else:
++        _add(checks, check_id="format_anonymous", category="format", severity="warning",
++             passed=final_copy, target="paper.tex",
++             message="Non-anonymous draft enables \\iclrfinalcopy." if final_copy
++             else "Brief is not anonymous, but \\iclrfinalcopy is not enabled.")
++    if anonymous:
++        _check_anonymity_leaks(project, checks)
++    banner = DRAFT_BANNER in active
++    _add(checks, check_id="format_draft_banner", category="format", severity="error", passed=not banner,
++         message="Draft running header is removed." if not banner
++         else "Remove the draft running header before submission.", target="paper.tex")
++    _check_bibliography_order(active, citation_map, checks)
++    _check_compile(project, checks)
++    _check_figures(project, checks)
++
++
++def _check_bibliography_order(active, citation_map, checks):
++    entries = (citation_map or {}).get("entries") if isinstance(citation_map, dict) else None
++    style_at = active.find(r"\bibliographystyle{")
++    bib_at = active.find(r"\bibliography{")
++    if not entries:
++        _add(checks, check_id="format_bibliography_order", category="format", severity="error", passed=True,
++             message="No literature entries were supplied, so bibliography order is not required.")
++        return
++    ordered = style_at != -1 and bib_at != -1 and style_at < bib_at
++    _add(checks, check_id="format_bibliography_order", category="format", severity="error", passed=ordered,
++         message="\\bibliographystyle appears before \\bibliography." if ordered
++         else "Literature was supplied, but bibliography commands are missing or in the wrong order.",
++         target="paper.tex")
++
++
++def _check_compile(project: Path, checks: list[dict]):
++    report_path = project / "compile_report.json"
++    if not report_path.is_file():
++        _add(checks, check_id="format_compile", category="format", severity="error", passed=False,
++             message="No compile_report.json. Run compile_framework.py before submission.", target="compile_report.json")
++        return
++    try:
++        report = json.loads(report_path.read_text(encoding="utf-8-sig"))
++    except json.JSONDecodeError as error:
++        _add(checks, check_id="format_compile", category="format", severity="error", passed=False,
++             message=f"compile_report.json is not valid JSON: {error}", target="compile_report.json")
++        return
++    success = bool(report.get("success")) and (project / "paper.pdf").is_file()
++    warning_text = " ".join(report.get("warnings") or [])
++    unresolved = "undefined" in warning_text.lower()
++    compiled = success and not unresolved
++    _add(checks, check_id="format_compile", category="format", severity="error", passed=compiled,
++         message="Compilation succeeded without undefined citations." if compiled
++         else "Compilation failed, paper.pdf is missing, or citations are undefined.",
++         target="compile_report.json")
++    stale = _newer_source(project, report_path) if compiled else None
++    if compiled:
++        _add(checks, check_id="format_compile_stale", category="format", severity="error",
++             passed=stale is None, target=str(stale.relative_to(project)) if stale else "compile_report.json",
++             message="Compilation is newer than paper.tex, section files, and references.bib." if stale is None
++             else f"{stale.name} changed after the last successful compilation. Compile again before review.")
++    pdf = project / "paper.pdf"
++    if pdf.is_file():
++        size_ok = pdf.stat().st_size <= MAX_PDF_BYTES
++        _add(checks, check_id="format_pdf_size", category="format", severity="error", passed=size_ok,
++             message="paper.pdf is within 10MB." if size_ok else "paper.pdf exceeds 10MB.", target="paper.pdf")
++    log = project / "paper.log"
++    if not log.is_file():
++        _add(checks, check_id="format_page_count", category="format", severity="info", passed=True,
++             message="Page count was not checked. Contest rules do not limit paper length.", target="paper.log")
++        return
++    match = PAGE_COUNT.search(log.read_text(encoding="utf-8", errors="replace"))
++    pages = match.group(1) if match else "unknown"
++    _add(checks, check_id="format_page_count", category="format", severity="info", passed=True,
++         message=f"pdflatex reports {pages} pages, including the bibliography. Contest rules do not limit length.",
++         target="paper.log")
++
++
++def _newer_source(project: Path, report_path: Path):
++    outputs = [report_path]
++    pdf = project / "paper.pdf"
++    if pdf.is_file():
++        outputs.append(pdf)
++    output_time = min(path.stat().st_mtime for path in outputs)
++    newest = None
++    for path in [project / "paper.tex", project / "references.bib", *sorted((project / "sections").glob("*.tex"))]:
++        if not path.is_file():
++            continue
++        if path.stat().st_mtime > output_time + SOURCE_CLOCK_SKEW and (newest is None or path.stat().st_mtime > newest.stat().st_mtime):
++            newest = path
++    return newest
++
++
++def _check_figures(project: Path, checks: list[dict]):
++    targets = []
++    for path in [project / "paper.tex", *sorted((project / "sections").glob("*.tex"))]:
++        if not path.is_file():
++            continue
++        targets.extend(INCLUDE_GRAPHICS.findall(_uncommented(path.read_text(encoding="utf-8"))))
++    if not targets:
++        _add(checks, check_id="format_figures", category="format", severity="warning", passed=False,
++             message="No \\includegraphics found. Add the method or result figures before final submission.")
++        return
++    missing = [item for item in targets if not (project / item).is_file()]
++    _add(checks, check_id="format_figures", category="format", severity="error", passed=not missing,
++         message="Every \\includegraphics target exists." if not missing
++         else "Missing figure files: " + ", ".join(missing), target="sections")
++    unlabeled = []
++    for path in [project / "paper.tex", *sorted((project / "sections").glob("*.tex"))]:
++        if not path.is_file():
++            continue
++        active = _uncommented(path.read_text(encoding="utf-8"))
++        if INCLUDE_GRAPHICS.search(active) and (r"\caption" not in active or r"\label" not in active):
++            unlabeled.append(str(path.relative_to(project)))
++    _add(checks, check_id="format_figure_caption", category="format", severity="error",
++         passed=not unlabeled, target="sections",
++         message="Every figure has a caption and a label." if not unlabeled
++         else "Figures are missing a caption or label in: " + ", ".join(unlabeled))
++
++
++def _check_anonymity_leaks(project: Path, checks: list[dict]):
++    leaks = []
++    tex_files = [project / "paper.tex", *sorted((project / "sections").glob("*.tex"))]
++    bib = project / "references.bib"
++    for path in tex_files + ([bib] if bib.is_file() else []):
++        if not path.is_file():
++            continue
++        active = _uncommented(path.read_text(encoding="utf-8", errors="replace"))
++        github = path.suffix == ".tex" and LEAK_GITHUB.search(active)
++        if LEAK_EMAIL.search(active) or github:
++            leaks.append(str(path.relative_to(project)))
++    _add(checks, check_id="format_anonymity_leak", category="format", severity="error",
++         passed=not leaks, target="paper.tex",
++         message="Anonymous draft has no email, GitHub profile, or \\thanks." if not leaks
++         else "Anonymous draft contains an identity leak in: " + ", ".join(leaks))
++
++
++def _check_typography(project: Path, checks: list[dict]):
++    problems = []
++    for path in [project / "paper.tex", project / "references.bib", *sorted((project / "sections").glob("*.tex"))]:
++        if not path.is_file():
++            continue
++        active = _uncommented(path.read_text(encoding="utf-8", errors="replace"))
++        relative = str(path.relative_to(project))
++        if CJK.search(active) or SMART_QUOTES.search(active):
++            problems.append(relative + " has Chinese or smart quotes")
++        if active.replace(r"\$", "").count("$") % 2:
++            problems.append(relative + " has an unmatched $")
++    _add(checks, check_id="format_typography", category="format", severity="error",
++         passed=not problems, target="paper.tex",
++         message="Paper sources have no CJK text, smart quotes, or unmatched math delimiters." if not problems
++         else "; ".join(problems))
++
++
++def _check_grammar(section_text: dict[str, str], checks: list[dict]):
++    for section_id, text in section_text.items():
++        target = f"sections/{section_id}.tex"
++        if any(marker in text for marker in SECTION_PLACEHOLDERS):
++            continue
++        source = _uncommented(text)
++        visible = _visible_prose(source)
++        if CJK.search(source):
++            _add(checks, check_id="grammar_cjk", category="grammar", severity="error", passed=False,
++                 message="Section contains Chinese characters. The pdfLaTeX draft has no CJK fonts.", target=target)
++        else:
++            _add(checks, check_id="grammar_cjk", category="grammar", severity="error", passed=True,
++                 message="Section has no CJK characters.", target=target)
++        stub = STUB_WORDS.search(visible)
++        _add(checks, check_id="grammar_stub", category="grammar", severity="error", passed=stub is None,
++             message="No TODO, FIXME, lorem ipsum, or XXX marker." if stub is None
++             else f"Remove writing stub {stub.group(0)!r}.", target=target)
++        words = TOKEN.findall(visible)
++        long_enough = len(words) >= MIN_WORDS
++        _add(checks, check_id="grammar_length", category="grammar", severity="warning", passed=long_enough,
++             message=f"Section has {len(words)} words." if long_enough
++             else f"Section has only {len(words)} words, below {MIN_WORDS}.", target=target)
++        repeat = REPEATED_WORD.search(visible)
++        _add(checks, check_id="grammar_repeated_word", category="grammar", severity="warning", passed=repeat is None,
++             message="No immediate repeated word." if repeat is None
++             else f"Repeated word {repeat.group(1)!r}.", target=target)
++        balanced = source.count("{") == source.count("}")
++        _add(checks, check_id="grammar_braces", category="grammar", severity="error", passed=balanced,
++             message="Braces are balanced." if balanced else "Unbalanced braces.", target=target)
++
++
++def _uncommented(tex: str) -> str:
++    kept = []
++    for line in tex.splitlines():
++        if line.lstrip().startswith("%"):
++            continue
++        kept.append(line.split("%", 1)[0])
++    return "\n".join(kept)
++
++
++def _visible_prose(tex: str) -> str:
++    text = re.sub(r"\\[a-zA-Z]+\*?(?:\[[^\]]*\])?(?:\{[^{}]*\})?", " ", tex)
++    return text.replace("{", " ").replace("}", " ")
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_quality/submission.py b/jiuwenswarm/research-paper-generator/scripts/paper_quality/submission.py
+new file mode 100644
+index 0000000..a672371
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_quality/submission.py
+@@ -0,0 +1,140 @@
++"""Check a contest submission directory. This does not zip the bundle or call a reviewer."""
++
++from __future__ import annotations
++
++import json
++import re
++from pathlib import Path
++
++REQUIRED_FILES = (
++    "paper/paper.pdf",
++    "AgenticReviewer/PaperReview-AccessToken.txt",
++    "docs/architecture.md",
++    "docs/module_call.md",
++    "docs/innovation.md",
++    "framework_contribution.md",
++    "resource_report.md",
++    "提交说明.md",
++)
++TOKEN_STUBS = ("todo", "xxx", "placeholder", "changeme", "your token", "your_token", "access token")
++SECRET_ASSIGNMENT = re.compile(
++    r"(?i)(?:api[_-]?key|secret|password|access[_-]?token)\s*[:=]\s*['\"]?([A-Za-z0-9_./+\-]{16,})"
++)
++SECRET_KEY = re.compile(r"\bsk-[A-Za-z0-9]{16,}\b")
++SECRET_FILENAMES = {"config.yaml", ".env", "credentials.json", "id_rsa", "id_ed25519"}
++PLACEHOLDER_SECRET = ("example", "your", "changeme", "placeholder", "todo", "xxx", "<", "none", "null")
++
++
++def check_submission(bundle: Path) -> dict:
++    """Write submission_report.json beside the bundle and return it."""
++    bundle = bundle.resolve()
++    if not bundle.is_dir():
++        raise ValueError(f"Submission directory does not exist: {bundle}")
++    checks: list[dict] = []
++    _check_required(bundle, checks)
++    _check_token(bundle, checks)
++    _check_contribution(bundle, checks)
++    _check_resources(bundle, checks)
++    _check_pdf(bundle, checks)
++    _check_secrets(bundle, checks)
++    report = {
++        "schema_version": 1,
++        "artifact_kind": "submission_quality_report",
++        "ready_for_submission": not any(item["severity"] == "error" and not item["passed"] for item in checks),
++        "summary": {
++            "passed": sum(item["passed"] for item in checks),
++            "errors": sum(item["severity"] == "error" and not item["passed"] for item in checks),
++            "warnings": sum(item["severity"] == "warning" and not item["passed"] for item in checks),
++        },
++        "checks": checks,
++    }
++    destination = bundle.parent / "submission_report.json"
++    destination.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++    return report
++
++
++def _add(checks, *, check_id, severity, passed, message, target=None):
++    item = {"id": check_id, "category": "submission", "severity": severity, "passed": passed, "message": message}
++    if target:
++        item["target"] = target
++    checks.append(item)
++
++
++def _check_required(bundle: Path, checks: list[dict]):
++    missing = [relative for relative in REQUIRED_FILES if not (bundle / relative).is_file()]
++    if not (bundle / "code").is_dir():
++        missing.append("code/")
++    _add(checks, check_id="submission_files", severity="error", passed=not missing,
++         message="Required contest files are present." if not missing
++         else "Missing submission files: " + ", ".join(missing))
++
++
++def _check_token(bundle: Path, checks: list[dict]):
++    path = bundle / "AgenticReviewer/PaperReview-AccessToken.txt"
++    if not path.is_file():
++        return
++    text = path.read_text(encoding="utf-8", errors="replace").strip()
++    stub = len(text) < 8 or any(marker in text.lower() for marker in TOKEN_STUBS)
++    _add(checks, check_id="submission_token", severity="error", passed=not stub, target=str(path.name),
++         message="Access token file is non-empty and not a placeholder." if not stub
++         else "PaperReview-AccessToken.txt is empty or still a placeholder. It must match paper/paper.pdf.")
++
++
++def _check_contribution(bundle: Path, checks: list[dict]):
++    path = bundle / "framework_contribution.md"
++    if not path.is_file():
++        return
++    text = path.read_text(encoding="utf-8", errors="replace")
++    linked = "http://" in text or "https://" in text
++    _add(checks, check_id="submission_contribution", severity="error", passed=linked,
++         message="framework_contribution.md contains a PR or patch link." if linked
++         else "framework_contribution.md needs an http(s) link to the PR or patch.")
++
++
++def _check_resources(bundle: Path, checks: list[dict]):
++    path = bundle / "resource_report.md"
++    if not path.is_file():
++        return
++    text = path.read_text(encoding="utf-8", errors="replace")
++    traced = bool(re.search(r"token|时长|运行|latency|hour", text, re.IGNORECASE))
++    _add(checks, check_id="submission_resources", severity="error", passed=traced,
++         message="resource_report.md records token use or runtime." if traced
++         else "resource_report.md should record token consumption and runtime.")
++
++
++def _check_pdf(bundle: Path, checks: list[dict]):
++    path = bundle / "paper/paper.pdf"
++    if not path.is_file():
++        return
++    header = path.read_bytes()[:5]
++    _add(checks, check_id="submission_pdf", severity="error", passed=header == b"%PDF-",
++         message="paper/paper.pdf has a PDF header." if header == b"%PDF-"
++         else "paper/paper.pdf is not a PDF file.")
++
++
++def _check_secrets(bundle: Path, checks: list[dict]):
++    found = []
++    for path in bundle.rglob("*"):
++        if not path.is_file() or ".git" in path.parts:
++            continue
++        relative = str(path.relative_to(bundle)).replace("\\", "/")
++        if path.name in SECRET_FILENAMES:
++            found.append(relative)
++            continue
++        if path.suffix.lower() not in {".py", ".yaml", ".yml", ".json", ".env", ".md", ".txt", ".toml"}:
++            continue
++        try:
++            text = path.read_text(encoding="utf-8")
++        except UnicodeDecodeError:
++            continue
++        if SECRET_KEY.search(text):
++            found.append(relative)
++            continue
++        for match in SECRET_ASSIGNMENT.finditer(text):
++            value = match.group(1).lower()
++            if not any(marker in value for marker in PLACEHOLDER_SECRET):
++                found.append(relative)
++                break
++    _add(checks, check_id="submission_secrets", severity="error", passed=not found,
++         message="No config secrets or credential files were found." if not found
++         else "Remove secrets before packing: " + ", ".join(sorted(set(found))))
+diff --git a/jiuwenswarm/research-paper-generator/tests/test_quality.py b/jiuwenswarm/research-paper-generator/tests/test_quality.py
+new file mode 100644
+index 0000000..477736e
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/tests/test_quality.py
+@@ -0,0 +1,188 @@
++"""Quality-gate checks against framework drafts and a hand-filled project."""
++
++import json
++import os
++import subprocess
++import sys
++import tempfile
++import time
++import unittest
++from pathlib import Path
++
++MODULE = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(MODULE / "scripts"))
++
++from paper_framework.project import generate_project
++from paper_quality.checker import check_project
++
++
++PROSE = (
++    "This section states the research question, the method, and the limits of the current evidence. "
++    "It does not claim a leaderboard result. Measurements stay in the cited result files."
++)
++
++
++class QualityTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temp.cleanup)
++        self.root = Path(self.temp.name)
++        self.brief = json.loads((MODULE / "examples/brief.json").read_text(encoding="utf-8"))
++        self.literature = json.loads((MODULE / "examples/literature.json").read_text(encoding="utf-8"))
++
++    def write(self, name, data):
++        path = self.root / name
++        path.write_text(json.dumps(data), encoding="utf-8")
++        return path
++
++    def generate(self, literature=None, name="paper"):
++        return generate_project(self.write("brief.json", self.brief), self.root / name,
++                                self.write("literature.json", literature) if literature is not None else None)
++
++    def ids(self, report, check_id, passed=None):
++        items = [item for item in report["checks"] if item["id"] == check_id]
++        if passed is not None:
++            items = [item for item in items if item["passed"] is passed]
++        return items
++
++    def test_skeleton_is_not_ready(self):
++        self.generate()
++        report = check_project(self.root / "paper")
++        self.assertFalse(report["ready_for_submission"])
++        self.assertTrue(self.ids(report, "completeness_placeholder", False))
++        self.assertTrue(self.ids(report, "format_draft_banner", False))
++        self.assertTrue(self.ids(report, "format_compile", False))
++        self.assertTrue(self.ids(report, "format_anonymous", True))
++        self.assertGreater(report["summary"]["errors"], 0)
++        self.assertTrue((self.root / "paper/quality_report.json").is_file())
++
++    def test_literature_skeleton_still_has_draft_citations(self):
++        self.generate(self.literature, name="cited")
++        report = check_project(self.root / "cited")
++        self.assertTrue(self.ids(report, "completeness_draft_bibliography", False))
++        self.assertTrue(self.ids(report, "format_bibliography_order", True))
++
++    def ready_draft(self):
++        self.brief.pop("methods", None)
++        self.brief.pop("experiments", None)
++        self.generate()
++        project = self.root / "paper"
++        for path in (project / "sections").glob("*.tex"):
++            path.write_text(PROSE + "\n", encoding="utf-8")
++        paper = project / "paper.tex"
++        paper.write_text(paper.read_text(encoding="utf-8").replace(
++            r"\lhead{Research paper framework -- draft}", ""), encoding="utf-8")
++        report = project / "compile_report.json"
++        pdf = project / "paper.pdf"
++        report.write_text(json.dumps({"success": True, "warnings": []}), encoding="utf-8")
++        (project / "paper.log").write_text("Output written on paper.pdf (6 pages, 1000 bytes).\n", encoding="utf-8")
++        pdf.write_bytes(b"%PDF-1.4\n")
++        stamp = time.time() + 30
++        os.utime(report, (stamp, stamp))
++        os.utime(pdf, (stamp, stamp))
++        return project
++
++    def test_filled_anonymous_draft_can_pass(self):
++        project = self.ready_draft()
++        report = check_project(project)
++        self.assertTrue(report["ready_for_submission"], [item for item in report["checks"] if not item["passed"]])
++        self.assertEqual(report["summary"]["errors"], 0)
++
++    def test_source_edited_after_compile_is_stale(self):
++        project = self.ready_draft()
++        section = project / "sections/introduction.tex"
++        later = time.time() + 120
++        os.utime(section, (later, later))
++        report = check_project(project)
++        self.assertTrue(self.ids(report, "format_compile_stale", False))
++
++    def test_section_omitted_from_paper_tex_fails(self):
++        project = self.ready_draft()
++        paper = project / "paper.tex"
++        paper.write_text(paper.read_text(encoding="utf-8").replace(r"\input{sections/discussion.tex}", ""),
++                         encoding="utf-8")
++        stamp = time.time() + 30
++        os.utime(project / "compile_report.json", (stamp, stamp))
++        os.utime(project / "paper.pdf", (stamp, stamp))
++        report = check_project(project)
++        self.assertTrue(self.ids(report, "completeness_section_input", False))
++
++    def test_assigned_citation_must_be_used_and_defined(self):
++        self.brief["methods"][0]["citation_ids"] = ["memgpt"]
++        self.generate(self.literature, name="cited-method")
++        project = self.root / "cited-method"
++        report = check_project(project)
++        self.assertTrue(self.ids(report, "completeness_assigned_citation", False))
++        self.assertTrue(self.ids(report, "completeness_citation_used", False))
++        key = json.loads((project / "citation_map.json").read_text())["by_source_id"]["memgpt"]
++        method = project / "sections/method.tex"
++        method.write_text(PROSE + f" Memory systems include \\citep{{{key},not_a_key}}.\n", encoding="utf-8")
++        report = check_project(project)
++        self.assertFalse(self.ids(report, "completeness_assigned_citation", False))
++        self.assertTrue(self.ids(report, "completeness_citation_unknown", False))
++
++    def test_result_numbers_must_come_from_the_evidence_file(self):
++        self.write("actual.json", {"accuracy": 0.25})
++        self.brief["experiments"][0].update(status="completed", result_path="actual.json")
++        self.generate(name="measured")
++        results = self.root / "measured/sections/results.tex"
++        results.write_text(PROSE + " The measured accuracy is 0.25.\n", encoding="utf-8")
++        report = check_project(self.root / "measured")
++        self.assertTrue(self.ids(report, "completeness_result_numbers", True))
++        results.write_text(PROSE + " The measured accuracy is 90\\%.\n", encoding="utf-8")
++        report = check_project(self.root / "measured")
++        self.assertTrue(self.ids(report, "completeness_result_numbers", False))
++
++    def test_planned_experiment_cannot_claim_a_gain(self):
++        self.generate(name="planned")
++        results = self.root / "planned/sections/results.tex"
++        results.write_text(PROSE + " Accuracy improved by 20\\%.\n", encoding="utf-8")
++        report = check_project(self.root / "planned")
++        self.assertTrue(self.ids(report, "completeness_planned_result", False))
++
++    def test_camera_ready_flag_blocks_anonymous_submission(self):
++        self.generate()
++        paper = self.root / "paper/paper.tex"
++        paper.write_text(paper.read_text(encoding="utf-8") + "\n\\iclrfinalcopy\n", encoding="utf-8")
++        report = check_project(self.root / "paper")
++        self.assertTrue(self.ids(report, "format_anonymous", False))
++
++    def test_missing_figure_and_changed_evidence_are_errors(self):
++        evidence = self.write("actual.json", {"accuracy": 0.25})
++        self.brief["experiments"][0].update(status="completed", result_path="actual.json")
++        self.generate()
++        evidence.write_text('{"accuracy": 0.9}', encoding="utf-8")
++        method = self.root / "paper/sections/method.tex"
++        method.write_text(method.read_text(encoding="utf-8") + "\n\\includegraphics{figures/missing.png}\n",
++                          encoding="utf-8")
++        report = check_project(self.root / "paper")
++        self.assertTrue(self.ids(report, "completeness_evidence_hash", False))
++        self.assertTrue(self.ids(report, "format_figures", False))
++        self.assertEqual(self.ids(report, "format_figures", False)[0]["severity"], "error")
++
++    def test_chinese_prose_and_writing_stubs_fail_grammar(self):
++        self.brief.pop("methods")
++        self.brief.pop("experiments")
++        self.generate()
++        section = self.root / "paper/sections/introduction.tex"
++        section.write_text(PROSE + " TODO 这里还没写完。\n", encoding="utf-8")
++        report = check_project(self.root / "paper")
++        self.assertTrue(self.ids(report, "grammar_cjk", False))
++        self.assertTrue(self.ids(report, "grammar_stub", False))
++
++    def test_missing_project_is_a_usage_error(self):
++        with self.assertRaisesRegex(ValueError, "paper.tex"):
++            check_project(self.root / "missing")
++
++    def test_cli_exits_nonzero_until_the_draft_is_ready(self):
++        self.generate()
++        script = MODULE / "scripts/check_quality.py"
++        failed = subprocess.run([sys.executable, str(script), str(self.root / "paper")],
++                                capture_output=True, text=True)
++        self.assertEqual(failed.returncode, 1, failed.stdout + failed.stderr)
++        self.assertIn("Not ready for submission", failed.stderr)
++        self.assertIn("completeness_placeholder", failed.stdout)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/jiuwenswarm/research-paper-generator/tests/test_submission.py b/jiuwenswarm/research-paper-generator/tests/test_submission.py
+new file mode 100644
+index 0000000..3ea931f
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/tests/test_submission.py
+@@ -0,0 +1,74 @@
++"""Contest bundle checks stay separate from the paper-project checker."""
++
++import subprocess
++import sys
++import tempfile
++import unittest
++from pathlib import Path
++
++MODULE = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(MODULE / "scripts"))
++
++from paper_quality.submission import check_submission
++
++
++class SubmissionTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temp.cleanup)
++        self.bundle = Path(self.temp.name) / "team"
++        self._write_complete()
++
++    def _write_complete(self):
++        files = {
++            "paper/paper.pdf": b"%PDF-1.4\n",
++            "AgenticReviewer/PaperReview-AccessToken.txt": b"review-token-123456\n",
++            "docs/architecture.md": b"architecture\n",
++            "docs/module_call.md": b"modules\n",
++            "docs/innovation.md": b"innovation\n",
++            "framework_contribution.md": b"PR: https://github.com/openJiuwen/jiuwenswarm/pull/1\n",
++            "resource_report.md": b"tokens: 1000\nruntime: 2 hours\n",
++            "提交说明.md": b"layout\n",
++            "code/README.md": b"agent\n",
++        }
++        for relative, content in files.items():
++            path = self.bundle / relative
++            path.parent.mkdir(parents=True, exist_ok=True)
++            path.write_bytes(content)
++
++    def test_complete_bundle_passes(self):
++        report = check_submission(self.bundle)
++        self.assertTrue(report["ready_for_submission"], [item for item in report["checks"] if not item["passed"]])
++        self.assertTrue((self.bundle.parent / "submission_report.json").is_file())
++
++    def test_placeholder_token_and_missing_link_fail(self):
++        (self.bundle / "AgenticReviewer/PaperReview-AccessToken.txt").write_text("TODO\n", encoding="utf-8")
++        (self.bundle / "framework_contribution.md").write_text("No link yet.\n", encoding="utf-8")
++        report = check_submission(self.bundle)
++        failed = {item["id"] for item in report["checks"] if not item["passed"]}
++        self.assertIn("submission_token", failed)
++        self.assertIn("submission_contribution", failed)
++
++    def test_real_secret_fails_and_example_value_does_not(self):
++        settings = self.bundle / "code/settings.py"
++        settings.write_text('API_KEY = "your-api-key-here-example"\n', encoding="utf-8")
++        report = check_submission(self.bundle)
++        self.assertTrue(report["ready_for_submission"], [item for item in report["checks"] if not item["passed"]])
++        settings.write_text('API_KEY = "sk-livekeyvalue1234567890"\n', encoding="utf-8")
++        report = check_submission(self.bundle)
++        self.assertTrue(any(item["id"] == "submission_secrets" and not item["passed"] for item in report["checks"]))
++        settings.write_text('API_KEY = "your-api-key-here-example"\n', encoding="utf-8")
++        (self.bundle / "code/config.yaml").write_text("model: example\n", encoding="utf-8")
++        report = check_submission(self.bundle)
++        self.assertTrue(any(item["id"] == "submission_secrets" and not item["passed"] for item in report["checks"]))
++
++    def test_cli_rejects_a_missing_bundle(self):
++        script = MODULE / "scripts/check_submission.py"
++        result = subprocess.run([sys.executable, str(script), str(self.bundle / "missing")],
++                                capture_output=True, text=True)
++        self.assertEqual(result.returncode, 1)
++        self.assertIn("does not exist", result.stderr)
++
++
++if __name__ == "__main__":
++    unittest.main()

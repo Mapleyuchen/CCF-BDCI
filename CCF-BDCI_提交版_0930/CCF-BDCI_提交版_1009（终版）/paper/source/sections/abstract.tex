@@ -1,0 +1,24 @@
+Agent memory retrieval requires a selector that delivers relevant items and an
+accounting of the cost to build them. We study temporal dominance --- a failure mode
+in the deployed hybrid selector where a fixed query-independent freshness weight
+displaces lexically relevant older records in favour of fresher but irrelevant ones.
+We introduce CTLS (Contrastive Tier-Based Lexical Selection), a novel selector that
+partitions candidates by lexical overlap tier before applying temporal scoring,
+provably eliminating temporal dominance by construction. The partition satisfies a
+Non-Dominance Property: for any two candidates where one has positive Jaccard overlap
+with the query and the other has zero overlap, CTLS always ranks the positive-overlap
+item first, regardless of freshness gap, access frequency, or importance values, and
+regardless of the weight assigned to the temporal term within the relevant-tier score.
+On a stratified LongMemEval-S subset of 84 memory episodes under three token budgets,
+BM25 outperforms the deployed hybrid by 36.1, 29.4, and 33.7 percentage points
+respectively (all Holm-corrected; $p \le 0.0022$ throughout). The hybrid\_no\_time
+ablation recovers most of this gap, confirming the temporal term as the primary cause.
+CTLS formalizes this fix while preserving temporal decay as a within-tier tiebreaker
+rather than discarding it globally. The mechanism inequality derived in this paper
+shows exactly when temporal dominance occurs, explains why budget growth does not help
+the hybrid, and establishes hybrid\_no\_time as a conservative lower bound on CTLS.
+CTLS requires no model calls, no embedding model, and no learned parameters; it is a
+zero-cost selector substitution that leaves construction cost and write amortization
+unchanged. We report the formal Non-Dominance Property with proof sketch, controlled
+evidence across three token budgets with cluster bootstrap inference, and lifecycle
+cost under memory reuse.

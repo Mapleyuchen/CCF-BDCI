@@ -1,0 +1,634 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "paper_quality_report",
+  "ready_for_submission": true,
+  "summary": {
+    "passed": 78,
+    "errors": 0,
+    "warnings": 0,
+    "info": 0
+  },
+  "checks": [
+    {
+      "id": "completeness_section_order",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "outline.json sections follow the eight-section ICLR order."
+    },
+    {
+      "id": "completeness_placeholder",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no draft placeholder.",
+      "target": "sections/abstract.tex"
+    },
+    {
+      "id": "completeness_placeholder",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no draft placeholder.",
+      "target": "sections/introduction.tex"
+    },
+    {
+      "id": "completeness_placeholder",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no draft placeholder.",
+      "target": "sections/related_work.tex"
+    },
+    {
+      "id": "completeness_placeholder",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no draft placeholder.",
+      "target": "sections/method.tex"
+    },
+    {
+      "id": "completeness_placeholder",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no draft placeholder.",
+      "target": "sections/experiments.tex"
+    },
+    {
+      "id": "completeness_placeholder",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no draft placeholder.",
+      "target": "sections/results.tex"
+    },
+    {
+      "id": "completeness_placeholder",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no draft placeholder.",
+      "target": "sections/discussion.tex"
+    },
+    {
+      "id": "completeness_placeholder",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no draft placeholder.",
+      "target": "sections/conclusion.tex"
+    },
+    {
+      "id": "completeness_draft_bibliography",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Draft bibliography and \\nocite{*} are removed.",
+      "target": "paper.tex"
+    },
+    {
+      "id": "completeness_evidence_hash",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Result file matches the hash recorded at planning time.",
+      "target": "D:\\同济大四\\数据挖掘\\CCF BDCI\\CCF-BDCI_提交版_0930\\CCF-BDCI_提交版_1009\\CCF-BDCI_runs\\ctls-paper-replay\\evidence\\fair_baselines_512.json"
+    },
+    {
+      "id": "completeness_evidence_hash",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Result file matches the hash recorded at planning time.",
+      "target": "D:\\同济大四\\数据挖掘\\CCF BDCI\\CCF-BDCI_提交版_0930\\CCF-BDCI_提交版_1009\\CCF-BDCI_runs\\ctls-paper-replay\\evidence\\fair_baselines.json"
+    },
+    {
+      "id": "completeness_evidence_hash",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Result file matches the hash recorded at planning time.",
+      "target": "D:\\同济大四\\数据挖掘\\CCF BDCI\\CCF-BDCI_提交版_0930\\CCF-BDCI_提交版_1009\\CCF-BDCI_runs\\ctls-paper-replay\\evidence\\protocol_replication.json"
+    },
+    {
+      "id": "completeness_evidence_hash",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Result file matches the hash recorded at planning time.",
+      "target": "D:\\同济大四\\数据挖掘\\CCF BDCI\\CCF-BDCI_提交版_0930\\CCF-BDCI_提交版_1009\\CCF-BDCI_runs\\ctls-paper-replay\\evidence\\memory_reuse.json"
+    },
+    {
+      "id": "completeness_evidence_hash",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Result file matches the hash recorded at planning time.",
+      "target": "D:\\同济大四\\数据挖掘\\CCF BDCI\\CCF-BDCI_提交版_0930\\CCF-BDCI_提交版_1009\\CCF-BDCI_runs\\ctls-paper-replay\\evidence\\normalized_results.json"
+    },
+    {
+      "id": "completeness_section_input",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "paper.tex inputs every outline section.",
+      "target": "paper.tex"
+    },
+    {
+      "id": "completeness_subsection",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Every planned subsection still appears in its section file.",
+      "target": "sections"
+    },
+    {
+      "id": "completeness_citation_unknown",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Every citation key exists in references.bib.",
+      "target": "references.bib"
+    },
+    {
+      "id": "completeness_bib_fields",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Bibliography entries include author, title, and year.",
+      "target": "references.bib"
+    },
+    {
+      "id": "completeness_citation_used",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "At least one supplied source is cited in the section files."
+    },
+    {
+      "id": "completeness_assigned_citation",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Method citation keys requested by the brief appear in that section.",
+      "target": "sections"
+    },
+    {
+      "id": "completeness_result_numbers",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Measured numbers in Results match the completed result files.",
+      "target": "sections/results.tex"
+    },
+    {
+      "id": "completeness_supporting_materials",
+      "category": "completeness",
+      "severity": "error",
+      "passed": true,
+      "message": "Supporting material snapshots match their recorded hashes."
+    },
+    {
+      "id": "format_iclr_style",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "paper.tex loads iclr2027_conference.",
+      "target": "paper.tex"
+    },
+    {
+      "id": "format_style_file",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "iclr2027_conference.sty is present.",
+      "target": "iclr2027_conference.sty"
+    },
+    {
+      "id": "format_style_file",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "iclr2027_conference.bst is present.",
+      "target": "iclr2027_conference.bst"
+    },
+    {
+      "id": "format_style_file",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "natbib.sty is present.",
+      "target": "natbib.sty"
+    },
+    {
+      "id": "format_anonymous",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "Anonymous submission keeps Anonymous authors and leaves \\iclrfinalcopy unset.",
+      "target": "paper.tex"
+    },
+    {
+      "id": "format_anonymity_leak",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "Anonymous draft has no email, GitHub profile, or \\thanks.",
+      "target": "paper.tex"
+    },
+    {
+      "id": "format_draft_banner",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "Draft running header is removed.",
+      "target": "paper.tex"
+    },
+    {
+      "id": "format_bibliography_order",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "\\bibliographystyle appears before \\bibliography.",
+      "target": "paper.tex"
+    },
+    {
+      "id": "format_compile",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "Compilation succeeded without undefined citations.",
+      "target": "compile_report.json"
+    },
+    {
+      "id": "format_compile_stale",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "Compilation is newer than paper.tex, section files, and references.bib.",
+      "target": "compile_report.json"
+    },
+    {
+      "id": "format_pdf_size",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "paper.pdf is within 10MB.",
+      "target": "paper.pdf"
+    },
+    {
+      "id": "format_page_count",
+      "category": "format",
+      "severity": "info",
+      "passed": true,
+      "message": "pdflatex reports 13 pages, including the bibliography. Contest rules do not limit length.",
+      "target": "paper.log"
+    },
+    {
+      "id": "format_figures",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "Every \\includegraphics target exists.",
+      "target": "sections"
+    },
+    {
+      "id": "format_figure_caption",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "Every figure has a caption and a label.",
+      "target": "sections"
+    },
+    {
+      "id": "format_typography",
+      "category": "format",
+      "severity": "error",
+      "passed": true,
+      "message": "Paper sources have no CJK text, smart quotes, or unmatched math delimiters.",
+      "target": "paper.tex"
+    },
+    {
+      "id": "grammar_cjk",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no CJK characters.",
+      "target": "sections/abstract.tex"
+    },
+    {
+      "id": "grammar_stub",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "No TODO, FIXME, lorem ipsum, or XXX marker.",
+      "target": "sections/abstract.tex"
+    },
+    {
+      "id": "grammar_length",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "Section has 180 words.",
+      "target": "sections/abstract.tex"
+    },
+    {
+      "id": "grammar_repeated_word",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "No immediate repeated word.",
+      "target": "sections/abstract.tex"
+    },
+    {
+      "id": "grammar_braces",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Braces are balanced.",
+      "target": "sections/abstract.tex"
+    },
+    {
+      "id": "grammar_cjk",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no CJK characters.",
+      "target": "sections/introduction.tex"
+    },
+    {
+      "id": "grammar_stub",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "No TODO, FIXME, lorem ipsum, or XXX marker.",
+      "target": "sections/introduction.tex"
+    },
+    {
+      "id": "grammar_length",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "Section has 647 words.",
+      "target": "sections/introduction.tex"
+    },
+    {
+      "id": "grammar_repeated_word",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "No immediate repeated word.",
+      "target": "sections/introduction.tex"
+    },
+    {
+      "id": "grammar_braces",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Braces are balanced.",
+      "target": "sections/introduction.tex"
+    },
+    {
+      "id": "grammar_cjk",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no CJK characters.",
+      "target": "sections/related_work.tex"
+    },
+    {
+      "id": "grammar_stub",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "No TODO, FIXME, lorem ipsum, or XXX marker.",
+      "target": "sections/related_work.tex"
+    },
+    {
+      "id": "grammar_length",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "Section has 359 words.",
+      "target": "sections/related_work.tex"
+    },
+    {
+      "id": "grammar_repeated_word",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "No immediate repeated word.",
+      "target": "sections/related_work.tex"
+    },
+    {
+      "id": "grammar_braces",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Braces are balanced.",
+      "target": "sections/related_work.tex"
+    },
+    {
+      "id": "grammar_cjk",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no CJK characters.",
+      "target": "sections/method.tex"
+    },
+    {
+      "id": "grammar_stub",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "No TODO, FIXME, lorem ipsum, or XXX marker.",
+      "target": "sections/method.tex"
+    },
+    {
+      "id": "grammar_length",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "Section has 1031 words.",
+      "target": "sections/method.tex"
+    },
+    {
+      "id": "grammar_repeated_word",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "No immediate repeated word.",
+      "target": "sections/method.tex"
+    },
+    {
+      "id": "grammar_braces",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Braces are balanced.",
+      "target": "sections/method.tex"
+    },
+    {
+      "id": "grammar_cjk",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no CJK characters.",
+      "target": "sections/experiments.tex"
+    },
+    {
+      "id": "grammar_stub",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "No TODO, FIXME, lorem ipsum, or XXX marker.",
+      "target": "sections/experiments.tex"
+    },
+    {
+      "id": "grammar_length",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "Section has 370 words.",
+      "target": "sections/experiments.tex"
+    },
+    {
+      "id": "grammar_repeated_word",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "No immediate repeated word.",
+      "target": "sections/experiments.tex"
+    },
+    {
+      "id": "grammar_braces",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Braces are balanced.",
+      "target": "sections/experiments.tex"
+    },
+    {
+      "id": "grammar_cjk",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no CJK characters.",
+      "target": "sections/results.tex"
+    },
+    {
+      "id": "grammar_stub",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "No TODO, FIXME, lorem ipsum, or XXX marker.",
+      "target": "sections/results.tex"
+    },
+    {
+      "id": "grammar_length",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "Section has 476 words.",
+      "target": "sections/results.tex"
+    },
+    {
+      "id": "grammar_repeated_word",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "No immediate repeated word.",
+      "target": "sections/results.tex"
+    },
+    {
+      "id": "grammar_braces",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Braces are balanced.",
+      "target": "sections/results.tex"
+    },
+    {
+      "id": "grammar_cjk",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no CJK characters.",
+      "target": "sections/discussion.tex"
+    },
+    {
+      "id": "grammar_stub",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "No TODO, FIXME, lorem ipsum, or XXX marker.",
+      "target": "sections/discussion.tex"
+    },
+    {
+      "id": "grammar_length",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "Section has 312 words.",
+      "target": "sections/discussion.tex"
+    },
+    {
+      "id": "grammar_repeated_word",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "No immediate repeated word.",
+      "target": "sections/discussion.tex"
+    },
+    {
+      "id": "grammar_braces",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Braces are balanced.",
+      "target": "sections/discussion.tex"
+    },
+    {
+      "id": "grammar_cjk",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Section has no CJK characters.",
+      "target": "sections/conclusion.tex"
+    },
+    {
+      "id": "grammar_stub",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "No TODO, FIXME, lorem ipsum, or XXX marker.",
+      "target": "sections/conclusion.tex"
+    },
+    {
+      "id": "grammar_length",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "Section has 210 words.",
+      "target": "sections/conclusion.tex"
+    },
+    {
+      "id": "grammar_repeated_word",
+      "category": "grammar",
+      "severity": "warning",
+      "passed": true,
+      "message": "No immediate repeated word.",
+      "target": "sections/conclusion.tex"
+    },
+    {
+      "id": "grammar_braces",
+      "category": "grammar",
+      "severity": "error",
+      "passed": true,
+      "message": "Braces are balanced.",
+      "target": "sections/conclusion.tex"
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "thesis": "Under an equal full-section character budget, a lexical hybrid-selection memory rail substantially outperforms a prefix-truncated file-based project memory in answer accuracy, but the gain is purchased through model-backed memory-construction calls that inflate total token cost by roughly one to two orders of magnitude; the trade-off narrows as the budget grows because the file baseline recovers evidence that was previously truncated, yet it never fully closes the gap because whole-item packing avoids the partial-fact failures that prefix truncation produces.",
+  "contributions": [
+    "A paired, single-run empirical comparison of two concrete memory implementations (file-prefix vs. lexical hybrid selection) on 20 adapted LongMemEval-S single-session questions at two character budgets, with full cost accounting that includes memory-write tokens.",
+    "Evidence that at the restricted budget (600 chars) the baseline achieves 0% accuracy and 0% evidence recall while the enhanced rail reaches 65% on both, and that at the expanded budget (2400 chars) the gap narrows from 65 to 35 percentage points but does not vanish.",
+    "A decomposition showing that enhanced query-time tokens are comparable to or lower than baseline query tokens, yet total tokens per question are 20–56× higher because of 400 model-backed seed calls, making write cost the dominant expense.",
+    "An explicit catalogue of confounds—prefix vs. whole-item packing, file-metadata overhead, format differences, single-run design, string-match scoring—that prevents over-generalisation of the observed gaps."
+  ],
+  "section_plan": [
+    {
+      "id": "abstract",
+      "goal": "State the research question, the two arms, the two budgets, the headline accuracy and cost numbers, and the principal limitation (single run, adapted benchmark slice). No claims beyond the data.",
+      "key_claims": [
+        "At 600-char budget: baseline 0% accuracy, enhanced 65%; at 2400-char budget: baseline 60%, enhanced 95%.",
+        "Enhanced total tokens per question are 5 083 (small) and 13 202 (large) vs. 234 and 844 for baseline.",
+        "One run per budget; descriptive Wilson intervals only; no significance test."
+      ],
+      "citations": []
+    },
+    {
+      "id": "introduction",
+      "goal": "Motivate the question from the practitioner's perspective: project-memory files are cheap but brittle under truncation; retrieval-style selection is flexible but requires construction cost. Pose three research questions: (RQ1) accuracy under equal budgets, (RQ2) association of complete evidence with correct answers, (RQ3) total write-plus-query cost. State scope limits up front.",
+      "key_claims": [
+        "The study audits an existing implementation rather than proposing a new algorithm.",
+        "Both arms receive identical facts, questions, model, and system prompt; only the memory-construction and selection protocol differ."
+      ],
+      "citations": []
+    },
+    {
+      "id": "related_work",
+      "goal": "Organise the six supplied references into three clusters: (a) memory control and organisation (MemGPT, A-MEM, Generative Agents), (b) evidence access and position effects (Lost in the Middle, MemoryBank), (c) evaluation of long-term interactive memory (LongMemEval). For each, state what the source actually demonstrates and what this study does NOT replicate or test.",
+      "key_claims": [
+        "MemGPT introduces OS-inspired virtual context management; our fixed L1 rail does not implement its autonomous controller.",
+        "A-MEM creates structured, evolving Zettelkasten-style notes; our lexical ranking lacks autonomous linking.",
+        "Generative Agents synthesise reflections for planning; we neither implement reflection nor test social behaviour.",
+        "Lost in the Middle shows position-dependent retrieval difficulty; our prefix truncation may share symptoms but is not shown to share the same cause.",
+        "MemoryBank models forgetting/reinforcement over time; our temporal decay is a simpler heuristic.",
+        "LongMemEval separates indexing, retrieval, and reading across five task types; our adapted slice covers only single-session extraction."
+      ],
+      "citations": [
+        "ref_959d6858d034c6e1",
+        "ref_1aacba116cbe3c5b",
+        "ref_6e953134a3c04402",
+        "ref_9dbf664b6954efbc",
+        "ref_713e886950406893",
+        "ref_ab2c226739f2f52a"
+      ]
+    },
+    {
+      "id": "method",
+      "goal": "Describe the two arms and the protocol with enough detail to reproduce the run. Distinguish implemented features from architectural stubs (L2/L3).",
+      "subsections": [
+        {
+          "id": "method_baseline",
+          "goal": "ProjectMemoryRail writes facts to an isolated JIUWENSWARM.md file. The prompt includes file metadata and is truncated by prefix to the character budget. No embedding retrieval. Both arms share facts, questions, model (qwen-plus), system prompt, and no tools.",
+          "key_claims": [
+            "Prefix truncation means later facts are systematically lost at small budgets.",
+            "File metadata consumes part of the 600/2400-char budget, reducing effective fact space."
+          ]
+        },
+        {
+          "id": "method_retrieval",
+          "goal": "EnhancedMemoryRail stores completed exchanges in process-local L1 (capacity 20, TTL 3600 s). Ranking: 0.4 Jaccard + 0.3 temporal decay + 0.2 capped log frequency + 0.1 importance. Top-10 candidates, each capped at 500 chars, greedily packed as whole items. Cite MemGPT as conceptual context only.",
+          "key_claims": [
+            "Whole-item packing avoids partial-fact corruption but may skip items that exceed remaining budget.",
+            "L2/L3 classes exist in the codebase but are not exercised; no cross-restart persistence or team sync."
+          ],
+          "citations": [
+            "ref_959d6858d034c6e1"
+          ]
+        },
+        {
+          "id": "method_protocol",
+          "goal": "Each question gets its own fact episode and fresh agents. Baseline writes facts to disk; enhanced performs model-backed memory-writing conversations (400 seed calls per budget). Formal question uses a new conversation ID. Runner verifies isolated history and actual memory injection, alternates arm order. Correctness: accepted-answer string match. Evidence recall: complete target fact survives truncation. Cite LongMemEval for the adapted evaluation design.",
+          "key_claims": [
+            "400 seed model calls are the source of the write-cost asymmetry.",
+            "Latency includes writes, amortised over 20 paired observations."
+          ],
+          "citations": [
+            "ref_ab2c226739f2f52a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experiments",
+      "goal": "Specify the adapted LongMemEval-S slice (20 single-session-user questions converted to fixed fact episodes with target and distractor turns), the two budgets (600 and 2400 chars), metrics (answer accuracy, complete evidence recall, total tokens including writes, query and end-to-end latency), scoring rules, and reproducibility details. State that this is not the official LongMemEval benchmark.",
+      "subsections": [
+        {
+          "id": "setup_public_small",
+          "goal": "600-char budget. 20 unique questions, 1 repeat, 20 paired observations. Metrics listed. Note that the small budget disadvantages the baseline through truncation and metadata overhead—flag as confound."
+        },
+        {
+          "id": "setup_public_large",
+          "goal": "2400-char budget. Same 20 questions. Metrics listed. Note that at this budget the baseline can fit more facts but prefix order still determines which survive."
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "goal": "Report only traceable measurements. Use metric tokens. Include cost and negative outcomes. Present paired outcome tables. Do not claim statistical significance.",
+      "subsections": [
+        {
+          "id": "result_public_small",
+          "goal": "Baseline accuracy [[metric:public_small.baseline.accuracy]], evidence recall [[metric:public_small.baseline.evidence_recall]]. Enhanced accuracy [[metric:public_small.enhanced.accuracy]], evidence recall [[metric:public_small.enhanced.evidence_recall]]. Accuracy gain [[metric:public_small.accuracy_gain_pp]] pp. Paired: 0 both-correct, 13 enhanced-only, 0 baseline-only, 7 both-wrong. Tokens per question: baseline [[metric:public_small.baseline.tokens_per_question]], enhanced [[metric:public_small.enhanced.tokens_per_question]]. Enhanced seed tokens [[metric:public_small.enhanced.seed_tokens]] from 400 calls. Query latency baseline [[metric:public_small.baseline.query_latency_ms]] ms vs enhanced [[metric:public_small.enhanced.query_latency_ms]] ms; end-to-end baseline [[metric:public_small.baseline.end_to_end_latency_ms]] ms vs enhanced [[metric:public_small.enhanced.end_to_end_latency_ms]] ms. Wilson intervals: baseline [0, 0.161], enhanced [0.433, 0.819]. All 7 both-wrong cases show enhanced evidence_recall 0, indicating the target fact was not retrieved. Note: 0 correct-without-full-evidence and 0 wrong-with-full-evidence in both arms.",
+          "metric_tokens_to_use": [
+            "[[metric:public_small.baseline.accuracy]]",
+            "[[metric:public_small.enhanced.accuracy]]",
+            "[[metric:public_small.baseline.evidence_recall]]",
+            "[[metric:public_small.enhanced.evidence_recall]]",
+            "[[metric:public_small.accuracy_gain_pp]]",
+            "[[metric:public_small.baseline.tokens_per_question]]",
+            "[[metric:public_small.enhanced.tokens_per_question]]",
+            "[[metric:public_small.enhanced.seed_tokens]]",
+            "[[metric:public_small.baseline.query_latency_ms]]",
+            "[[metric:public_small.enhanced.query_latency_ms]]",
+            "[[metric:public_small.baseline.end_to_end_latency_ms]]",
+            "[[metric:public_small.enhanced.end_to_end_latency_ms]]",
+            "[[metric:public_small.paired.both_correct]]",
+            "[[metric:public_small.paired.enhanced_only]]",
+            "[[metric:public_small.paired.baseline_only]]",
+            "[[metric:public_small.paired.both_wrong]]"
+          ]
+        },
+        {
+          "id": "result_public_large",
+          "goal": "Baseline accuracy [[metric:public_large.baseline.accuracy]], evidence recall [[metric:public_large.baseline.evidence_recall]]. Enhanced accuracy [[metric:public_large.enhanced.accuracy]], evidence recall [[metric:public_large.enhanced.evidence_recall]]. Accuracy gain [[metric:public_large.accuracy_gain_pp]] pp. Paired: 12 both-correct, 7 enhanced-only, 0 baseline-only, 1 both-wrong. Tokens per question: baseline [[metric:public_large.baseline.tokens_per_question]], enhanced [[metric:public_large.enhanced.tokens_per_question]]. Enhanced seed tokens [[metric:public_large.enhanced.seed_tokens]]. Query latency baseline [[metric:public_large.baseline.query_latency_ms]] ms vs enhanced [[metric:public_large.enhanced.query_latency_ms]] ms (enhanced lower at query time); end-to-end baseline [[metric:public_large.baseline.end_to_end_latency_ms]] ms vs enhanced [[metric:public_large.enhanced.end_to_end_latency_ms]] ms. Wilson intervals: baseline [0.387, 0.781], enhanced [0.764, 0.991]. Baseline has 1 correct-without-full-evidence (question 60d45044: partial fact still contains answer). Enhanced has 0 correct-without-full-evidence and 0 wrong-with-full-evidence. The single both-wrong case is question 75499fd8 (dog breed).",
+          "metric_tokens_to_use": [
+            "[[metric:public_large.baseline.accuracy]]",
+            "[[metric:public_large.enhanced.accuracy]]",
+            "[[metric:public_large.baseline.evidence_recall]]",
+            "[[metric:public_large.enhanced.evidence_recall]]",
+            "[[metric:public_large.accuracy_gain_pp]]",
+            "[[metric:public_large.baseline.tokens_per_question]]",
+            "[[metric:public_large.enhanced.tokens_per_question]]",
+            "[[metric:public_large.enhanced.seed_tokens]]",
+            "[[metric:public_large.baseline.query_latency_ms]]",
+            "[[metric:public_large.enhanced.query_latency_ms]]",
+            "[[metric:public_large.baseline.end_to_end_latency_ms]]",
+            "[[metric:public_large.enhanced.end_to_end_latency_ms]]",
+            "[[metric:public_large.paired.both_correct]]",
+            "[[metric:public_large.paired.enhanced_only]]",
+            "[[metric:public_large.paired.baseline_only]]",
+            "[[metric:public_large.paired.both_wrong]]",
+            "[[metric:public_large.baseline.correct_without_full_evidence]]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "discussion",
+      "goal": "Interpret results cautiously. Address: (1) the prefix-truncation confound that structurally disadvantages the baseline at small budgets; (2) whole-item packing vs. prefix as a format difference, not purely a retrieval-quality difference; (3) the 400 seed calls as the dominant cost driver; (4) the fact that evidence recall tracks accuracy almost perfectly in the enhanced arm but not in the baseline at the large budget (1 correct-without-full-evidence); (5) the 7 both-wrong cases at small budget and 1 at large budget indicating retrieval failures, not just truncation; (6) no repeated runs, no significance test, no offline retrieval ablation; (7) string-match scoring may miss paraphrastic correct answers; (8) L2/L3 persistence and team sync are untested; (9) the adapted LongMemEval slice is not the official benchmark. Distinguish budget sensitivity from component ablation explicitly.",
+      "key_claims": [
+        "The accuracy gap is real within this protocol but cannot be attributed to a single factor because construction protocol and formatting differ between arms.",
+        "Write cost is the price of selective retrieval; whether it is justified depends on the deployment's query-to-write ratio.",
+        "No claim is made about the automatic paper writer or any end-to-end generation pipeline."
+      ]
+    },
+    {
+      "id": "conclusion",
+      "goal": "Answer the three research questions using only the reviewed results. RQ1: enhanced selection improves accuracy by 65 pp (small) and 35 pp (large) under equal character budgets. RQ2: complete evidence recall is a near-necessary condition for correctness in the enhanced arm; the baseline can occasionally answer correctly from partial evidence at the large budget. RQ3: the enhanced arm's total token cost is 20–56× higher due to memory-write calls, and end-to-end latency is roughly 10–18× higher. Restate that these are single-run descriptive findings on an adapted benchmark slice.",
+      "key_claims": [
+        "Retrieved memory buys accuracy, but the purchase price is write-time model cost.",
+        "The trade-off narrows with budget but does not vanish within the tested range.",
+        "Future work requires repeated runs, component ablations, and official LongMemEval evaluation."
+      ]
+    }
+  ],
+  "claim_limits": [
+    "All accuracy and recall figures come from a single run per budget on 20 questions. Wilson intervals describe binomial uncertainty over those 20 selected questions, not variability across repeated model runs. No significance test is claimed or justified.",
+    "The dataset is an adapted LongMemEval-S single-session-user slice converted into fixed fact episodes. It is not the official LongMemEval benchmark and does not cover multi-session reasoning, temporal reasoning, updates, or abstention.",
+    "The two arms differ in construction protocol (disk write vs. 400 model-backed seed calls) and formatting (prefix-truncated file with metadata vs. whole-item packed exchanges). The observed accuracy gap cannot be cleanly attributed to retrieval quality alone.",
+    "The smaller budget (600 chars) structurally disadvantages the baseline because file metadata consumes part of the budget and prefix truncation drops later facts. This is a confound, not a neutral design choice.",
+    "String-based accepted-answer matching may miss semantically correct paraphrases. Semantic review of the 7 both-wrong (small) and 1 both-wrong (large) cases has not been performed.",
+    "The enhanced rail writes only to process-local L1 memory. L2/L3 persistence, cross-restart durability, and team synchronisation are architectural stubs that are not exercised or evaluated.",
+    "No offline retrieval ablation (e.g., varying the Jaccard weight or removing temporal decay) has been performed. Budget sensitivity is tested; component sensitivity is not.",
+    "MemGPT, A-MEM, Generative Agents, MemoryBank, and Lost in the Middle are cited as conceptual context. None is implemented, replicated, or empirically compared in this study.",
+    "The study does not evaluate or validate the automatic paper writer itself."
+  ],
+  "failure_modes": [
+    {
+      "id": "fm_prefix_confound",
+      "description": "The baseline's prefix truncation is a deterministic, order-dependent failure mode. At 600 chars, every question's target fact falls outside the prefix, yielding 0% accuracy. A reviewer could argue the comparison is between 'no relevant information' and 'selected relevant information', not between two retrieval strategies.",
+      "mitigation": "State the confound explicitly in the methods and discussion. Present the large-budget results where the baseline does recover 60% accuracy. Do not claim the small-budget gap isolates retrieval quality."
+    },
+    {
+      "id": "fm_write_cost_asymmetry",
+      "description": "The enhanced arm's 400 seed model calls are an artefact of the memory-construction protocol, not an inherent property of lexical retrieval. A different construction method (e.g., direct insertion without model calls) would eliminate most of the cost gap.",
+      "mitigation": "Report seed tokens and seed model calls separately from query tokens. Discuss that the cost is a property of the current writing protocol, not of the ranking function."
+    },
+    {
+      "id": "fm_single_run",
+      "description": "One run per budget means no estimate of model stochasticity, sampling variance, or sensitivity to fact-episode ordering. Any single question's outcome could flip with a different model sample.",
+      "mitigation": "Label all intervals as descriptive Wilson intervals over selected questions. Do not use the word 'significant'. Recommend repeated runs as future work."
+    },
+    {
+      "id": "fm_string_match",
+      "description": "Accepted-answer string matching may produce false negatives for paraphrastic answers. The baseline's single correct-without-full-evidence case at the large budget (question 60d45044) shows partial evidence can suffice, but the scoring rule does not capture graded correctness.",
+      "mitigation": "Report the correct-without-full-evidence and wrong-with-full-evidence counts. Flag that semantic review is needed for the both-wrong cases."
+    },
+    {
+      "id": "fm_format_difference",
+      "description": "The baseline presents a flat file with metadata; the enhanced arm presents formatted user-assistant exchanges. The model may respond differently to dialogue format vs. file format independent of information content.",
+      "mitigation": "Acknowledge in the discussion that format is a confound. Note that no format-controlled ablation was run."
+    },
+    {
+      "id": "fm_both_wrong_unexplained",
+      "description": "At the small budget, 7 of 20 questions are wrong in both arms with 0% evidence recall in the enhanced arm, meaning the target fact was not retrieved despite being in L1. The cause (ranking failure, capacity overflow, or fact-episode construction) is not diagnosed.",
+      "mitigation": "List the 7 question IDs. Note that diagnosis requires an offline retrieval ablation that was not performed."
+    },
+    {
+      "id": "fm_overgeneralisation",
+      "description": "A reader might conclude that hybrid retrieval is universally superior to file-based memory, or that the 65 pp / 35 pp gaps generalise to other models, datasets, or budget ranges.",
+      "mitigation": "Restrict all claims to the specific protocol, model (qwen-plus), 20-question slice, and two tested budgets. State that no generalisation beyond this setting is supported."
+    }
+  ]
+}

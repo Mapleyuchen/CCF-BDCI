@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "planner": "deterministic_rules_v1",
+  "title": "What Does Retrieved Memory Buy? Accuracy, Evidence and Write Cost",
+  "research_question": "How do file-based project memory and hybrid retrieval compare in answer accuracy and total model cost under equal context-character budgets?",
+  "anonymous": true,
+  "authors": [],
+  "sections": [
+    {
+      "id": "abstract",
+      "title": "Abstract",
+      "file": "sections/abstract.tex",
+      "goal": "Summarize the question, method, supported results, and limitations after content is complete.",
+      "status": "generated_needs_human_review",
+      "citation_keys": [],
+      "subsections": []
+    },
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "file": "sections/introduction.tex",
+      "goal": "How do file-based project memory and hybrid retrieval compare in answer accuracy and total model cost under equal context-character budgets?",
+      "status": "generated_needs_human_review",
+      "citation_keys": [],
+      "subsections": []
+    },
+    {
+      "id": "related_work",
+      "title": "Related Work",
+      "file": "sections/related_work.tex",
+      "goal": "Compare supplied sources; verify each claim against its cited source.",
+      "status": "generated_needs_human_review",
+      "citation_keys": [
+        "ref_1aacba116cbe3c5b",
+        "ref_6e953134a3c04402",
+        "ref_713e886950406893",
+        "ref_959d6858d034c6e1",
+        "ref_9dbf664b6954efbc",
+        "ref_ab2c226739f2f52a"
+      ],
+      "subsections": []
+    },
+    {
+      "id": "method",
+      "title": "Method",
+      "file": "sections/method.tex",
+      "goal": "Describe the implemented approach and distinguish it from proposed extensions.",
+      "status": "generated_needs_human_review",
+      "citation_keys": [],
+      "subsections": [
+        {
+          "id": "method_baseline",
+          "title": "File-Based Project Memory",
+          "goal": "The baseline is the actual ProjectMemoryRail. Facts are written to an isolated JIUWENSWARM.md file. Its prompt includes file metadata and is truncated to the full-section character budget. Both arms receive the same facts, questions, model, system prompt and no tools. This is not a retrieval-augmented embedding baseline.",
+          "status": "needs_content",
+          "citation_keys": []
+        },
+        {
+          "id": "method_retrieval",
+          "title": "Hybrid Selection from Working Memory",
+          "goal": "EnhancedMemoryRail writes completed user-assistant exchanges to process-local L1 memory. The experiment uses lexical Jaccard similarity combined with temporal decay, access frequency and importance, rather than learned embeddings. Selected memories are assembled under the same full-section character budget. The architecture has L2/L3 classes, but this Rail does not route writes there, persist them across process restarts or synchronize a team. MemGPT is conceptual context, not an implemented or tested baseline.",
+          "status": "needs_content",
+          "citation_keys": [
+            "ref_959d6858d034c6e1"
+          ]
+        },
+        {
+          "id": "method_protocol",
+          "title": "Isolation and Cost Accounting",
+          "goal": "Each public-data question has its own fact episode and fresh agents. Baseline writes facts to disk; enhanced performs model-backed memory-writing conversations. The formal question uses a new conversation ID. The runner verifies isolated query history and actual memory injection, alternates arm order across questions, and records both query usage and memory-write usage. Latency including writes is amortized over paired observations. Correctness is accepted-answer string matching; evidence recall requires the complete target fact to survive prompt truncation.",
+          "status": "needs_content",
+          "citation_keys": [
+            "ref_ab2c226739f2f52a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experiments",
+      "title": "Experimental Setup",
+      "file": "sections/experiments.tex",
+      "goal": "Specify datasets, baselines, budgets, metrics, scoring rules, and reproducibility.",
+      "status": "generated_needs_human_review",
+      "citation_keys": [],
+      "subsections": [
+        {
+          "id": "setup_public_small",
+          "title": "Restricted Context Budget",
+          "goal": "Describe the protocol and these metrics: answer accuracy, complete evidence recall, total tokens including writes, latency",
+          "status": "completed",
+          "citation_keys": []
+        },
+        {
+          "id": "setup_public_large",
+          "title": "Expanded Context Budget",
+          "goal": "Describe the protocol and these metrics: answer accuracy, complete evidence recall, total tokens including writes, latency",
+          "status": "completed",
+          "citation_keys": []
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "title": "Results and Analysis",
+      "file": "sections/results.tex",
+      "goal": "Report only traceable measurements; include costs and negative outcomes.",
+      "status": "generated_needs_human_review",
+      "citation_keys": [],
+      "subsections": [
+        {
+          "id": "result_public_small",
+          "title": "Restricted Context Budget",
+          "goal": "Read the referenced result file; check validity before stating findings.",
+          "status": "needs_evidence_review",
+          "evidence_ids": [
+            "public_small"
+          ],
+          "citation_keys": []
+        },
+        {
+          "id": "result_public_large",
+          "title": "Expanded Context Budget",
+          "goal": "Read the referenced result file; check validity before stating findings.",
+          "status": "needs_evidence_review",
+          "evidence_ids": [
+            "public_large"
+          ],
+          "citation_keys": []
+        }
+      ]
+    },
+    {
+      "id": "discussion",
+      "title": "Discussion and Limitations",
+      "file": "sections/discussion.tex",
+      "goal": "Explain scope, confounders, missing evaluations, and resource tradeoffs.",
+      "status": "generated_needs_human_review",
+      "citation_keys": [],
+      "subsections": []
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "file": "sections/conclusion.tex",
+      "goal": "Answer the research question using only reviewed results.",
+      "status": "generated_needs_human_review",
+      "citation_keys": [],
+      "subsections": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "public_small",
+      "input_path": "evidence/public_small.json",
+      "resolved_path": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\output\\pdf\\memory-research-release\\evidence\\public_small.json",
+      "sha256": "43a472342f52fc83d1265e24f8093bf3bcb169e5c793692d52f40e08f135f252",
+      "validation": "live_records_recomputed; human_review_required",
+      "original_path": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval_s_turn20_live.json"
+    },
+    {
+      "id": "public_large",
+      "input_path": "evidence/public_large.json",
+      "resolved_path": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\output\\pdf\\memory-research-release\\evidence\\public_large.json",
+      "sha256": "e66ef0357ab8ed05c08ad6a28a3b21c5e4ca98348c71a5270e050128e9888f3d",
+      "validation": "live_records_recomputed; human_review_required",
+      "original_path": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval_s_turn20_live_2400.json"
+    },
+    {
+      "id": "content_normalized",
+      "input_path": "evidence/normalized_results.json",
+      "resolved_path": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\output\\pdf\\memory-research-release\\evidence\\normalized_results.json",
+      "sha256": "920e149787d5f8fc96161aeaddd48bdea65c417c19f5f189abbfd8af313aa2ab",
+      "validation": "derived_from_hashed_live_records"
+    }
+  ],
+  "warnings": [],
+  "citation_policy": "Candidates only; presence does not establish support for any claim."
+}

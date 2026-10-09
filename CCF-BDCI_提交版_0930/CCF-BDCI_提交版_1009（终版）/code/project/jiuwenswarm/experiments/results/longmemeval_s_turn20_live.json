@@ -1,0 +1,1982 @@
+{
+  "kind": "adapted_longmemeval_live",
+  "official_longmemeval_score": false,
+  "dataset_sha256": "af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
+  "source_url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+  "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+  "source_citation": "Wu et al., LongMemEval, ICLR 2025, arXiv:2410.10813",
+  "selection_rule": "Sort eligible single-session-user questions by question_id; take the first 20. Each has exactly one has_answer turn of 20-250 characters, a 4-70 character string answer present in that turn but absent from the question, and at least 19 same-history non-answer turns of 20-250 characters that omit the answer. Sample 19 distractors deterministically and shuffle all 20 turns.",
+  "scoring_note": "Answer accuracy uses a provisional accepted-answer substring check. Inspect raw answers or use a separately documented judge before publication.",
+  "settings": {
+    "model_name": "qwen-plus",
+    "context_chars": 600,
+    "top_k": 10,
+    "episodes": 20,
+    "turns_per_episode": 20,
+    "max_iterations": 1,
+    "tools": []
+  },
+  "summary": {
+    "baseline": {
+      "valid": 20,
+      "failed": 0,
+      "accuracy": 0,
+      "mean_evidence_recall": 0.0,
+      "mean_memory_chars": 599.7,
+      "mean_input_tokens": 233.3,
+      "mean_output_tokens": 1,
+      "mean_total_tokens": 234.3,
+      "mean_latency_ms": 408.0265550002878
+    },
+    "enhanced": {
+      "valid": 20,
+      "failed": 0,
+      "accuracy": 0.65,
+      "mean_evidence_recall": 0.65,
+      "mean_memory_chars": 497.75,
+      "mean_input_tokens": 185.35,
+      "mean_output_tokens": 7.85,
+      "mean_total_tokens": 193.2,
+      "mean_latency_ms": 503.75684999999066
+    },
+    "paired": {
+      "n": 20,
+      "unique_questions": 20,
+      "repeats": 1,
+      "accuracy_gain": 0.65,
+      "evidence_recall_gain": 0.65
+    },
+    "by_repeat": [
+      {
+        "repeat": 0,
+        "paired_questions": 20,
+        "baseline_accuracy": 0,
+        "enhanced_accuracy": 0.65
+      }
+    ],
+    "resource_totals": {
+      "baseline": {
+        "query_tokens": 4686,
+        "seed_tokens": 0,
+        "all_tokens": 4686,
+        "tokens_per_valid_question_including_seed": 234.3,
+        "seed_model_calls": 0
+      },
+      "enhanced": {
+        "query_tokens": 3864,
+        "seed_tokens": 97805,
+        "all_tokens": 101669,
+        "tokens_per_valid_question_including_seed": 5083.45,
+        "seed_model_calls": 400
+      }
+    }
+  },
+  "runs": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "0862e8bf"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6965.090300000156,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4915,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4935,
+      "source_question_id": "0862e8bf"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6867.555599999832,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4815,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4835,
+      "source_question_id": "118b2229"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "118b2229"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "15745da0"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6167.323800000304,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4960,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4980,
+      "source_question_id": "15745da0"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6329.028699999981,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4931,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4951,
+      "source_question_id": "19b5f2b3"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "19b5f2b3"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "1faac195"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6997.748499999943,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 5089,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 5109,
+      "source_question_id": "1faac195"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 7085.085599999729,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 5055,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 5075,
+      "source_question_id": "36580ce8"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "36580ce8"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "3d86fd0a"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 7738.326999999117,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4888,
+      "seed_output_tokens": 40,
+      "seed_total_tokens": 4928,
+      "source_question_id": "3d86fd0a"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6597.256400000333,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4838,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4858,
+      "source_question_id": "545bd2b5"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "545bd2b5"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "58bf7951"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 7743.594999999914,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4826,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4846,
+      "source_question_id": "58bf7951"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6314.400299999761,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4849,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4869,
+      "source_question_id": "60d45044"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "60d45044"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "66f24dbb"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6190.386999998736,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4601,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4621,
+      "source_question_id": "66f24dbb"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6867.049299999053,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4813,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4833,
+      "source_question_id": "6ade9755"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "6ade9755"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "75499fd8"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 7142.48729999963,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4949,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4969,
+      "source_question_id": "75499fd8"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6632.589299999381,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4698,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4718,
+      "source_question_id": "86f00804"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "86f00804"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "8a137a7f"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6757.673699999941,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4490,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4510,
+      "source_question_id": "8a137a7f"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 7086.749199999758,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 5012,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 5032,
+      "source_question_id": "8ebdbe50"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "8ebdbe50"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "c14c00dd"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6671.068300000115,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4738,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4758,
+      "source_question_id": "c14c00dd"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 7316.906899999594,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 5059,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 5079,
+      "source_question_id": "c8c3f81d"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "c8c3f81d"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "caf9ead2"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 7001.05319999966,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 4853,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 4873,
+      "source_question_id": "caf9ead2"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 6966.863300000114,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 5006,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 5026,
+      "source_question_id": "ccb36322"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "source_question_id": "ccb36322"
+    }
+  ],
+  "records": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "0862e8bf",
+      "query": "What is the name of my cat?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Luna"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-b9528016a0ec4f728bb9f1df1d98535e-probe-0862e8bf",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 787.6267999999982,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-000-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/22 (Mon) 10:46] user: I think my posture could use some improvement. I've noticed I tend to slouch a bit when I'm tired. Do you have any specific exercises or tips to help me maintain a tall, upright posture\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 599,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 221,
+      "output_tokens": 1,
+      "total_tokens": 222,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "0862e8bf",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "0862e8bf",
+      "query": "What is the name of my cat?",
+      "relevant_ids": [
+        "F07"
+      ],
+      "answers": [
+        "Luna"
+      ],
+      "seed_latency_ms": 6965.090300000156,
+      "conversation_id": "memory-ab-b1b025b927d442268320ab158e761c07-probe-0862e8bf",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 428.04919999980484,
+      "answer": "Your cat's name is Luna.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F07> [2023/05/24 (Wed) 17:25] user: By the way, my cat's name is Luna, and she's been such a sweetie throughout all the changes we've been making to her environment. I'm just glad I can provide her with a happy and healthy home. Reply ACK.\nAssistant: ACK\n\n## Memory 10:\nUser: Remember this project fact: <FACT:F15> [2023/05/24 (Wed) 03:30] user: Remove all the spaces Reply ACK.\nAssistant: ACK",
+      "memory_chars": 550,
+      "observed_ids": [
+        "F07",
+        "F15"
+      ],
+      "complete_fact_ids": [
+        "F07",
+        "F15"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 208,
+      "output_tokens": 7,
+      "total_tokens": 215,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "0862e8bf",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "118b2229",
+      "query": "How long is my daily commute to work?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "45 minutes each way"
+      ],
+      "seed_latency_ms": 6867.555599999832,
+      "conversation_id": "memory-ab-e2fff7e0ff8d440d8bb34e9c071f71ee-probe-118b2229",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 569.5945000006759,
+      "answer": "Your daily commute to work is 45 minutes each way.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F08> [2023/05/22 (Mon) 21:18] user: I've been listening to audiobooks during my daily commute, which takes 45 minutes each way. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F11> [2023/05/20 (Sat) 10:18] user: What is the best time to visit Bali for surfing, and what beaches are recommended for beginners? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 523,
+      "observed_ids": [
+        "F08",
+        "F11"
+      ],
+      "complete_fact_ids": [
+        "F08",
+        "F11"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 199,
+      "output_tokens": 13,
+      "total_tokens": 212,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "118b2229",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "118b2229",
+      "query": "How long is my daily commute to work?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "45 minutes each way"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-26a3cc25125940f3bdead4c38fa7a26b-probe-118b2229",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 383.72789999993984,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-001-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/25 (Thu) 03:26] user: I've already taken a course on regression analysis on Coursera, but I'd like to explore more resources on the topic. Can you recommend any podcasts that discuss data science and machine\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 599,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 218,
+      "output_tokens": 1,
+      "total_tokens": 219,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "118b2229",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "15745da0",
+      "query": "How long have I been collecting vintage cameras?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three months"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-966e41a12f334749b84b09039b7fc7b9-probe-15745da0",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 379.05570000111766,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-002-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/23 (Tue) 15:04] user: I'm thinking of hosting a family game night and want to introduce Mysterium to my family. Do you think it's suitable for my younger brother who's 12 years old?\n<FACT:F02> [2023/05/30 (Tu\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 238,
+      "output_tokens": 1,
+      "total_tokens": 239,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "15745da0",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "15745da0",
+      "query": "How long have I been collecting vintage cameras?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "three months"
+      ],
+      "seed_latency_ms": 6167.323800000304,
+      "conversation_id": "memory-ab-2e7f59f985c5418393320059abb6a2bd-probe-15745da0",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 487.8489999991871,
+      "answer": "You have been collecting vintage cameras for three months.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F18> [2023/05/21 (Sun) 22:01] user: I've been collecting vintage cameras for three months now, and I've already amassed a pretty impressive collection. Do you have any advice on how to keep my cameras organized and easily accessible for maintenance and cleaning? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 445,
+      "observed_ids": [
+        "F18"
+      ],
+      "complete_fact_ids": [
+        "F18"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 151,
+      "output_tokens": 10,
+      "total_tokens": 161,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "15745da0",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "19b5f2b3",
+      "query": "How long was I in Japan for?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "two weeks"
+      ],
+      "seed_latency_ms": 6329.028699999981,
+      "conversation_id": "memory-ab-ecc0f70d25ec437681c28082335aa5ed-probe-19b5f2b3",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 492.00590000145894,
+      "answer": "You were in Japan for two weeks.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F20> [2023/05/30 (Tue) 03:02] user: I actually visited Fushimi Inari Shrine when I was in Japan a few months ago. I spent two weeks traveling solo around the country and it was an incredible experience. Can you recommend some good places to stay in Kyoto that are budget-friendly? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 463,
+      "observed_ids": [
+        "F20"
+      ],
+      "complete_fact_ids": [
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 159,
+      "output_tokens": 8,
+      "total_tokens": 167,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "19b5f2b3",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "19b5f2b3",
+      "query": "How long was I in Japan for?",
+      "relevant_ids": [
+        "F20"
+      ],
+      "answers": [
+        "two weeks"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-6265430c216d4a8181ec60aece135540-probe-19b5f2b3",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 310.53910000082396,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-003-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/29 (Mon) 05:02] user: I think education is key, especially for younger generations who have grown up with social media. We need to teach critical thinking and how to evaluate sources of information. What do y\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 215,
+      "output_tokens": 1,
+      "total_tokens": 216,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "19b5f2b3",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "1faac195",
+      "query": "Where does my sister Emily live?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Denver"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-e8ee2fcc60284a5e93394e2c334dca34-probe-1faac195",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 412.69520000059856,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-004-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/30 (Tue) 08:24] user: That looks good. I'm glad we were able to fit in the doctor's appointment and the light exercise routine into my schedule. I'm also happy to see that I can still dedicate 4 hours each da\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 221,
+      "output_tokens": 1,
+      "total_tokens": 222,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "1faac195",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "1faac195",
+      "query": "Where does my sister Emily live?",
+      "relevant_ids": [
+        "F04"
+      ],
+      "answers": [
+        "Denver"
+      ],
+      "seed_latency_ms": 6997.748499999943,
+      "conversation_id": "memory-ab-ac43f8d7e8fa4726b5df8cae90208c8d-probe-1faac195",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 411.02110000065295,
+      "answer": "Your sister Emily lives in Denver.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F04> [2023/05/20 (Sat) 21:14] user: I'm thinking of visiting my sister Emily in Denver soon, and I was wondering if you knew any kid-friendly attractions there? Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F19> [2023/05/21 (Sun) 19:19] user: I think I flew to Miami on April 12th, so the dates for my Miami trip should be April 12th - 17th. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 558,
+      "observed_ids": [
+        "F04",
+        "F19"
+      ],
+      "complete_fact_ids": [
+        "F04",
+        "F19"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 214,
+      "output_tokens": 7,
+      "total_tokens": 221,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "1faac195",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "36580ce8",
+      "query": "What health issue did I initially think was just a cold?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "bronchitis"
+      ],
+      "seed_latency_ms": 7085.085599999729,
+      "conversation_id": "memory-ab-eee6669b201948ef9825869ba2b47349-probe-36580ce8",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 615.6711999992694,
+      "answer": "You initially thought bronchitis was just a cold.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F06> [2023/05/30 (Tue) 00:08] user: I actually recently had a bad case of bronchitis that I initially thought was just a cold, but it turned out to be a lot more serious. Anyway, back to my question, are there any specific foods or spices that can help boost my immune system? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 459,
+      "observed_ids": [
+        "F06"
+      ],
+      "complete_fact_ids": [
+        "F06"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 166,
+      "output_tokens": 11,
+      "total_tokens": 177,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "36580ce8",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "36580ce8",
+      "query": "What health issue did I initially think was just a cold?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "bronchitis"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-404a095294964ef8ace53b812f4060a1-probe-36580ce8",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 399.82919999965816,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-005-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/23 (Tue) 16:25] user: I'd like to prioritize meditation, taking a short walk, and checking emails/social media in my daily routine. I'd also like to allocate time for lunch and a short break in the afternoon\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 599,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 222,
+      "output_tokens": 1,
+      "total_tokens": 223,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "36580ce8",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "3d86fd0a",
+      "query": "Where did I meet Sophia?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "a coffee shop in the city"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-32b90ec009fd46bb9d55c61daa240a97-probe-3d86fd0a",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 402.8902999998536,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-006-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/24 (Wed) 09:52] user: Please use LaTex for mathematical terms\n<FACT:F02> [2023/05/20 (Sat) 19:18] user: PlayPlay value proposition\n<FACT:F03> [2023/05/24 (Wed) 09:52] user: Create another variations of questi\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "complete_fact_ids": [
+        "F01",
+        "F02"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 254,
+      "output_tokens": 1,
+      "total_tokens": 255,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "3d86fd0a",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "3d86fd0a",
+      "query": "Where did I meet Sophia?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "a coffee shop in the city"
+      ],
+      "seed_latency_ms": 7738.326999999117,
+      "conversation_id": "memory-ab-22244c8fa096459585df0dae810b1f36-probe-3d86fd0a",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 722.2985999997036,
+      "answer": "You met Sophia at a coffee shop in the city.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F14> [2023/05/21 (Sun) 16:24] user: I'll start filling out the template. Under \"How We Met\", I'll include the location where I met them. For Sophia, it was a coffee shop in the city. Reply ACK.\nAssistant: ACK.\n\n## Memory 4:\nUser: Remember this project fact: <FACT:F18> [2023/05/22 (Mon) 13:45] user: Interesting, I never knew the size of gloves could make such a big difference in the sport of boxing. Reply ACK.\nAssistant: ACK.",
+      "memory_chars": 585,
+      "observed_ids": [
+        "F14",
+        "F18"
+      ],
+      "complete_fact_ids": [
+        "F14",
+        "F18"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 213,
+      "output_tokens": 11,
+      "total_tokens": 224,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "3d86fd0a",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "545bd2b5",
+      "query": "How much screen time have I been averaging on Instagram per day?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "2 hours"
+      ],
+      "seed_latency_ms": 6597.256400000333,
+      "conversation_id": "memory-ab-0295bc31b4d04ae9983f0fbe2b237cc7-probe-545bd2b5",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 713.7344000002486,
+      "answer": "You have been averaging around 2 hours of screen time on Instagram per day for the past two weeks.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> [2023/05/27 (Sat) 04:20] user: I've been averaging around 2 hours of screen time on Instagram per day for the past two weeks, which is way too much. Do you think setting a time limit of 30 minutes per day would be a good starting point for me? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 431,
+      "observed_ids": [
+        "F09"
+      ],
+      "complete_fact_ids": [
+        "F09"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 164,
+      "output_tokens": 21,
+      "total_tokens": 185,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "545bd2b5",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "545bd2b5",
+      "query": "How much screen time have I been averaging on Instagram per day?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "2 hours"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-8db27b1262904038b68e94cc0ee549c1-probe-545bd2b5",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 438.7528999995993,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-007-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/23 (Tue) 00:18] user: What is the impact of artificial intelligence on cybersecurity, both in terms of threats and defenses?\n<FACT:F02> [2023/05/20 (Sat) 23:47] user: I'm also planning to participate in a cha\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 241,
+      "output_tokens": 1,
+      "total_tokens": 242,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "545bd2b5",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "58bf7951",
+      "query": "What play did I attend at the local community theater?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "The Glass Menagerie"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-7dfe379ef2c54590b8fdf25ba492df5b-probe-58bf7951",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 333.66920000116806,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-008-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/24 (Wed) 12:26] user: I see, it's really interesting how an author's personal beliefs can shape their work in such a profound way. Can you recommend any other books that were heavily influenced by the author'\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 219,
+      "output_tokens": 1,
+      "total_tokens": 220,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "58bf7951",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "58bf7951",
+      "query": "What play did I attend at the local community theater?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "The Glass Menagerie"
+      ],
+      "seed_latency_ms": 7743.594999999914,
+      "conversation_id": "memory-ab-71e3035e68924d8e82600b868d5342e3-probe-58bf7951",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 323.17179999881773,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F06> [2023/05/26 (Fri) 12:02] user: What level on the CEFR would you place this student Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F12> [2023/05/26 (Fri) 00:11] user: What was the reaction from fans of The WB and UPN when the merger was announced? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 467,
+      "observed_ids": [
+        "F06",
+        "F12"
+      ],
+      "complete_fact_ids": [
+        "F06",
+        "F12"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 189,
+      "output_tokens": 1,
+      "total_tokens": 190,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "58bf7951",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "60d45044",
+      "query": "What type of rice is my favorite?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Japanese short-grain rice"
+      ],
+      "seed_latency_ms": 6314.400299999761,
+      "conversation_id": "memory-ab-f6f6b6e85b2d4d4ab58226d0b3f99025-probe-60d45044",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 410.5172000017774,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> [2023/05/24 (Wed) 13:51] user: What is the significance of the setting's historical context in the film's story? Reply ACK.\nAssistant: ACK\n\n## Memory 4:\nUser: Remember this project fact: <FACT:F08> [2023/05/29 (Mon) 06:48] user: Today, many people do not know their neighbors.\n\nWhy is this?\n\nWhat can be done about this? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 508,
+      "observed_ids": [
+        "F08",
+        "F09"
+      ],
+      "complete_fact_ids": [
+        "F08",
+        "F09"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 194,
+      "output_tokens": 1,
+      "total_tokens": 195,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "60d45044",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "60d45044",
+      "query": "What type of rice is my favorite?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Japanese short-grain rice"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-84681fe4bf9a48ff96a301b55e2c5cc1-probe-60d45044",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 351.0984999993525,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-009-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/25 (Thu) 06:56] user: Cómo responder al teléfono en inglés\n<FACT:F02> [2023/05/22 (Mon) 00:10] user: That's really helpful, thanks for the info. I'm interested in trying the 16:8 method, but I was wondering i\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 245,
+      "output_tokens": 1,
+      "total_tokens": 246,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "60d45044",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "66f24dbb",
+      "query": "What did I buy for my sister's birthday gift?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "a yellow dress"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-05a17ad196d4426f8f5b3e629afc28e8-probe-66f24dbb",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 377.70020000061777,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-010-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/22 (Mon) 08:24] user: I think I'll definitely look into attending the Pushkar Camel Fair. The idea of experiencing local music, dance, and culture while surrounded by camels sounds amazing!\n<FACT:F02> [2023/0\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 229,
+      "output_tokens": 1,
+      "total_tokens": 230,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "66f24dbb",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "66f24dbb",
+      "query": "What did I buy for my sister's birthday gift?",
+      "relevant_ids": [
+        "F18"
+      ],
+      "answers": [
+        "a yellow dress"
+      ],
+      "seed_latency_ms": 6190.386999998736,
+      "conversation_id": "memory-ab-b9a44d90ba9f4e47bf7a83b2776a5f74-probe-66f24dbb",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 995.5195999991702,
+      "answer": "You bought your sister a yellow dress and a pair of earrings to match.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F18> [2023/05/24 (Wed) 04:49] user: For my sister's birthday, I got her a yellow dress and a pair of earrings to match. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F06> [2023/05/26 (Fri) 09:26] user: I'll definitely do some more research and find the best fit for me. Any tips on how to narrow down my options? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 529,
+      "observed_ids": [
+        "F06",
+        "F18"
+      ],
+      "complete_fact_ids": [
+        "F06",
+        "F18"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 205,
+      "output_tokens": 15,
+      "total_tokens": 220,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "66f24dbb",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "6ade9755",
+      "query": "Where do I take yoga classes?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Serenity Yoga"
+      ],
+      "seed_latency_ms": 6867.049299999053,
+      "conversation_id": "memory-ab-1dd45b94114e4da5beadf3c25dec9c2d-probe-6ade9755",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 305.96650000006775,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> [2023/05/20 (Sat) 19:31] user: Which one do you think I should prioritize during my trip to Pontus? Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F01> [2023/05/22 (Mon) 18:33] user: Do you have any general information or resources on popular causes that people can support? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 495,
+      "observed_ids": [
+        "F01",
+        "F09"
+      ],
+      "complete_fact_ids": [
+        "F01",
+        "F09"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 187,
+      "output_tokens": 1,
+      "total_tokens": 188,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "6ade9755",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "6ade9755",
+      "query": "Where do I take yoga classes?",
+      "relevant_ids": [
+        "F12"
+      ],
+      "answers": [
+        "Serenity Yoga"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-57dde02129d8486b870f9e0574da89a9-probe-6ade9755",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 386.7864000003465,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-011-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/22 (Mon) 18:33] user: Do you have any general information or resources on popular causes that people can support?\n<FACT:F02> [2023/05/26 (Fri) 14:44] user: I see. But why focus solely on gender diversity? Why\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 236,
+      "output_tokens": 1,
+      "total_tokens": 237,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "6ade9755",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "75499fd8",
+      "query": "What breed is my dog?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "Golden Retriever"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-b378bac0dbcf4c02b879f1f8ea88c9da-probe-75499fd8",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 346.5749999995751,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-012-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/22 (Mon) 06:17] user: That is great thank you. Can we add a function to this script that makes a list of all folders from the parent source directory that do not immediately contain a folder named '..\\CC\\' an\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 217,
+      "output_tokens": 1,
+      "total_tokens": 218,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "75499fd8",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "75499fd8",
+      "query": "What breed is my dog?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "Golden Retriever"
+      ],
+      "seed_latency_ms": 7142.48729999963,
+      "conversation_id": "memory-ab-dc32686dbbae49da9b92eae79e5b116d-probe-75499fd8",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 279.8234000001685,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F06> [2023/05/20 (Sat) 18:43] assistant: The length of that passage is 203 words. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F04> [2023/05/22 (Mon) 19:33] user: I'm thinking of taking a walk around the neighborhood this weekend to capture some fall foliage with my camera. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 492,
+      "observed_ids": [
+        "F04",
+        "F06"
+      ],
+      "complete_fact_ids": [
+        "F04",
+        "F06"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 188,
+      "output_tokens": 1,
+      "total_tokens": 189,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "75499fd8",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "86f00804",
+      "query": "What book am I currently reading?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "The Seven Husbands of Evelyn Hugo"
+      ],
+      "seed_latency_ms": 6632.589299999381,
+      "conversation_id": "memory-ab-febb1b2a68d34f2396342474e58927ec-probe-86f00804",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 716.4269000004424,
+      "answer": "You are currently reading *The Seven Husbands of Evelyn Hugo*.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F05> [2023/05/23 (Tue) 11:27] user: I'm trying to figure out how to fit more reading time into my daily routine. Do you have any tips on how to prioritize reading when life gets busy? By the way, I'm currently devouring \"The Seven Husbands of Evelyn Hugo\" and it's hard to put down! Reply ACK.\nAssistant: ACK",
+      "memory_chars": 465,
+      "observed_ids": [
+        "F05"
+      ],
+      "complete_fact_ids": [
+        "F05"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 167,
+      "output_tokens": 14,
+      "total_tokens": 181,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "86f00804",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "86f00804",
+      "query": "What book am I currently reading?",
+      "relevant_ids": [
+        "F05"
+      ],
+      "answers": [
+        "The Seven Husbands of Evelyn Hugo"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-425716a33fe14a988c66eae4625f5d2b-probe-86f00804",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 377.1132000001671,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-013-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/24 (Wed) 05:43] user: I'm still a bit worried about my ankle, though. Is it okay to perform with a minor ankle sprain, or should I prioritize my recovery and wait until it's fully healed?\n<FACT:F02> [2023/05/\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 231,
+      "output_tokens": 1,
+      "total_tokens": 232,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "86f00804",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "8a137a7f",
+      "query": "What type of bulb did I replace in my bedside lamp?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Philips LED bulb"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-13060fcb59b74f77b204775bc1967c90-probe-8a137a7f",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 393.0344000000332,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-014-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/25 (Thu) 07:04] user: Can you explain the historical significance of the Magna Carta in relation to English law and governance?\n<FACT:F02> [2023/05/20 (Sat) 10:05] user: I think it's important for non-Indigen\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 243,
+      "output_tokens": 1,
+      "total_tokens": 244,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "8a137a7f",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "8a137a7f",
+      "query": "What type of bulb did I replace in my bedside lamp?",
+      "relevant_ids": [
+        "F09"
+      ],
+      "answers": [
+        "Philips LED bulb"
+      ],
+      "seed_latency_ms": 6757.673699999941,
+      "conversation_id": "memory-ab-4040a4ce162a4c06a44ad1c8435e37d0-probe-8a137a7f",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 614.854399998876,
+      "answer": "You replaced the bulb in your bedside lamp with a Philips LED bulb.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> [2023/05/22 (Mon) 10:10] user: I like those ideas, especially the layered lighting concept. I think I'll try placing a floor lamp behind the sofa. Can you suggest some good floor lamps with a warm tone that would work well with the Philips LED bulb I have in my bedside lamp? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 463,
+      "observed_ids": [
+        "F09"
+      ],
+      "complete_fact_ids": [
+        "F09"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 164,
+      "output_tokens": 14,
+      "total_tokens": 178,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "8a137a7f",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "8ebdbe50",
+      "query": "What certification did I complete last month?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "Data Science"
+      ],
+      "seed_latency_ms": 7086.749199999758,
+      "conversation_id": "memory-ab-370b622855644583a2228b7d99845f6c-probe-8ebdbe50",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 503.7541000001511,
+      "answer": "You completed a certification in Data Science last month.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F11> [2023/05/28 (Sun) 03:42] user: I need to add my latest certification in Data Science, which I completed last month, to my profile. Do you have any specific tips on how to showcase certifications? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 383,
+      "observed_ids": [
+        "F11"
+      ],
+      "complete_fact_ids": [
+        "F11"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 142,
+      "output_tokens": 10,
+      "total_tokens": 152,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "8ebdbe50",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "8ebdbe50",
+      "query": "What certification did I complete last month?",
+      "relevant_ids": [
+        "F11"
+      ],
+      "answers": [
+        "Data Science"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-de25507d4f624a0c8149c1145436c4a7-probe-8ebdbe50",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 342.18500000133645,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-015-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/21 (Sun) 18:35] user: I think I might need to get my GPS updated again, can you tell me how I can do that or what I need to prepare before updating?\n<FACT:F02> [2023/05/21 (Sun) 18:11] user: I want to have a\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 599,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 244,
+      "output_tokens": 1,
+      "total_tokens": 245,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "8ebdbe50",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "c14c00dd",
+      "query": "What brand of shampoo do I currently use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "Trader Joe's"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-2a794d49988c4b00b90093b079d80263-probe-c14c00dd",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 337.5140999996802,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-016-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/21 (Sun) 17:54] user: It's amazing how the creatures in the Mariana Trench have adapted to live in such extreme environments. I wonder if it's possible for humans to engineer ourselves to survive in those con\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01"
+      ],
+      "complete_fact_ids": [],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 218,
+      "output_tokens": 1,
+      "total_tokens": 219,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "c14c00dd",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "c14c00dd",
+      "query": "What brand of shampoo do I currently use?",
+      "relevant_ids": [
+        "F19"
+      ],
+      "answers": [
+        "Trader Joe's"
+      ],
+      "seed_latency_ms": 6671.068300000115,
+      "conversation_id": "memory-ab-dcc308fd95b64e87a7814d3f36070642-probe-c14c00dd",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 274.05720000024303,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> [2023/05/29 (Mon) 21:40] user: I've been watching some pro players' streams and I've noticed they use a lot of different keybinds, do you think it's worth trying out some of those? Reply ACK.\nAssistant: ACK\n\n## Memory 5:\nUser: Remember this project fact: <FACT:F20> [2023/05/29 (Mon) 06:40] user: I think this is a lot of 10x, be wiser Reply ACK.\nAssistant: ACK",
+      "memory_chars": 523,
+      "observed_ids": [
+        "F09",
+        "F20"
+      ],
+      "complete_fact_ids": [
+        "F09",
+        "F20"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 208,
+      "output_tokens": 1,
+      "total_tokens": 209,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "c14c00dd",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "c8c3f81d",
+      "query": "What brand are my favorite running shoes?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "Nike"
+      ],
+      "seed_latency_ms": 7316.906899999594,
+      "conversation_id": "memory-ab-cb9f6793649d441ba4c8871b743a2a1f-probe-c8c3f81d",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 509.4917999995232,
+      "answer": "Your favorite brand for running shoes is Nike.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F08> [2023/05/29 (Mon) 19:47] user: Nike has been my favourite brand so far for running shoes. I'm looking for a new pair running shoes, specifically the same model as my current ones. Do you know where I can find them or if they have any similar models that might be a good fit? Reply ACK.\nAssistant: ACK",
+      "memory_chars": 462,
+      "observed_ids": [
+        "F08"
+      ],
+      "complete_fact_ids": [
+        "F08"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 162,
+      "output_tokens": 9,
+      "total_tokens": 171,
+      "correct": true,
+      "status": "ok",
+      "source_question_id": "c8c3f81d",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "c8c3f81d",
+      "query": "What brand are my favorite running shoes?",
+      "relevant_ids": [
+        "F08"
+      ],
+      "answers": [
+        "Nike"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-f7607749cc4d4789a50bab58e88a0224-probe-c8c3f81d",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 473.06810000009136,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-017-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/27 (Sat) 04:18] user: Can you please list the tracks on this albums?\n<FACT:F02> [2023/05/22 (Mon) 06:50] user: now only use 4 tabs for the app\n<FACT:F03> [2023/05/30 (Tue) 23:22] user: I'm also interested in\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 599,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "complete_fact_ids": [
+        "F01",
+        "F02"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 263,
+      "output_tokens": 1,
+      "total_tokens": 264,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "c8c3f81d",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "caf9ead2",
+      "query": "How long did it take to move to the new apartment?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "5 hours"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-ea793b87be234c95a5ec67e39613f74e-probe-caf9ead2",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 552.4856000010914,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-018-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/26 (Fri) 01:08] user: Can you give me a list of dry cleaners in my area that specialize in stain removal and cleaning delicate fabrics?\n<FACT:F02> [2023/05/30 (Tue) 16:19] user: What other artforms from Odish\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 242,
+      "output_tokens": 1,
+      "total_tokens": 243,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "caf9ead2",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "caf9ead2",
+      "query": "How long did it take to move to the new apartment?",
+      "relevant_ids": [
+        "F06"
+      ],
+      "answers": [
+        "5 hours"
+      ],
+      "seed_latency_ms": 7001.05319999966,
+      "conversation_id": "memory-ab-9e7780c2a5114dcc93d6520c153fbfe9-probe-caf9ead2",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 420.73419999906037,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F09> [2023/05/24 (Wed) 07:18] user: It's interesting to see how the wine industry is adapting to the challenges it's facing. Do you think these solutions are sustainable in the long term? Reply ACK.\nAssistant: ACK\n\n## Memory 5:\nUser: Remember this project fact: <FACT:F10> [2023/05/21 (Sun) 14:49] user: I'd like to incorporate meditation into my morning routine, but I'm worried I won't be able to stick to it. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 594,
+      "observed_ids": [
+        "F09",
+        "F10"
+      ],
+      "complete_fact_ids": [
+        "F09",
+        "F10"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 216,
+      "output_tokens": 1,
+      "total_tokens": 217,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "caf9ead2",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "ccb36322",
+      "query": "What is the name of the music streaming service have I been using lately?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "Spotify"
+      ],
+      "seed_latency_ms": 6966.863300000114,
+      "conversation_id": "memory-ab-c7ebfbe47bd849b4a0525d5c75b99cbd-probe-ccb36322",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 280.5960000005143,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F11> [2023/05/20 (Sat) 03:08] user: What are the signs of root rot in succulents and how can it be prevented? Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F18> [2023/05/27 (Sat) 02:11] user: I don't think feedback is all that important. The organizers should just do what they think is best and not worry about pleasing every single attendee. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 560,
+      "observed_ids": [
+        "F11",
+        "F18"
+      ],
+      "complete_fact_ids": [
+        "F11",
+        "F18"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 211,
+      "output_tokens": 1,
+      "total_tokens": 212,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "ccb36322",
+      "question_type": "single-session-user"
+    },
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "ccb36322",
+      "query": "What is the name of the music streaming service have I been using lately?",
+      "relevant_ids": [
+        "F14"
+      ],
+      "answers": [
+        "Spotify"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-2db79f716a2e4b44ba82540ce168f918-probe-ccb36322",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 374.18430000070657,
+      "answer": "UNKNOWN",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- F:\\竞赛\\CCF-BDCI\\jiuwenswarm\\experiments\\results\\longmemeval-turn20-ab-8ll2ocme\\case-019-baseline\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> [2023/05/28 (Sun) 08:36] user: I'm actually thinking of setting up a dedicated art space in my home. Do you have any tips on how to organize my art supplies?\n<FACT:F02> [2023/05/27 (Sat) 08:53] user: I think I'll add\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 599,
+      "observed_ids": [
+        "F01",
+        "F02"
+      ],
+      "complete_fact_ids": [
+        "F01"
+      ],
+      "evidence_recall": 0.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 249,
+      "output_tokens": 1,
+      "total_tokens": 250,
+      "correct": false,
+      "status": "ok",
+      "source_question_id": "ccb36322",
+      "question_type": "single-session-user"
+    }
+  ]
+}

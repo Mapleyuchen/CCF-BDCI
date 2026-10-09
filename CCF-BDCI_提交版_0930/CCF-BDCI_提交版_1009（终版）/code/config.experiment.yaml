@@ -1,0 +1,19 @@
+# Credentials stay in the process environment or a local --env-file.
+# This endpoint is for the Beijing region; match your API key's region.
+models:
+  defaults:
+    - is_default: true
+      model_client_config:
+        client_provider: OpenAI
+        api_base: https://dashscope.aliyuncs.com/compatible-mode/v1
+        api_key: ${DASHSCOPE_API_KEY}
+        model_name: qwen-plus
+        timeout: 180
+      model_config_obj:
+        temperature: 0
+        max_tokens: 7000
+        enable_thinking: false
+modes:
+  code:
+    memory:
+      enabled: true

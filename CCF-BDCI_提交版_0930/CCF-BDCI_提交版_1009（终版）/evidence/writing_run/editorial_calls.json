@@ -1,0 +1,50 @@
+[
+  {
+    "model": "qwen3.8-max",
+    "elapsed_seconds": 227.282,
+    "http_attempts": 2,
+    "usage": {
+      "prompt_tokens": 14707,
+      "completion_tokens": 5290,
+      "total_tokens": 19997
+    },
+    "stage": "editorial_plan",
+    "reused_from_previous_run": true
+  },
+  {
+    "model": "qwen3.8-max",
+    "elapsed_seconds": 493.468,
+    "http_attempts": 3,
+    "usage": {
+      "prompt_tokens": 19770,
+      "completion_tokens": 6314,
+      "total_tokens": 26084
+    },
+    "stage": "editorial_draft",
+    "reused_from_previous_run": true
+  },
+  {
+    "model": "qwen3.8-max",
+    "elapsed_seconds": 30.438,
+    "http_attempts": 1,
+    "usage": {
+      "prompt_tokens": 20381,
+      "completion_tokens": 1163,
+      "total_tokens": 21544
+    },
+    "stage": "editorial_review",
+    "enable_thinking": false
+  },
+  {
+    "model": "qwen3.8-max",
+    "elapsed_seconds": 242.015,
+    "http_attempts": 2,
+    "usage": {
+      "prompt_tokens": 22361,
+      "completion_tokens": 6303,
+      "total_tokens": 28664
+    },
+    "stage": "editorial_revision",
+    "enable_thinking": false
+  }
+]

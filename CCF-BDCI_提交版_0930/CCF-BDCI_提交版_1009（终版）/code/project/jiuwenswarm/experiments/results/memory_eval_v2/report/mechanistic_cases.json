@@ -1,0 +1,2273 @@
+[
+  {
+    "question_id": "001be529",
+    "question": "How long did I wait for the decision on my asylum application?",
+    "gold_answer": "over a year",
+    "hybrid_answer": "The information about your asylum application or how long you waited for a decision is not present in the provided conversation records.",
+    "no_time_answer": "You waited over a year for the decision on your asylum application.",
+    "hybrid_semantic_correct": false,
+    "no_time_semantic_correct": true,
+    "hybrid_selected_scores": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.0967741935483871,
+          "semantic_contribution": 0.03870967741935484,
+          "temporal": 0.8572439828530728,
+          "temporal_contribution": 0.2571731948559218,
+          "total": 0.34588287227527664
+        },
+        "item_id": "M00743",
+        "position": 743,
+        "score": 0.34588287227527664,
+        "rank": 1
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.05,
+          "semantic_contribution": 0.020000000000000004,
+          "temporal": 0.8572439828530728,
+          "temporal_contribution": 0.2571731948559218,
+          "total": 0.32717319485592183
+        },
+        "item_id": "M00736",
+        "position": 736,
+        "score": 0.32717319485592183,
+        "rank": 2
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.047619047619047616,
+          "semantic_contribution": 0.01904761904761905,
+          "temporal": 0.8572439828530728,
+          "temporal_contribution": 0.2571731948559218,
+          "total": 0.32622081390354085
+        },
+        "item_id": "M00739",
+        "position": 739,
+        "score": 0.32622081390354085,
+        "rank": 3
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.04838709677419355,
+          "semantic_contribution": 0.01935483870967742,
+          "temporal": 0.8547717369272803,
+          "temporal_contribution": 0.25643152107818407,
+          "total": 0.32578635978786147
+        },
+        "item_id": "M00735",
+        "position": 735,
+        "score": 0.32578635978786147,
+        "rank": 4
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.04,
+          "semantic_contribution": 0.016,
+          "temporal": 0.8547717369272803,
+          "temporal_contribution": 0.25643152107818407,
+          "total": 0.32243152107818407
+        },
+        "item_id": "M00732",
+        "position": 732,
+        "score": 0.32243152107818407,
+        "rank": 5
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.037037037037037035,
+          "semantic_contribution": 0.014814814814814815,
+          "temporal": 0.8572439828530728,
+          "temporal_contribution": 0.2571731948559218,
+          "total": 0.32198800967073665
+        },
+        "item_id": "M00741",
+        "position": 741,
+        "score": 0.32198800967073665,
+        "rank": 6
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.037037037037037035,
+          "semantic_contribution": 0.014814814814814815,
+          "temporal": 0.8547717369272803,
+          "temporal_contribution": 0.25643152107818407,
+          "total": 0.3212463358929989
+        },
+        "item_id": "M00733",
+        "position": 733,
+        "score": 0.3212463358929989,
+        "rank": 7
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.02586206896551724,
+          "semantic_contribution": 0.010344827586206896,
+          "temporal": 0.8572439828530728,
+          "temporal_contribution": 0.2571731948559218,
+          "total": 0.31751802244212873
+        },
+        "item_id": "M00744",
+        "position": 744,
+        "score": 0.31751802244212873,
+        "rank": 8
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.02564102564102564,
+          "semantic_contribution": 0.010256410256410256,
+          "temporal": 0.8572439828530728,
+          "temporal_contribution": 0.2571731948559218,
+          "total": 0.3174296051123321
+        },
+        "item_id": "M00746",
+        "position": 746,
+        "score": 0.3174296051123321,
+        "rank": 9
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.023255813953488372,
+          "semantic_contribution": 0.009302325581395349,
+          "temporal": 0.8572439828530728,
+          "temporal_contribution": 0.2571731948559218,
+          "total": 0.31647552043731714
+        },
+        "item_id": "M00740",
+        "position": 740,
+        "score": 0.31647552043731714,
+        "rank": 11
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.0,
+          "semantic_contribution": 0.0,
+          "temporal": 0.8572439828530728,
+          "temporal_contribution": 0.2571731948559218,
+          "total": 0.3071731948559218
+        },
+        "item_id": "M00738",
+        "position": 738,
+        "score": 0.3071731948559218,
+        "rank": 17
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.0,
+          "semantic_contribution": 0.0,
+          "temporal": 0.8572439828530728,
+          "temporal_contribution": 0.2571731948559218,
+          "total": 0.3071731948559218
+        },
+        "item_id": "M00745",
+        "position": 745,
+        "score": 0.3071731948559218,
+        "rank": 18
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.058823529411764705,
+          "semantic_contribution": 0.023529411764705882,
+          "temporal": 0.6311746249521635,
+          "temporal_contribution": 0.18935238748564903,
+          "total": 0.26288179925035493
+        },
+        "item_id": "M00695",
+        "position": 695,
+        "score": 0.26288179925035493,
+        "rank": 46
+      }
+    ],
+    "items_selected_after_removing_time": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.16666666666666666,
+          "semantic_contribution": 0.06666666666666667,
+          "temporal": 0.07728059435384561,
+          "temporal_contribution": 0.023184178306153682,
+          "total": 0.13985084497282035
+        },
+        "item_id": "M00486",
+        "position": 486,
+        "score": 0.13985084497282035,
+        "rank": 144
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.16,
+          "semantic_contribution": 0.064,
+          "temporal": 0.009228281817908097,
+          "temporal_contribution": 0.002768484545372429,
+          "total": 0.11676848454537243
+        },
+        "item_id": "M00233",
+        "position": 233,
+        "score": 0.11676848454537243,
+        "rank": 162
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.14814814814814814,
+          "semantic_contribution": 0.05925925925925926,
+          "temporal": 0.31407187619608695,
+          "temporal_contribution": 0.09422156285882609,
+          "total": 0.20348082211808532
+        },
+        "item_id": "M00618",
+        "position": 618,
+        "score": 0.20348082211808532,
+        "rank": 100
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13333333333333333,
+          "semantic_contribution": 0.05333333333333334,
+          "temporal": 0.07371972218909512,
+          "temporal_contribution": 0.022115916656728535,
+          "total": 0.12544924999006188
+        },
+        "item_id": "M00463",
+        "position": 463,
+        "score": 0.12544924999006188,
+        "rank": 157
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13043478260869565,
+          "semantic_contribution": 0.052173913043478265,
+          "temporal": 0.07728059435384561,
+          "temporal_contribution": 0.023184178306153682,
+          "total": 0.12535809134963194
+        },
+        "item_id": "M00488",
+        "position": 488,
+        "score": 0.12535809134963194,
+        "rank": 158
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.125,
+          "semantic_contribution": 0.05,
+          "temporal": 0.001800531916957387,
+          "temporal_contribution": 0.000540159575087216,
+          "total": 0.10054015957508722
+        },
+        "item_id": "M00100",
+        "position": 100,
+        "score": 0.10054015957508722,
+        "rank": 189
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.12121212121212122,
+          "semantic_contribution": 0.04848484848484849,
+          "temporal": 0.001800531916957387,
+          "temporal_contribution": 0.000540159575087216,
+          "total": 0.09902500805993572
+        },
+        "item_id": "M00111",
+        "position": 111,
+        "score": 0.09902500805993572,
+        "rank": 194
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11904761904761904,
+          "semantic_contribution": 0.047619047619047616,
+          "temporal": 0.0017325147295851053,
+          "temporal_contribution": 0.0005197544188755316,
+          "total": 0.09813880203792315
+        },
+        "item_id": "M00086",
+        "position": 86,
+        "score": 0.09813880203792315,
+        "rank": 197
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11764705882352941,
+          "semantic_contribution": 0.047058823529411764,
+          "temporal": 0.0016040915767881027,
+          "temporal_contribution": 0.0004812274730364308,
+          "total": 0.0975400510024482
+        },
+        "item_id": "M00044",
+        "position": 44,
+        "score": 0.0975400510024482,
+        "rank": 203
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11538461538461539,
+          "semantic_contribution": 0.046153846153846156,
+          "temporal": 0.07490008214277942,
+          "temporal_contribution": 0.022470024642833826,
+          "total": 0.11862387079667998
+        },
+        "item_id": "M00484",
+        "position": 484,
+        "score": 0.11862387079667998,
+        "rank": 161
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11363636363636363,
+          "semantic_contribution": 0.045454545454545456,
+          "temporal": 0.0017325147295851053,
+          "temporal_contribution": 0.0005197544188755316,
+          "total": 0.09597429987342099
+        },
+        "item_id": "M00083",
+        "position": 83,
+        "score": 0.09597429987342099,
+        "rank": 210
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.1111111111111111,
+          "semantic_contribution": 0.044444444444444446,
+          "temporal": 0.011432665036321895,
+          "temporal_contribution": 0.0034297995108965684,
+          "total": 0.09787424395534101
+        },
+        "item_id": "M00270",
+        "position": 270,
+        "score": 0.09787424395534101,
+        "rank": 198
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.1111111111111111,
+          "semantic_contribution": 0.044444444444444446,
+          "temporal": 0.09555664421893817,
+          "temporal_contribution": 0.02866699326568145,
+          "total": 0.1231114377101259
+        },
+        "item_id": "M00523",
+        "position": 523,
+        "score": 0.1231114377101259,
+        "rank": 159
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.1111111111111111,
+          "semantic_contribution": 0.044444444444444446,
+          "temporal": 0.3496607530188334,
+          "temporal_contribution": 0.10489822590565002,
+          "total": 0.19934267035009445
+        },
+        "item_id": "M00629",
+        "position": 629,
+        "score": 0.19934267035009445,
+        "rank": 103
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.10810810810810811,
+          "semantic_contribution": 0.043243243243243246,
+          "temporal": 0.0067554977038771676,
+          "temporal_contribution": 0.00202664931116315,
+          "total": 0.0952698925544064
+        },
+        "item_id": "M00206",
+        "position": 206,
+        "score": 0.0952698925544064,
+        "rank": 216
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.10714285714285714,
+          "semantic_contribution": 0.04285714285714286,
+          "temporal": 0.013452590082659796,
+          "temporal_contribution": 0.004035777024797939,
+          "total": 0.09689291988194079
+        },
+        "item_id": "M00316",
+        "position": 316,
+        "score": 0.09689291988194079,
+        "rank": 206
+      }
+    ],
+    "candidate_hash": "6bd1cf7ce85f6ff39cca5e968c471e327ee16d7695cfc12fc62f37177500a1f1",
+    "source_ranking": {
+      "path": "artifacts/rankings/6bc8f4a4367a951f06f366d2f39201095faf25302888efbb437839bfc0572c2c.json.gz",
+      "sha256": "6bc8f4a4367a951f06f366d2f39201095faf25302888efbb437839bfc0572c2c"
+    },
+    "selection_rule": "First five lexicographic IDs at repeat zero / 1024 tokens where removing time restores all evidence-session hits. Exploratory examples; no further inference."
+  },
+  {
+    "question_id": "06f04340",
+    "question": "What should I serve for dinner this weekend with my homegrown ingredients?",
+    "gold_answer": "The user would prefer dinner suggestions that incorporate their homegrown cherry tomatoes and herbs like basil and mint, highlighting recipes that showcase their garden produce. They might not prefer suggestions that do not utilize these specific ingredients or do not emphasize the use of homegrown elements.",
+    "hybrid_answer": "The provided conversation records do not contain any information about homegrown ingredients or dinner recipe suggestions. Therefore, the information needed to answer your question is unavailable.",
+    "no_time_answer": "The conversation records do not mention any homegrown ingredients you have, nor do they include dinner suggestions tied to homegrown produce. Therefore, the information needed to answer your question is unavailable.",
+    "hybrid_semantic_correct": false,
+    "no_time_semantic_correct": false,
+    "hybrid_selected_scores": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.029411764705882353,
+          "semantic_contribution": 0.011764705882352941,
+          "temporal": 0.8956284254160037,
+          "temporal_contribution": 0.2686885276248011,
+          "total": 0.33045323350715405
+        },
+        "item_id": "M00740",
+        "position": 740,
+        "score": 0.33045323350715405,
+        "rank": 1
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.024793388429752067,
+          "semantic_contribution": 0.009917355371900827,
+          "temporal": 0.8956284254160037,
+          "temporal_contribution": 0.2686885276248011,
+          "total": 0.3286058829967019
+        },
+        "item_id": "M00741",
+        "position": 741,
+        "score": 0.3286058829967019,
+        "rank": 2
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.009523809523809525,
+          "semantic_contribution": 0.00380952380952381,
+          "temporal": 0.8956284254160037,
+          "temporal_contribution": 0.2686885276248011,
+          "total": 0.3224980514343249
+        },
+        "item_id": "M00736",
+        "position": 736,
+        "score": 0.3224980514343249,
+        "rank": 3
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.008695652173913044,
+          "semantic_contribution": 0.0034782608695652175,
+          "temporal": 0.8956284254160037,
+          "temporal_contribution": 0.2686885276248011,
+          "total": 0.3221667884943663
+        },
+        "item_id": "M00739",
+        "position": 739,
+        "score": 0.3221667884943663,
+        "rank": 4
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.06896551724137931,
+          "semantic_contribution": 0.027586206896551724,
+          "temporal": 0.8134261821138894,
+          "temporal_contribution": 0.24402785463416682,
+          "total": 0.32161406153071853
+        },
+        "item_id": "M00723",
+        "position": 723,
+        "score": 0.32161406153071853,
+        "rank": 5
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.0,
+          "semantic_contribution": 0.0,
+          "temporal": 0.8956284254160037,
+          "temporal_contribution": 0.2686885276248011,
+          "total": 0.3186885276248011
+        },
+        "item_id": "M00735",
+        "position": 735,
+        "score": 0.3186885276248011,
+        "rank": 6
+      }
+    ],
+    "items_selected_after_removing_time": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13793103448275862,
+          "semantic_contribution": 0.05517241379310345,
+          "temporal": 0.0008476952557637053,
+          "temporal_contribution": 0.0002543085767291116,
+          "total": 0.10542672236983255
+        },
+        "item_id": "M00025",
+        "position": 25,
+        "score": 0.10542672236983255,
+        "rank": 212
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.12121212121212122,
+          "semantic_contribution": 0.04848484848484849,
+          "temporal": 0.10628222362100036,
+          "temporal_contribution": 0.031884667086300104,
+          "total": 0.13036951557114862
+        },
+        "item_id": "M00472",
+        "position": 472,
+        "score": 0.13036951557114862,
+        "rank": 159
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11764705882352941,
+          "semantic_contribution": 0.047058823529411764,
+          "temporal": 0.0006338323383628901,
+          "temporal_contribution": 0.00019014970150886703,
+          "total": 0.09724897323092063
+        },
+        "item_id": "M00013",
+        "position": 13,
+        "score": 0.09724897323092063,
+        "rank": 250
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11764705882352941,
+          "semantic_contribution": 0.047058823529411764,
+          "temporal": 0.004247510806742317,
+          "temporal_contribution": 0.0012742532420226952,
+          "total": 0.09833307677143446
+        },
+        "item_id": "M00198",
+        "position": 198,
+        "score": 0.09833307677143446,
+        "rank": 246
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11428571428571428,
+          "semantic_contribution": 0.045714285714285714,
+          "temporal": 0.10628222362100036,
+          "temporal_contribution": 0.031884667086300104,
+          "total": 0.1275989528005858
+        },
+        "item_id": "M00484",
+        "position": 484,
+        "score": 0.1275989528005858,
+        "rank": 163
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.1111111111111111,
+          "semantic_contribution": 0.044444444444444446,
+          "temporal": 0.26119414172940014,
+          "temporal_contribution": 0.07835824251882004,
+          "total": 0.1728026869632645
+        },
+        "item_id": "M00599",
+        "position": 599,
+        "score": 0.1728026869632645,
+        "rank": 98
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.10526315789473684,
+          "semantic_contribution": 0.042105263157894736,
+          "temporal": 0.10628222362100036,
+          "temporal_contribution": 0.031884667086300104,
+          "total": 0.12398993024419484
+        },
+        "item_id": "M00492",
+        "position": 492,
+        "score": 0.12398993024419484,
+        "rank": 164
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.10344827586206896,
+          "semantic_contribution": 0.041379310344827586,
+          "temporal": 0.0018793434314338775,
+          "temporal_contribution": 0.0005638030294301633,
+          "total": 0.09194311337425776
+        },
+        "item_id": "M00112",
+        "position": 112,
+        "score": 0.09194311337425776,
+        "rank": 279
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.10344827586206896,
+          "semantic_contribution": 0.041379310344827586,
+          "temporal": 0.08766801814329589,
+          "temporal_contribution": 0.026300405442988766,
+          "total": 0.11767971578781636
+        },
+        "item_id": "M00449",
+        "position": 449,
+        "score": 0.11767971578781636,
+        "rank": 181
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.10204081632653061,
+          "semantic_contribution": 0.04081632653061225,
+          "temporal": 0.08766801814329589,
+          "temporal_contribution": 0.026300405442988766,
+          "total": 0.11711673197360102
+        },
+        "item_id": "M00453",
+        "position": 453,
+        "score": 0.11711673197360102,
+        "rank": 183
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.0967741935483871,
+          "semantic_contribution": 0.03870967741935484,
+          "temporal": 0.004247510806742317,
+          "temporal_contribution": 0.0012742532420226952,
+          "total": 0.08998393066137754
+        },
+        "item_id": "M00212",
+        "position": 212,
+        "score": 0.08998393066137754,
+        "rank": 283
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.09302325581395349,
+          "semantic_contribution": 0.037209302325581395,
+          "temporal": 0.5779544811569123,
+          "temporal_contribution": 0.17338634434707367,
+          "total": 0.26059564667265506
+        },
+        "item_id": "M00673",
+        "position": 673,
+        "score": 0.26059564667265506,
+        "rank": 41
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.09090909090909091,
+          "semantic_contribution": 0.03636363636363637,
+          "temporal": 0.0018793434314338775,
+          "temporal_contribution": 0.0005638030294301633,
+          "total": 0.08692743939306653
+        },
+        "item_id": "M00114",
+        "position": 114,
+        "score": 0.08692743939306653,
+        "rank": 292
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.09090909090909091,
+          "semantic_contribution": 0.03636363636363637,
+          "temporal": 0.004247510806742317,
+          "temporal_contribution": 0.0012742532420226952,
+          "total": 0.08763788960565908
+        },
+        "item_id": "M00204",
+        "position": 204,
+        "score": 0.08763788960565908,
+        "rank": 291
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.09090909090909091,
+          "semantic_contribution": 0.03636363636363637,
+          "temporal": 0.0200496688967929,
+          "temporal_contribution": 0.0060149006690378695,
+          "total": 0.09237853703267423
+        },
+        "item_id": "M00361",
+        "position": 361,
+        "score": 0.09237853703267423,
+        "rank": 276
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.09090909090909091,
+          "semantic_contribution": 0.03636363636363637,
+          "temporal": 0.0200496688967929,
+          "temporal_contribution": 0.0060149006690378695,
+          "total": 0.09237853703267423
+        },
+        "item_id": "M00370",
+        "position": 370,
+        "score": 0.09237853703267423,
+        "rank": 277
+      }
+    ],
+    "candidate_hash": "418dc3bf7405f97a0a02b092dde79bfa30c7a4a5568b735c0c788a9024f028d8",
+    "source_ranking": {
+      "path": "artifacts/rankings/e9f4c159c70a5c1fa77ce211568aeddaab94271ed77919dae24758830711f1bd.json.gz",
+      "sha256": "e9f4c159c70a5c1fa77ce211568aeddaab94271ed77919dae24758830711f1bd"
+    },
+    "selection_rule": "First five lexicographic IDs at repeat zero / 1024 tokens where removing time restores all evidence-session hits. Exploratory examples; no further inference."
+  },
+  {
+    "question_id": "0edc2aef",
+    "question": "Can you suggest a hotel for my upcoming trip to Miami?",
+    "gold_answer": "The user would prefer suggestions of hotels in Miami that offer great views, possibly of the ocean or the city skyline, and have unique features such as a rooftop pool or a hot tub on the balcony. They may not prefer suggestions of basic or budget hotels without these features.",
+    "hybrid_answer": "The provided conversation records do not contain any information about hotel recommendations, travel planning, or Miami accommodations. Therefore, this information is unavailable.",
+    "no_time_answer": "The conversation records do not contain any information about hotels in Miami or suggestions for Miami accommodations. Therefore, the information is unavailable.",
+    "hybrid_semantic_correct": false,
+    "no_time_semantic_correct": false,
+    "hybrid_selected_scores": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.1,
+          "semantic_contribution": 0.04000000000000001,
+          "temporal": 0.9776304397654498,
+          "temporal_contribution": 0.29328913192963496,
+          "total": 0.38328913192963493
+        },
+        "item_id": "M00706",
+        "position": 706,
+        "score": 0.38328913192963493,
+        "rank": 1
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.0967741935483871,
+          "semantic_contribution": 0.03870967741935484,
+          "temporal": 0.9776304397654498,
+          "temporal_contribution": 0.29328913192963496,
+          "total": 0.3819988093489898
+        },
+        "item_id": "M00713",
+        "position": 713,
+        "score": 0.3819988093489898,
+        "rank": 2
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.09523809523809523,
+          "semantic_contribution": 0.0380952380952381,
+          "temporal": 0.9776304397654498,
+          "temporal_contribution": 0.29328913192963496,
+          "total": 0.3813843700248731
+        },
+        "item_id": "M00698",
+        "position": 698,
+        "score": 0.3813843700248731,
+        "rank": 3
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.07894736842105263,
+          "semantic_contribution": 0.031578947368421054,
+          "temporal": 0.9776304397654498,
+          "temporal_contribution": 0.29328913192963496,
+          "total": 0.374868079298056
+        },
+        "item_id": "M00694",
+        "position": 694,
+        "score": 0.374868079298056,
+        "rank": 4
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.06451612903225806,
+          "semantic_contribution": 0.025806451612903226,
+          "temporal": 0.9776304397654498,
+          "temporal_contribution": 0.29328913192963496,
+          "total": 0.3690955835425382
+        },
+        "item_id": "M00702",
+        "position": 702,
+        "score": 0.3690955835425382,
+        "rank": 5
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.058823529411764705,
+          "semantic_contribution": 0.023529411764705882,
+          "temporal": 0.9776304397654498,
+          "temporal_contribution": 0.29328913192963496,
+          "total": 0.3668185436943408
+        },
+        "item_id": "M00709",
+        "position": 709,
+        "score": 0.3668185436943408,
+        "rank": 6
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.058823529411764705,
+          "semantic_contribution": 0.023529411764705882,
+          "temporal": 0.9776304397654498,
+          "temporal_contribution": 0.29328913192963496,
+          "total": 0.3668185436943408
+        },
+        "item_id": "M00710",
+        "position": 710,
+        "score": 0.3668185436943408,
+        "rank": 7
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.05555555555555555,
+          "semantic_contribution": 0.022222222222222223,
+          "temporal": 0.9795145913504073,
+          "temporal_contribution": 0.29385437740512216,
+          "total": 0.36607659962734435
+        },
+        "item_id": "M00719",
+        "position": 719,
+        "score": 0.36607659962734435,
+        "rank": 8
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.05555555555555555,
+          "semantic_contribution": 0.022222222222222223,
+          "temporal": 0.9776304397654498,
+          "temporal_contribution": 0.29328913192963496,
+          "total": 0.36551135415185715
+        },
+        "item_id": "M00705",
+        "position": 705,
+        "score": 0.36551135415185715,
+        "rank": 9
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.04597701149425287,
+          "semantic_contribution": 0.01839080459770115,
+          "temporal": 0.9795145913504073,
+          "temporal_contribution": 0.29385437740512216,
+          "total": 0.3622451820028233
+        },
+        "item_id": "M00722",
+        "position": 722,
+        "score": 0.3622451820028233,
+        "rank": 10
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.037037037037037035,
+          "semantic_contribution": 0.014814814814814815,
+          "temporal": 0.9776304397654498,
+          "temporal_contribution": 0.29328913192963496,
+          "total": 0.3581039467444498
+        },
+        "item_id": "M00697",
+        "position": 697,
+        "score": 0.3581039467444498,
+        "rank": 16
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.03225806451612903,
+          "semantic_contribution": 0.012903225806451613,
+          "temporal": 0.9795145913504073,
+          "temporal_contribution": 0.29385437740512216,
+          "total": 0.35675760321157374
+        },
+        "item_id": "M00720",
+        "position": 720,
+        "score": 0.35675760321157374,
+        "rank": 18
+      }
+    ],
+    "items_selected_after_removing_time": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.2,
+          "semantic_contribution": 0.08000000000000002,
+          "temporal": 0.39551533998914445,
+          "temporal_contribution": 0.11865460199674333,
+          "total": 0.24865460199674333
+        },
+        "item_id": "M00594",
+        "position": 594,
+        "score": 0.24865460199674333,
+        "rank": 95
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.18518518518518517,
+          "semantic_contribution": 0.07407407407407407,
+          "temporal": 0.06954866664950793,
+          "temporal_contribution": 0.02086459999485238,
+          "total": 0.14493867406892647
+        },
+        "item_id": "M00404",
+        "position": 404,
+        "score": 0.14493867406892647,
+        "rank": 144
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.17647058823529413,
+          "semantic_contribution": 0.07058823529411766,
+          "temporal": 0.7571290408168926,
+          "temporal_contribution": 0.22713871224506776,
+          "total": 0.3477269475391854
+        },
+        "item_id": "M00674",
+        "position": 674,
+        "score": 0.3477269475391854,
+        "rank": 34
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.17391304347826086,
+          "semantic_contribution": 0.06956521739130435,
+          "temporal": 0.05180254064900274,
+          "temporal_contribution": 0.015540762194700821,
+          "total": 0.13510597958600518
+        },
+        "item_id": "M00361",
+        "position": 361,
+        "score": 0.13510597958600518,
+        "rank": 158
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.16666666666666666,
+          "semantic_contribution": 0.06666666666666667,
+          "temporal": 0.05180254064900274,
+          "temporal_contribution": 0.015540762194700821,
+          "total": 0.1322074288613675
+        },
+        "item_id": "M00349",
+        "position": 349,
+        "score": 0.1322074288613675,
+        "rank": 167
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.15625,
+          "semantic_contribution": 0.0625,
+          "temporal": 0.0025195138653962773,
+          "temporal_contribution": 0.0007558541596188831,
+          "total": 0.11325585415961889
+        },
+        "item_id": "M00140",
+        "position": 140,
+        "score": 0.11325585415961889,
+        "rank": 231
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.15384615384615385,
+          "semantic_contribution": 0.06153846153846154,
+          "temporal": 0.0009718730901800328,
+          "temporal_contribution": 0.0002915619270540098,
+          "total": 0.11183002346551556
+        },
+        "item_id": "M00068",
+        "position": 68,
+        "score": 0.11183002346551556,
+        "rank": 237
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.15384615384615385,
+          "semantic_contribution": 0.06153846153846154,
+          "temporal": 0.4170217237367804,
+          "temporal_contribution": 0.12510651712103413,
+          "total": 0.23664497865949569
+        },
+        "item_id": "M00603",
+        "position": 603,
+        "score": 0.23664497865949569,
+        "rank": 98
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.15384615384615385,
+          "semantic_contribution": 0.06153846153846154,
+          "temporal": 0.7677720785600414,
+          "temporal_contribution": 0.2303316235680124,
+          "total": 0.34187008510647393
+        },
+        "item_id": "M00690",
+        "position": 690,
+        "score": 0.34187008510647393,
+        "rank": 37
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.14285714285714285,
+          "semantic_contribution": 0.05714285714285714,
+          "temporal": 0.06954866664950793,
+          "temporal_contribution": 0.02086459999485238,
+          "total": 0.1280074571377095
+        },
+        "item_id": "M00401",
+        "position": 401,
+        "score": 0.1280074571377095,
+        "rank": 181
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.14285714285714285,
+          "semantic_contribution": 0.05714285714285714,
+          "temporal": 0.08843090381611526,
+          "temporal_contribution": 0.02652927114483458,
+          "total": 0.1336721282876917
+        },
+        "item_id": "M00460",
+        "position": 460,
+        "score": 0.1336721282876917,
+        "rank": 162
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13636363636363635,
+          "semantic_contribution": 0.05454545454545454,
+          "temporal": 0.05180254064900274,
+          "temporal_contribution": 0.015540762194700821,
+          "total": 0.12008621674015536
+        },
+        "item_id": "M00353",
+        "position": 353,
+        "score": 0.12008621674015536,
+        "rank": 210
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13636363636363635,
+          "semantic_contribution": 0.05454545454545454,
+          "temporal": 0.08318689045148396,
+          "temporal_contribution": 0.024956067135445188,
+          "total": 0.12950152168089973
+        },
+        "item_id": "M00447",
+        "position": 447,
+        "score": 0.12950152168089973,
+        "rank": 177
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13333333333333333,
+          "semantic_contribution": 0.05333333333333334,
+          "temporal": 0.0005438722945102229,
+          "temporal_contribution": 0.00016316168835306687,
+          "total": 0.1034964950216864
+        },
+        "item_id": "M00005",
+        "position": 5,
+        "score": 0.1034964950216864,
+        "rank": 257
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13333333333333333,
+          "semantic_contribution": 0.05333333333333334,
+          "temporal": 0.08843090381611526,
+          "temporal_contribution": 0.02652927114483458,
+          "total": 0.12986260447816791
+        },
+        "item_id": "M00462",
+        "position": 462,
+        "score": 0.12986260447816791,
+        "rank": 176
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13333333333333333,
+          "semantic_contribution": 0.05333333333333334,
+          "temporal": 0.7571290408168926,
+          "temporal_contribution": 0.22713871224506776,
+          "total": 0.3304720455784011
+        },
+        "item_id": "M00672",
+        "position": 672,
+        "score": 0.3304720455784011,
+        "rank": 38
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.12903225806451613,
+          "semantic_contribution": 0.05161290322580645,
+          "temporal": 0.037126962842547115,
+          "temporal_contribution": 0.011138088852764134,
+          "total": 0.11275099207857059
+        },
+        "item_id": "M00314",
+        "position": 314,
+        "score": 0.11275099207857059,
+        "rank": 233
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.125,
+          "semantic_contribution": 0.05,
+          "temporal": 0.016207189879234734,
+          "temporal_contribution": 0.00486215696377042,
+          "total": 0.10486215696377042
+        },
+        "item_id": "M00252",
+        "position": 252,
+        "score": 0.10486215696377042,
+        "rank": 254
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.125,
+          "semantic_contribution": 0.05,
+          "temporal": 0.037126962842547115,
+          "temporal_contribution": 0.011138088852764134,
+          "total": 0.11113808885276413
+        },
+        "item_id": "M00317",
+        "position": 317,
+        "score": 0.11113808885276413,
+        "rank": 242
+      }
+    ],
+    "candidate_hash": "c64dd6c58a05914719e4d0f7e9484684c18ef91522359c8e61af0778861df3f0",
+    "source_ranking": {
+      "path": "artifacts/rankings/6b518f73222724b1ce5e5b2c978e9c0328a1f7f18cb64cf94f898ab6ec86c000.json.gz",
+      "sha256": "6b518f73222724b1ce5e5b2c978e9c0328a1f7f18cb64cf94f898ab6ec86c000"
+    },
+    "selection_rule": "First five lexicographic IDs at repeat zero / 1024 tokens where removing time restores all evidence-session hits. Exploratory examples; no further inference."
+  },
+  {
+    "question_id": "10e09553",
+    "question": "How many largemouth bass did I catch with Alex on the earlier fishing trip to Lake Michigan before the 7/22 trip?",
+    "gold_answer": "7",
+    "hybrid_answer": "You caught 9 largemouth bass with Alex on the earlier fishing trip to Lake Michigan. This is stated in the timestamped record:  \n[M00582 | 2023/11/30 (Thu) 00:28 | user]  \n“I'm planning to try out some of those deer calls during our next hunting trip. By the way, speaking of hunting, I've been watching some YouTube videos on deer hunting strategies and tactics, just like I did before our last fishing trip to Lake Michigan. Remember that trip when we caught 9 largemouth bass with Alex?”  \n\nNo other fishing trip with Alex is mentioned in memory, and the reference is explicitly to “our last fishing trip to Lake Michigan” — confirming the count is 9.",
+    "no_time_answer": "You caught 7 largemouth bass with Alex on the earlier fishing trip to Lake Michigan on 7/10.",
+    "hybrid_semantic_correct": false,
+    "no_time_semantic_correct": true,
+    "hybrid_selected_scores": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.05434782608695652,
+          "semantic_contribution": 0.021739130434782608,
+          "temporal": 0.3458109735464198,
+          "temporal_contribution": 0.10374329206392595,
+          "total": 0.17548242249870855
+        },
+        "item_id": "M00716",
+        "position": 716,
+        "score": 0.17548242249870855,
+        "rank": 1
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.05063291139240506,
+          "semantic_contribution": 0.020253164556962026,
+          "temporal": 0.3458109735464198,
+          "temporal_contribution": 0.10374329206392595,
+          "total": 0.17399645662088797
+        },
+        "item_id": "M00714",
+        "position": 714,
+        "score": 0.17399645662088797,
+        "rank": 2
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.045454545454545456,
+          "semantic_contribution": 0.018181818181818184,
+          "temporal": 0.3458109735464198,
+          "temporal_contribution": 0.10374329206392595,
+          "total": 0.17192511024574414
+        },
+        "item_id": "M00713",
+        "position": 713,
+        "score": 0.17192511024574414,
+        "rank": 3
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.037037037037037035,
+          "semantic_contribution": 0.014814814814814815,
+          "temporal": 0.3458109735464198,
+          "temporal_contribution": 0.10374329206392595,
+          "total": 0.1685581068787408
+        },
+        "item_id": "M00719",
+        "position": 719,
+        "score": 0.1685581068787408,
+        "rank": 4
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.03225806451612903,
+          "semantic_contribution": 0.012903225806451613,
+          "temporal": 0.3458109735464198,
+          "temporal_contribution": 0.10374329206392595,
+          "total": 0.16664651787037757
+        },
+        "item_id": "M00715",
+        "position": 715,
+        "score": 0.16664651787037757,
+        "rank": 5
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.02877697841726619,
+          "semantic_contribution": 0.011510791366906477,
+          "temporal": 0.3458109735464198,
+          "temporal_contribution": 0.10374329206392595,
+          "total": 0.16525408343083242
+        },
+        "item_id": "M00717",
+        "position": 717,
+        "score": 0.16525408343083242,
+        "rank": 6
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.2653061224489796,
+          "semantic_contribution": 0.10612244897959185,
+          "temporal": 0.011427163222016541,
+          "temporal_contribution": 0.003428148966604962,
+          "total": 0.1595505979461968
+        },
+        "item_id": "M00582",
+        "position": 582,
+        "score": 0.1595505979461968,
+        "rank": 7
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.0,
+          "semantic_contribution": 0.0,
+          "temporal": 0.3458109735464198,
+          "temporal_contribution": 0.10374329206392595,
+          "total": 0.15374329206392595
+        },
+        "item_id": "M00718",
+        "position": 718,
+        "score": 0.15374329206392595,
+        "rank": 8
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.2,
+          "semantic_contribution": 0.08000000000000002,
+          "temporal": 0.011427163222016541,
+          "temporal_contribution": 0.003428148966604962,
+          "total": 0.133428148966605
+        },
+        "item_id": "M00569",
+        "position": 569,
+        "score": 0.133428148966605,
+        "rank": 9
+      }
+    ],
+    "items_selected_after_removing_time": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.18518518518518517,
+          "semantic_contribution": 0.07407407407407407,
+          "temporal": 4.848726438932431e-36,
+          "temporal_contribution": 1.4546179316797292e-36,
+          "total": 0.12407407407407407
+        },
+        "item_id": "M00072",
+        "position": 72,
+        "score": 0.12407407407407407,
+        "rank": 10
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.1568627450980392,
+          "semantic_contribution": 0.06274509803921569,
+          "temporal": 0.011427163222016541,
+          "temporal_contribution": 0.003428148966604962,
+          "total": 0.11617324700582066
+        },
+        "item_id": "M00572",
+        "position": 572,
+        "score": 0.11617324700582066,
+        "rank": 14
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13793103448275862,
+          "semantic_contribution": 0.05517241379310345,
+          "temporal": 5.575310118502017e-24,
+          "temporal_contribution": 1.672593035550605e-24,
+          "total": 0.10517241379310345
+        },
+        "item_id": "M00302",
+        "position": 302,
+        "score": 0.10517241379310345,
+        "rank": 39
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.12903225806451613,
+          "semantic_contribution": 0.05161290322580645,
+          "temporal": 5.240326344618314e-21,
+          "temporal_contribution": 1.5720979033854942e-21,
+          "total": 0.10161290322580646
+        },
+        "item_id": "M00348",
+        "position": 348,
+        "score": 0.10161290322580646,
+        "rank": 42
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.125,
+          "semantic_contribution": 0.05,
+          "temporal": 4.848726438932431e-36,
+          "temporal_contribution": 1.4546179316797292e-36,
+          "total": 0.1
+        },
+        "item_id": "M00087",
+        "position": 87,
+        "score": 0.1,
+        "rank": 44
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.125,
+          "semantic_contribution": 0.05,
+          "temporal": 3.968412230622989e-20,
+          "temporal_contribution": 1.1905236691868968e-20,
+          "total": 0.1
+        },
+        "item_id": "M00359",
+        "position": 359,
+        "score": 0.1,
+        "rank": 45
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.125,
+          "semantic_contribution": 0.05,
+          "temporal": 4.99046676513077e-08,
+          "temporal_contribution": 1.497140029539231e-08,
+          "total": 0.10000001497140029
+        },
+        "item_id": "M00500",
+        "position": 500,
+        "score": 0.10000001497140029,
+        "rank": 43
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.12345679012345678,
+          "semantic_contribution": 0.04938271604938271,
+          "temporal": 0.011427163222016541,
+          "temporal_contribution": 0.003428148966604962,
+          "total": 0.10281086501598768
+        },
+        "item_id": "M00583",
+        "position": 583,
+        "score": 0.10281086501598768,
+        "rank": 41
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.12,
+          "semantic_contribution": 0.048,
+          "temporal": 1.8865514173287183e-22,
+          "temporal_contribution": 5.659654251986155e-23,
+          "total": 0.098
+        },
+        "item_id": "M00326",
+        "position": 326,
+        "score": 0.098,
+        "rank": 48
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.12,
+          "semantic_contribution": 0.048,
+          "temporal": 1.4529023808186453e-14,
+          "temporal_contribution": 4.358707142455935e-15,
+          "total": 0.09800000000000436
+        },
+        "item_id": "M00432",
+        "position": 432,
+        "score": 0.09800000000000436,
+        "rank": 47
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11627906976744186,
+          "semantic_contribution": 0.046511627906976744,
+          "temporal": 0.011427163222016541,
+          "temporal_contribution": 0.003428148966604962,
+          "total": 0.09993977687358171
+        },
+        "item_id": "M00571",
+        "position": 571,
+        "score": 0.09993977687358171,
+        "rank": 46
+      }
+    ],
+    "candidate_hash": "24715a5079d6e75ff97700ad8a18a5db6a69b213c4ae7730490902d35aa16b66",
+    "source_ranking": {
+      "path": "artifacts/rankings/7e5d98fe853cec14cf089f5d56464ce2637fb8db3efbc844895e5b2617fc0786.json.gz",
+      "sha256": "7e5d98fe853cec14cf089f5d56464ce2637fb8db3efbc844895e5b2617fc0786"
+    },
+    "selection_rule": "First five lexicographic IDs at repeat zero / 1024 tokens where removing time restores all evidence-session hits. Exploratory examples; no further inference."
+  },
+  {
+    "question_id": "1192316e",
+    "question": "What is the total time it takes I to get ready and commute to work?",
+    "gold_answer": "an hour and a half",
+    "hybrid_answer": "The total time it takes to get ready and commute to work is not mentioned in the provided conversation records. This information is unavailable.",
+    "no_time_answer": "Based on the records, you take about an hour to get ready (M00182), and your daily commute takes about 30 minutes (M00047). Therefore, the total time is **1 hour and 30 minutes**.",
+    "hybrid_semantic_correct": false,
+    "no_time_semantic_correct": true,
+    "hybrid_selected_scores": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.25,
+          "semantic_contribution": 0.1,
+          "temporal": 0.9090931295275593,
+          "temporal_contribution": 0.2727279388582678,
+          "total": 0.4227279388582678
+        },
+        "item_id": "M00699",
+        "position": 699,
+        "score": 0.4227279388582678,
+        "rank": 1
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11764705882352941,
+          "semantic_contribution": 0.047058823529411764,
+          "temporal": 0.9090931295275593,
+          "temporal_contribution": 0.2727279388582678,
+          "total": 0.36978676238767955
+        },
+        "item_id": "M00710",
+        "position": 710,
+        "score": 0.36978676238767955,
+        "rank": 2
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.11764705882352941,
+          "semantic_contribution": 0.047058823529411764,
+          "temporal": 0.9090931295275593,
+          "temporal_contribution": 0.2727279388582678,
+          "total": 0.36978676238767955
+        },
+        "item_id": "M00712",
+        "position": 712,
+        "score": 0.36978676238767955,
+        "rank": 3
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.10526315789473684,
+          "semantic_contribution": 0.042105263157894736,
+          "temporal": 0.9090931295275593,
+          "temporal_contribution": 0.2727279388582678,
+          "total": 0.36483320201616254
+        },
+        "item_id": "M00697",
+        "position": 697,
+        "score": 0.36483320201616254,
+        "rank": 4
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.09090909090909091,
+          "semantic_contribution": 0.03636363636363637,
+          "temporal": 0.9090931295275593,
+          "temporal_contribution": 0.2727279388582678,
+          "total": 0.35909157522190416
+        },
+        "item_id": "M00711",
+        "position": 711,
+        "score": 0.35909157522190416,
+        "rank": 5
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.08571428571428572,
+          "semantic_contribution": 0.03428571428571429,
+          "temporal": 0.9090931295275593,
+          "temporal_contribution": 0.2727279388582678,
+          "total": 0.3570136531439821
+        },
+        "item_id": "M00704",
+        "position": 704,
+        "score": 0.3570136531439821,
+        "rank": 6
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.1,
+          "semantic_contribution": 0.04000000000000001,
+          "temporal": 0.8870475415475745,
+          "temporal_contribution": 0.26611426246427233,
+          "total": 0.3561142624642723
+        },
+        "item_id": "M00687",
+        "position": 687,
+        "score": 0.3561142624642723,
+        "rank": 7
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.07692307692307693,
+          "semantic_contribution": 0.03076923076923077,
+          "temporal": 0.9090931295275593,
+          "temporal_contribution": 0.2727279388582678,
+          "total": 0.35349716962749855
+        },
+        "item_id": "M00700",
+        "position": 700,
+        "score": 0.35349716962749855,
+        "rank": 8
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.06818181818181818,
+          "semantic_contribution": 0.02727272727272727,
+          "temporal": 0.9090931295275593,
+          "temporal_contribution": 0.2727279388582678,
+          "total": 0.35000066613099506
+        },
+        "item_id": "M00713",
+        "position": 713,
+        "score": 0.35000066613099506,
+        "rank": 9
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.06666666666666667,
+          "semantic_contribution": 0.02666666666666667,
+          "temporal": 0.9090931295275593,
+          "temporal_contribution": 0.2727279388582678,
+          "total": 0.34939460552493445
+        },
+        "item_id": "M00709",
+        "position": 709,
+        "score": 0.34939460552493445,
+        "rank": 10
+      }
+    ],
+    "items_selected_after_removing_time": [
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.2,
+          "semantic_contribution": 0.08000000000000002,
+          "temporal": 0.09854622684845137,
+          "temporal_contribution": 0.029563868054535408,
+          "total": 0.15956386805453543
+        },
+        "item_id": "M00467",
+        "position": 467,
+        "score": 0.15956386805453543,
+        "rank": 153
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.2,
+          "semantic_contribution": 0.08000000000000002,
+          "temporal": 0.68929547251896,
+          "temporal_contribution": 0.20678864175568798,
+          "total": 0.33678864175568796
+        },
+        "item_id": "M00637",
+        "position": 637,
+        "score": 0.33678864175568796,
+        "rank": 24
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.16666666666666666,
+          "semantic_contribution": 0.06666666666666667,
+          "temporal": 0.0037478470104232646,
+          "temporal_contribution": 0.0011243541031269793,
+          "total": 0.11779102076979364
+        },
+        "item_id": "M00173",
+        "position": 173,
+        "score": 0.11779102076979364,
+        "rank": 216
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.16666666666666666,
+          "semantic_contribution": 0.06666666666666667,
+          "temporal": 0.0037478470104232646,
+          "temporal_contribution": 0.0011243541031269793,
+          "total": 0.11779102076979364
+        },
+        "item_id": "M00175",
+        "position": 175,
+        "score": 0.11779102076979364,
+        "rank": 217
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.16666666666666666,
+          "semantic_contribution": 0.06666666666666667,
+          "temporal": 0.015505124160358492,
+          "temporal_contribution": 0.004651537248107547,
+          "total": 0.12131820391477421
+        },
+        "item_id": "M00279",
+        "position": 279,
+        "score": 0.12131820391477421,
+        "rank": 206
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.16279069767441862,
+          "semantic_contribution": 0.06511627906976745,
+          "temporal": 0.0010202896161304695,
+          "temporal_contribution": 0.0003060868848391408,
+          "total": 0.1154223659546066
+        },
+        "item_id": "M00047",
+        "position": 47,
+        "score": 0.1154223659546066,
+        "rank": 226
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.16216216216216217,
+          "semantic_contribution": 0.06486486486486487,
+          "temporal": 0.005721838306525923,
+          "temporal_contribution": 0.0017165514919577768,
+          "total": 0.11658141635682265
+        },
+        "item_id": "M00195",
+        "position": 195,
+        "score": 0.11658141635682265,
+        "rank": 223
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.16,
+          "semantic_contribution": 0.064,
+          "temporal": 0.0010202896161304695,
+          "temporal_contribution": 0.0003060868848391408,
+          "total": 0.11430608688483915
+        },
+        "item_id": "M00062",
+        "position": 62,
+        "score": 0.11430608688483915,
+        "rank": 232
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.15384615384615385,
+          "semantic_contribution": 0.06153846153846154,
+          "temporal": 0.24629721541330074,
+          "temporal_contribution": 0.07388916462399021,
+          "total": 0.18542762616245173
+        },
+        "item_id": "M00547",
+        "position": 547,
+        "score": 0.18542762616245173,
+        "rank": 124
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.15384615384615385,
+          "semantic_contribution": 0.06153846153846154,
+          "temporal": 0.68929547251896,
+          "temporal_contribution": 0.20678864175568798,
+          "total": 0.31832710329414954
+        },
+        "item_id": "M00630",
+        "position": 630,
+        "score": 0.31832710329414954,
+        "rank": 32
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.14285714285714285,
+          "semantic_contribution": 0.05714285714285714,
+          "temporal": 0.04008004053353252,
+          "temporal_contribution": 0.012024012160059756,
+          "total": 0.1191668693029169
+        },
+        "item_id": "M00347",
+        "position": 347,
+        "score": 0.1191668693029169,
+        "rank": 213
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.14285714285714285,
+          "semantic_contribution": 0.05714285714285714,
+          "temporal": 0.1245195734025719,
+          "temporal_contribution": 0.03735587202077157,
+          "total": 0.14449872916362871
+        },
+        "item_id": "M00480",
+        "position": 480,
+        "score": 0.14449872916362871,
+        "rank": 177
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.1388888888888889,
+          "semantic_contribution": 0.05555555555555556,
+          "temporal": 0.68929547251896,
+          "temporal_contribution": 0.20678864175568798,
+          "total": 0.3123441973112435
+        },
+        "item_id": "M00636",
+        "position": 636,
+        "score": 0.3123441973112435,
+        "rank": 35
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13725490196078433,
+          "semantic_contribution": 0.05490196078431373,
+          "temporal": 0.005721838306525923,
+          "temporal_contribution": 0.0017165514919577768,
+          "total": 0.1066185122762715
+        },
+        "item_id": "M00182",
+        "position": 182,
+        "score": 0.1066185122762715,
+        "rank": 256
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13513513513513514,
+          "semantic_contribution": 0.05405405405405406,
+          "temporal": 0.025468558400189193,
+          "temporal_contribution": 0.007640567520056757,
+          "total": 0.11169462157411081
+        },
+        "item_id": "M00342",
+        "position": 342,
+        "score": 0.11169462157411081,
+        "rank": 242
+      },
+      {
+        "components": {
+          "frequency": 0.0,
+          "frequency_contribution": 0.0,
+          "importance": 0.5,
+          "importance_contribution": 0.05,
+          "semantic": 0.13333333333333333,
+          "semantic_contribution": 0.05333333333333334,
+          "temporal": 0.24629721541330074,
+          "temporal_contribution": 0.07388916462399021,
+          "total": 0.17722249795732353
+        },
+        "item_id": "M00539",
+        "position": 539,
+        "score": 0.17722249795732353,
+        "rank": 128
+      }
+    ],
+    "candidate_hash": "a99e856a33832fadb69928d3b4d20892869f574834bb1c9091645212b0028e2d",
+    "source_ranking": {
+      "path": "artifacts/rankings/304986fe55329546898cdb1c5b1de36ada63eb3a7f0ba55e1c0e409fa106f6c9.json.gz",
+      "sha256": "304986fe55329546898cdb1c5b1de36ada63eb3a7f0ba55e1c0e409fa106f6c9"
+    },
+    "selection_rule": "First five lexicographic IDs at repeat zero / 1024 tokens where removing time restores all evidence-session hits. Exploratory examples; no further inference."
+  }
+]

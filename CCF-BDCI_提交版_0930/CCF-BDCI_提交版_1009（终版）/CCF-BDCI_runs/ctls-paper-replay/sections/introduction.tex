@@ -1,0 +1,31 @@
+\section{Introduction}
+
+\label{sec:introduction}
+
+A language-model agent can retain project facts in a file and expose a prefix of that file to its next question. This is inexpensive to construct, but a fixed prompt allowance can remove relevant facts before the model sees them. An alternative is to store exchanges as separate memory items and select a subset for each question. That design introduces a second resource decision: how the items are constructed. If construction itself invokes a model, measuring only the final query can give an incomplete account of operational cost. A useful comparison therefore needs to follow the information delivered to the query and the model calls required to prepare it.
+
+This paper presents an auditable systems study of that trade-off. The research question is: how do file-based project memory and hybrid retrieval compare in answer accuracy and total model cost under equal context-character budgets? Three sub-questions structure the investigation. RQ1 asks whether accuracy differs between the two arms when both receive the same character budget. RQ2 asks whether complete evidence recall is associated with correct answers, and whether partial evidence can suffice. RQ3 asks how total token cost, including memory-write calls, compares between the arms.
+
+The study audits an existing implementation rather than proposing a new retrieval algorithm. Both arms receive identical facts, questions, model identity, and system prompt; only the memory-construction and selection protocol differ. The baseline writes facts to an isolated JIUWENSWARM.md file and presents a prefix-truncated view. The enhanced arm writes completed user-assistant exchanges to process-local L1 memory through model-backed conversations and selects items using a fixed lexical ranking. Neither arm employs learned embeddings, reflection modules, or external tools.
+
+The study contributes an auditable comparison, a cost decomposition and a question-level diagnostic record. The comparison pairs identical questions under restricted and expanded memory budgets instead of treating the two budgets as independent datasets. The decomposition separates query tokens from model-backed writes, allowing an accuracy advantage to be assessed alongside its construction expense. The diagnostics distinguish missing complete evidence from an incorrect answer and expose a case where a partial fact still contains an accepted answer. These contributions concern measurement and implementation behaviour; they do not establish a new retrieval algorithm or state-of-the-art performance.
+
+The scope is deliberately narrow. The experiments do not validate an end-to-end paper-generation pipeline, do not test multi-session reasoning or temporal updates, and do not compare against published memory systems. The adapted LongMemEval slice covers only single-session factual extraction. All reported intervals are descriptive Wilson intervals over the twenty selected questions; no significance test is claimed or justified by the single-run protocol.
+
+\subsection{Quality under Matched Budgets}
+
+\label{sec:rq_quality}
+
+The primary research question is whether CTLS closes the gap between the deployed hybrid and BM25. The controlled study shows that BM25 substantially outperforms the hybrid at every budget. CTLS is designed to recover this gap by eliminating temporal dominance through tier partition while preserving temporal decay as a within-tier tiebreaker rather than discarding it entirely.
+
+\subsection{Mechanism Attribution via Tier Partition}
+
+\label{sec:rq_attribution}
+
+The second question asks which component causes the hybrid deficit and whether tier partition addresses it by construction. The mechanism analysis derives the temporal dominance condition: a fixed query-independent freshness weight can outweigh a positive lexical advantage. The hybrid\_no\_time ablation recovers most of the deficit empirically, establishing that the temporal term is the primary cause. CTLS formalizes this fix while retaining within-tier temporal tiebreaking.
+
+\subsection{Lifecycle Cost under Memory Reuse}
+
+\label{sec:rq_lifecycle}
+
+The third question asks how write amortization changes the per-query cost when a single memory bank serves multiple distinct queries. CTLS is a zero-cost selector substitution: it requires no additional model calls, no embedding model, and no extra parameters. Construction cost and write amortization are identical to the baseline write path. The reuse experiment measures whether per-query cost falls as query count increases, independent of which selector is used.

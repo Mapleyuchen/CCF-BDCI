@@ -1,0 +1,1126 @@
+commit 886a3e4534128df42ad79804d7736d8a53db94da
+Author:     Eureka-Y17 <2454276@tongji.edu.cn>
+AuthorDate: Mon Sep 28 11:32:25 2026 +0800
+Commit:     Eureka-Y17 <2454276@tongji.edu.cn>
+CommitDate: Mon Sep 28 11:32:25 2026 +0800
+
+    feat: add offline ICLR paper framework generator
+
+diff --git a/jiuwenswarm/research-paper-generator/README.md b/jiuwenswarm/research-paper-generator/README.md
+new file mode 100644
+index 0000000..6f980c7
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/README.md
+@@ -0,0 +1,88 @@
++# 第 3 部分：论文框架生成
++
++本模块在没有其他模块、模型服务或 API Key 的情况下，可以生成 ICLR 论文骨架、结构化大纲和引用映射。使用 Python 3.11+ 标准库；生成 PDF 另需 PATH 中有 `pdflatex` 和 `bibtex`。
++
++**当前为规则规划器，不调用 LLM，不生成论文正文、实验数字或研究结论。** 主章节使用科研论文常见结构，方法与实验子章节根据输入生成。后续主 Agent 可以先组织研究说明，再调用本模块。尚未实现自主研究构思或主 Agent 的工具注册。
++
++## 立即运行
++
++在仓库根目录 `E:\rollup\CCF` 执行：
++
++```powershell
++python jiuwenswarm/research-paper-generator/scripts/generate_framework.py --brief jiuwenswarm/research-paper-generator/examples/brief.json --literature jiuwenswarm/research-paper-generator/examples/literature.json --output output/paper-framework-demo --compile
++```
++
++不传 `--literature` 也能生成骨架；不传 `--compile` 就完全不需要 LaTeX。输出目录必须尚不存在，避免覆盖第 4 位同学填好的内容。重新生成时选择新目录；修改正文后使用下面的命令重新编译：
++
++```powershell
++python jiuwenswarm/research-paper-generator/scripts/compile_framework.py output/paper-framework-demo
++```
++
++CLI 输入与输出路径相对当前工作目录；模板默认路径相对模块自身定位，不依赖启动目录。可用 `--template-dir` 指向另一份兼容的样式目录。
++
++`examples/literature.json` 取自仓库已有书目，仅用于演示接入，没有联网核验元数据。它不表示该文献支持示例课题的任何结论。公开发布前应回到原文核对。
++
++## 输入约定（版本 1）
++
++研究说明 `--brief` 为 JSON 对象，字段如下：
++
++| 字段 | 必填 | 内容 |
++| --- | --- | --- |
++| `schema_version` | 是 | 整数 `1` |
++| `title` | 是 | 论文标题，普通文本 |
++| `research_question` | 是 | 研究问题；保留在大纲，供写作者使用 |
++| `anonymous` | 否 | 默认 `true`；`false` 显示传入作者，页面仍标注 draft |
++| `authors` | 否 | 作者姓名字符串数组；非匿名时必填 |
++| `methods` | 否 | 方法对象数组；每项有 `id`、`title`，可选 `description`、`citation_ids` |
++| `experiments` | 否 | 实验对象数组；每项有 `id`、`title`，可选 `status`、`metrics`、`result_path` |
++
++方法、实验的 `id` 在各自数组内唯一，使用小写字母开头及小写字母、数字、下划线、短横线。它们生成稳定的章节标签。`citation_ids` 是文献的显式 `id` 或规范 ID，例如 `arxiv:2310.08560`、`doi:10.xxxx/xxx`；引用不存在的 ID 会报错。
++
++`status` 默认 `planned`。计划实验仅产生实验设置子章节，并列出待补数据。`completed` 必须附上存在的 `result_path`，其路径**相对原始 brief 文件所在目录**解析。模块记录结果文件路径和 SHA-256，生成“待证据复核”的结果子章节；不会读取数值生成结论，也不会把文件存在当作实验有效的证明。
++
++这允许第 2 位同学继续使用自己的结果格式。第 3 部分只约定实验描述和文件关联，不要求对方先改实验脚本。输入给正文的实验结果由第 4 位同学解析。
++
++### 文献输入
++
++`--literature` 是 JSON 数组，兼容当前 `scripts/literature_search.py` 的输出。每条需要 `title`、非空 `authors` 字符串数组，以及 `year` 或 ISO 日期 `published` 的前四位。可选 `id`、`arxiv_id`、`doi`、`url`、`journal`。`abstract`、`pdf_url` 等额外字段可保留在上游输入中，不会用于生成书目。
++
++引用管理按 DOI、去除版本号的 arXiv ID，或规范化后的“标题 + 作者 + 年份”去重。同一身份的元数据冲突会报错，交给上游核对；不做模糊去重。引用键以规范身份的哈希生成，同一元数据改变输入顺序不会改变键。后续新增 DOI 等更强身份信息可能改变引用键，应重新交付引用映射。
++
++未提供年份、作者等必填信息时明确报错，不用假作者、假年份或示例文献补齐。无文献时传空数组或省略文件。
++
++正文标题、子章节标题和书目使用适合英文论文的文本；默认 pdfLaTeX 工程不配置 CJK 字体。中文研究说明可放在 `research_question`、`description` 中，它们保留在 JSON，不直接排入 PDF。元数据不支持原始 LaTeX 命令，特殊字符会转义。
++
++## 输出与协作交接
++
++```text
++<output>/
++  paper.tex                 主文件及章节装配
++  sections/*.tex            8 个主章节的可填写文件
++  outline.json              每节目标、状态、子章节、候选引用与证据关联
++  citation_map.json         规范元数据、原始 ID -> 引用键、去重来源索引
++  references.bib            从输入生成的 BibTeX
++  brief.input.json          研究说明快照（结果相对路径仍以原始 brief 为基准）
++  manifest.json             输入/样式哈希、draft 状态和待补信息
++  HANDOFF.md                内容填充注意事项
++  *.sty / *.bst             仓库现有 ICLR 样式依赖
++  paper.pdf                 仅在编译成功后生成
++  compile_report.json       编译命令、错误与警告
++```
++
++`outline.json` 的 `sections` 按论文顺序排列：`abstract`、`introduction`、`related_work`、`method`、`experiments`、`results`、`discussion`、`conclusion`。每节有 `id/title/file/goal/status/citation_keys/subsections`。子章节有 `id/title/goal/status/citation_keys`，结果子章节另外有 `evidence_ids`，引用顶层 `evidence` 数组中的记录。
++
++第 4 位同学按 `file` 填写章节，不必更改主文件装配逻辑；摘要文件只填写摘要正文。用 `citation_map.json` 中的键写 `\citep{ref_...}` 或 `\citet{ref_...}`，不要自行重建引用键。Related Work 默认列出全部传入文献作为候选，并不代表已判定相关性或证据支持。
++
++为验证完整书目链路，骨架使用 `\nocite{*}` 展示候选书目，并有可见草稿提示。正文完成后应移除 `\nocite{*}`、Draft bibliography 段落及各章节占位文字，改用真实逐条引用。最终的语言、实验有效性、引用支持和提交规范检查仍由第 5 部分负责。
++
++模块不会改写原来的 `paper/`、根目录论文或已有实验结果。旧 `scripts/generate_paper.py` 仍是早期固定内容脚本，包含写死的实验数字和示例书目；第 3 部分应使用新的 `generate_framework.py`。
++
++## 验证
++
++```powershell
++python -m unittest discover -s jiuwenswarm/research-paper-generator/tests -v
++```
++
++离线测试覆盖缺失数据、证据路径与哈希、引用键与去重、元数据冲突、LaTeX 文本转义、跨工作目录运行、拒绝覆盖和编译失败。检测到 LaTeX 时还会执行实际编译测试，检查正文引用交接、无书目和非匿名模式、未知引用拦截；未安装时跳过这两项。
++
++真实编译使用 `pdflatex -> bibtex（有书目时）-> pdflatex -> pdflatex`，关闭 shell escape；命令错误和未解析引用会导致非零退出码。编译通过仅表示工程有效，不表示论文内容已完成。
+diff --git a/jiuwenswarm/research-paper-generator/examples/brief.json b/jiuwenswarm/research-paper-generator/examples/brief.json
+new file mode 100644
+index 0000000..9e50eff
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/examples/brief.json
+@@ -0,0 +1,23 @@
++{
++  "schema_version": 1,
++  "title": "Memory Retrieval under a Limited Context Budget",
++  "research_question": "How does memory retrieval affect answer accuracy and total model cost under equal context budgets?",
++  "anonymous": true,
++  "authors": [],
++  "methods": [
++    {
++      "id": "retrieval",
++      "title": "Memory Selection and Context Assembly",
++      "description": "Describe the implemented ranking signals, context budget, and memory write path. Separate implemented features from future work.",
++      "citation_ids": []
++    }
++  ],
++  "experiments": [
++    {
++      "id": "budget_sweep",
++      "title": "Context Budget Comparison",
++      "status": "planned",
++      "metrics": ["answer accuracy", "complete evidence recall", "tokens including memory writes"]
++    }
++  ]
++}
+diff --git a/jiuwenswarm/research-paper-generator/examples/literature.json b/jiuwenswarm/research-paper-generator/examples/literature.json
+new file mode 100644
+index 0000000..f8fe56a
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/examples/literature.json
+@@ -0,0 +1,11 @@
++[
++  {
++    "id": "memgpt",
++    "title": "MemGPT: Towards LLMs as Operating Systems",
++    "authors": ["Charles Packer", "Vivian Fang", "Shishir G Patil", "Kevin Wooders", "Joseph E Gonzalez"],
++    "year": 2023,
++    "arxiv_id": "2310.08560",
++    "url": "https://arxiv.org/abs/2310.08560",
++    "metadata_note": "Demonstration copied from the repository bibliography; not independently verified."
++  }
++]
+diff --git a/jiuwenswarm/research-paper-generator/examples/paper-framework-demo.pdf b/jiuwenswarm/research-paper-generator/examples/paper-framework-demo.pdf
+new file mode 100644
+index 0000000000000000000000000000000000000000..9ccd82f1e101e4b524a4a9e2c342ca4dd14e8edb
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/examples/paper-framework-demo.pdf
+@@ -0,0 +1,223 @@
++     Research paper framework – draft
++
++000 MEMORY RETRIEVAL UNDER A LIMITED CONTEXT
++
++001
++
++002 BUDGET
++
++003
++
++004
++
++005  Anonymous authors
++
++006  Paper under double-blind review
++
++007
++
++008
++
++009                                    ABSTRACT
++
++010
++
++011  [To be written. See the section plan in outline.json.]
++
++012
++
++013
++
++014 1 INTRODUCTION
++
++015
++
++016 [To be written. See the section plan in outline.json.]
++
++017
++
++018  2 RELATED WORK
++019
++
++020
++
++021 [To be written. See the section plan in outline.json.]
++
++022
++
++023 3 METHOD
++
++024
++
++025 [To be written. See the section plan in outline.json.]
++
++026
++
++027  3.1 MEMORY SELECTION AND CONTEXT ASSEMBLY
++
++028
++
++029 [To be written after reviewing the specified inputs.]
++
++030
++
++031 4 EXPERIMENTAL SETUP
++
++032
++
++033 [To be written. See the section plan in outline.json.]
++
++034
++
++035  4.1 CONTEXT BUDGET COMPARISON
++
++036
++
++037 [To be written after reviewing the specified inputs.]
++
++038
++
++039
++
++040 5 RESULTS AND ANALYSIS
++
++041
++
++042 [To be written. See the section plan in outline.json.]
++
++043
++
++044 6 DISCUSSION AND LIMITATIONS
++
++045
++
++046 [To be written. See the section plan in outline.json.]
++
++047
++
++048
++
++049 7 CONCLUSION
++
++050
++
++051 [To be written. See the section plan in outline.json.]
++
++052
++
++053 Draft bibliography. Candidate sources supplied for planning; claim-level citations remain to be
++          reviewed.
++
++                                       1
++     Research paper framework – draft
++
++054 REFERENCES
++
++055
++
++056 Charles Packer, Vivian Fang, Shishir G Patil, Kevin Wooders, and Joseph E Gonzalez. MemGPT:
++
++057  Towards LLMs as Operating Systems. arXiv preprint arXiv:2310.08560, 2023. URL https:
++
++058  //arxiv.org/abs/2310.08560.
++
++059
++
++060
++
++061
++
++062
++
++063
++
++064
++
++065
++
++066
++
++067
++
++068
++
++069
++
++070
++
++071
++
++072
++
++073
++
++074
++
++075
++
++076
++
++077
++
++078
++
++079
++
++080
++
++081
++
++082
++
++083
++
++084
++
++085
++
++086
++
++087
++
++088
++
++089
++
++090
++
++091
++
++092
++
++093
++
++094
++
++095
++
++096
++
++097
++
++098
++
++099
++
++100
++
++101
++
++102
++
++103
++
++104
++
++105
++
++106
++
++107
++
++                                       2
++
+diff --git a/jiuwenswarm/research-paper-generator/scripts/compile_framework.py b/jiuwenswarm/research-paper-generator/scripts/compile_framework.py
+new file mode 100644
+index 0000000..239cdca
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/compile_framework.py
+@@ -0,0 +1,21 @@
++#!/usr/bin/env python3
++"""Recompile a framework after the content author edits its section files."""
++
++import argparse
++from pathlib import Path
++
++from paper_framework.compiler import compile_project
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("project", type=Path)
++    args = parser.parse_args()
++    try:
++        print(compile_project(args.project))
++    except (ValueError, OSError) as error:
++        parser.exit(1, f"Error: {error}\n")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/jiuwenswarm/research-paper-generator/scripts/generate_framework.py b/jiuwenswarm/research-paper-generator/scripts/generate_framework.py
+new file mode 100644
+index 0000000..3041637
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/generate_framework.py
+@@ -0,0 +1,31 @@
++#!/usr/bin/env python3
++"""Generate the module-3 paper skeleton; no network or LLM credentials needed."""
++
++import argparse
++from pathlib import Path
++
++from paper_framework.project import DEFAULT_TEMPLATE, generate_project
++from paper_framework.compiler import compile_project
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--brief", required=True, type=Path, help="Version-1 research brief JSON")
++    parser.add_argument("--literature", type=Path, help="Literature-search JSON array; optional")
++    parser.add_argument("--output", required=True, type=Path, help="New output directory (never overwritten)")
++    parser.add_argument("--template-dir", type=Path, default=DEFAULT_TEMPLATE)
++    parser.add_argument("--compile", action="store_true", help="Compile the skeleton with pdflatex and BibTeX")
++    args = parser.parse_args()
++    try:
++        manifest = generate_project(args.brief, args.output, args.literature, args.template_dir)
++        print(f"Framework generated: {args.output.resolve()}")
++        for warning in manifest["warnings"]:
++            print(f"NOTE: {warning}")
++        if args.compile:
++            print(f"PDF: {compile_project(args.output)}")
++    except (ValueError, OSError) as error:
++        parser.exit(1, f"Error: {error}\n")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_framework/__init__.py b/jiuwenswarm/research-paper-generator/scripts/paper_framework/__init__.py
+new file mode 100644
+index 0000000..88859e4
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_framework/__init__.py
+@@ -0,0 +1,5 @@
++"""Offline paper planning, citation management, and ICLR project generation."""
++
++from .project import generate_project
++
++__all__ = ["generate_project"]
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_framework/citations.py b/jiuwenswarm/research-paper-generator/scripts/paper_framework/citations.py
+new file mode 100644
+index 0000000..67eebaf
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_framework/citations.py
+@@ -0,0 +1,143 @@
++"""Normalize supplied metadata without inventing or downloading references."""
++
++from __future__ import annotations
++
++import hashlib
++import re
++import unicodedata
++from urllib.parse import unquote
++
++
++def latex_text(value: str) -> str:
++    """Treat metadata as text, never as executable LaTeX."""
++    escapes = {
++        "\\": r"\textbackslash{}", "{": r"\{", "}": r"\}",
++        "$": r"\$", "&": r"\&", "#": r"\#", "%": r"\%",
++        "_": r"\_", "~": r"\textasciitilde{}", "^": r"\textasciicircum{}",
++    }
++    return "".join(escapes.get(char, char) for char in " ".join(value.split()))
++
++
++def required_text(value: object, label: str) -> str:
++    if not isinstance(value, str) or not value.strip():
++        raise ValueError(f"{label} must be a non-empty string")
++    return " ".join(value.split())
++
++
++def normalize_arxiv(value: str) -> str:
++    value = re.sub(r"^https?://(?:www\.)?(?:export\.)?arxiv\.org/(?:abs|pdf)/", "", value.strip(), flags=re.I)
++    value = re.sub(r"^arxiv:", "", value, flags=re.I)
++    value = re.sub(r"\.pdf$", "", value)
++    value = re.sub(r"v\d+$", "", value)
++    if not re.fullmatch(r"(?:\d{4}\.\d{4,5}|[a-zA-Z.-]+(?:\.[A-Z]{2})?/\d{7})", value):
++        raise ValueError(f"Invalid arXiv ID: {value}")
++    return value.lower()
++
++
++def normalize_doi(value: str) -> str:
++    value = unquote(re.sub(r"^(?:https?://(?:dx\.)?doi\.org/|doi:\s*)", "", value.strip(), flags=re.I)).lower()
++    if not re.fullmatch(r"10\.\d{4,9}/\S+", value):
++        raise ValueError(f"Invalid DOI: {value}")
++    return value
++
++
++def _fingerprint(title: str, authors: list[str], year: str) -> str:
++    value = f"{title}|{'|'.join(authors)}|{year}"
++    return re.sub(r"[^\w|]", "", unicodedata.normalize("NFKC", value).casefold())
++
++
++def build_citations(raw: object) -> dict:
++    """Accept literature_search.py's list; reject incomplete/ambiguous metadata.
++
++    DOI/arXiv identities and exact normalized title+authors+year deduplicate
++    records. Conflicting identifiers or metadata fail rather than silently merge.
++    """
++    if not isinstance(raw, list):
++        raise ValueError("Literature input must be a JSON array")
++    entries: list[dict] = []
++    for index, item in enumerate(raw):
++        if not isinstance(item, dict):
++            raise ValueError(f"literature[{index}] must be an object")
++        title = required_text(item.get("title"), f"literature[{index}].title")
++        authors = item.get("authors")
++        if not isinstance(authors, list) or not authors:
++            raise ValueError(f"literature[{index}].authors must be a non-empty string array")
++        authors = [required_text(a, "author") for a in authors]
++        year = str(item.get("year") or str(item.get("published", ""))[:4])
++        if not re.fullmatch(r"\d{4}", year):
++            raise ValueError(f"literature[{index}] needs year or an ISO published date")
++        arxiv = normalize_arxiv(required_text(item["arxiv_id"], "arxiv_id")) if item.get("arxiv_id") else None
++        doi = normalize_doi(required_text(item["doi"], "doi")) if item.get("doi") else None
++        fingerprint = _fingerprint(title, authors, year)
++        identity = f"doi:{doi}" if doi else f"arxiv:{arxiv}" if arxiv else f"metadata:{fingerprint}"
++        aliases = [identity]
++        if arxiv:
++            aliases.append(f"arxiv:{arxiv}")
++        if item.get("id"):
++            aliases.append(required_text(item["id"], "literature.id"))
++        url = item.get("url") or (f"https://doi.org/{doi}" if doi else f"https://arxiv.org/abs/{arxiv}" if arxiv else None)
++        if url is not None:
++            url = required_text(url, "literature.url")
++            if not re.match(r"^https?://\S+$", url):
++                raise ValueError("literature.url must be an HTTP(S) URL")
++        journal = item.get("journal")
++        if journal is not None:
++            journal = required_text(journal, "literature.journal")
++        record = {
++            "title": title, "authors": authors, "year": year, "arxiv_id": arxiv,
++            "doi": doi, "url": url, "journal": journal, "fingerprint": fingerprint,
++            "source_ids": sorted(set(aliases)), "source_indices": [index],
++            "verification": "supplied_metadata_not_independently_verified",
++        }
++        matches = [old for old in entries if
++                   (doi and doi == old["doi"]) or (arxiv and arxiv == old["arxiv_id"]) or
++                   fingerprint == old["fingerprint"] or set(aliases) & set(old["source_ids"])]
++        if len(matches) > 1:
++            raise ValueError(f"Ambiguous duplicate literature: {title}")
++        if matches:
++            old = matches[0]
++            if fingerprint != old["fingerprint"] or any(
++                old[field] and record[field] and old[field] != record[field]
++                for field in ("doi", "arxiv_id", "journal")
++            ):
++                raise ValueError(f"Conflicting metadata for literature: {title}")
++            for field in ("doi", "arxiv_id", "url", "journal"):
++                old[field] = old[field] or record[field]
++            old["source_ids"] = sorted(set(old["source_ids"] + aliases))
++            old["source_indices"].append(index)
++        else:
++            entries.append(record)
++    by_source_id = {}
++    for record in entries:
++        identity = (f"doi:{record['doi']}" if record["doi"] else
++                    f"arxiv:{record['arxiv_id']}" if record["arxiv_id"] else
++                    f"metadata:{record['fingerprint']}")
++        record["id"] = identity
++        # Content-based keys do not depend on input ordering or explicit user IDs.
++        record["cite_key"] = "ref_" + hashlib.sha256(identity.encode()).hexdigest()[:16]
++        record.pop("fingerprint")
++        for alias in record["source_ids"]:
++            by_source_id[alias] = record["cite_key"]
++    entries.sort(key=lambda entry: entry["cite_key"])
++    return {"schema_version": 1, "entries": entries, "by_source_id": by_source_id}
++
++
++def bibliography(citations: dict) -> str:
++    blocks = ["% Supplied metadata only; verify against primary sources before submission.\n"]
++    for entry in citations["entries"]:
++        fields = {
++            "title": "{" + latex_text(entry["title"]) + "}",
++            "author": " and ".join(latex_text(a) for a in entry["authors"]),
++            "year": entry["year"],
++        }
++        for name in ("journal", "doi", "url"):
++            if entry[name]:
++                fields[name] = latex_text(entry[name])
++        if entry["arxiv_id"]:
++            fields["eprint"] = entry["arxiv_id"]
++            fields["archivePrefix"] = "arXiv"
++            fields.setdefault("howpublished", f"arXiv preprint arXiv:{entry['arxiv_id']}")
++        kind = "article" if entry["journal"] else "misc"
++        body = ",\n".join(f"  {key} = {{{value}}}" for key, value in fields.items())
++        blocks.append(f"@{kind}{{{entry['cite_key']},\n{body}\n}}\n")
++    return "\n".join(blocks)
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_framework/compiler.py b/jiuwenswarm/research-paper-generator/scripts/paper_framework/compiler.py
+new file mode 100644
+index 0000000..4297309
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_framework/compiler.py
+@@ -0,0 +1,57 @@
++"""Compile a generated draft with BibTeX and retain actionable diagnostics."""
++
++from __future__ import annotations
++
++import json
++import re
++import shutil
++import subprocess
++from pathlib import Path
++
++
++def compile_project(project: Path, timeout: int = 120) -> Path:
++    project = project.resolve()
++    if not (project / "paper.tex").is_file():
++        raise ValueError(f"Missing paper.tex in {project}")
++    latex = shutil.which("pdflatex")
++    if not latex:
++        raise ValueError("pdflatex is not installed or is not on PATH")
++    bibtex = shutil.which("bibtex")
++    report = {"success": False, "commands": [], "warnings": []}
++    report_path = project / "compile_report.json"
++
++    def run(command):
++        try:
++            result = subprocess.run(command, cwd=project, capture_output=True,
++                                    text=True, encoding="utf-8", errors="replace", timeout=timeout)
++        except (subprocess.TimeoutExpired, OSError) as error:
++            report["commands"].append({"command": command, "error": str(error)})
++            raise ValueError(f"Compilation could not finish; see {report_path}") from error
++        report["commands"].append({"command": command, "returncode": result.returncode,
++                                   "output_tail": (result.stdout + result.stderr)[-6000:]})
++        if result.returncode:
++            raise ValueError(f"Compilation failed ({Path(command[0]).name}); see {report_path}")
++
++    try:
++        command = [latex, "-no-shell-escape", "-interaction=nonstopmode", "-halt-on-error", "-file-line-error", "paper.tex"]
++        run(command)
++        auxiliary = (project / "paper.aux").read_text(encoding="utf-8", errors="replace")
++        if r"\bibdata{" in auxiliary:
++            if not bibtex:
++                raise ValueError("This draft needs bibtex, which is not on PATH")
++            run([bibtex, "paper"])
++        run(command)
++        run(command)
++        log = (project / "paper.log").read_text(encoding="utf-8", errors="replace")
++        report["warnings"] = [line for line in log.splitlines() if "Warning" in line or "Overfull" in line]
++        if re.search(r"(?:Citation|Reference).*undefined|There were undefined (?:references|citations)", log):
++            raise ValueError(f"Unresolved citations or references; see {report_path}")
++        if not (project / "paper.pdf").is_file():
++            raise ValueError("Compilation did not produce paper.pdf")
++        report["success"] = True
++        return project / "paper.pdf"
++    except ValueError as error:
++        report["error"] = str(error)
++        raise
++    finally:
++        report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_framework/planner.py b/jiuwenswarm/research-paper-generator/scripts/paper_framework/planner.py
+new file mode 100644
+index 0000000..9a3982a
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_framework/planner.py
+@@ -0,0 +1,109 @@
++"""Deterministic, evidence-aware outline planning; no model calls required."""
++
++from __future__ import annotations
++
++import hashlib
++import re
++from pathlib import Path
++
++from .citations import required_text
++
++
++def _objects(value: object, label: str) -> list[dict]:
++    if not isinstance(value, list) or any(not isinstance(x, dict) for x in value):
++        raise ValueError(f"{label} must be an array of objects")
++    seen = set()
++    normalized = []
++    for item in value:
++        item_id = required_text(item.get("id"), f"{label}.id")
++        if not re.fullmatch(r"[a-z][a-z0-9_-]*", item_id) or item_id in seen:
++            raise ValueError(f"Invalid or duplicate {label} ID: {item_id}")
++        seen.add(item_id)
++        title = required_text(item.get("title"), f"{label}.title")
++        normalized.append(dict(item, id=item_id, title=title))
++    return normalized
++
++
++def plan_outline(brief: object, citations: dict, base_dir: Path) -> dict:
++    if not isinstance(brief, dict) or type(brief.get("schema_version")) is not int or brief["schema_version"] != 1:
++        raise ValueError("Brief must be an object with schema_version: 1")
++    title = required_text(brief.get("title"), "brief.title")
++    question = required_text(brief.get("research_question"), "brief.research_question")
++    methods = _objects(brief.get("methods", []), "methods")
++    experiments = _objects(brief.get("experiments", []), "experiments")
++    authors = brief.get("authors", [])
++    if not isinstance(authors, list):
++        raise ValueError("authors must be an array of strings")
++    authors = [required_text(a, "author") for a in authors]
++    anonymous = brief.get("anonymous", True)
++    if not isinstance(anonymous, bool) or (not anonymous and not authors):
++        raise ValueError("anonymous must be boolean; non-anonymous drafts require authors")
++    warnings = []
++    if not citations["entries"]:
++        warnings.append("No literature supplied; related work and citations need input.")
++    sections = []
++
++    def section(section_id, heading, goal):
++        value = {"id": section_id, "title": heading, "file": f"sections/{section_id}.tex",
++                 "goal": goal, "status": "needs_content", "citation_keys": [], "subsections": []}
++        sections.append(value)
++        return value
++
++    section("abstract", "Abstract", "Summarize the question, method, supported results, and limitations after content is complete.")
++    section("introduction", "Introduction", question)
++    related = section("related_work", "Related Work", "Compare supplied sources; verify each claim against its cited source.")
++    related["citation_keys"] = [e["cite_key"] for e in citations["entries"]]
++    method_section = section("method", "Method", "Describe the implemented approach and distinguish it from proposed extensions.")
++    for method in methods:
++        refs = method.get("citation_ids", [])
++        if not isinstance(refs, list) or any(not isinstance(ref, str) for ref in refs):
++            raise ValueError("methods.citation_ids must be an array of strings")
++        unknown = [ref for ref in refs if ref not in citations["by_source_id"]]
++        if unknown:
++            raise ValueError(f"Unknown citation IDs in method {method['id']}: {unknown}")
++        method_section["subsections"].append({
++            "id": f"method_{method['id']}", "title": method["title"],
++            "goal": required_text(method.get("description", method["title"]), "method.description"),
++            "status": "needs_content", "citation_keys": sorted({citations["by_source_id"][ref] for ref in refs}),
++        })
++    if not methods:
++        warnings.append("No method specification supplied; Method remains a placeholder.")
++    setup = section("experiments", "Experimental Setup", "Specify datasets, baselines, budgets, metrics, scoring rules, and reproducibility.")
++    results = section("results", "Results and Analysis", "Report only traceable measurements; include costs and negative outcomes.")
++    evidence = []
++    for experiment in experiments:
++        status = experiment.get("status", "planned")
++        if status not in ("planned", "completed"):
++            raise ValueError("experiment.status must be planned or completed")
++        metrics = experiment.get("metrics", [])
++        if not isinstance(metrics, list):
++            raise ValueError("experiment.metrics must be an array of strings")
++        metrics = [required_text(m, "metric") for m in metrics]
++        setup["subsections"].append({
++            "id": f"setup_{experiment['id']}", "title": experiment["title"],
++            "goal": "Describe the protocol and these metrics: " + (", ".join(metrics) or "not supplied"),
++            "status": status, "citation_keys": [],
++        })
++        if status == "planned":
++            warnings.append(f"Experiment {experiment['id']} is planned; no result subsection generated.")
++            continue
++        source = required_text(experiment.get("result_path"), "completed experiment.result_path")
++        path = (base_dir / source).resolve()
++        if not path.is_file():
++            raise ValueError(f"Result file does not exist: {source}")
++        evidence.append({"id": experiment["id"], "input_path": source, "resolved_path": str(path),
++                         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
++                         "validation": "file_exists_and_hashed_only"})
++        results["subsections"].append({
++            "id": f"result_{experiment['id']}", "title": experiment["title"],
++            "goal": "Read the referenced result file; check validity before stating findings.",
++            "status": "needs_evidence_review", "evidence_ids": [experiment["id"]], "citation_keys": [],
++        })
++    if not evidence:
++        warnings.append("No completed experiment evidence supplied; result claims must remain empty.")
++    section("discussion", "Discussion and Limitations", "Explain scope, confounders, missing evaluations, and resource tradeoffs.")
++    section("conclusion", "Conclusion", "Answer the research question using only reviewed results.")
++    return {"schema_version": 1, "planner": "deterministic_rules_v1", "title": title,
++            "research_question": question, "anonymous": anonymous, "authors": authors,
++            "sections": sections, "evidence": evidence, "warnings": warnings,
++            "citation_policy": "Candidates only; presence does not establish support for any claim."}
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_framework/project.py b/jiuwenswarm/research-paper-generator/scripts/paper_framework/project.py
+new file mode 100644
+index 0000000..01ae49f
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_framework/project.py
+@@ -0,0 +1,106 @@
++"""Render an isolated, portable LaTeX draft and its handoff manifests."""
++
++from __future__ import annotations
++
++import hashlib
++import json
++import re
++import shutil
++import tempfile
++from pathlib import Path
++
++from .citations import bibliography, build_citations, latex_text
++from .planner import plan_outline
++
++ROOT = Path(__file__).resolve().parents[4]
++DEFAULT_TEMPLATE = ROOT / "iclr-2027-style-files" / "iclr2027"
++STYLE_FILES = ("iclr2027_conference.sty", "iclr2027_conference.bst", "fancyhdr.sty", "natbib.sty")
++MAIN_TEMPLATE = Path(__file__).resolve().parents[2] / "templates" / "paper.tex.template"
++
++
++def load_json(path: Path):
++    return json.loads(path.read_text(encoding="utf-8-sig"))
++
++
++def _write_json(path: Path, value: object):
++    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++
++
++def _section_tex(section: dict) -> str:
++    abstract = section["id"] == "abstract"
++    lines = ["% Draft placeholder. Replace with reviewed content; see outline.json."]
++    if not abstract:
++        lines += [f"\\section{{{latex_text(section['title'])}}}", f"\\label{{sec:{section['id']}}}"]
++    lines.append(r"\textit{[To be written. See the section plan in outline.json.]}")
++    if section["citation_keys"]:
++        lines.append("% Candidate citation keys (not verified claim support): " + ", ".join(section["citation_keys"]))
++    for child in section["subsections"]:
++        lines += [f"\\subsection{{{latex_text(child['title'])}}}", f"\\label{{sec:{child['id']}}}",
++                  r"\textit{[To be written after reviewing the specified inputs.]}"]
++        if child["citation_keys"]:
++            lines.append("% Candidate citation keys: " + ", ".join(child["citation_keys"]))
++    return "\n".join(lines) + "\n"
++
++
++def generate_project(brief_path: Path, output: Path, literature_path: Path | None = None,
++                     template_dir: Path = DEFAULT_TEMPLATE) -> dict:
++    """Validate all inputs before writing; never replace an existing directory."""
++    brief_path, output, template_dir = brief_path.resolve(), output.resolve(), template_dir.resolve()
++    if output.exists():
++        raise ValueError(f"Output already exists; choose a new directory to preserve edits: {output}")
++    brief = load_json(brief_path)
++    citations = build_citations(load_json(literature_path) if literature_path else [])
++    outline = plan_outline(brief, citations, brief_path.parent)
++    for name in STYLE_FILES:
++        if not (template_dir / name).is_file():
++            raise ValueError(f"Missing template dependency: {template_dir / name}")
++    tex = MAIN_TEMPLATE.read_text(encoding="utf-8")
++    sections = "\n".join(f"\\input{{{s['file']}}}" for s in outline["sections"] if s["id"] != "abstract")
++    bib = (r"\paragraph{Draft bibliography.} Candidate sources supplied for planning; claim-level citations remain to be reviewed."
++           "\n% Remove nocite when real claim-level citations have been inserted.\n"
++           "\\nocite{*}\n\\bibliographystyle{iclr2027_conference}\n\\bibliography{references}") if citations["entries"] else "% No literature supplied. Add bibliography after citation handoff."
++    replacements = {
++        "TITLE": latex_text(outline["title"]),
++        "AUTHORS": "Anonymous Authors" if outline["anonymous"] else " \\And ".join(latex_text(a) for a in outline["authors"]),
++        # This remains a draft, not a claim of acceptance at ICLR.
++        "AUTHOR_MODE": "" if outline["anonymous"] else r"\iclrfinalcopy",
++        "SECTIONS": sections, "BIBLIOGRAPHY": bib,
++    }
++    tex = re.sub(r"@@([A-Z_]+)@@", lambda match: replacements[match[1]], tex)
++    source_paths = {"brief": brief_path}
++    if literature_path:
++        source_paths["literature"] = literature_path.resolve()
++    manifest = {
++        "schema_version": 1, "artifact_kind": "paper_framework_draft", "ready_for_submission": False,
++        "inputs": {key: {"filename": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
++                   for key, path in source_paths.items()},
++        "style_sha256": {name: hashlib.sha256((template_dir / name).read_bytes()).hexdigest() for name in STYLE_FILES},
++        "warnings": outline["warnings"],
++    }
++    output.parent.mkdir(parents=True, exist_ok=True)
++    # Temporary staging is in the output's parent, so rename stays on one volume.
++    with tempfile.TemporaryDirectory(prefix=".framework-", dir=output.parent) as temporary:
++        staged = Path(temporary) / "project"
++        (staged / "sections").mkdir(parents=True)
++        for section in outline["sections"]:
++            (staged / section["file"]).write_text(_section_tex(section), encoding="utf-8")
++        (staged / "paper.tex").write_text(tex, encoding="utf-8")
++        (staged / "references.bib").write_text(bibliography(citations), encoding="utf-8")
++        _write_json(staged / "outline.json", outline)
++        _write_json(staged / "citation_map.json", citations)
++        _write_json(staged / "manifest.json", manifest)
++        _write_json(staged / "brief.input.json", brief)
++        for name in STYLE_FILES:
++            shutil.copyfile(template_dir / name, staged / name)
++        (staged / "HANDOFF.md").write_text(
++            "# Paper framework draft\n\n"
++            "Fill sections/*.tex using outline.json. Do not edit measured results into the planner.\n"
++            "Result file hashes record provenance, not scientific validity. Resolve input_path relative to the original brief.\n"
++            "Use citation_map.json to select citation keys; verify each source and claim before citing it.\n"
++            "Remove draft placeholders, the Draft bibliography paragraph, and \\nocite{*} before final review.\n"
++            "Keep paper.tex and sections/*.tex changes: regeneration requires a new output directory.\n"
++            "The skeleton uses the repository's ICLR style; check current submission requirements separately.\n",
++            encoding="utf-8",
++        )
++        staged.rename(output)
++    return manifest
+diff --git a/jiuwenswarm/research-paper-generator/templates/paper.tex.template b/jiuwenswarm/research-paper-generator/templates/paper.tex.template
+new file mode 100644
+index 0000000..a3011cf
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/templates/paper.tex.template
+@@ -0,0 +1,26 @@
++\documentclass{article}
++\usepackage[T1]{fontenc}
++\usepackage[utf8]{inputenc}
++\usepackage{iclr2027_conference,times}
++\usepackage{hyperref}
++\usepackage{url}
++\usepackage{graphicx}
++\usepackage{booktabs}
++\usepackage{amsmath}
++
++\title{@@TITLE@@}
++\author{@@AUTHORS@@}
++@@AUTHOR_MODE@@
++
++\begin{document}
++\maketitle
++% Override the bundled style's submission/acceptance header for this draft.
++\lhead{Research paper framework -- draft}
++\begin{abstract}
++\input{sections/abstract.tex}
++\end{abstract}
++
++@@SECTIONS@@
++
++@@BIBLIOGRAPHY@@
++\end{document}
+diff --git a/jiuwenswarm/research-paper-generator/tests/test_framework.py b/jiuwenswarm/research-paper-generator/tests/test_framework.py
+new file mode 100644
+index 0000000..73c8da6
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/tests/test_framework.py
+@@ -0,0 +1,197 @@
++"""Offline regression checks for handoff integrity and honest evidence handling."""
++
++import copy
++import hashlib
++import json
++import shutil
++import subprocess
++import sys
++import tempfile
++import unittest
++from pathlib import Path
++from unittest.mock import patch
++
++MODULE = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(MODULE / "scripts"))
++
++from paper_framework.citations import bibliography, build_citations
++from paper_framework.compiler import compile_project
++from paper_framework.project import generate_project
++
++
++class FrameworkTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temp.cleanup)
++        self.root = Path(self.temp.name)
++        self.brief = json.loads((MODULE / "examples/brief.json").read_text(encoding="utf-8"))
++        self.literature = json.loads((MODULE / "examples/literature.json").read_text(encoding="utf-8"))
++
++    def write(self, name, data):
++        path = self.root / name
++        path.write_text(json.dumps(data), encoding="utf-8")
++        return path
++
++    def generate(self, literature=None):
++        return generate_project(self.write("brief.json", self.brief), self.root / "paper",
++                                self.write("literature.json", literature) if literature is not None else None)
++
++    def outline(self):
++        return json.loads((self.root / "paper/outline.json").read_text(encoding="utf-8"))
++
++    def test_no_dependencies_required_for_minimal_draft(self):
++        self.brief.pop("methods")
++        self.brief.pop("experiments")
++        manifest = self.generate()
++        self.assertFalse(manifest["ready_for_submission"])
++        self.assertEqual(len(self.outline()["sections"]), 8)
++        self.assertNotIn(r"\bibliography{", (self.root / "paper/paper.tex").read_text())
++        self.assertTrue((self.root / "paper/iclr2027_conference.sty").is_file())
++
++    def test_planned_experiment_does_not_become_a_result(self):
++        self.generate()
++        outline = self.outline()
++        sections = {s["id"]: s for s in outline["sections"]}
++        self.assertEqual(len(sections["experiments"]["subsections"]), 1)
++        self.assertEqual(sections["results"]["subsections"], [])
++        self.assertEqual(outline["evidence"], [])
++
++    def test_completed_evidence_is_hashed_but_not_claimed_as_verified(self):
++        evidence = self.write("actual.json", {"accuracy": 0.25})
++        self.brief["experiments"][0].update(status="completed", result_path="actual.json")
++        self.generate()
++        record = self.outline()["evidence"][0]
++        self.assertEqual(record["sha256"], hashlib.sha256(evidence.read_bytes()).hexdigest())
++        self.assertEqual(record["validation"], "file_exists_and_hashed_only")
++        tex = (self.root / "paper/sections/results.tex").read_text()
++        self.assertNotIn("0.25", tex)
++        self.assertIn("Context Budget Comparison", tex)
++
++    def test_missing_completed_evidence_fails_before_output(self):
++        self.brief["experiments"][0].update(status="completed", result_path="missing.json")
++        with self.assertRaisesRegex(ValueError, "does not exist"):
++            self.generate()
++        self.assertFalse((self.root / "paper").exists())
++
++    def test_unknown_citation_fails_before_output(self):
++        self.brief["methods"][0]["citation_ids"] = ["missing"]
++        with self.assertRaisesRegex(ValueError, "Unknown citation"):
++            self.generate(self.literature)
++        self.assertFalse((self.root / "paper").exists())
++
++    def test_citation_handoff_resolves_explicit_id(self):
++        self.brief["methods"][0]["citation_ids"] = ["memgpt"]
++        self.generate(self.literature)
++        mapping = json.loads((self.root / "paper/citation_map.json").read_text())
++        key = mapping["by_source_id"]["memgpt"]
++        methods = next(s for s in self.outline()["sections"] if s["id"] == "method")
++        self.assertEqual(methods["subsections"][0]["citation_keys"], [key])
++        self.assertIn("{" + key + ",", (self.root / "paper/references.bib").read_text())
++
++    def test_versioned_arxiv_duplicates_have_stable_keys(self):
++        duplicate = copy.deepcopy(self.literature[0])
++        duplicate.update(id="duplicate", arxiv_id="https://arxiv.org/abs/2310.08560v2")
++        a = build_citations(self.literature + [duplicate])
++        b = build_citations([duplicate] + self.literature)
++        self.assertEqual(len(a["entries"]), 1)
++        self.assertEqual(a["by_source_id"], b["by_source_id"])
++        self.assertEqual(a["by_source_id"]["memgpt"], a["by_source_id"]["duplicate"])
++
++    def test_doi_dedup_and_metadata_fallback(self):
++        item = {"id": "a", "title": "Test", "authors": ["Test Author"], "year": 2025,
++                "doi": "https://doi.org/10.1234/ABC"}
++        other = dict(item, id="b", doi="doi:10.1234/abc")
++        result = build_citations([item, other])
++        self.assertEqual(len(result["entries"]), 1)
++        self.assertEqual(result["entries"][0]["doi"], "10.1234/abc")
++        item.pop("doi")
++        other.pop("doi")
++        self.assertEqual(len(build_citations([item, other])["entries"]), 1)
++
++    def test_incomplete_or_conflicting_metadata_is_not_invented(self):
++        bad = dict(self.literature[0], authors=[])
++        with self.assertRaisesRegex(ValueError, "authors"):
++            build_citations([bad])
++        bad = dict(self.literature[0], title="Different paper")
++        with self.assertRaisesRegex(ValueError, "Conflicting"):
++            build_citations(self.literature + [bad])
++
++    def test_plain_text_is_escaped_and_template_markers_are_not_reexpanded(self):
++        self.brief["title"] = r"A & B_50% \input{secret} @@SECTIONS@@"
++        self.generate()
++        tex = (self.root / "paper/paper.tex").read_text()
++        self.assertIn(r"A \& B\_50\% \textbackslash{}input\{secret\} @@SECTIONS@@", tex)
++        self.assertEqual(tex.count(r"\input{sections/introduction.tex}"), 1)
++        item = dict(self.literature[0], title="A {B} & C_50%")
++        self.assertIn(r"A \{B\} \& C\_50\%", bibliography(build_citations([item])))
++
++    def test_existing_work_is_never_overwritten(self):
++        self.generate()
++        section = self.root / "paper/sections/introduction.tex"
++        section.write_text("Manual work", encoding="utf-8")
++        with self.assertRaisesRegex(ValueError, "already exists"):
++            self.generate()
++        self.assertEqual(section.read_text(), "Manual work")
++
++    def test_missing_style_fails_before_output(self):
++        with self.assertRaisesRegex(ValueError, "Missing template"):
++            generate_project(self.write("brief.json", self.brief), self.root / "paper",
++                             template_dir=self.root / "missing")
++        self.assertFalse((self.root / "paper").exists())
++
++    def test_cli_paths_work_outside_repository(self):
++        result = subprocess.run([sys.executable, str(MODULE / "scripts/generate_framework.py"),
++                                 "--brief", str(MODULE / "examples/brief.json"), "--output", "draft"],
++                                cwd=self.root, capture_output=True, text=True)
++        self.assertEqual(result.returncode, 0, result.stderr)
++        self.assertTrue((self.root / "draft/paper.tex").is_file())
++
++    def test_missing_latex_has_clear_error(self):
++        self.generate()
++        with patch("paper_framework.compiler.shutil.which", return_value=None):
++            with self.assertRaisesRegex(ValueError, "pdflatex"):
++                compile_project(self.root / "paper")
++
++    def test_compile_failure_is_reported_not_masked_by_an_old_pdf(self):
++        self.generate()
++        (self.root / "paper/paper.pdf").write_bytes(b"old result")
++        failed = subprocess.CompletedProcess([], 1, "LaTeX error", "")
++        with patch("paper_framework.compiler.shutil.which", return_value="tool"), \
++             patch("paper_framework.compiler.subprocess.run", return_value=failed):
++            with self.assertRaisesRegex(ValueError, "Compilation failed"):
++                compile_project(self.root / "paper")
++        report = json.loads((self.root / "paper/compile_report.json").read_text())
++        self.assertFalse(report["success"])
++        self.assertIn("LaTeX error", report["commands"][0]["output_tail"])
++
++    @unittest.skipUnless(shutil.which("pdflatex") and shutil.which("bibtex"), "LaTeX tools not installed")
++    def test_real_bibtex_and_citation_survive_content_handoff(self):
++        self.generate(self.literature)
++        key = build_citations(self.literature)["by_source_id"]["memgpt"]
++        section = self.root / "paper/sections/related_work.tex"
++        section.write_text(r"\section{Related Work}" + "\nCitation plumbing check: \\citep{" + key + "}.\n",
++                           encoding="utf-8")
++        pdf = compile_project(self.root / "paper")
++        self.assertTrue(pdf.read_bytes().startswith(b"%PDF-"))
++        report = json.loads((self.root / "paper/compile_report.json").read_text())
++        self.assertTrue(report["success"])
++        self.assertEqual(len(report["commands"]), 4)
++        self.assertNotIn("undefined", " ".join(report["warnings"]))
++
++    @unittest.skipUnless(shutil.which("pdflatex"), "LaTeX tools not installed")
++    def test_real_empty_bibliography_and_unresolved_citation_detection(self):
++        self.brief.update(anonymous=False, authors=["Alice Example", "Bob Example"])
++        self.generate()
++        compile_project(self.root / "paper")
++        report = json.loads((self.root / "paper/compile_report.json").read_text())
++        self.assertEqual(len(report["commands"]), 3)
++        section = self.root / "paper/sections/introduction.tex"
++        section.write_text(r"\section{Introduction} Missing: \citep{not_in_library}.", encoding="utf-8")
++        with self.assertRaisesRegex(ValueError, "Unresolved citations"):
++            compile_project(self.root / "paper")
++        report = json.loads((self.root / "paper/compile_report.json").read_text())
++        self.assertFalse(report["success"])
++
++
++if __name__ == "__main__":
++    unittest.main()

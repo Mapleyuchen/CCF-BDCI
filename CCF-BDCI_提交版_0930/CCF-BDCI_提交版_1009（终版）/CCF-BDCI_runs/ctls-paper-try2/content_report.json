@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "human_review_required": true,
+  "source_framework": "D:\\同济大四\\数据挖掘\\CCF BDCI\\CCF-BDCI_提交版_0930\\CCF-BDCI_提交版_1009\\CCF-BDCI_runs\\ctls-framework-test",
+  "source_outline_sha256": "0ee77afcb11d5afedf77dd1de61d966354166b49fed199c7ef9c3d644c7ead5d",
+  "calls": [],
+  "validation_errors": [],
+  "figures": [],
+  "writing_mode": "offline",
+  "content_input_sha256": "85bc976503f139d320d6322e6a976e440886fd4436c5228809995272eb0b3fa1",
+  "content_input_path": "D:\\同济大四\\数据挖掘\\CCF BDCI\\CCF-BDCI_提交版_0930\\CCF-BDCI_提交版_1009\\CCF-BDCI_runs\\ctls-content-adapted.json",
+  "error": "'context_chars'",
+  "elapsed_seconds": 1.547,
+  "new_text_calls": 0,
+  "new_text_tokens": 0
+}

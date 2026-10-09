@@ -1,0 +1,192 @@
+# ==============================================================
+# JiuwenSwarm 配置模板（CCF BDCI 2026 项目用）
+# 使用方法：复制本文件为 config.yaml，填入实际值后启动。
+# config.yaml 已被 .gitignore 排除，本模板可安全提交。
+# ==============================================================
+
+# 配置版本号
+config_version: ""
+
+# 前端显示语言：zh / en
+preferred_language: zh
+
+# Agent 模式渐进式工具暴露
+progressive_tool_enabled: true
+
+setup_guide:
+  enabled: true
+
+auto_recap:
+  enabled: true
+
+a2ui:
+  enabled: false
+  protocol_version: "0.8"
+  stream_validation_enabled: true
+  non_web_fallback_enabled: false
+  dev_smoke_tools_enabled: false
+
+rsi:
+  enabled: true
+
+# ==============================================================
+# 代理设置（如使用本地代理，端口 7897）
+# 在系统环境变量或 .env 中设置：
+#   HTTP_PROXY=http://127.0.0.1:7897
+#   HTTPS_PROXY=http://127.0.0.1:7897
+# ==============================================================
+
+symphony:
+  enabled: false
+  paths:
+    skills_root: ""
+    graph_dir: ""
+
+  fingerprint:
+    scan:
+      max_depth:
+    extraction:
+      workers: 4
+      batch_size: 2
+      body_limit:
+
+  build:
+    workers: 4
+    batch_size: 16
+    max_candidates_per_skill_relation: 32
+    require_consensus: false
+    min_edge_confidence: 0.5
+
+  evolution:
+    enabled: false
+    flow:
+      enabled: false
+      min_edge_support: 1
+      min_edge_success_rate: 0.5
+      min_successes_candidate: 2
+      min_successes_verified: 3
+      min_pack_success_rate_verified: 0.8
+
+  orchestration:
+    mode: fast
+    top_k: 3
+    max_depth: 4
+    min_edge_confidence: 0.5
+
+  skill_retrieval:
+    enabled: false
+    index:
+      enabled: false
+      recommendation_shown: false
+    artifact_root: ${SYMPHONY_SKILL_RETRIEVAL_ROOT:-}
+    discovery:
+      max_output_chars: 12000
+      incremental_notice_max_chars: 4000
+      prompt_preferred_skills:
+        - skill-creator
+        - swarmskill-creator
+        - symphony-assistant
+    build:
+      preserve_previous_index_on_failure: true
+
+auto_memory_enabled: false
+
+logging:
+  level: INFO
+  console_level: INFO
+  gateway: INFO
+  channel: INFO
+  agent_server: INFO
+  full: INFO
+
+memory:
+  mode: ${MEMORY_MODE:-local}
+  engine: ${MEMORY_ENGINE:-builtin}
+  forbidden_memory_definition:
+    enabled: false
+    patterns: []
+    description:
+      zh: "以下内容禁止记忆："
+      en: "The following content is forbidden to remember:"
+
+  external:
+    provider: ${MEMORY_EXTERNAL_PROVIDER:-}
+    user_id: ${MEMORY_USER_ID:-__default__}
+    scope_id: ${MEMORY_SCOPE_ID:-__default__}
+
+    openjiuwen:
+      kv_type: shelve
+      kv_path: ${MEMORY_KV_PATH:-}
+      vector_type: chroma
+      vector_persist_dir: ${MEMORY_VECTOR_DIR:-}
+      db_type: sqlite
+      db_path: ${MEMORY_DB_PATH:-}
+
+    mem0:
+      api_key: ${MEM0_API_KEY:-}
+      user_id: ${MEM0_USER_ID:-jiuwenswarm-user}
+      agent_id: ${MEM0_AGENT_ID:-jiuwenswarm}
+      rerank: true
+
+    openviking:
+      endpoint: ${OPENVIKING_ENDPOINT:-http://127.0.0.1:1933}
+      api_key: ${OPENVIKING_API_KEY:-}
+      account: ${OPENVIKING_ACCOUNT:-root}
+      user: ${OPENVIKING_USER:-default}
+
+    lakebase:
+      api_key: ${LAKEBASE_API_KEY:-}
+      base_url: ${LAKEBASE_API_URL:-}
+      base_id: ${LAKEBASE_MEM_BASE_ID:-}
+      database_id: ${LAKEBASE_DATABASE_ID:-}
+
+    jiuwen:
+      mode: ${JIUWEN_MEMORY_MODE:-server}
+      tenant_id: ${JIUWEN_MEMORY_TENANT_ID:-default}
+      infer_turns: true
+      save_assistant_turns: false
+      server:
+        base_url: ${JIUWEN_MEMORY_BASE_URL:-http://127.0.0.1:8137}
+        api_key: ${JIUWEN_MEMORY_API_KEY:-}
+        read_timeout: 30.0
+        write_timeout: 120.0
+      sdk:
+        kv_type: ${JIUWEN_KV_TYPE:-redis}
+        kv_url: ${JIUWEN_KV_URL:-redis://localhost:6379/0}
+        vector_type: ${JIUWEN_VECTOR_TYPE:-milvus}
+        vector_url: ${JIUWEN_VECTOR_URL:-http://localhost:19530}
+        db_type: ${JIUWEN_DB_TYPE:-elasticsearch}
+        db_url: ${JIUWEN_DB_URL:-http://localhost:9200}
+        embedder_dim: ${JIUWEN_EMBEDDER_DIM:-1024}
+
+proactive_recommendation:
+  enabled: false
+  max_recommend_per_day: 10
+  max_rounds_per_tick: 20
+
+endpoint_profile_overrides:
+
+# ==============================================================
+# 模型配置（必填）
+# 在系统环境变量或 .env 中设置以下变量：
+#   API_BASE=https://api.your-provider.com/v1
+#   API_KEY=sk-your-key-here
+#   MODEL_NAME=your-model-name
+#   MODEL_PROVIDER=OpenAI
+#   ENDPOINT_PROFILE=openai
+# ==============================================================
+models:
+  defaults:
+    - model_client_config:
+        api_base: ${API_BASE}
+        api_key: ${API_KEY}
+        model_name: ${MODEL_NAME}
+        client_provider: ${MODEL_PROVIDER}
+        endpoint_profile: ${ENDPOINT_PROFILE:-openai}
+        timeout: 360
+        stream_first_chunk_timeout: 300
+        stream_idle_timeout: 120
+        verify_ssl: true
+        custom_headers: {}
+      model_config_obj: {}
+      is_default: true

@@ -1,0 +1,46 @@
+\section{Discussion and Limitations}
+
+\label{sec:discussion}
+
+The controlled results establish two findings clearly. First, the deployed hybrid selector is consistently and substantially outperformed by BM25 at every token budget, with differences surviving Holm correction throughout. Second, removing only the temporal term recovers most of this deficit, localizing the cause. These two facts together motivate CTLS: the temporal term is the primary source of the ranking error, and a fix that targets it precisely rather than discarding it globally is the right architectural response.
+
+\subsection{What the Mechanism Explains}
+
+The mechanism analysis turns the empirical observation into a formal condition (Eq.~\ref{eq:mech_ineq}). A fixed query-independent temporal weight can outweigh a positive Jaccard advantage whenever the freshness gap exceeds a threshold determined by the weight ratio and the half-life. This condition is satisfied routinely in single-session factual extraction because target facts are old and distractors are recent. The evidence recall deficit mirrors the accuracy deficit exactly: the displaced items are the relevant older ones, and once they leave the prompt the answering model cannot produce the correct answer.
+
+CTLS addresses this by partitioning candidates before temporal scoring. Within the relevant tier (positive Jaccard overlap), the full hybrid score ranks candidates so temporal decay and frequency serve as tiebreakers among genuinely relevant items. No zero-overlap item can enter the relevant tier, so no freshness advantage can displace a positive-overlap candidate. The Non-Dominance Property (Theorem~1) is a structural guarantee: it holds for any positive value of the temporal weight within the tier-0 scoring function and requires no retuning of existing weights.
+
+\subsection{CTLS versus hybrid\_no\_time}
+
+The relationship between CTLS and hybrid\_no\_time deserves careful statement. hybrid\_no\_time solves temporal dominance by eliminating the temporal term entirely, which is effective but discards useful temporal information. CTLS solves the same problem more precisely by restricting temporal scoring to within-tier comparisons: a fresher item can still outrank a less-fresh item when both have positive overlap, but it cannot outrank an item from a different tier with lower overlap. For queries where all candidates have positive overlap, CTLS and hybrid\_no\_time are equivalent and both outperform the deployed hybrid. For mixed-tier queries -- the more common case for short natural-language questions against long conversational segments -- CTLS is strictly stronger. The hybrid\_no\_time empirical result is therefore a conservative lower bound on what CTLS will achieve when directly evaluated.
+
+\subsection{Lifecycle Cost and CTLS}
+
+The reuse experiment shows that construction cost amortizes across queries. At the evaluated endpoint, the total token ratio of the model-acknowledgement path to the raw path confirms that write cost is the dominant term at low query counts and declines as query count increases. CTLS does not change this curve: it is a selector-only substitution with zero construction overhead. An application that serves many queries against a single memory instance will pay the write cost once and amortize it; CTLS provides better retrieval quality at every query at no additional cost.
+
+\subsection{Design Implications for Agent Memory Systems}
+
+\label{sec:disc_design}
+
+The Non-Dominance Property has a direct design implication: any system that uses a fixed mixture of lexical and temporal signals without a tier-aware architecture is susceptible to temporal dominance. Weight tuning can reduce the prevalence of temporal dominance on a training distribution, but it cannot eliminate it by construction: there will always exist query-candidate pairs where the freshness gap exceeds the tuned threshold and a relevant older item is displaced. CTLS eliminates the structural vulnerability rather than managing it.
+
+A second implication concerns the relationship between construction quality and selection quality. The operational study changes construction, representation, and ordering simultaneously, so its accuracy advantage cannot be attributed to ranking alone. The controlled study separates these by holding everything except the ordering rule fixed. The lesson is not that hybrid retrieval is worse than file memory in general: it is that a component whose ranking rule is miscalibrated will underperform a much simpler baseline regardless of what surrounds it. Diagnosing the component failure first is the right order of investigation.
+
+A third implication concerns evaluation methodology. Reporting only an operational comparison against a file-prefix baseline is insufficient to establish that the ranking rule is responsible for any observed benefit. A controlled comparison with a frozen bank and a strong lexical baseline is the minimum needed to license that claim. The 36-point deficit of the deployed hybrid against BM25 in the controlled study was completely invisible in the operational study, where the hybrid outperformed the file-prefix baseline by a wide margin. The two results are not contradictory; they measure different things. Any researcher building on memory retrieval results should report both.
+
+\subsection{Scope of the Evaluation}
+
+\label{sec:disc_scope}
+
+The controlled evaluation measures one well-defined quantity: the accuracy of a question-answering component under different candidate ordering rules, on a fixed bank, with a fixed answering model, a fixed packing policy, and a fixed question set. It does not measure the quality of an end-to-end memory system, the benefit of model-backed acquisition, cross-session performance, temporal update handling, or the quality of automatically generated research papers. These are important questions but they require different experimental designs.
+
+The stratified LongMemEval-S subset used here covers six question types plus abstention. Category-level accuracy is available in the supporting materials and shows that the hybrid-BM25 gap is most pronounced in single-session user strata where relevant facts are old and distractors are recent, exactly as the mechanism analysis predicts. Extending the evaluation to multi-session and temporal-update categories is the recommended next step, because the dynamics of recency and relevance differ across question types.
+
+The full-history retrieval sweep over all LongMemEval-S histories measures delivery of annotated evidence without an answering model. Evidence-session hit rates and annotated-character coverage provide a retrieval-only view consistent with the QA accuracy ordering. That sweep confirms that the selector ordering established by accuracy is also visible in retrieval coverage metrics. Neither measure alone is sufficient to establish answer quality; together they show that the ranking deficit operates through evidence delivery rather than through an answering-model artifact.
+
+\subsection{Limitations}
+
+Several restrictions apply. The controlled evaluation uses a frozen single-layer bank; the production rail has different capacity constraints. The judge substitution and stratified subset are disclosed deviations from the official evaluation protocol. The blinded human-adjudication task remains incomplete and results use the primary predeclared judge. CTLS is established theoretically with empirical support from the hybrid\_no\_time ablation; a direct CTLS implementation and controlled evaluation remains the primary recommended follow-up. The present artifact records candidate scores and skipped-item behavior and can directly support that experiment.
+
+Neither the operational pilot study nor the controlled selector study evaluates an end-to-end memory system; both study a retrieval component. The operational study changes construction, representation, and ordering simultaneously and cannot attribute its outcome to the ranking rule alone; the controlled study isolates the ranking rule but evaluates a frozen bank rather than a production deployment. Both studies together establish a consistent picture: the deployed hybrid ranking rule underperforms BM25 under controlled conditions, and the temporal term is the mechanism. Addressing the ranking rule in isolation, as CTLS does, is the appropriate first step before evaluating the system end to end.
+

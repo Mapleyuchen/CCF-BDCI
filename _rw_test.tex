@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{iclr2027_conference,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{natbib}
+\begin{document}
+\section{Related Work}
+
+\subsection{Agent Memory Systems}
+Recent surveys argue that agent memory is evolving into a full-fledged data management layer that governs storage, retrieval, consolidation, and lifecycle policies throughout execution \citep{zhou2026we}. Complementing this view, enterprise-grade substrates emphasize durable, organization-wide retention of task state and procedural knowledge for long-horizon workflows \citep{alake2026oracle}. At the mechanism level, memory-as-a-tool approaches convert transient critiques into retrievable guidelines to amortize inference-time reasoning \citep{gallego2026distilling}. Unified episodic–semantic designs further explore spreading-activation retrieval to connect long-term facts with task-specific episodes \citep{jiang2026synapse}.
+
+\subsection{Retrieval Methods for Agent Memory}
+Neural ranking and retrieval provide the algorithmic backbone for scoring and selecting relevant records under diverse evidence sources \citep{trabelsi2021neural}. Hybrid retrievers that fuse vector semantic search with lexical signals have demonstrated accuracy gains over single-source methods \citep{sawarkar2024blended,steffens2026vstash}. Beyond query–content similarity, longitudinal studies highlight the importance of temporal dynamics in retrieval effectiveness \citep{ovcharov2026temporal}. Our setting adopts a hybrid scoring paradigm tailored to agent memory by integrating semantic similarity with temporal decay, access frequency, and importance weighting.
+
+\subsection{Multi-Agent Collaboration}
+Multi-agent evaluation frameworks underscore the benefits and challenges of coordinating several LLM agents to assess capabilities and systemic risks \citep{rasheed2024large}. Domain-specific, hierarchical teams showcase how role specialization and delegated reasoning can drive autonomous scientific discovery \citep{rothfarb2025hierarchic}. From a systems perspective, organization-scale memory infrastructures are advocated to support coherent collaboration across extended processes \citep{alake2026oracle}. Nevertheless, concrete protocols for synchronizing, reconciling, and governing shared memories across teams remain under-specified.
+
+\subsection{LLM-Based Autonomous Agents}
+LLM-based agents increasingly rely on tool use and iterative interaction to execute complex tasks, yet alignment and finetuning must bridge the gap between generation and effective action \citep{wang2024learning}. Surveys of advanced LLM capabilities highlight persistent issues—temporal knowledge gaps, arithmetic robustness, and hallucination—that motivate external memory and retrieval \citep{roffo2024exploring}. As agents accumulate long-term histories, privacy analyses reveal new attack surfaces in memory stores, calling for principled management and access policies \citep{chen2026mrmmia}. In parallel, techniques that distill feedback into persistent, retrievable rules aim to stabilize behavior across episodes \citep{gallego2026distilling}.
+
+Building on calls for agent-native memory infrastructures, we introduce a three-level working–task–project architecture with explicit per-layer TTL and capacity controls, enabling lifecycle governance that is not addressed by existing designs \citep{zhou2026we}. Departing from standard hybrid retrievers, our scoring function couples semantic similarity with temporal decay, access frequency, and importance weighting to prioritize salient, timely, and reused items \citep{sawarkar2024blended,ovcharov2026temporal}. Finally, unlike prior multi-agent efforts that emphasize evaluation or hierarchical role decomposition, we formalize a team memory synchronization protocol and validate the full stack in JiuwenSwarm \citep{rasheed2024large,rothfarb2025hierarchic}.
+\bibliography{iclr2027_conference,related_work_refs}
+\bibliographystyle{iclr2027_conference}
+\end{document}

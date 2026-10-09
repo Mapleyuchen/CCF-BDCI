@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "kind": "research_revision_plan",
+  "scientific_review_required": true,
+  "policy": "Protocols are declared plans, not verified execution. Files and mappings do not establish claim support or resolve reviewer concerns.",
+  "research_questions": [
+    {
+      "id": "quality",
+      "title": "Quality under Matched Budgets",
+      "question": "How does CTLS answer accuracy compare against hybrid and BM25 across all three token budgets on the stratified LongMemEval-S subset?",
+      "experiment_ids": [
+        "fair_baselines_512",
+        "fair_baselines",
+        "protocol_replication"
+      ],
+      "awaiting_evidence": [],
+      "evidence_to_review": [
+        "fair_baselines_512",
+        "fair_baselines",
+        "protocol_replication"
+      ]
+    },
+    {
+      "id": "attribution",
+      "title": "Mechanism Attribution via Tier Partition",
+      "question": "Does the tier partition eliminate the temporal dominance condition by construction, and does removing decay entirely (hybrid_no_time) serve as an ablation upper bound?",
+      "experiment_ids": [
+        "fair_baselines_512",
+        "fair_baselines"
+      ],
+      "awaiting_evidence": [],
+      "evidence_to_review": [
+        "fair_baselines_512",
+        "fair_baselines"
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "title": "Lifecycle Cost under Memory Reuse",
+      "question": "How does write-plus-query cost change when a single constructed memory bank serves multiple distinct queries, and does CTLS change that cost?",
+      "experiment_ids": [
+        "memory_reuse"
+      ],
+      "awaiting_evidence": [],
+      "evidence_to_review": [
+        "memory_reuse"
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "id": "fair_baselines_512",
+      "title": "CTLS versus Hybrid and BM25 at 512 Tokens",
+      "purpose": "comparison",
+      "status": "completed",
+      "evidence_status": "evidence_needs_review",
+      "research_question_ids": [
+        "quality",
+        "attribution"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            512
+          ],
+          "scope": "Complete memory section including the identical wrapper.",
+          "packing": "Identical whole-item packing in all arms; CTLS drains tier-0 first.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218; tokenizer.json SHA256=aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        "dataset": {
+          "name": "LongMemEval-S full history subset",
+          "split": "Predeclared evaluation",
+          "version": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+          "sample_size": 84,
+          "adaptation": "Full history source retained. QA is a balanced subset with a substituted Qwen judge."
+        },
+        "baselines": [
+          "bm25",
+          "hybrid",
+          "hybrid_no_time"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path"
+        ],
+        "changed_variables": [
+          "selector"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+          "review": "966 distinct responses audited; 239 model disagreements have member-5 boolean decisions."
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction."
+        }
+      },
+      "metrics": [
+        "semantic answer accuracy",
+        "evidence-session recall",
+        "annotated-turn recall (any fragment)",
+        "complete annotated-turn coverage",
+        "write-plus-query tokens",
+        "query latency including scheduling"
+      ],
+      "evidence_requirements": [],
+      "limitations": [
+        "CTLS is evaluated on the same frozen bank as hybrid and BM25; no new model calls are required.",
+        "The non-dominance property holds by construction; empirical results measure whether tier-0 candidates are consistently more useful than tier-1 candidates.",
+        "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+        "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item L1 capacity is not asserted to support full histories.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score."
+      ],
+      "missing_protocol_fields": [],
+      "evidence_ids": [
+        "fair_baselines_512"
+      ]
+    },
+    {
+      "id": "fair_baselines",
+      "title": "Primary CTLS versus Hybrid and BM25 at 1024 Tokens",
+      "purpose": "comparison",
+      "status": "completed",
+      "evidence_status": "evidence_needs_review",
+      "research_question_ids": [
+        "quality",
+        "attribution"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            1024
+          ],
+          "scope": "Complete memory section including the identical wrapper.",
+          "packing": "Identical whole-item packing in all arms; CTLS drains tier-0 first.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218; tokenizer.json SHA256=aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        "dataset": {
+          "name": "LongMemEval-S full history subset",
+          "split": "Predeclared evaluation",
+          "version": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+          "sample_size": 84,
+          "adaptation": "Full history source retained. QA is a balanced subset with a substituted Qwen judge."
+        },
+        "baselines": [
+          "bm25",
+          "hybrid",
+          "hybrid_no_time"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "system_prompt",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "write_path"
+        ],
+        "changed_variables": [
+          "selector"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned original LongMemEval task-specific prompts; arm-blind strict yes/no parsing; primary qwen3-max-2026-01-23.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+          "review": "966 distinct responses audited; 239 model disagreements have member-5 boolean decisions."
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction."
+        }
+      },
+      "metrics": [
+        "semantic answer accuracy",
+        "evidence-session recall",
+        "annotated-turn recall (any fragment)",
+        "complete annotated-turn coverage",
+        "write-plus-query tokens",
+        "query latency including scheduling"
+      ],
+      "evidence_requirements": [],
+      "limitations": [
+        "CTLS non-dominance is a structural property of the scoring rule, not a measured empirical claim.",
+        "hybrid_no_time provides a conservative ablation upper bound for CTLS on queries with mixed tier membership.",
+        "Blinded judge audit remains incomplete; results use the primary predeclared judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score."
+      ],
+      "missing_protocol_fields": [],
+      "evidence_ids": [
+        "fair_baselines"
+      ]
+    },
+    {
+      "id": "protocol_replication",
+      "title": "CTLS Robustness at 2048 Tokens",
+      "purpose": "comparison",
+      "status": "completed",
+      "evidence_status": "evidence_needs_review",
+      "research_question_ids": [
+        "quality"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            2048
+          ],
+          "scope": "Complete memory section including the identical wrapper.",
+          "packing": "Identical whole-item packing in all arms.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+        },
+        "dataset": {
+          "name": "LongMemEval-S full history subset",
+          "split": "Predeclared evaluation",
+          "version": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+          "sample_size": 84,
+          "adaptation": "Full history source retained. Same 84-question subset at higher budget."
+        },
+        "baselines": [
+          "bm25",
+          "hybrid",
+          "hybrid_no_time"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing"
+        ],
+        "changed_variables": [
+          "selector"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned original LongMemEval task-specific prompts; primary qwen3-max-2026-01-23.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc"
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction."
+        }
+      },
+      "metrics": [
+        "semantic answer accuracy",
+        "evidence-session recall",
+        "complete annotated-turn coverage",
+        "write-plus-query tokens"
+      ],
+      "evidence_requirements": [],
+      "limitations": [
+        "At 2048 tokens, nearly all tier-0 items fit within the budget, reducing the practical impact of tier partition; this budget tests whether CTLS retains the gain when budget is not a binding constraint.",
+        "protocol_replication is the same 84-question subset at a higher budget, not an independent cohort."
+      ],
+      "missing_protocol_fields": [
+        "scoring.review"
+      ],
+      "evidence_ids": [
+        "protocol_replication"
+      ]
+    },
+    {
+      "id": "memory_reuse",
+      "title": "Measured Memory Reuse on Synthetic Banks",
+      "purpose": "amortization",
+      "status": "completed",
+      "evidence_status": "evidence_needs_review",
+      "research_question_ids": [
+        "lifecycle"
+      ],
+      "protocol": {
+        "budget": {
+          "unit": "tokens",
+          "values": [
+            512
+          ],
+          "scope": "Complete memory section.",
+          "packing": "Identical whole-item packing.",
+          "tokenizer": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+        },
+        "dataset": {
+          "name": "Synthetic entity/value variants",
+          "split": "Predeclared evaluation",
+          "version": "d1db63c6266134ca54c28eb56762e75f35be8083ee8ab1babdecb7891ee636e8",
+          "sample_size": 8,
+          "adaptation": "Eight synthetic banks; each serves twenty distinct queries after one construction."
+        },
+        "baselines": [
+          "hybrid_raw",
+          "hybrid_model_ack"
+        ],
+        "controlled_variables": [
+          "question_ids",
+          "query_model_and_version",
+          "decoding_settings",
+          "canonical_memory_items",
+          "memory_wrapper",
+          "tokenizer",
+          "packing",
+          "selector"
+        ],
+        "changed_variables": [
+          "write_path",
+          "observed_distinct_query_prefix_length"
+        ],
+        "repeats": 3,
+        "scoring": {
+          "method": "Pinned LongMemEval task-specific prompts; primary qwen3-max-2026-01-23.",
+          "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc"
+        },
+        "statistics": {
+          "unit": "Memory episode, averaging repeats within memory",
+          "method": "Stratified memory-cluster bootstrap; Holm correction."
+        },
+        "reuse": {
+          "queries_per_memory": [
+            1,
+            5,
+            10,
+            20
+          ],
+          "construction_cost_policy": "Count construction once per memory instance; per-query cost = (write + sum of query costs) / query count."
+        }
+      },
+      "metrics": [
+        "semantic answer accuracy",
+        "required fact-item recall",
+        "write-plus-query tokens",
+        "query latency including scheduling"
+      ],
+      "evidence_requirements": [],
+      "limitations": [
+        "Synthetic banks share templates; eight entity/value variants do not establish generality on natural workloads.",
+        "The linked pair provides the endpoint after twenty queries; other prefix lengths are in supporting materials.",
+        "CTLS selector substitution does not change construction cost; reuse amortization is identical to the baseline write path."
+      ],
+      "missing_protocol_fields": [
+        "scoring.review"
+      ],
+      "evidence_ids": [
+        "memory_reuse"
+      ]
+    }
+  ],
+  "review_concerns": []
+}

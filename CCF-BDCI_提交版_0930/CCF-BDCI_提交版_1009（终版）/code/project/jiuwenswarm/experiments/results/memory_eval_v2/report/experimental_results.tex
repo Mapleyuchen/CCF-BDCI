@@ -1,0 +1,25 @@
+\subsection{Token-Matched Answer Quality}
+
+At 512 memory tokens, hybrid minus BM25 accuracy is -36.1 percentage points (95\% paired memory-cluster interval [-46.0, -25.8]; two-sided paired $p=0.0001$, Holm-adjusted $p=0.0021$).
+
+At 1024 memory tokens, hybrid minus BM25 accuracy is -29.4 percentage points (95\% paired memory-cluster interval [-40.1, -18.3]; two-sided paired $p=0.0002$, Holm-adjusted $p=0.0022$).
+
+At 2048 memory tokens, hybrid minus BM25 accuracy is -33.7 percentage points (95\% paired memory-cluster interval [-44.0, -23.0]; two-sided paired $p=0.0001$, Holm-adjusted $p=0.0021$).
+
+These are measured differences for the fixed model and balanced question subset; budgets and repeated calls do not add independent memory episodes. Negative and inconclusive comparisons are retained. The associated full-history retrieval sweep contains 9000 selector/budget traces, not additional model answers.
+
+\subsection{Isolating the Temporal Ranking Contribution}
+
+At 1024 memory tokens, full hybrid minus the same selector with only time removed is -27.0 accuracy points (95\% paired memory-cluster interval [-36.9, -17.5]; Holm-adjusted $p=0.0021$). Source records, lexical scoring, frequency, importance, representation and packing remain fixed. With constant frequency and importance, the no-time and Jaccard controls select identical items; separate actual generations can still produce different answers. This replay uses original source timestamps and the question date, rather than assigning a common new ingestion timestamp.
+
+\subsection{Component Controls and Measured Reuse}
+
+The adapted micro control hybrid\_exchange minus hybrid\_raw has accuracy difference -16.7 points (95\% memory-cluster interval [-33.3, -1.7]; Holm-adjusted $p=0.8728$). These mechanism controls have twenty adapted episodes and do not establish full-history generality.
+
+The adapted micro control hybrid\_model\_ack minus hybrid\_raw has accuracy difference +0.0 points (95\% memory-cluster interval [+0.0, +0.0]; Holm-adjusted $p=1.0000$). These mechanism controls have twenty adapted episodes and do not establish full-history generality.
+
+bm25\_raw uses 501, 499, 499, 499 measured write-plus-query tokens per question after serving one, five, ten and twenty distinct questions, respectively. Construction is counted once per memory instance; the banks share synthetic templates.
+
+hybrid\_model\_ack uses 2570, 913, 706, 602 measured write-plus-query tokens per question after serving one, five, ten and twenty distinct questions, respectively. Construction is counted once per memory instance; the banks share synthetic templates.
+
+hybrid\_raw uses 501, 499, 499, 499 measured write-plus-query tokens per question after serving one, five, ten and twenty distinct questions, respectively. Construction is counted once per memory instance; the banks share synthetic templates.

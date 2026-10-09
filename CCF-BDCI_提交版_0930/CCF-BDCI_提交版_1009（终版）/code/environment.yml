@@ -1,0 +1,9 @@
+name: ccf-bdci-submission
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - matplotlib==3.11.2
+      - PyYAML==6.0.3
+      - python-dotenv==1.2.3
+      - requests==2.34.2

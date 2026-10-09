@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "prepared_date": "2026-10-08",
+  "team_name": null,
+  "source_commit": "e0fa45cfa18d6a71a6bcd90c4a22592fc1e4adbb",
+  "paper_sha256": "94a9e439c9eccbfc6e94f350b3780ae3be2f5c5c4ecacaf6836f601dec9a7bd4",
+  "reviewed_pdf_sha256": null,
+  "upstream_pr_url": null,
+  "human_review_completed": false,
+  "note": "Prepared locally. Team name, matching reviewer token, upstream PR and human review remain outstanding.",
+  "author": {
+    "name": "Yuan Junsong",
+    "email": "2287884254@qq.com",
+    "github": "GoldstreamCitadel"
+  },
+  "working_tree_changes_included": true
+}

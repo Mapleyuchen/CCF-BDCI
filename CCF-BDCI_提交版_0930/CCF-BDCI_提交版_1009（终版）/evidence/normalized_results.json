@@ -1,0 +1,1546 @@
+{
+  "schema_version": 1,
+  "results": [
+    {
+      "id": "public_small",
+      "title": "Restricted Context Budget",
+      "kind": "adapted_longmemeval_live",
+      "model_name": "qwen-plus",
+      "dataset_sha256": "af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
+      "source_sha256": "43a472342f52fc83d1265e24f8093bf3bcb169e5c793692d52f40e08f135f252",
+      "context_chars": 600,
+      "unique_questions": 20,
+      "paired_observations": 20,
+      "repeats": 1,
+      "groups": {
+        "baseline": {
+          "n": 20,
+          "correct": 0,
+          "accuracy": 0,
+          "evidence_recall": 0.0,
+          "query_tokens": 4686,
+          "seed_tokens": 0,
+          "all_tokens": 4686,
+          "tokens_per_question": 234.3,
+          "seed_model_calls": 0,
+          "query_latency_ms": 408.0265550002878,
+          "end_to_end_latency_ms": 408.0265550002878,
+          "excluded_records": 0,
+          "tokens_per_correct": null,
+          "accuracy_ci_low": 0,
+          "accuracy_ci_high": 0.16112515805281938,
+          "correct_without_full_evidence": 0,
+          "wrong_with_full_evidence": 0
+        },
+        "enhanced": {
+          "n": 20,
+          "correct": 13,
+          "accuracy": 0.65,
+          "evidence_recall": 0.65,
+          "query_tokens": 3864,
+          "seed_tokens": 97805,
+          "all_tokens": 101669,
+          "tokens_per_question": 5083.45,
+          "seed_model_calls": 400,
+          "query_latency_ms": 503.75684999999066,
+          "end_to_end_latency_ms": 7375.6687849997425,
+          "excluded_records": 0,
+          "tokens_per_correct": 7820.692307692308,
+          "accuracy_ci_low": 0.43285427668523624,
+          "accuracy_ci_high": 0.818808175898918,
+          "correct_without_full_evidence": 0,
+          "wrong_with_full_evidence": 0
+        }
+      },
+      "paired_outcomes": {
+        "both_correct": 0,
+        "enhanced_only": 13,
+        "baseline_only": 0,
+        "both_wrong": 7
+      },
+      "observed_cases": [
+        {
+          "question_id": "0862e8bf",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What is the name of my cat?",
+          "accepted_answers": [
+            "Luna"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 599,
+            "total_tokens": 222
+          },
+          "enhanced": {
+            "answer": "Your cat's name is Luna.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 550,
+            "total_tokens": 215
+          }
+        },
+        {
+          "question_id": "118b2229",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "How long is my daily commute to work?",
+          "accepted_answers": [
+            "45 minutes each way"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 599,
+            "total_tokens": 219
+          },
+          "enhanced": {
+            "answer": "Your daily commute to work is 45 minutes each way.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 523,
+            "total_tokens": 212
+          }
+        },
+        {
+          "question_id": "15745da0",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "How long have I been collecting vintage cameras?",
+          "accepted_answers": [
+            "three months"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 239
+          },
+          "enhanced": {
+            "answer": "You have been collecting vintage cameras for three months.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 445,
+            "total_tokens": 161
+          }
+        },
+        {
+          "question_id": "19b5f2b3",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "How long was I in Japan for?",
+          "accepted_answers": [
+            "two weeks"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 216
+          },
+          "enhanced": {
+            "answer": "You were in Japan for two weeks.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 463,
+            "total_tokens": 167
+          }
+        },
+        {
+          "question_id": "1faac195",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "Where does my sister Emily live?",
+          "accepted_answers": [
+            "Denver"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 222
+          },
+          "enhanced": {
+            "answer": "Your sister Emily lives in Denver.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 558,
+            "total_tokens": 221
+          }
+        },
+        {
+          "question_id": "36580ce8",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What health issue did I initially think was just a cold?",
+          "accepted_answers": [
+            "bronchitis"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 599,
+            "total_tokens": 223
+          },
+          "enhanced": {
+            "answer": "You initially thought bronchitis was just a cold.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 459,
+            "total_tokens": 177
+          }
+        },
+        {
+          "question_id": "3d86fd0a",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "Where did I meet Sophia?",
+          "accepted_answers": [
+            "a coffee shop in the city"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 255
+          },
+          "enhanced": {
+            "answer": "You met Sophia at a coffee shop in the city.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 585,
+            "total_tokens": 224
+          }
+        },
+        {
+          "question_id": "545bd2b5",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "How much screen time have I been averaging on Instagram per day?",
+          "accepted_answers": [
+            "2 hours"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 242
+          },
+          "enhanced": {
+            "answer": "You have been averaging around 2 hours of screen time on Instagram per day for the past two weeks.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 431,
+            "total_tokens": 185
+          }
+        },
+        {
+          "question_id": "58bf7951",
+          "repeat": 0,
+          "outcome": "both_wrong",
+          "query": "What play did I attend at the local community theater?",
+          "accepted_answers": [
+            "The Glass Menagerie"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 220
+          },
+          "enhanced": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 467,
+            "total_tokens": 190
+          }
+        },
+        {
+          "question_id": "60d45044",
+          "repeat": 0,
+          "outcome": "both_wrong",
+          "query": "What type of rice is my favorite?",
+          "accepted_answers": [
+            "Japanese short-grain rice"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 246
+          },
+          "enhanced": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 508,
+            "total_tokens": 195
+          }
+        },
+        {
+          "question_id": "66f24dbb",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What did I buy for my sister's birthday gift?",
+          "accepted_answers": [
+            "a yellow dress"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 230
+          },
+          "enhanced": {
+            "answer": "You bought your sister a yellow dress and a pair of earrings to match.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 529,
+            "total_tokens": 220
+          }
+        },
+        {
+          "question_id": "6ade9755",
+          "repeat": 0,
+          "outcome": "both_wrong",
+          "query": "Where do I take yoga classes?",
+          "accepted_answers": [
+            "Serenity Yoga"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 237
+          },
+          "enhanced": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 495,
+            "total_tokens": 188
+          }
+        },
+        {
+          "question_id": "75499fd8",
+          "repeat": 0,
+          "outcome": "both_wrong",
+          "query": "What breed is my dog?",
+          "accepted_answers": [
+            "Golden Retriever"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 218
+          },
+          "enhanced": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 492,
+            "total_tokens": 189
+          }
+        },
+        {
+          "question_id": "86f00804",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What book am I currently reading?",
+          "accepted_answers": [
+            "The Seven Husbands of Evelyn Hugo"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 232
+          },
+          "enhanced": {
+            "answer": "You are currently reading *The Seven Husbands of Evelyn Hugo*.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 465,
+            "total_tokens": 181
+          }
+        },
+        {
+          "question_id": "8a137a7f",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What type of bulb did I replace in my bedside lamp?",
+          "accepted_answers": [
+            "Philips LED bulb"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 244
+          },
+          "enhanced": {
+            "answer": "You replaced the bulb in your bedside lamp with a Philips LED bulb.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 463,
+            "total_tokens": 178
+          }
+        },
+        {
+          "question_id": "8ebdbe50",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What certification did I complete last month?",
+          "accepted_answers": [
+            "Data Science"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 599,
+            "total_tokens": 245
+          },
+          "enhanced": {
+            "answer": "You completed a certification in Data Science last month.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 383,
+            "total_tokens": 152
+          }
+        },
+        {
+          "question_id": "c14c00dd",
+          "repeat": 0,
+          "outcome": "both_wrong",
+          "query": "What brand of shampoo do I currently use?",
+          "accepted_answers": [
+            "Trader Joe's"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 219
+          },
+          "enhanced": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 523,
+            "total_tokens": 209
+          }
+        },
+        {
+          "question_id": "c8c3f81d",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What brand are my favorite running shoes?",
+          "accepted_answers": [
+            "Nike"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 599,
+            "total_tokens": 264
+          },
+          "enhanced": {
+            "answer": "Your favorite brand for running shoes is Nike.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 462,
+            "total_tokens": 171
+          }
+        },
+        {
+          "question_id": "caf9ead2",
+          "repeat": 0,
+          "outcome": "both_wrong",
+          "query": "How long did it take to move to the new apartment?",
+          "accepted_answers": [
+            "5 hours"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 600,
+            "total_tokens": 243
+          },
+          "enhanced": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 594,
+            "total_tokens": 217
+          }
+        },
+        {
+          "question_id": "ccb36322",
+          "repeat": 0,
+          "outcome": "both_wrong",
+          "query": "What is the name of the music streaming service have I been using lately?",
+          "accepted_answers": [
+            "Spotify"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 599,
+            "total_tokens": 250
+          },
+          "enhanced": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 560,
+            "total_tokens": 212
+          }
+        }
+      ],
+      "accuracy_interval": {
+        "method": "Wilson",
+        "confidence": 0.95,
+        "confidence_percent": 95,
+        "interpretation": "Descriptive binomial interval, not repeated-run uncertainty"
+      },
+      "accuracy_gain_pp": 65.0,
+      "total_token_ratio": 21.69632949210414,
+      "cost_per_correct_ratio": null,
+      "protocol": {
+        "top_k": 10,
+        "turns_per_episode": 20,
+        "max_iterations": 1,
+        "tools": []
+      },
+      "selection_rule": "Sort eligible single-session-user questions by question_id; take the first 20. Each has exactly one has_answer turn of 20-250 characters, a 4-70 character string answer present in that turn but absent from the question, and at least 19 same-history non-answer turns of 20-250 characters that omit the answer. Sample 19 distractors deterministically and shuffle all 20 turns.",
+      "limitations": [
+        "A paired memory question-answering experiment, not an end-to-end paper-generation evaluation.",
+        "Current enhanced Rail writes only process-local L1 memory; L2/L3 persistence and team synchronization are untested.",
+        "String-based accepted-answer matching requires semantic review; context metadata also consumes the character budget.",
+        "Repeated questions and budgets sharing a dataset are not independent samples; no significance test is claimed.",
+        "Total token cost includes memory writes and all recorded attempts, amortized over valid paired observations.",
+        "This is an adapted LongMemEval slice, not an official LongMemEval score."
+      ]
+    },
+    {
+      "id": "public_large",
+      "title": "Expanded Context Budget",
+      "kind": "adapted_longmemeval_live",
+      "model_name": "qwen-plus",
+      "dataset_sha256": "af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
+      "source_sha256": "e66ef0357ab8ed05c08ad6a28a3b21c5e4ca98348c71a5270e050128e9888f3d",
+      "context_chars": 2400,
+      "unique_questions": 20,
+      "paired_observations": 20,
+      "repeats": 1,
+      "groups": {
+        "baseline": {
+          "n": 20,
+          "correct": 12,
+          "accuracy": 0.6,
+          "evidence_recall": 0.55,
+          "query_tokens": 16877,
+          "seed_tokens": 0,
+          "all_tokens": 16877,
+          "tokens_per_question": 843.85,
+          "seed_model_calls": 0,
+          "query_latency_ms": 717.0077500000843,
+          "end_to_end_latency_ms": 717.0077500000843,
+          "excluded_records": 0,
+          "tokens_per_correct": 1406.4166666666667,
+          "accuracy_ci_low": 0.3865815007622531,
+          "accuracy_ci_high": 0.781193467627183,
+          "correct_without_full_evidence": 1,
+          "wrong_with_full_evidence": 0
+        },
+        "enhanced": {
+          "n": 20,
+          "correct": 19,
+          "accuracy": 0.95,
+          "evidence_recall": 0.95,
+          "query_tokens": 14638,
+          "seed_tokens": 249398,
+          "all_tokens": 264036,
+          "tokens_per_question": 13201.8,
+          "seed_model_calls": 400,
+          "query_latency_ms": 601.4053299999432,
+          "end_to_end_latency_ms": 7133.407969999916,
+          "excluded_records": 0,
+          "tokens_per_correct": 13896.631578947368,
+          "accuracy_ci_low": 0.763868806553258,
+          "accuracy_ci_high": 0.9911185511992047,
+          "correct_without_full_evidence": 0,
+          "wrong_with_full_evidence": 0
+        }
+      },
+      "paired_outcomes": {
+        "both_correct": 12,
+        "enhanced_only": 7,
+        "baseline_only": 0,
+        "both_wrong": 1
+      },
+      "observed_cases": [
+        {
+          "question_id": "0862e8bf",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "What is the name of my cat?",
+          "accepted_answers": [
+            "Luna"
+          ],
+          "baseline": {
+            "answer": "Your cat's name is Luna.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2400,
+            "total_tokens": 839
+          },
+          "enhanced": {
+            "answer": "Your cat's name is Luna.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2334,
+            "total_tokens": 743
+          }
+        },
+        {
+          "question_id": "118b2229",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "How long is my daily commute to work?",
+          "accepted_answers": [
+            "45 minutes each way"
+          ],
+          "baseline": {
+            "answer": "Your daily commute to work is 45 minutes each way.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2400,
+            "total_tokens": 827
+          },
+          "enhanced": {
+            "answer": "Your daily commute to work is 45 minutes each way.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2358,
+            "total_tokens": 765
+          }
+        },
+        {
+          "question_id": "15745da0",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "How long have I been collecting vintage cameras?",
+          "accepted_answers": [
+            "three months"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 2400,
+            "total_tokens": 812
+          },
+          "enhanced": {
+            "answer": "You have been collecting vintage cameras for three months.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2344,
+            "total_tokens": 730
+          }
+        },
+        {
+          "question_id": "19b5f2b3",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "How long was I in Japan for?",
+          "accepted_answers": [
+            "two weeks"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 2400,
+            "total_tokens": 816
+          },
+          "enhanced": {
+            "answer": "You were in Japan for two weeks.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2367,
+            "total_tokens": 734
+          }
+        },
+        {
+          "question_id": "1faac195",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "Where does my sister Emily live?",
+          "accepted_answers": [
+            "Denver"
+          ],
+          "baseline": {
+            "answer": "Your sister Emily lives in Denver.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2399,
+            "total_tokens": 855
+          },
+          "enhanced": {
+            "answer": "Your sister Emily lives in Denver.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2367,
+            "total_tokens": 778
+          }
+        },
+        {
+          "question_id": "36580ce8",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "What health issue did I initially think was just a cold?",
+          "accepted_answers": [
+            "bronchitis"
+          ],
+          "baseline": {
+            "answer": "You initially thought bronchitis was just a cold.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2400,
+            "total_tokens": 817
+          },
+          "enhanced": {
+            "answer": "You initially thought a bad case of bronchitis was just a cold.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2270,
+            "total_tokens": 747
+          }
+        },
+        {
+          "question_id": "3d86fd0a",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "Where did I meet Sophia?",
+          "accepted_answers": [
+            "a coffee shop in the city"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 2400,
+            "total_tokens": 876
+          },
+          "enhanced": {
+            "answer": "You met Sophia at a coffee shop in the city.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2387,
+            "total_tokens": 731
+          }
+        },
+        {
+          "question_id": "545bd2b5",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "How much screen time have I been averaging on Instagram per day?",
+          "accepted_answers": [
+            "2 hours"
+          ],
+          "baseline": {
+            "answer": "You've been averaging around 2 hours of screen time on Instagram per day for the past two weeks.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2400,
+            "total_tokens": 847
+          },
+          "enhanced": {
+            "answer": "You have been averaging around 2 hours of screen time on Instagram per day for the past two weeks.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2222,
+            "total_tokens": 725
+          }
+        },
+        {
+          "question_id": "58bf7951",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What play did I attend at the local community theater?",
+          "accepted_answers": [
+            "The Glass Menagerie"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 2400,
+            "total_tokens": 814
+          },
+          "enhanced": {
+            "answer": "You attended a production of *The Glass Menagerie*.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2224,
+            "total_tokens": 736
+          }
+        },
+        {
+          "question_id": "60d45044",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "What type of rice is my favorite?",
+          "accepted_answers": [
+            "Japanese short-grain rice"
+          ],
+          "baseline": {
+            "answer": "Your favorite type of rice is Japanese short-grain rice.",
+            "correct": true,
+            "evidence_recall": 0.0,
+            "memory_chars": 2399,
+            "total_tokens": 840
+          },
+          "enhanced": {
+            "answer": "Your favorite type of rice is Japanese short-grain rice.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2140,
+            "total_tokens": 686
+          }
+        },
+        {
+          "question_id": "66f24dbb",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What did I buy for my sister's birthday gift?",
+          "accepted_answers": [
+            "a yellow dress"
+          ],
+          "baseline": {
+            "answer": "You bought your sister a pair of silver hoop earrings with a small pearl in the center.  \n<FACT:F05> [2023/05/24 (Wed) 04:49] user: I got her a pair of silver hoop earrings with a small pearl in the center.",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 2400,
+            "total_tokens": 854
+          },
+          "enhanced": {
+            "answer": "You bought your sister a yellow dress and a pair of earrings to match.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2359,
+            "total_tokens": 746
+          }
+        },
+        {
+          "question_id": "6ade9755",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "Where do I take yoga classes?",
+          "accepted_answers": [
+            "Serenity Yoga"
+          ],
+          "baseline": {
+            "answer": "You take yoga classes at **Serenity Yoga**, as mentioned in FACT:F12: *\"I've actually been using Down Dog for my home practice and I really like it. It's been super helpful for me, especially on days when I can't make it to Serenity Yoga.\"*",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2400,
+            "total_tokens": 929
+          },
+          "enhanced": {
+            "answer": "You take yoga classes at **Serenity Yoga**, as indicated by the fact that you mentioned using Down Dog for home practice “especially on days when I can't make it to Serenity Yoga” (<FACT:F12>).",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2246,
+            "total_tokens": 742
+          }
+        },
+        {
+          "question_id": "75499fd8",
+          "repeat": 0,
+          "outcome": "both_wrong",
+          "query": "What breed is my dog?",
+          "accepted_answers": [
+            "Golden Retriever"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 2400,
+            "total_tokens": 834
+          },
+          "enhanced": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 2374,
+            "total_tokens": 727
+          }
+        },
+        {
+          "question_id": "86f00804",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "What book am I currently reading?",
+          "accepted_answers": [
+            "The Seven Husbands of Evelyn Hugo"
+          ],
+          "baseline": {
+            "answer": "You are currently reading *The Seven Husbands of Evelyn Hugo*.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2399,
+            "total_tokens": 868
+          },
+          "enhanced": {
+            "answer": "You are currently reading *The Seven Husbands of Evelyn Hugo*.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2254,
+            "total_tokens": 709
+          }
+        },
+        {
+          "question_id": "8a137a7f",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "What type of bulb did I replace in my bedside lamp?",
+          "accepted_answers": [
+            "Philips LED bulb"
+          ],
+          "baseline": {
+            "answer": "You replaced a **Philips LED bulb** in your bedside lamp.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2400,
+            "total_tokens": 803
+          },
+          "enhanced": {
+            "answer": "You replaced the bulb in your bedside lamp with a **Philips LED bulb**.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2194,
+            "total_tokens": 700
+          }
+        },
+        {
+          "question_id": "8ebdbe50",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "What certification did I complete last month?",
+          "accepted_answers": [
+            "Data Science"
+          ],
+          "baseline": {
+            "answer": "You completed a Data Science certification last month.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2400,
+            "total_tokens": 879
+          },
+          "enhanced": {
+            "answer": "You completed a certification in Data Science last month.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2344,
+            "total_tokens": 733
+          }
+        },
+        {
+          "question_id": "c14c00dd",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What brand of shampoo do I currently use?",
+          "accepted_answers": [
+            "Trader Joe's"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 2400,
+            "total_tokens": 819
+          },
+          "enhanced": {
+            "answer": "You currently use a lavender-scented shampoo from Trader Joe's.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2329,
+            "total_tokens": 766
+          }
+        },
+        {
+          "question_id": "c8c3f81d",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "What brand are my favorite running shoes?",
+          "accepted_answers": [
+            "Nike"
+          ],
+          "baseline": {
+            "answer": "Your favorite brand for running shoes is Nike.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2400,
+            "total_tokens": 846
+          },
+          "enhanced": {
+            "answer": "Nike",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2302,
+            "total_tokens": 717
+          }
+        },
+        {
+          "question_id": "caf9ead2",
+          "repeat": 0,
+          "outcome": "both_correct",
+          "query": "How long did it take to move to the new apartment?",
+          "accepted_answers": [
+            "5 hours"
+          ],
+          "baseline": {
+            "answer": "It took around 5 hours to move everything into the new apartment.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2400,
+            "total_tokens": 847
+          },
+          "enhanced": {
+            "answer": "It took around 5 hours to move everything into the new apartment.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2160,
+            "total_tokens": 689
+          }
+        },
+        {
+          "question_id": "ccb36322",
+          "repeat": 0,
+          "outcome": "enhanced_only",
+          "query": "What is the name of the music streaming service have I been using lately?",
+          "accepted_answers": [
+            "Spotify"
+          ],
+          "baseline": {
+            "answer": "UNKNOWN",
+            "correct": false,
+            "evidence_recall": 0.0,
+            "memory_chars": 2400,
+            "total_tokens": 855
+          },
+          "enhanced": {
+            "answer": "You have been using Spotify lately.",
+            "correct": true,
+            "evidence_recall": 1.0,
+            "memory_chars": 2283,
+            "total_tokens": 734
+          }
+        }
+      ],
+      "accuracy_interval": {
+        "method": "Wilson",
+        "confidence": 0.95,
+        "confidence_percent": 95,
+        "interpretation": "Descriptive binomial interval, not repeated-run uncertainty"
+      },
+      "accuracy_gain_pp": 35.0,
+      "total_token_ratio": 15.64472358831546,
+      "cost_per_correct_ratio": 9.880878055778185,
+      "protocol": {
+        "top_k": 10,
+        "turns_per_episode": 20,
+        "max_iterations": 1,
+        "tools": []
+      },
+      "selection_rule": "Sort eligible single-session-user questions by question_id; take the first 20. Each has exactly one has_answer turn of 20-250 characters, a 4-70 character string answer present in that turn but absent from the question, and at least 19 same-history non-answer turns of 20-250 characters that omit the answer. Sample 19 distractors deterministically and shuffle all 20 turns.",
+      "limitations": [
+        "A paired memory question-answering experiment, not an end-to-end paper-generation evaluation.",
+        "Current enhanced Rail writes only process-local L1 memory; L2/L3 persistence and team synchronization are untested.",
+        "String-based accepted-answer matching requires semantic review; context metadata also consumes the character budget.",
+        "Repeated questions and budgets sharing a dataset are not independent samples; no significance test is claimed.",
+        "Total token cost includes memory writes and all recorded attempts, amortized over valid paired observations.",
+        "This is an adapted LongMemEval slice, not an official LongMemEval score."
+      ]
+    }
+  ],
+  "metrics": {
+    "public_small.context_chars": {
+      "value": 600,
+      "text": "600",
+      "display_value": 600.0
+    },
+    "public_small.unique_questions": {
+      "value": 20,
+      "text": "20",
+      "display_value": 20.0
+    },
+    "public_small.paired_observations": {
+      "value": 20,
+      "text": "20",
+      "display_value": 20.0
+    },
+    "public_small.repeats": {
+      "value": 1,
+      "text": "1",
+      "display_value": 1.0
+    },
+    "public_small.accuracy_gain_pp": {
+      "value": 65.0,
+      "text": "65 percentage points",
+      "display_value": 65.0
+    },
+    "public_small.total_token_ratio": {
+      "value": 21.69632949210414,
+      "text": "21.70",
+      "display_value": 21.7
+    },
+    "public_small.cost_per_correct_ratio": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "public_small.baseline.n": {
+      "value": 20,
+      "text": "20",
+      "display_value": 20.0
+    },
+    "public_small.baseline.correct": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.baseline.accuracy": {
+      "value": 0,
+      "text": "0.0%",
+      "display_value": 0.0
+    },
+    "public_small.baseline.evidence_recall": {
+      "value": 0.0,
+      "text": "0.0%",
+      "display_value": 0.0
+    },
+    "public_small.baseline.query_tokens": {
+      "value": 4686,
+      "text": "4686",
+      "display_value": 4686.0
+    },
+    "public_small.baseline.seed_tokens": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.baseline.all_tokens": {
+      "value": 4686,
+      "text": "4686",
+      "display_value": 4686.0
+    },
+    "public_small.baseline.tokens_per_question": {
+      "value": 234.3,
+      "text": "234.30",
+      "display_value": 234.3
+    },
+    "public_small.baseline.seed_model_calls": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.baseline.query_latency_ms": {
+      "value": 408.0265550002878,
+      "text": "408.03",
+      "display_value": 408.03
+    },
+    "public_small.baseline.end_to_end_latency_ms": {
+      "value": 408.0265550002878,
+      "text": "408.03",
+      "display_value": 408.03
+    },
+    "public_small.baseline.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.baseline.tokens_per_correct": {
+      "value": null,
+      "text": "not reported",
+      "display_value": null
+    },
+    "public_small.baseline.accuracy_ci_low": {
+      "value": 0,
+      "text": "0.0%",
+      "display_value": 0.0
+    },
+    "public_small.baseline.accuracy_ci_high": {
+      "value": 0.16112515805281938,
+      "text": "16.1%",
+      "display_value": 16.1
+    },
+    "public_small.baseline.correct_without_full_evidence": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.baseline.wrong_with_full_evidence": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.enhanced.n": {
+      "value": 20,
+      "text": "20",
+      "display_value": 20.0
+    },
+    "public_small.enhanced.correct": {
+      "value": 13,
+      "text": "13",
+      "display_value": 13.0
+    },
+    "public_small.enhanced.accuracy": {
+      "value": 0.65,
+      "text": "65.0%",
+      "display_value": 65.0
+    },
+    "public_small.enhanced.evidence_recall": {
+      "value": 0.65,
+      "text": "65.0%",
+      "display_value": 65.0
+    },
+    "public_small.enhanced.query_tokens": {
+      "value": 3864,
+      "text": "3864",
+      "display_value": 3864.0
+    },
+    "public_small.enhanced.seed_tokens": {
+      "value": 97805,
+      "text": "97805",
+      "display_value": 97805.0
+    },
+    "public_small.enhanced.all_tokens": {
+      "value": 101669,
+      "text": "101669",
+      "display_value": 101669.0
+    },
+    "public_small.enhanced.tokens_per_question": {
+      "value": 5083.45,
+      "text": "5083.45",
+      "display_value": 5083.45
+    },
+    "public_small.enhanced.seed_model_calls": {
+      "value": 400,
+      "text": "400",
+      "display_value": 400.0
+    },
+    "public_small.enhanced.query_latency_ms": {
+      "value": 503.75684999999066,
+      "text": "503.76",
+      "display_value": 503.76
+    },
+    "public_small.enhanced.end_to_end_latency_ms": {
+      "value": 7375.6687849997425,
+      "text": "7375.67",
+      "display_value": 7375.67
+    },
+    "public_small.enhanced.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.enhanced.tokens_per_correct": {
+      "value": 7820.692307692308,
+      "text": "7820.69",
+      "display_value": 7820.69
+    },
+    "public_small.enhanced.accuracy_ci_low": {
+      "value": 0.43285427668523624,
+      "text": "43.3%",
+      "display_value": 43.3
+    },
+    "public_small.enhanced.accuracy_ci_high": {
+      "value": 0.818808175898918,
+      "text": "81.9%",
+      "display_value": 81.9
+    },
+    "public_small.enhanced.correct_without_full_evidence": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.enhanced.wrong_with_full_evidence": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.paired.both_correct": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.paired.enhanced_only": {
+      "value": 13,
+      "text": "13",
+      "display_value": 13.0
+    },
+    "public_small.paired.baseline_only": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_small.paired.both_wrong": {
+      "value": 7,
+      "text": "7",
+      "display_value": 7.0
+    },
+    "public_large.context_chars": {
+      "value": 2400,
+      "text": "2400",
+      "display_value": 2400.0
+    },
+    "public_large.unique_questions": {
+      "value": 20,
+      "text": "20",
+      "display_value": 20.0
+    },
+    "public_large.paired_observations": {
+      "value": 20,
+      "text": "20",
+      "display_value": 20.0
+    },
+    "public_large.repeats": {
+      "value": 1,
+      "text": "1",
+      "display_value": 1.0
+    },
+    "public_large.accuracy_gain_pp": {
+      "value": 35.0,
+      "text": "35 percentage points",
+      "display_value": 35.0
+    },
+    "public_large.total_token_ratio": {
+      "value": 15.64472358831546,
+      "text": "15.64",
+      "display_value": 15.64
+    },
+    "public_large.cost_per_correct_ratio": {
+      "value": 9.880878055778185,
+      "text": "9.88",
+      "display_value": 9.88
+    },
+    "public_large.baseline.n": {
+      "value": 20,
+      "text": "20",
+      "display_value": 20.0
+    },
+    "public_large.baseline.correct": {
+      "value": 12,
+      "text": "12",
+      "display_value": 12.0
+    },
+    "public_large.baseline.accuracy": {
+      "value": 0.6,
+      "text": "60.0%",
+      "display_value": 60.0
+    },
+    "public_large.baseline.evidence_recall": {
+      "value": 0.55,
+      "text": "55.0%",
+      "display_value": 55.0
+    },
+    "public_large.baseline.query_tokens": {
+      "value": 16877,
+      "text": "16877",
+      "display_value": 16877.0
+    },
+    "public_large.baseline.seed_tokens": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_large.baseline.all_tokens": {
+      "value": 16877,
+      "text": "16877",
+      "display_value": 16877.0
+    },
+    "public_large.baseline.tokens_per_question": {
+      "value": 843.85,
+      "text": "843.85",
+      "display_value": 843.85
+    },
+    "public_large.baseline.seed_model_calls": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_large.baseline.query_latency_ms": {
+      "value": 717.0077500000843,
+      "text": "717.01",
+      "display_value": 717.01
+    },
+    "public_large.baseline.end_to_end_latency_ms": {
+      "value": 717.0077500000843,
+      "text": "717.01",
+      "display_value": 717.01
+    },
+    "public_large.baseline.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_large.baseline.tokens_per_correct": {
+      "value": 1406.4166666666667,
+      "text": "1406.42",
+      "display_value": 1406.42
+    },
+    "public_large.baseline.accuracy_ci_low": {
+      "value": 0.3865815007622531,
+      "text": "38.7%",
+      "display_value": 38.7
+    },
+    "public_large.baseline.accuracy_ci_high": {
+      "value": 0.781193467627183,
+      "text": "78.1%",
+      "display_value": 78.1
+    },
+    "public_large.baseline.correct_without_full_evidence": {
+      "value": 1,
+      "text": "1",
+      "display_value": 1.0
+    },
+    "public_large.baseline.wrong_with_full_evidence": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_large.enhanced.n": {
+      "value": 20,
+      "text": "20",
+      "display_value": 20.0
+    },
+    "public_large.enhanced.correct": {
+      "value": 19,
+      "text": "19",
+      "display_value": 19.0
+    },
+    "public_large.enhanced.accuracy": {
+      "value": 0.95,
+      "text": "95.0%",
+      "display_value": 95.0
+    },
+    "public_large.enhanced.evidence_recall": {
+      "value": 0.95,
+      "text": "95.0%",
+      "display_value": 95.0
+    },
+    "public_large.enhanced.query_tokens": {
+      "value": 14638,
+      "text": "14638",
+      "display_value": 14638.0
+    },
+    "public_large.enhanced.seed_tokens": {
+      "value": 249398,
+      "text": "249398",
+      "display_value": 249398.0
+    },
+    "public_large.enhanced.all_tokens": {
+      "value": 264036,
+      "text": "264036",
+      "display_value": 264036.0
+    },
+    "public_large.enhanced.tokens_per_question": {
+      "value": 13201.8,
+      "text": "13201.80",
+      "display_value": 13201.8
+    },
+    "public_large.enhanced.seed_model_calls": {
+      "value": 400,
+      "text": "400",
+      "display_value": 400.0
+    },
+    "public_large.enhanced.query_latency_ms": {
+      "value": 601.4053299999432,
+      "text": "601.41",
+      "display_value": 601.41
+    },
+    "public_large.enhanced.end_to_end_latency_ms": {
+      "value": 7133.407969999916,
+      "text": "7133.41",
+      "display_value": 7133.41
+    },
+    "public_large.enhanced.excluded_records": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_large.enhanced.tokens_per_correct": {
+      "value": 13896.631578947368,
+      "text": "13896.63",
+      "display_value": 13896.63
+    },
+    "public_large.enhanced.accuracy_ci_low": {
+      "value": 0.763868806553258,
+      "text": "76.4%",
+      "display_value": 76.4
+    },
+    "public_large.enhanced.accuracy_ci_high": {
+      "value": 0.9911185511992047,
+      "text": "99.1%",
+      "display_value": 99.1
+    },
+    "public_large.enhanced.correct_without_full_evidence": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_large.enhanced.wrong_with_full_evidence": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_large.paired.both_correct": {
+      "value": 12,
+      "text": "12",
+      "display_value": 12.0
+    },
+    "public_large.paired.enhanced_only": {
+      "value": 7,
+      "text": "7",
+      "display_value": 7.0
+    },
+    "public_large.paired.baseline_only": {
+      "value": 0,
+      "text": "0",
+      "display_value": 0.0
+    },
+    "public_large.paired.both_wrong": {
+      "value": 1,
+      "text": "1",
+      "display_value": 1.0
+    }
+  },
+  "display_policy": "Percentages to one decimal; average tokens and milliseconds to two decimals."
+}

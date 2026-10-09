@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "status": "completed_after_editorial_review",
+  "writer_model": "qwen3.8-max",
+  "calls": [
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 227.282,
+      "http_attempts": 2,
+      "usage": {
+        "prompt_tokens": 14707,
+        "completion_tokens": 5290,
+        "total_tokens": 19997
+      },
+      "stage": "editorial_plan",
+      "reused_from_previous_run": true
+    },
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 493.468,
+      "http_attempts": 3,
+      "usage": {
+        "prompt_tokens": 19770,
+        "completion_tokens": 6314,
+        "total_tokens": 26084
+      },
+      "stage": "editorial_draft",
+      "reused_from_previous_run": true
+    },
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 30.438,
+      "http_attempts": 1,
+      "usage": {
+        "prompt_tokens": 20381,
+        "completion_tokens": 1163,
+        "total_tokens": 21544
+      },
+      "stage": "editorial_review",
+      "enable_thinking": false
+    },
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 242.015,
+      "http_attempts": 2,
+      "usage": {
+        "prompt_tokens": 22361,
+        "completion_tokens": 6303,
+        "total_tokens": 28664
+      },
+      "stage": "editorial_revision",
+      "enable_thinking": false
+    },
+    {
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 131.656,
+      "http_attempts": 1,
+      "usage": {
+        "prompt_tokens": 21948,
+        "completion_tokens": 6390,
+        "total_tokens": 28338
+      },
+      "stage": "schema_repair"
+    }
+  ],
+  "recorded_writing_tokens": 124627,
+  "raw_model_validation_status": "failed",
+  "raw_validation_errors": [
+    "method_retrieval paragraph 1: Numeric prose must use a [[metric:...]] token; found 3600; result_public_large paragraph 3: Numeric prose must use a [[metric:...]] token; found 7820; discussion paragraph 3: Numeric prose must use a [[metric:...]] token; found 500; discussion paragraph 5: Numeric prose must use a [[metric:...]] token; found 9.9; conclusion paragraph 1: Numeric prose must use a [[metric:...]] token; found 15.6",
+    "method_retrieval paragraph 1: Numeric prose must use a [[metric:...]] token; found 0.4"
+  ],
+  "resolution": "Saved revision was evidence-checked and edited by Codex; numeric claims use program-computed tokens. See memory-research.editorial-review.json.",
+  "unaccounted_attempts": "Initial review connection failure and unsuccessful transport attempts did not provide usage. Recorded tokens are not a complete billing statement.",
+  "image_calls": [
+    {
+      "schema_version": 1,
+      "provider": "dashscope-image-api",
+      "endpoint": "https://dashscope.aliyuncs.com/api/v1/services/aigc/image-generation/generation",
+      "requested_model": "qwen-image-3.0-pro",
+      "request_settings": {
+        "size": "2688*1536",
+        "n": 1,
+        "prompt_extend": false,
+        "watermark": false
+      },
+      "prompt_sha256": "34907ddd4edbbd81ac19735a87dbe1687fa3498038b24fea3ade2174bc70b7ee",
+      "status": "completed",
+      "create_attempts": 1,
+      "polls": 4,
+      "note": "Conceptual method illustration. Experimental plots are computed separately from records.",
+      "task_id": "2fea3043-1de0-41f8-9d04-4fbdd4ab30f2",
+      "request_id": "157b3c3c-9962-9647-afd0-ff186ca5b661",
+      "elapsed_seconds": 23.015,
+      "task_status": "SUCCEEDED",
+      "image_sha256": "a94fa5eeffc4be05bd3fd692c3db6e9ad862b139ff774ccb9044a8ccd60d3192",
+      "bytes": 1634905,
+      "usage": {
+        "output_width": 2688,
+        "input_image_count": 0,
+        "input_image_type": "qima_input_2k",
+        "output_image_count": 1,
+        "output_image_type": "qima_output_2k",
+        "output_height": 1536
+      }
+    },
+    {
+      "schema_version": 1,
+      "provider": "dashscope-image-api",
+      "endpoint": "https://dashscope.aliyuncs.com/api/v1/services/aigc/image-generation/generation",
+      "requested_model": "qwen-image-3.0-pro",
+      "request_settings": {
+        "size": "2688*1536",
+        "n": 1,
+        "prompt_extend": false,
+        "watermark": false
+      },
+      "prompt_sha256": "040717fc74e91b63d8fd7de40224c7515f2fb026f126b89946537eaafff101ef",
+      "status": "completed",
+      "create_attempts": 1,
+      "polls": 4,
+      "note": "Conceptual method illustration. Experimental plots are computed separately from records.",
+      "task_id": "b3a13709-2965-4be0-8575-7a811660fd99",
+      "request_id": "2c4b9ba8-2fa0-90ce-90cd-df73aee4fe96",
+      "elapsed_seconds": 25.0,
+      "task_status": "SUCCEEDED",
+      "image_sha256": "7c33aabf738bc3b56cbc464a1ac347ff47949a41ae84649adcb9732e25915f05",
+      "bytes": 1601077,
+      "usage": {
+        "output_width": 2688,
+        "input_image_count": 0,
+        "input_image_type": "qima_input_2k",
+        "output_image_count": 1,
+        "output_image_type": "qima_output_2k",
+        "output_height": 1536
+      }
+    }
+  ],
+  "selected_image": "methodology-dashscope-v2; complete arrows and labels visually inspected",
+  "final_paper": {
+    "name": "paper_memory_research_20260930.pdf",
+    "pages": 11,
+    "bytes": 1842116,
+    "sha256": "0b85a83bd148ad69ab59b71f927b859e8ec5cb74470aa2e116966bec816eb9e6",
+    "visual_review": "All 11 pages inspected; pages 1-8 unchanged by final bibliography compaction.",
+    "mechanical_checks": {
+      "passed": 75,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "human_review_required": true,
+  "experiment_model": "qwen-plus",
+  "experiments_rerun_this_revision": false
+}

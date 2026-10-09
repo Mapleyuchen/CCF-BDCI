@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "provider": "dashscope-image-api",
+  "endpoint": "https://dashscope.aliyuncs.com/api/v1/services/aigc/image-generation/generation",
+  "requested_model": "qwen-image-3.0-pro",
+  "request_settings": {
+    "size": "2688*1536",
+    "n": 1,
+    "prompt_extend": false,
+    "watermark": false
+  },
+  "prompt_sha256": "040717fc74e91b63d8fd7de40224c7515f2fb026f126b89946537eaafff101ef",
+  "status": "completed",
+  "create_attempts": 0,
+  "polls": 1,
+  "note": "Conceptual method illustration. Experimental plots are computed separately from records.",
+  "task_id": "b3a13709-2965-4be0-8575-7a811660fd99",
+  "elapsed_seconds": 2.64,
+  "task_status": "SUCCEEDED",
+  "image_sha256": "7c33aabf738bc3b56cbc464a1ac347ff47949a41ae84649adcb9732e25915f05",
+  "bytes": 1601077,
+  "usage": {
+    "output_width": 2688,
+    "input_image_count": 0,
+    "input_image_type": "qima_input_2k",
+    "output_image_count": 1,
+    "output_image_type": "qima_output_2k",
+    "output_height": 1536
+  }
+}

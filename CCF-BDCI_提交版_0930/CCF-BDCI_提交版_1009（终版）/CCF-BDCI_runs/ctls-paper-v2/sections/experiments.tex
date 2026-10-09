@@ -1,0 +1,29 @@
+\section{Experimental Setup}
+
+\label{sec:experiments}
+
+The controlled evaluation keeps the candidate bank, packing policy, token budgets, and model configuration identical across all selectors. Only the scoring function that orders candidates changes. This design makes score differences attributable to ranking rather than to representation, construction, or packing. The primary comparison is BM25 against the deployed hybrid; CTLS and hybrid\_no\_time are evaluated as additional selectors. Three complementary experiments address the three research questions: a selector quality comparison across three token budgets on the full stratified subset, a mechanism ablation that isolates the temporal term, and a write-amortization study that measures lifecycle cost independently of selector choice.
+
+\subsection{CTLS versus Hybrid and BM25 at 512 Tokens}
+
+\label{sec:setup_fair_baselines_512}
+
+The smallest token budget condition uses the stratified LongMemEval-S subset of 84 memory episodes spanning six question types plus abstention. Each episode receives 3 answering calls under isolated conversation IDs. All selectors share the same frozen candidate bank, memory wrapper, and whole-item first-fit overflow policy at 512 tokens. Only the scoring function ordering candidates changes.
+
+\subsection{Primary CTLS versus Hybrid and BM25 at 1024 Tokens}
+
+\label{sec:setup_fair_baselines}
+
+The primary budget condition uses the same 84 stratified memory episodes with 3 answering calls per episode. The frozen candidate bank, tokenizer, packing policy, and memory wrapper are identical to the smaller budget condition; only the context cap differs at 1024 tokens. CTLS drains the relevant tier before the absent tier; hybrid applies weights globally; BM25 uses standard probabilistic lexical scoring; hybrid\_no\_time sets temporal weight to zero and sums remaining weighted terms directly. Answering calls use temperature zero with no tools and one iteration.
+
+\subsection{CTLS Robustness at 2048 Tokens}
+
+\label{sec:setup_protocol_replication}
+
+The largest budget condition uses the same 84 stratified memory episodes with 3 answering calls. The context budget is 2048 tokens. At this budget nearly all tier-relevant items fit within the allowance, so the tier partition has less marginal impact than at tighter caps. This condition tests whether the hybrid deficit versus BM25 persists when budget is no longer a binding constraint on recall.
+
+\subsection{Measured Memory Reuse on Synthetic Banks}
+
+\label{sec:setup_memory_reuse}
+
+The memory reuse experiment measures write amortization on 8 synthetic entity/value bank variants, each serving 160 distinct queries after a single construction. The context budget is 512 tokens. Construction cost is counted once per memory instance; per-query cost decreases as query count increases. CTLS adds no construction overhead: it is a zero-cost selector substitution that leaves the write path unchanged.

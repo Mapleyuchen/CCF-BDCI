@@ -1,0 +1,58 @@
+\section{Introduction}
+
+\label{sec:introduction}
+
+Agent memory systems face a fundamental tension between recency and relevance. A memory item stored months ago may contain the exact fact needed for a query today; an item stored seconds ago may share only surface vocabulary without containing its answer. Retrieval selectors that treat freshness as a primary ordering signal risk displacing relevant older items with irrelevant newer ones. We call this failure mode temporal dominance, and we show that it is the structural cause of a large and consistent accuracy deficit across every evaluated token budget in the system we study.
+
+The problem is precise and algebraic. The deployed hybrid scoring function assigns fixed weights to lexical Jaccard overlap, temporal decay, access frequency, and heuristic importance. Because the temporal weight is query-independent, a freshness gap of moderate size can outweigh a positive lexical advantage whenever Jaccard scores are small -- which is the typical case when a short natural-language question is compared against long conversational memory segments. We derive the exact condition under which displacement occurs and show it is routinely satisfied in the evaluated bank.
+
+We propose CTLS (Contrastive Tier-Based Lexical Selection) as the principled corrective. CTLS partitions candidates into a lexically relevant tier (Jaccard overlap J(q,m) strictly positive) and a lexically absent tier (J(q,m) equal to zero) before applying any temporal scoring. Within the relevant tier, the full hybrid score ranks candidates so that temporal decay and frequency serve as tiebreakers among genuinely relevant items. Packing draws from the relevant tier first, then from the absent tier if budget permits. This partition provably satisfies a Non-Dominance Property: no zero-overlap item can outrank a positive-overlap item regardless of freshness gap, frequency, or importance values. Temporal dominance is eliminated by construction, not by parameter tuning.
+
+Our empirical evidence comes from a controlled evaluation on a stratified LongMemEval-S subset. All selectors draw from the same frozen candidate bank with identical token budgets, metadata, memory wrapper, and whole-item first-fit packing. Only the scoring function changes. We evaluate across three token budgets with three answering calls per memory episode, stratified paired cluster bootstrap confidence intervals, and Holm correction across all prespecified comparisons.
+
+BM25 substantially outperforms the deployed hybrid at every budget; the gap is consistent at all three token caps and survives Holm correction throughout. Removing only the temporal term recovers most of this deficit, confirming it as the primary cause. CTLS is the principled generalization: where hybrid\_no\_time discards temporal information globally, CTLS preserves it as a within-tier tiebreaker. The CTLS direct experimental evaluation remains future work; this paper establishes the theoretical guarantee and the empirical motivation.
+
+\subsection{Quality under Matched Budgets}
+
+\label{sec:rq_quality}
+
+RQ1 asks whether CTLS closes the gap between the deployed hybrid and BM25 under matched token budgets on the frozen bank. BM25 substantially outperforms the hybrid at every budget, with the difference surviving Holm correction throughout. CTLS is designed to close this gap by eliminating temporal dominance through tier partition while preserving temporal decay as a within-tier tiebreaker rather than discarding it globally. The hybrid\_no\_time ablation, which sets the temporal weight to zero globally, recovers most of the deficit and serves as the empirical upper bound for CTLS on queries where all candidates have positive lexical overlap.
+
+\subsection{Mechanism Attribution via Tier Partition}
+
+\label{sec:rq_attribution}
+
+RQ2 asks which component of the hybrid scoring function causes the deficit and whether the tier partition addresses it by construction. The mechanism analysis derives the temporal dominance condition: the temporal weight can outweigh a positive Jaccard advantage whenever the freshness gap exceeds a threshold set by the weight ratio and the half-life parameter. Three empirical consequences follow: the deficit should be largest in single-session-user strata; removing only the temporal term should recover most of the loss; and evidence hit rates should fall with accuracy rates. All three are visible in the data. CTLS formalizes the fix while preserving within-tier temporal ordering among genuinely relevant items.
+
+\subsection{Summary of Contributions}
+
+\label{sec:contributions}
+
+This paper makes four contributions.
+
+\textbf{Formal diagnosis.} We derive the temporal dominance condition (Definition~2 and Equation~\ref{eq:dom_condition}): the exact algebraic inequality under which a fixed query-independent temporal weight displaces a lexically relevant older record with a fresher but irrelevant one. The condition is parameter-free: it follows directly from the weight ratio and the temporal decay function, with no statistical estimation required.
+
+\textbf{Constructive fix with proof.} We introduce CTLS (Contrastive Tier-Based Lexical Selection), a tier-partitioned selector that satisfies a Non-Dominance Property by construction (Theorem~1). No positive-overlap item can ever be displaced by a zero-overlap item regardless of freshness gap, frequency, or importance. CTLS requires no model calls, no embedding model, no learned parameters, and no write-path changes.
+
+\textbf{Controlled empirical evidence.} We provide a controlled comparison of six selectors on a stratified LongMemEval-S subset under three token budgets with cluster bootstrap inference and Holm correction. The deployed hybrid is 36.1, 29.4, and 33.7 percentage points below BM25 at the three budgets (all $p \le 0.0022$), and the hybrid\_no\_time ablation recovers most of the deficit, validating the mechanism. These results use a frozen candidate bank where only the ordering rule varies, making the deficit attributable to the ranking algorithm rather than to representation or construction.
+
+\textbf{Lifecycle cost analysis.} We measure write amortization on synthetic memory banks, showing that construction cost is a one-time expense that declines per query as query count increases. CTLS is a zero-cost selector substitution: its lifecycle cost curve is identical to the baseline write path, providing better retrieval quality at every query with no additional overhead.
+
+\subsection{Summary of Findings}
+
+\label{sec:findings}
+
+We state the headline results plainly so that the remainder of the paper can be read as support rather than as a surprise.
+
+\begin{itemize}
+  \item \textbf{The deployed hybrid consistently loses to BM25.} BM25 outperforms it by 36.1, 29.4, and 33.7 percentage points at 512, 1024, and 2048 tokens respectively, with all differences surviving Holm correction ($p \le 0.0022$).
+  \item \textbf{The temporal term causes most of the deficit.} Removing only the temporal weight (hybrid\_no\_time) recovers the majority of the gap at all three budgets, confirming the mechanism diagnosis.
+  \item \textbf{Budget growth does not help.} The hybrid deficit is stable across all three token budgets because the temporal term reorders the candidate list at every budget rather than truncating it.
+  \item \textbf{Evidence delivery tracks accuracy.} Evidence-session recall and complete annotated-turn coverage follow the same selector ordering as accuracy, confirming that the mechanism operates through evidence delivery.
+  \item \textbf{CTLS eliminates the vulnerability by construction.} The Non-Dominance Property holds for any positive value of the temporal weight within the relevant-tier score, requiring no parameter retuning.
+  \item \textbf{CTLS is zero-cost.} No model calls, embedding models, or learned parameters are required; construction cost and write amortization are identical to any other selector on the same bank.
+\end{itemize}
+
+\label{sec:rq_lifecycle}
+
+RQ3 asks how write amortization changes per-query cost when a single memory bank serves multiple distinct queries, and whether CTLS changes that cost. CTLS is a zero-cost selector substitution: no model calls, no embedding model, no parameters beyond the existing Jaccard tokenizer. Construction cost, write amortization, and per-query token counts are identical between CTLS and any selector on the same bank. The reuse experiment confirms that per-query cost declines as query count increases, and that this amortization is a property of the write path rather than the selector.

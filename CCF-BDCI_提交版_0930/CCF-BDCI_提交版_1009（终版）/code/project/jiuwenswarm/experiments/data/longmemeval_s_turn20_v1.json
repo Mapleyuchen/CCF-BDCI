@@ -1,0 +1,3172 @@
+{
+  "kind": "LongMemEval-S adapted 20-turn single-session-user slice",
+  "source_url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+  "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+  "source_license": "MIT",
+  "source_citation": "Wu et al., LongMemEval, ICLR 2025, arXiv:2410.10813",
+  "selection_seed": 2026,
+  "eligible_count": 22,
+  "selection_rule": "Sort eligible single-session-user questions by question_id; take the first 20. Each has exactly one has_answer turn of 20-250 characters, a 4-70 character string answer present in that turn but absent from the question, and at least 19 same-history non-answer turns of 20-250 characters that omit the answer. Sample 19 distractors deterministically and shuffle all 20 turns.",
+  "episodes": [
+    {
+      "id": "0862e8bf",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/22 (Mon) 10:46] user: I think my posture could use some improvement. I've noticed I tend to slouch a bit when I'm tired. Do you have any specific exercises or tips to help me maintain a tall, upright posture while jogging?",
+          "source_session_id": "147381f2_2",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/20 (Sat) 15:31] user: Show that the closed-loop poles all lie in the half plane, {z 2 C : Re(z) <\n-↵}.",
+          "source_session_id": "sharegpt_0iEF8Gz_0",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/27 (Sat) 11:19] user: I was thinking of checking out some outdoor art installations or sculptures around the city. Do you know of any popular ones or parks that feature them?",
+          "source_session_id": "0566c21b",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/28 (Sun) 15:16] user: Create a quiz test for beginner about user interview skill",
+          "source_session_id": "sharegpt_G8j6c8J_23",
+          "source_turn_index": 9,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/25 (Thu) 09:54] user: That's interesting. Do you know if there are any rules or customs to follow when wearing a traditional kimono?",
+          "source_session_id": "ultrachat_408906",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/27 (Sat) 07:10] user: I'm actually living in Tokyo right now, not Nikko. I was just planning a trip there. Do you know of any neighborhoods in Tokyo that would fit my criteria?",
+          "source_session_id": "95c36d37",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/24 (Wed) 17:25] user: By the way, my cat's name is Luna, and she's been such a sweetie throughout all the changes we've been making to her environment. I'm just glad I can provide her with a happy and healthy home.",
+          "source_session_id": "answer_c6fd8ebd",
+          "source_turn_index": 10,
+          "has_answer": true
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/20 (Sat) 04:37] user: I just don't understand why I should have to wear a mask while working out. It's so uncomfortable and makes it hard to breathe. Plus, I'm already sweating enough!",
+          "source_session_id": "ultrachat_511593",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/29 (Mon) 03:47] user: I'd like to know more about the \"Coffee Break German\" podcast. Can you tell me more about it and how it can help me improve my German skills?",
+          "source_session_id": "2442d5b9",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/27 (Sat) 22:18] user: I've been experimenting with different types of bitters in my cocktails lately. Do you think bitters would complement the spicy and fruity flavors I'm working with?",
+          "source_session_id": "381b80a3",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/22 (Mon) 06:04] user: What are some specific herbs or spices that can enhance the flavor of a soup while maintaining a well-balanced profile?",
+          "source_session_id": "ultrachat_96014",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/21 (Sun) 05:13] user: Can you provide more information on how to write a strong research statement? What are the key elements that admission committees look for in a research statement?",
+          "source_session_id": "aefe50f4",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/26 (Fri) 08:31] user: Can students from other universities participate in UCLA medical school research programs?",
+          "source_session_id": "ultrachat_470951",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/21 (Sun) 14:51] user: Okay but less chessy",
+          "source_session_id": "sharegpt_p073tJI_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/24 (Wed) 03:30] user: Remove all the spaces",
+          "source_session_id": "sharegpt_MTUnqho_0",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/25 (Thu) 18:52] user: it doesnt work I see strange behavioru",
+          "source_session_id": "sharegpt_isQJkCz_17",
+          "source_turn_index": 3,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/23 (Tue) 13:35] user: I'd like to explore more about the job market for data analysts. Can you provide some insights on the current demand, salary ranges, and growth prospects in this field?",
+          "source_session_id": "a8179676",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/26 (Fri) 08:31] user: What kind of research opportunities are available to students at UCLA's medical school?",
+          "source_session_id": "ultrachat_470951",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/26 (Fri) 01:49] user: discribe please one important and knowen work of art that speaks about war",
+          "source_session_id": "sharegpt_3BkB8g5_0",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/21 (Sun) 05:13] user: Can you tell me more about the kind of research experience that top CS programs like Stanford and Carnegie Mellon look for in applicants?",
+          "source_session_id": "aefe50f4",
+          "source_turn_index": 4,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "0862e8bf",
+          "query": "What is the name of my cat?",
+          "answers": [
+            "Luna"
+          ],
+          "relevant_ids": [
+            "F07"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "118b2229",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/25 (Thu) 03:26] user: I've already taken a course on regression analysis on Coursera, but I'd like to explore more resources on the topic. Can you recommend any podcasts that discuss data science and machine learning?",
+          "source_session_id": "927b9087",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/30 (Tue) 18:19] user: What are some good music podcasts that focus on indie and alternative music?",
+          "source_session_id": "3ea9f765",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/28 (Sun) 16:37] user: How do the Maldives cope with the rising sea levels due to climate change, and what initiatives are being undertaken to address this issue?",
+          "source_session_id": "ultrachat_498215",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/26 (Fri) 00:49] user: so give me back the original list with the unrelated ones removed.",
+          "source_session_id": "sharegpt_0Zvzz4F_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/30 (Tue) 06:31] user: I think I'll try the classic combination with broccoli, bell peppers, carrots, onions, and mushrooms. I have most of those in my fridge already. Can you give me some tips on how to cook the veggies so they're all perfectly tender but still crisp?",
+          "source_session_id": "728deb4d_5",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/20 (Sat) 10:18] user: I'll check them out online and see which one fits my budget. Do you have any other tips for a beginner surfer in Bali?",
+          "source_session_id": "ultrachat_577747",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/20 (Sat) 22:34] user: I'll definitely check out those recommendations. I'm particularly interested in exploring more of the singer-songwriter and Americana genres. Do you think you could suggest some artists that are similar to Bon Iver, Fleet Foxes, and Sufjan Stevens?",
+          "source_session_id": "a0b8b0ad_6",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/22 (Mon) 21:18] user: I've been listening to audiobooks during my daily commute, which takes 45 minutes each way.",
+          "source_session_id": "answer_40a90d51",
+          "source_turn_index": 8,
+          "has_answer": true
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/20 (Sat) 07:48] user: going forward please be more decisive and concise in your responses. be sure to word your responses like you were conversational",
+          "source_session_id": "sharegpt_5V5H2HN_0",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/30 (Tue) 18:19] user: What's the best way to discover new music on Apple Music? I've been using their radio stations and playlists, but I'm looking for more personalized recommendations.",
+          "source_session_id": "3ea9f765",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/20 (Sat) 10:18] user: What is the best time to visit Bali for surfing, and what beaches are recommended for beginners?",
+          "source_session_id": "ultrachat_577747",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/24 (Wed) 18:16] user: Can you help me find some charity events that are more low-key, like a charity yard sale or a food drive? I've been collecting donations for a charity yard sale that's happening next month, and I'd love to find more events like that.",
+          "source_session_id": "db50c0f6",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/24 (Wed) 07:12] user: But do parents do it anyway?",
+          "source_session_id": "sharegpt_brc2wJS_109",
+          "source_turn_index": 11,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/27 (Sat) 08:23] user: I'm planning to do a hike in the area, and I was thinking of doing a challenging hike, something similar to the hike I did at Mount Tamalpais State Park a few weeks ago.",
+          "source_session_id": "c22571ff_2",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/27 (Sat) 15:42] user: What's the best way to get around Melbourne without a car? I'm planning to rely on public transport and walk or bike whenever possible.",
+          "source_session_id": "004edb32",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/29 (Mon) 01:32] user: What are the benefits of urban green spaces for biodiversity?",
+          "source_session_id": "ultrachat_450272",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/24 (Wed) 18:15] user: I'm considering signing up for a cycling event in two months, a 20-mile ride along the coast. Do you have any tips on how to prepare for it, especially since I've only been doing shorter rides on the weekends?",
+          "source_session_id": "7d8b5834_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/27 (Sat) 05:39] user: Is your response intended for Maiko Haga?",
+          "source_session_id": "sharegpt_dabXXRO_10",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/20 (Sat) 10:18] user: Wow, Bali sounds amazing! I think I'll definitely check out the temples and rice terraces. Do you have any recommendations for good places to eat in Bali? I love trying new foods.",
+          "source_session_id": "ultrachat_577747",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/26 (Fri) 00:49] user: ok give me the list again with those removed.",
+          "source_session_id": "sharegpt_0Zvzz4F_0",
+          "source_turn_index": 6,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "118b2229",
+          "query": "How long is my daily commute to work?",
+          "answers": [
+            "45 minutes each way"
+          ],
+          "relevant_ids": [
+            "F08"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15745da0",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/23 (Tue) 15:04] user: I'm thinking of hosting a family game night and want to introduce Mysterium to my family. Do you think it's suitable for my younger brother who's 12 years old?",
+          "source_session_id": "0d73afc8",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/30 (Tue) 11:59] user: I think I can help you with that.\n\nYou mentioned earlier that you participated in the San Francisco Marathon, right?",
+          "source_session_id": "a4f22269",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/26 (Fri) 06:25] user: Can you explain the concept of linguistic relativity, and its historical and contemporary implications for language research and theory?",
+          "source_session_id": "ultrachat_488881",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/23 (Tue) 15:04] user: I'm looking for some new board game recommendations for my Friday game nights with friends. Do you have any suggestions?",
+          "source_session_id": "0d73afc8",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/29 (Mon) 19:07] user: I'll definitely try some of those nut butters. I've been stocking up on nuts lately, so it's great to have some new ideas for using them.",
+          "source_session_id": "ca929779_4",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/23 (Tue) 03:26] user: Can you provide examples of traditional crafts or trades that are in decline and need revitalization?",
+          "source_session_id": "ultrachat_446016",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/27 (Sat) 11:13] user: I'm trying to plan out my week ahead. Can you help me set reminders for my upcoming events?",
+          "source_session_id": "9f8fc173_2",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/22 (Mon) 14:57] user: What's the best way to incorporate yoga into my daily routine, especially on busy days?",
+          "source_session_id": "7f15b596",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/23 (Tue) 20:59] user: now, a service page conclusion. write a convincing h2 title for this and the content for this section should be a CTA to contact primal physical therapy or use their online scheduling system",
+          "source_session_id": "sharegpt_9bmybcO_35",
+          "source_turn_index": 11,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/26 (Fri) 02:18] user: I'm actually looking for some recommendations on where to eat during my trip to Chicago, especially local eateries that serve these dishes. Do you have any suggestions?",
+          "source_session_id": "64a97d9b",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/29 (Mon) 23:31] user: Wow, I had no idea the Taj Mahal was decorated with precious stones like jade and lapis lazuli. That must have taken so much work to create such intricate carvings and inlays. What was the significance of using these particular stones?",
+          "source_session_id": "ultrachat_577603",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/29 (Mon) 15:56] user: I've got a 60s Seamaster Omega that's been acting up, so I'll definitely keep those tips in mind. Speaking of vintage items, do you know anything about the value of first edition books, like a 1937 edition of The Hobbit?",
+          "source_session_id": "07d33eaa",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/30 (Tue) 11:59] user: I'm planning to travel to Europe soon and I'm wondering if you can help me with some travel tips, specifically about the best ways to stay active while traveling?",
+          "source_session_id": "a4f22269",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/20 (Sat) 06:35] user: How does the reputation of the institution influence employers' hiring decisions?",
+          "source_session_id": "ultrachat_18910",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/21 (Sun) 07:21] user: Please create a survey with 15 questions and a range of named question types on the topic of the UK energy crisis.",
+          "source_session_id": "sharegpt_6TSnbGC_0",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/26 (Fri) 02:18] user: I'd like to ask about the Polish sausage sandwich at Jim's Beef. Is it a traditional Polish-style sausage, and what's the atmosphere like at Jim's Beef?",
+          "source_session_id": "64a97d9b",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/25 (Thu) 11:59] user: I actually prefer electronic dance music when I'm running or cycling, it really gets me pumped up! Do you have any playlists that are more specific to electronic dance music for workouts?",
+          "source_session_id": "535ce50e_2",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/21 (Sun) 22:01] user: I've been collecting vintage cameras for three months now, and I've already amassed a pretty impressive collection. Do you have any advice on how to keep my cameras organized and easily accessible for maintenance and cleaning?",
+          "source_session_id": "answer_586de428",
+          "source_turn_index": 4,
+          "has_answer": true
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/30 (Tue) 11:59] user: I'm actually a bit concerned about recovering from my recent marathon. Can you give me some tips on how to recover properly after a big race like that?",
+          "source_session_id": "a4f22269",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/29 (Mon) 19:07] user: I'm looking for some healthy snack ideas for my afternoon cravings. I've been making my own energy balls with oats, peanut butter, and honey, but I want to try something new. Do you have any suggestions?",
+          "source_session_id": "ca929779_4",
+          "source_turn_index": 0,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "15745da0",
+          "query": "How long have I been collecting vintage cameras?",
+          "answers": [
+            "three months"
+          ],
+          "relevant_ids": [
+            "F18"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "19b5f2b3",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/29 (Mon) 05:02] user: I think education is key, especially for younger generations who have grown up with social media. We need to teach critical thinking and how to evaluate sources of information. What do you think?",
+          "source_session_id": "ultrachat_265828",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/24 (Wed) 08:05] user: I'm also considering selling my jewelry at other markets and events. Do you have any tips on how to choose the right events for my products?",
+          "source_session_id": "2a99adf5_2",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/23 (Tue) 14:06] user: I've been thinking about getting a facial steamer, but I'm not sure how often I should use it. Can you tell me more about how steaming affects the skin and how often I should do it?",
+          "source_session_id": "5214491c",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/30 (Tue) 07:33] user: What's the best way to allocate my time during my morning work sessions to ensure I'm making the most of my time? I want to make sure I'm dedicating enough time to my priority tasks.",
+          "source_session_id": "fbe6fa2c_1",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/27 (Sat) 10:06] user: I'm looking for something similar to my current bag, so around the same price range, which was pretty affordable. I prefer a bag with a lot of padding and compartments, since I'll be carrying my laptop, wireless mouse, and some other accessories.",
+          "source_session_id": "055bde41_2",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/28 (Sun) 03:58] user: I think I'll start with McFarland, USA since I love true underdog stories. Have you seen that one? What did you think of it?",
+          "source_session_id": "ultrachat_392866",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/23 (Tue) 14:06] user: What are some good ways to prevent wrinkles around the eyes? I've been noticing that I've been getting more wrinkles there lately, and I want to take care of it before it gets worse.",
+          "source_session_id": "5214491c",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/21 (Sun) 16:40] user: IV. The Horrors Unfold\n, in this chapter i don't want any ghosts and hunted things, or cursed things, suggest different scary ideas",
+          "source_session_id": "sharegpt_I0Wgney_11",
+          "source_turn_index": 11,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/20 (Sat) 10:46] user: I remember that my friends and I got to the park around 7 pm, right when the Scream Fest event started. Does that help?",
+          "source_session_id": "f379d356_1",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/20 (Sat) 02:11] user: Is it possible for a quantum tunneling event to create a new person?",
+          "source_session_id": "sharegpt_d1pTYei_39",
+          "source_turn_index": 5,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/22 (Mon) 05:13] user: Do you know which park has the best wildlife sightings for RVers to observe? I'm hoping to see some bears or moose during my trip.",
+          "source_session_id": "ultrachat_463145",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/28 (Sun) 23:28] user: I did try some other traditional Catalan dishes during my stay in Barcelona. I had a delicious pan con tomate at a local café, and I also tried escalivada at a restaurant near our apartment in the Gothic Quarter. Both were amazing!",
+          "source_session_id": "01a27982_1",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/21 (Sun) 14:06] user: Hmm, those sound interesting, but I wonder if any controversial exhibits have been shown at the Venice Biennale?",
+          "source_session_id": "ultrachat_302261",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/21 (Sun) 03:03] user: I forgot to mention that I recently won a stunning sculpture at an auction for $1,200, and I'm trying to figure out how to best showcase it.",
+          "source_session_id": "275804a8_3",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/28 (Sun) 03:58] user: These are some great recommendations! I've already seen Remember The Titans and Friday Night Lights, but I haven't seen the rest of these. I'll definitely add them to my watchlist.",
+          "source_session_id": "ultrachat_392866",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/27 (Sat) 10:06] user: I think I'll check out the Case Logic brand. I've heard good things about them. By the way, I'm still happy with my current Targus bag, which I got on January 24th.",
+          "source_session_id": "055bde41_2",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/30 (Tue) 18:14] user: It's impressive to know that the Kenyan government is investing in expanding the port and developing new infrastructure. Do you think this will attract more foreign investments and boost the economy even further?",
+          "source_session_id": "ultrachat_138083",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/24 (Wed) 07:56] user: I'm looking for some recommendations on floor lamps, as I think I need to replace the one in the living room. It's been having some issues lately and I've been meaning to get a new one.",
+          "source_session_id": "941bcb91_1",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/28 (Sun) 03:58] user: What are some common themes in movies that depict the struggles of young athletes trying to make it to the top?",
+          "source_session_id": "ultrachat_392866",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/30 (Tue) 03:02] user: I actually visited Fushimi Inari Shrine when I was in Japan a few months ago. I spent two weeks traveling solo around the country and it was an incredible experience. Can you recommend some good places to stay in Kyoto that are budget-friendly?",
+          "source_session_id": "answer_5ff494b9",
+          "source_turn_index": 2,
+          "has_answer": true
+        }
+      ],
+      "questions": [
+        {
+          "id": "19b5f2b3",
+          "query": "How long was I in Japan for?",
+          "answers": [
+            "two weeks"
+          ],
+          "relevant_ids": [
+            "F20"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1faac195",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/30 (Tue) 08:24] user: That looks good. I'm glad we were able to fit in the doctor's appointment and the light exercise routine into my schedule. I'm also happy to see that I can still dedicate 4 hours each day to the project deadline.",
+          "source_session_id": "06fe8cfb_2",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/21 (Sun) 19:19] user: I went to New York City on February 17th for a friend's birthday party, stayed for 3 nights, and took the subway to get around the city.",
+          "source_session_id": "87252d80_5",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/20 (Sat) 19:50] user: That's interesting! Have there been any efforts to preserve pure Tamil language usage despite these influences?",
+          "source_session_id": "ultrachat_283922",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/20 (Sat) 21:14] user: I'm thinking of visiting my sister Emily in Denver soon, and I was wondering if you knew any kid-friendly attractions there?",
+          "source_session_id": "answer_d01949bf",
+          "source_turn_index": 2,
+          "has_answer": true
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/20 (Sat) 14:53] user: These tips seem like common sense. Do people actually fall for these scams?",
+          "source_session_id": "ultrachat_12436",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/22 (Mon) 12:41] assistant: Mahi hamedinah hagedolah ba'olam atah yodea she-hi Yisrael. Yisrael hi hamedinah hagedolah ba'olam. Ken, lo?",
+          "source_session_id": "sharegpt_wgTTTPq_0",
+          "source_turn_index": 11,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/21 (Sun) 02:04] user: I'd like to know more about how to prevent injuries while playing soccer. I've had some issues with hamstring strains and shin splints in the past, and I want to make sure I'm taking the right steps to prevent them from happening again.",
+          "source_session_id": "4fc2cf8c_2",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/22 (Mon) 07:33] user: continue.. Frequently Asked Questions (FAQs)",
+          "source_session_id": "sharegpt_V7ePzVN_1",
+          "source_turn_index": 1,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/21 (Sun) 14:27] user: I'll definitely check out these options. I've been thinking of trying out a few different styles, like Salsa and Zumba, too. Do you think I could find classes or workshops that combine these styles, like a Bollywood-Salsa fusion class?",
+          "source_session_id": "9e7fee16_3",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/27 (Sat) 00:08] user: I think I'll also add a few props to my costume, like a fake magnifying glass and a notebook. Do you think I could use a regular notebook and just decorate it to look like a detective's notebook?",
+          "source_session_id": "bcf6953d_3",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/22 (Mon) 15:52] user: Oh, I was saying that Prokofiev's Romeo and Juliet (and not Tchaikovsky's) sounded quite Tchaikovsky. Tchaikovsky also wrote his own Romeo and Juliet though, but I actually didn't enjoy it so much.",
+          "source_session_id": "sharegpt_koRE8H2_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/22 (Mon) 12:41] user: Didn't he break the Sabbath? If he broke the Sabbath he is not Torah observant.",
+          "source_session_id": "sharegpt_wgTTTPq_0",
+          "source_turn_index": 36,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/22 (Mon) 12:41] assistant: Ani rotzeh lehitpalel bisfat ivrit. Im ani mevin et hakol leshon ivrit, ani rotzeh lehitpalel itcha bisfat ivrit bilti misgabei. Atah yodea leshon ivrit?",
+          "source_session_id": "sharegpt_wgTTTPq_0",
+          "source_turn_index": 1,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/28 (Sun) 09:52] user: I'm looking for some new outdoor spots to shoot with my new wide-angle lens. Any suggestions for nearby state or national parks with interesting landscapes?",
+          "source_session_id": "bce91ca6",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/22 (Mon) 12:41] user: How do you know that he is really the Messiah?",
+          "source_session_id": "sharegpt_wgTTTPq_0",
+          "source_turn_index": 28,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/26 (Fri) 21:10] user: How can we implement the AR part?",
+          "source_session_id": "sharegpt_RqCgT5f_0",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/26 (Fri) 21:10] user: Is it a good idea to integrate Unity with AR Foundation in Flutter?",
+          "source_session_id": "sharegpt_RqCgT5f_0",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/27 (Sat) 00:08] user: I think I'll also add some fake cigarette smoke to my costume, maybe using a vape pen or a fog machine to create a cloud of smoke around me. Do you think that would be a good idea?",
+          "source_session_id": "bcf6953d_3",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/21 (Sun) 19:19] user: I think I flew to Miami on April 12th, so the dates for my Miami trip should be April 12th - 17th.",
+          "source_session_id": "87252d80_5",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/21 (Sun) 19:19] user: Let me start filling in the blanks. For City 2, I think I went to Chicago on February 10th for a business meeting, and I flew with United Airlines.",
+          "source_session_id": "87252d80_5",
+          "source_turn_index": 4,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "1faac195",
+          "query": "Where does my sister Emily live?",
+          "answers": [
+            "Denver"
+          ],
+          "relevant_ids": [
+            "F04"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "36580ce8",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/23 (Tue) 16:25] user: I'd like to prioritize meditation, taking a short walk, and checking emails/social media in my daily routine. I'd also like to allocate time for lunch and a short break in the afternoon to get some fresh air.",
+          "source_session_id": "9f8fc173_3",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/20 (Sat) 05:44] user: Plato's point of view",
+          "source_session_id": "sharegpt_ZbUcxUa_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/30 (Tue) 11:04] user: Create a webinar script and a structure from a product designer to introduce motion and Lottie animations to the audience. This is from a product designer at LottieFiles.",
+          "source_session_id": "sharegpt_vKQRlls_0",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/28 (Sun) 22:34] user: build a skyscraper to increase the population",
+          "source_session_id": "sharegpt_yI9gjck_62",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/30 (Tue) 03:01] assistant: I am ready to assist you in evaluating job applications. Please provide the candidate's answers to the questions and the criterion on which you would like me to evaluate the candidate. I will respond with a numerical score between 0 and 100.",
+          "source_session_id": "sharegpt_cUXo8S0_0",
+          "source_turn_index": 1,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/30 (Tue) 00:08] user: I actually recently had a bad case of bronchitis that I initially thought was just a cold, but it turned out to be a lot more serious. Anyway, back to my question, are there any specific foods or spices that can help boost my immune system?",
+          "source_session_id": "answer_93e1bd22",
+          "source_turn_index": 4,
+          "has_answer": true
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/20 (Sat) 20:21] user: I don't really understand the point of all this injury prevention stuff. Isn't getting injured just a part of being an athlete?",
+          "source_session_id": "ultrachat_318891",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/25 (Thu) 07:58] user: Could you suggest some design solutions for renovating an old factory building into a modern office space while preserving its historical features?",
+          "source_session_id": "ultrachat_521047",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/24 (Wed) 02:29] user: I'm thinking of getting the Ultraboosts in a neutral color like white or gray, that way they'll go with most of my outfits. What do you think?",
+          "source_session_id": "2aee3e70",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/22 (Mon) 09:41] user: I'm glad you provided so many options. I'm actually thinking of planting some peas, I built a small trellis for them recently. Do you have any tips on how to keep them healthy and encourage them to climb up the trellis?",
+          "source_session_id": "ce7fedf8_2",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/23 (Tue) 16:25] user: I think this revised routine looks good. I'm glad I have more time in the morning to get ready and have breakfast. Now, I'm wondering, can you remind me what time I should aim to go to bed to ensure I get 7-8 hours of sleep?",
+          "source_session_id": "9f8fc173_3",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/25 (Thu) 10:47] user: That sounds like an amazing experience! I can't wait to try my hand at cooking some local Thai dishes. Is there anything else you would recommend doing in Khao Yai National Park besides the eco-friendly activities and farm-to-table dining?",
+          "source_session_id": "ultrachat_471245",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/20 (Sat) 05:56] user: I'm thinking of staying in the Hongdae neighborhood in Seoul, since I've heard it's a really vibrant and artsy area. Can you recommend some good restaurants and cafes in the area that serve traditional Korean food or have a unique atmosphere?",
+          "source_session_id": "9325144f",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/26 (Fri) 01:09] user: History from middle ages",
+          "source_session_id": "sharegpt_FpTfRvR_0",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/27 (Sat) 11:55] user: Can you design a presentation on this article in 5 slides?",
+          "source_session_id": "sharegpt_A6FQIZB_0",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/28 (Sun) 23:54] user: Zeph was sent away so as to prevent courtly gossip about his powers resembling Emperor Rius's, and has only returned now because the emperor personally sent for him. It's getting hard for him to maintain his illusions on his own and he needs help.",
+          "source_session_id": "sharegpt_5L3F069_69",
+          "source_turn_index": 11,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/30 (Tue) 08:33] user: Can you try asking me a question?",
+          "source_session_id": "sharegpt_WmCiERa_25",
+          "source_turn_index": 9,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/30 (Tue) 08:33] assistant: Based on the letters in \"Gary Niami,\" it looks like the name could be an anagram of the word \"imaging.\" Is this the word you had in mind?",
+          "source_session_id": "sharegpt_WmCiERa_25",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/26 (Fri) 01:09] user: was the town ever part of ukraine",
+          "source_session_id": "sharegpt_FpTfRvR_0",
+          "source_turn_index": 14,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/28 (Sun) 11:44] user: and if i want to say that i didnt wrote him because im not sure about him",
+          "source_session_id": "sharegpt_KH9Qr5r_0",
+          "source_turn_index": 12,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "36580ce8",
+          "query": "What health issue did I initially think was just a cold?",
+          "answers": [
+            "bronchitis"
+          ],
+          "relevant_ids": [
+            "F06"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3d86fd0a",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/24 (Wed) 09:52] user: Please use LaTex for mathematical terms",
+          "source_session_id": "sharegpt_d7bP5fb_0",
+          "source_turn_index": 16,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/20 (Sat) 19:18] user: PlayPlay value proposition",
+          "source_session_id": "sharegpt_VUBjUDH_0",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/24 (Wed) 09:52] user: Create another variations of question 3",
+          "source_session_id": "sharegpt_d7bP5fb_0",
+          "source_turn_index": 14,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/28 (Sun) 12:33] user: How does this cartoon demonstrate the idea that the War of 1812 is the Second War for Independence?",
+          "source_session_id": "sharegpt_LA4bYER_0",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/20 (Sat) 22:18] user: I'll definitely check out those accommodations and coffee farms. I'm also thinking of visiting the Hilo Farmers Market on Saturday. Do you think it's worth taking a day trip to Hilo from Kailua-Kona?",
+          "source_session_id": "5ca6cd28",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/27 (Sat) 23:18] user: please continue sequence 5 and 6",
+          "source_session_id": "sharegpt_ljriyZ5_34",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/22 (Mon) 14:36] user: It's really interesting to see how the EU is responding to all these challenges. Do you think the EU will continue to be a major player in the global economy?",
+          "source_session_id": "ultrachat_459424",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/22 (Mon) 12:33] user: Compose a speech using the style of philosopher and speaker Alan Watts about the history of bubble gum.",
+          "source_session_id": "sharegpt_fIIZB3W_31",
+          "source_turn_index": 7,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/21 (Sun) 21:02] user: I'm excited to try them out. Which one do you think will work the best?",
+          "source_session_id": "ultrachat_94624",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/22 (Mon) 17:35] user: That's great to hear! I'm particularly interested in the grants available. Can you tell me a bit more about the National Science Foundation Graduate Research Fellowship?",
+          "source_session_id": "ultrachat_394611",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/22 (Mon) 12:33] user: Any poems about nature?",
+          "source_session_id": "sharegpt_fIIZB3W_31",
+          "source_turn_index": 3,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/24 (Wed) 09:52] assistant: Sure, I can do that. Please let me know the level of difficulty and the specific topic or concepts you would like me to include in the questions.",
+          "source_session_id": "sharegpt_d7bP5fb_0",
+          "source_turn_index": 1,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/25 (Thu) 15:39] user: Thanks for the suggestions, I'll definitely try to be more conscious about my consumption and support sustainable practices. Do you have any specific companies or products you'd recommend for me to look into?",
+          "source_session_id": "ultrachat_96218",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/21 (Sun) 16:24] user: I'll start filling out the template. Under \"How We Met\", I'll include the location where I met them. For Sophia, it was a coffee shop in the city.",
+          "source_session_id": "answer_19c24c11",
+          "source_turn_index": 2,
+          "has_answer": true
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/24 (Wed) 23:34] user: Can we try a few quotes that focus less on frustration and more on sadness or wistfulness, while still showing genuine respect to the kind master?",
+          "source_session_id": "sharegpt_KD0kssi_33",
+          "source_turn_index": 7,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/22 (Mon) 17:35] user: I feel much more confident about applying for the National Science Foundation Graduate Research Fellowship Program now. Do you have any advice on how to balance research with coursework and other commitments as a graduate student?",
+          "source_session_id": "ultrachat_394611",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/21 (Sun) 19:38] user: Could you discuss any controversies or backlash that the New York Times Magazine has faced in the past, and how they responded to it?",
+          "source_session_id": "ultrachat_263518",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/22 (Mon) 13:45] user: Interesting, I never knew the size of gloves could make such a big difference in the sport of boxing.",
+          "source_session_id": "ultrachat_357116",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/27 (Sat) 09:32] user: I'm struggling to get the paint job right on my F-16 model, and I'm hoping you can help me with some advice on matching colors. By the way, I've been working on this project since February 10th, and I'm determined to get it just right.",
+          "source_session_id": "8c9bc932_1",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/22 (Mon) 14:36] user: I see, those are definitely important factors to consider. Have there been any recent developments or changes in the EU that are worth noting?",
+          "source_session_id": "ultrachat_459424",
+          "source_turn_index": 4,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "3d86fd0a",
+          "query": "Where did I meet Sophia?",
+          "answers": [
+            "a coffee shop in the city"
+          ],
+          "relevant_ids": [
+            "F14"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "545bd2b5",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/23 (Tue) 00:18] user: What is the impact of artificial intelligence on cybersecurity, both in terms of threats and defenses?",
+          "source_session_id": "ultrachat_10653",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/20 (Sat) 23:47] user: I'm also planning to participate in a charity badminton tournament on April 15th, and I was wondering if you could recommend some exercises that can help improve my badminton game, specifically my speed and agility around the court.",
+          "source_session_id": "700c16e2_1",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/23 (Tue) 00:18] user: With so many people working from home now, are there any extra security measures individuals should take to protect their devices and data?",
+          "source_session_id": "ultrachat_10653",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/20 (Sat) 02:16] user: I've been researching different options and think I'll go with a Continental Gatorskin, which has good reviews for durability and puncture resistance.",
+          "source_session_id": "cc021f81_2",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/21 (Sun) 01:39] user: I've heard of Good Omens, but I haven't read it yet. How does it compare to Douglas Adams' style in terms of humor and wit?",
+          "source_session_id": "32fbfe26_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/25 (Thu) 12:02] user: I think Zoom might be a good option. Can you show me how to schedule a recurring meeting on Zoom?",
+          "source_session_id": "1351505a_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/25 (Thu) 07:47] user: I'd be happy to help you with that!",
+          "source_session_id": "74932466_3",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/30 (Tue) 06:07] user: tools that can represent graphs and information into content",
+          "source_session_id": "sharegpt_nuYnG53_0",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/27 (Sat) 04:20] user: I've been averaging around 2 hours of screen time on Instagram per day for the past two weeks, which is way too much. Do you think setting a time limit of 30 minutes per day would be a good starting point for me?",
+          "source_session_id": "answer_47ffab4c",
+          "source_turn_index": 4,
+          "has_answer": true
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/25 (Thu) 07:47] user: Can you recommend some guitar tutorials or online resources that can help me improve my guitar playing, especially for indie rock and acoustic styles?",
+          "source_session_id": "74932466_3",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/24 (Wed) 21:39] user: I think I'll mention it briefly, but focus on my current goals and what I'm looking for in a group. Thanks for the advice! Do you have any suggestions on how to phrase my initial message to the groups I'm interested in?",
+          "source_session_id": "cf8e352f_1",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/21 (Sun) 05:47] user: I just read about the negative impacts of tourism on popular destinations. It seems like no matter what I do, my travels will have some negative effects. Why bother trying to make my trips sustainable?",
+          "source_session_id": "ultrachat_38246",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/20 (Sat) 05:49] user: I don't really like any of those suggestions. Are there any extreme sports that I can try in St Albans? Something like bungee jumping or skydiving?",
+          "source_session_id": "ultrachat_317048",
+          "source_turn_index": 12,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/21 (Sun) 19:48] user: That's really cool! What were some of the biggest scientific discoveries and advancements that the American Philosophical Society contributed to?",
+          "source_session_id": "ultrachat_517182",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/26 (Fri) 04:24] user: I'm looking for some recommendations on throw pillows that would match my new coffee table. What style or color would you suggest?",
+          "source_session_id": "b1e06c1a",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/22 (Mon) 13:35] user: Yeah, I agree. Harry Potter and the other characters feel like real people, with complex motivations and struggles that make them so relatable. That's one of the things that makes the series so special!",
+          "source_session_id": "ultrachat_257446",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/26 (Fri) 04:24] user: I'm also thinking of getting a new lamp for the corner of the room. Do you have any suggestions for that as well?",
+          "source_session_id": "b1e06c1a",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/26 (Fri) 16:51] user: I'll make sure to check my passport and apply for a new one if necessary. Thanks for the information! I was also wondering, are there any specific vaccinations or medications I need to take before traveling to India?",
+          "source_session_id": "a410bab2_3",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/21 (Sun) 01:39] user: I'd like to ask about the availability of these audiobooks on Scribd. Are they available on the platform, and if so, can I access them immediately?",
+          "source_session_id": "32fbfe26_1",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/28 (Sun) 11:02] user: Oh, those sound like great combinations. I'll have to try the grapefruit and rosemary one, that sounds unique.",
+          "source_session_id": "ultrachat_299238",
+          "source_turn_index": 10,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "545bd2b5",
+          "query": "How much screen time have I been averaging on Instagram per day?",
+          "answers": [
+            "2 hours"
+          ],
+          "relevant_ids": [
+            "F09"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "58bf7951",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/24 (Wed) 12:26] user: I see, it's really interesting how an author's personal beliefs can shape their work in such a profound way. Can you recommend any other books that were heavily influenced by the author's beliefs and values?",
+          "source_session_id": "ultrachat_221066",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/20 (Sat) 10:44] user: Can you explain how Toulouse's aerospace industry has evolved over the past decade and its impact on the city's economy?",
+          "source_session_id": "ultrachat_132201",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/30 (Tue) 21:03] user: I'm looking for some book recommendations. I've been reading \"The Silent Patient\" for about 2 weeks now and I'm really enjoying the psychological thriller genre. Can you suggest some similar books or authors I might like?",
+          "source_session_id": "987b36db_2",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/24 (Wed) 13:09] user: Can I ask, do they have any outlets available for charging my laptop in case my battery runs low?",
+          "source_session_id": "1587bd78_1",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/26 (Fri) 00:11] user: Yeah, I totally get it. It's just hard to say goodbye to characters and storylines that you've invested so much time in. But I'm glad there are still new shows to discover on The CW! Have you seen any good ones lately?",
+          "source_session_id": "ultrachat_155546",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/26 (Fri) 12:02] user: What level on the CEFR would you place this student",
+          "source_session_id": "sharegpt_53zErgw_0",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/20 (Sat) 10:44] user: I hope Toulouse's aerospace industry can set a positive example for other industries to prioritize innovation and sustainability. The future of our planet depends on it!",
+          "source_session_id": "ultrachat_132201",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/29 (Mon) 03:13] user: Yeah, I think it's important for journalism to shift from sensationalism to deep and thoughtful reporting about religion and spirituality. Doing so can help to reduce misunderstandings and prejudices about these vital topics.",
+          "source_session_id": "ultrachat_520205",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/24 (Wed) 10:57] user: I'm thinking about the Sigma 24mm f/2.8 DN Contemporary. Can you tell me more about its build quality and autofocus performance?",
+          "source_session_id": "4d1b9b0d_2",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/28 (Sun) 02:18] user: what is his clinical background?",
+          "source_session_id": "sharegpt_PancT1q_0",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/26 (Fri) 07:31] user: I was thinking of getting Emily to audition for a role, I'll definitely encourage her to give it a shot. The play I attended was actually a production of The Glass Menagerie, have you heard of it?",
+          "source_session_id": "answer_355c48bb",
+          "source_turn_index": 4,
+          "has_answer": true
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/26 (Fri) 00:11] user: What was the reaction from fans of The WB and UPN when the merger was announced?",
+          "source_session_id": "ultrachat_155546",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/30 (Tue) 20:40] user: ANS was response for \"1983 Church Street bombing in Pretoria\" that make them terrorist organization because civilian was died is that correct. say NO or YES without full answer",
+          "source_session_id": "sharegpt_OFiElWf_37",
+          "source_turn_index": 27,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/26 (Fri) 07:31] user: I'm looking for some recommendations for local Italian restaurants. I recently tried the new place downtown and it was pretty good, but I'd love to explore other options.",
+          "source_session_id": "answer_355c48bb",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/25 (Thu) 20:58] user: I'm planning to reduce my caffeine intake and was wondering if I can use Yerba Mate as a substitute for my afternoon coffee. Would it be a good idea to brew a cup of Yerba Mate and then add a small amount of coffee to it to wean myself off of coffee?",
+          "source_session_id": "e40d733b_3",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/28 (Sun) 18:16] user: Is it possible that she was forced to marry Jaramillo?",
+          "source_session_id": "sharegpt_RkFlOeC_19",
+          "source_turn_index": 3,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/30 (Tue) 20:40] user: how many kids and women was killed by ANC",
+          "source_session_id": "sharegpt_OFiElWf_37",
+          "source_turn_index": 3,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/22 (Mon) 06:46] user: I can't wait to see Rashod Bateman in action this season. I think he's going to be a great addition to the Ravens' offense!",
+          "source_session_id": "ultrachat_283755",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/27 (Sat) 19:41] user: Wow, that's amazing. It's great to know that the National Guard is always ready to help during emergencies and natural disasters. Do they work closely with other agencies like FEMA or Red Cross?",
+          "source_session_id": "ultrachat_366731",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/30 (Tue) 20:40] user: you say about \"government and military targets\" is Church Street bombing a military target",
+          "source_session_id": "sharegpt_OFiElWf_37",
+          "source_turn_index": 5,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "58bf7951",
+          "query": "What play did I attend at the local community theater?",
+          "answers": [
+            "The Glass Menagerie"
+          ],
+          "relevant_ids": [
+            "F11"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "60d45044",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/25 (Thu) 06:56] user: Cómo responder al teléfono en inglés",
+          "source_session_id": "sharegpt_yyStjJb_103",
+          "source_turn_index": 27,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/22 (Mon) 00:10] user: That's really helpful, thanks for the info. I'm interested in trying the 16:8 method, but I was wondering if you could provide some tips on how to stay focused and productive during my fasting periods.",
+          "source_session_id": "af4d4ecd_2",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/22 (Mon) 11:24] assistant: Sure! Did you know that the world's largest snowflake on record measured 15 inches wide and 8 inches thick? It fell in Montana in 1887.",
+          "source_session_id": "ultrachat_181742",
+          "source_turn_index": 3,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/23 (Tue) 22:08] user: Alright, can we make the characters more normal people? I want these characters to have simple occupations and relatively simple tasks as opposed to world ending disaster for the party to help out with",
+          "source_session_id": "sharegpt_gzocj9T_0",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/22 (Mon) 03:06] user: Please give me good argument that Russia should withdraw military troops from Ukraine and seek for a peace agreement",
+          "source_session_id": "sharegpt_ClWRKRv_0",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/28 (Sun) 02:27] assistant: Filon's relationship with Lisa is not specified in the story that you've provided. Could you please provide more context or information about their relationship?",
+          "source_session_id": "sharegpt_hcaZN94_507",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/23 (Tue) 22:08] user: Change the name to be more interesting",
+          "source_session_id": "sharegpt_gzocj9T_0",
+          "source_turn_index": 12,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/29 (Mon) 06:48] user: Today, many people do not know their neighbors.\n\nWhy is this?\n\nWhat can be done about this?",
+          "source_session_id": "sharegpt_SxpAlwx_50",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/24 (Wed) 13:51] user: What is the significance of the setting's historical context in the film's story?",
+          "source_session_id": "ultrachat_532690",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/25 (Thu) 23:20] user: Meh, these are all too mainstream. Do you have anything that's truly death-defying and will make my friends jealous?",
+          "source_session_id": "ultrachat_384646",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/26 (Fri) 09:16] user: list all of the miracles that Jesus performed as recorded in the Bible book of Mark, ordered by chapter sequence",
+          "source_session_id": "sharegpt_cmyFRwn_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/27 (Sat) 00:47] user: I was thinking of making some Japanese-style dishes with my favorite Japanese short-grain rice. Do you have any simple recipes that pair well with it? Maybe something with grilled chicken or vegetables?",
+          "source_session_id": "answer_9cddca88",
+          "source_turn_index": 4,
+          "has_answer": true
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/28 (Sun) 02:27] user: I will tell you the story chapter by chapter, okay?",
+          "source_session_id": "sharegpt_hcaZN94_507",
+          "source_turn_index": 13,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/20 (Sat) 23:47] user: So, what's the typical cost of a home inspection, and are there any additional costs we should be aware of?",
+          "source_session_id": "4ebf9095_1",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/26 (Fri) 21:54] user: That's good to know. Do you have any tips for finding affordable housing in Leiden?",
+          "source_session_id": "ultrachat_518863",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/24 (Wed) 00:47] user: I'm thinking of doing a Q&A session on TikTok, where I answer questions about my art process, inspiration, and more. Do you think this is a good idea, and if so, how can I promote it to get more viewers?",
+          "source_session_id": "0c0f2449_1",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/28 (Sun) 02:27] user: Describe Filon's relationship with Jean (you don't have to write in 5 listed points anymore).",
+          "source_session_id": "sharegpt_hcaZN94_507",
+          "source_turn_index": 5,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/24 (Wed) 00:03] assistant: You're welcome! I'm glad I could help. If you have any more questions, feel free to ask.",
+          "source_session_id": "sharegpt_uDSaCgI_0",
+          "source_turn_index": 9,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/26 (Fri) 09:16] user: Create a comprehensive list of the miracles performed by Jesus as described in the four gospel Bible books. For each miracle, indicate where the event is described in each gospel Bible books",
+          "source_session_id": "sharegpt_cmyFRwn_0",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/29 (Mon) 11:49] user: I'm looking for some book recommendations. I recently read \"The Lost City\" by Sarah Lee and loved it. Do you have any suggestions for similar books or authors?",
+          "source_session_id": "fec059c5",
+          "source_turn_index": 0,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "60d45044",
+          "query": "What type of rice is my favorite?",
+          "answers": [
+            "Japanese short-grain rice"
+          ],
+          "relevant_ids": [
+            "F12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "66f24dbb",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/22 (Mon) 08:24] user: I think I'll definitely look into attending the Pushkar Camel Fair. The idea of experiencing local music, dance, and culture while surrounded by camels sounds amazing!",
+          "source_session_id": "ultrachat_423195",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/20 (Sat) 16:05] user: I'm trying to organize my contacts from the conference I attended last Thursday. Can you help me find a template for a spreadsheet to keep track of my networking contacts?",
+          "source_session_id": "2d90fb95",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/29 (Mon) 16:28] user: How has the city worked with its residents or local businesses to encourage more sustainable practices?",
+          "source_session_id": "ultrachat_267957",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/28 (Sun) 01:27] user: I'm interested in exploring more indie games with strong storytelling and character development. Are there any games that you would recommend that have a similar atmosphere and tone to What Remains of Edith Finch?",
+          "source_session_id": "8d015d9d_4",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/24 (Wed) 04:49] user: I got her a pair of silver hoop earrings with a small pearl in the center.",
+          "source_session_id": "answer_fea2e4d3",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/26 (Fri) 09:26] user: I'll definitely do some more research and find the best fit for me. Any tips on how to narrow down my options?",
+          "source_session_id": "ultrachat_168731",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/26 (Fri) 20:42] user: I'm really interested in checking out \"New Girl\" and \"Happy Endings\" since they seem to have a similar feel to \"Friends\". Can you tell me more about \"New Girl\"? How many seasons are there, and what's the general plot of the show?",
+          "source_session_id": "ca3a4e4f_1",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/23 (Tue) 01:12] user: That's encouraging to hear that there are such initiatives in place for marginalized populations. Are there any plans to increase mental health education and awareness among the general population in India?",
+          "source_session_id": "ultrachat_488573",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/27 (Sat) 08:58] user: I'm looking for some advice on organizing my space. I've been decluttering my closet and reorganizing, but now I'm stuck on my desk. I've also been meaning to tackle the clutter on my desk, which has been accumulating for months.",
+          "source_session_id": "3fa35683_7",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/28 (Sun) 01:27] user: I'm more interested in games with a stronger focus on storytelling and character development. Can you tell me more about What Remains of Edith Finch and Firewatch? How do they compare to Celeste in terms of storytelling and emotional investment?",
+          "source_session_id": "8d015d9d_4",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/26 (Fri) 11:25] user: Can you help me with organizing my daily vitamins and supplements? I have a multivitamin, Omega-3 fish oil, and a probiotic that I take every morning with breakfast. I'd like to create a routine to ensure I don't forget to take them.",
+          "source_session_id": "7732b1cc",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/22 (Mon) 11:55] user: Can you provide more information on what features of the University of Birmingham's clock tower contribute to its architectural style?",
+          "source_session_id": "ultrachat_202740",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/24 (Wed) 05:11] user: How I integrate this given Frontend with this given Backend code on WordPress Website Page.",
+          "source_session_id": "sharegpt_EvgMYt3_8",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/28 (Sun) 17:58] user: What is thematic analysis",
+          "source_session_id": "sharegpt_jf3W889_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/27 (Sat) 23:55] user: That's really helpful, thanks. I'm actually thinking of trying out the volunteer opportunity at the local animal shelter. Do you think that's a good way to meet like-minded people?",
+          "source_session_id": "9ca3534f_2",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/24 (Wed) 04:49] assistant: Waiting for your response...",
+          "source_session_id": "answer_fea2e4d3",
+          "source_turn_index": 9,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/29 (Mon) 23:28] user: Now you act as the best expert designer in the world. Write 20 list of most popular comics illustration styles names. Sort it from the most popular to the lest popular. Write an answer detail list!",
+          "source_session_id": "sharegpt_GvbQ56N_0",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/24 (Wed) 04:49] user: For my sister's birthday, I got her a yellow dress and a pair of earrings to match.",
+          "source_session_id": "answer_fea2e4d3",
+          "source_turn_index": 4,
+          "has_answer": true
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/27 (Sat) 11:36] user: Traditional financial institutions:",
+          "source_session_id": "sharegpt_83fkMsQ_0",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/21 (Sun) 05:51] user: how to automatically mount a nfs share on boot without blocking the boot process on debian",
+          "source_session_id": "sharegpt_XfeER1N_0",
+          "source_turn_index": 0,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "66f24dbb",
+          "query": "What did I buy for my sister's birthday gift?",
+          "answers": [
+            "a yellow dress"
+          ],
+          "relevant_ids": [
+            "F18"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6ade9755",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/22 (Mon) 18:33] user: Do you have any general information or resources on popular causes that people can support?",
+          "source_session_id": "ultrachat_302115",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/26 (Fri) 14:44] user: I see. But why focus solely on gender diversity? Why not also include racial and ethnic diversity?",
+          "source_session_id": "ultrachat_59767",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/20 (Sat) 13:08] user: In what ways might a lack of attention to data quality hinder the use of advanced analytics techniques such as machine learning?",
+          "source_session_id": "ultrachat_105990",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/22 (Mon) 12:51] user: I'm thinking of tracking my progress and monitoring my heart rate during exercise. Do you have any suggestions on how to do this?",
+          "source_session_id": "de5634fc_2",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/24 (Wed) 16:28] user: give me some sample answers to theses interview questions",
+          "source_session_id": "sharegpt_2o1zvbh_11",
+          "source_turn_index": 3,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/23 (Tue) 11:13] user: I'm thinking of adding some chopped fresh herbs to the citrus vinaigrette to give it an extra boost of flavor. I recently had a great vegan quinoa salad at a café that was made with quinoa, and it had a lovely fresh flavor from the herbs.",
+          "source_session_id": "bd2b1034_2",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/20 (Sat) 06:35] user: Can you provide information on the best time of year to go on a river cruise in Europe?",
+          "source_session_id": "ultrachat_84599",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/23 (Tue) 20:41] user: Can you recommend some good kid-friendly podcasts or audiobooks that my niece might enjoy during the car ride?",
+          "source_session_id": "a200b713_4",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/20 (Sat) 19:31] user: Which one do you think I should prioritize during my trip to Pontus?",
+          "source_session_id": "ultrachat_270925",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/20 (Sat) 13:08] user: Data cleaning seems like a hassle. Can't we just hire more data scientists to clean the data for us?",
+          "source_session_id": "ultrachat_105990",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/22 (Mon) 03:38] user: I've been sticking to my usual almond milk and oat flour pancakes on Sundays, topped with fresh berries and maple syrup.",
+          "source_session_id": "73c6fe9e_2",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/30 (Tue) 15:30] user: I've actually been using Down Dog for my home practice and I really like it. It's been super helpful for me, especially on days when I can't make it to Serenity Yoga.",
+          "source_session_id": "answer_9398da02",
+          "source_turn_index": 4,
+          "has_answer": true
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/24 (Wed) 16:18] user: how to show desktop quickly",
+          "source_session_id": "sharegpt_BghMUHh_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/20 (Sat) 06:35] user: Can you tell me more about the most popular river cruise destinations in Europe?",
+          "source_session_id": "ultrachat_84599",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/22 (Mon) 12:51] user: I'm glad you provided some strength training exercises I can do at home. I'm thinking of incorporating them into my routine, possibly on the days I'm not using my exercise bike.",
+          "source_session_id": "de5634fc_2",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/20 (Sat) 22:48] user: It's crazy to think about how much personal information we share online. It's no wonder data breaches are becoming more common.",
+          "source_session_id": "ultrachat_565482",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/20 (Sat) 14:22] user: What's the nutrition info for the homemade granola bar recipe? Can you also suggest some variations for different flavors?",
+          "source_session_id": "f2209dd0",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/20 (Sat) 19:31] user: I think I might go for the Sumela Monastery since it sounds like a good balance of adventure and relaxation. Do you have any recommendations for the best time of year to visit?",
+          "source_session_id": "ultrachat_270925",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/23 (Tue) 03:48] user: I'm currently working on a project that involves data analysis, and I need to create some visualizations to present to my team. Can you recommend some data visualization tools that are easy to use and integrate well with Python and R?",
+          "source_session_id": "5d049e3c",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/28 (Sun) 16:40] user: I'm also thinking of visiting the Space Needle, do you know if there's a good time to visit to avoid the crowds, and are there any special deals or packages available?",
+          "source_session_id": "ec8fa65d_2",
+          "source_turn_index": 6,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "6ade9755",
+          "query": "Where do I take yoga classes?",
+          "answers": [
+            "Serenity Yoga"
+          ],
+          "relevant_ids": [
+            "F12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "75499fd8",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/22 (Mon) 06:17] user: That is great thank you. Can we add a function to this script that makes a list of all folders from the parent source directory that do not immediately contain a folder named '..\\CC\\' and then save it as a text file with today's date?",
+          "source_session_id": "sharegpt_KOaA4jf_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/25 (Thu) 08:17] user: Wow, these examples are really impressive! Do you think these changes will become the norm in the industry or just remain isolated examples?",
+          "source_session_id": "ultrachat_466236",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/25 (Thu) 17:02] user: How about something more concise and energetic?",
+          "source_session_id": "sharegpt_gUEZUtS_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/22 (Mon) 19:33] user: I'm thinking of taking a walk around the neighborhood this weekend to capture some fall foliage with my camera.",
+          "source_session_id": "533372c8_3",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/30 (Tue) 13:21] user: fhlt has landing and maneuver cameras all ove rit",
+          "source_session_id": "sharegpt_v11Tpg9_195",
+          "source_turn_index": 5,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/20 (Sat) 18:43] assistant: The length of that passage is 203 words.",
+          "source_session_id": "sharegpt_XlNs8Lz_111",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/26 (Fri) 04:49] user: What about the maintenance and filter replacement costs for these eco-friendly air purifiers? Can you provide some information on that?",
+          "source_session_id": "410ec447",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/24 (Wed) 23:19] user: I want to explore the idea of the smell of old books reminding me of cozy reading nooks and getting lost in a good story. Can you give me some more ideas on how to develop this idea and what kind of memories I can associate with it?",
+          "source_session_id": "3b028282",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/29 (Mon) 03:15] user: I'll definitely call the store beforehand to confirm they have the Mustang II in stock. By the way, do you know if they also carry drum accessories? I need to get some new drumheads for my set.",
+          "source_session_id": "aea71da3_2",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/20 (Sat) 01:22] user: I'm thinking of growing some herbs like basil, mint, and parsley in my garden as well. Do you think these herbs will attract beneficial insects like ladybugs and lacewings, or are they more of a human-food-only crop?",
+          "source_session_id": "85b50955_6",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/26 (Fri) 06:13] user: Are there any limitations or downsides to playing games with friends on different platforms?",
+          "source_session_id": "ultrachat_114711",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/26 (Fri) 04:49] user: Can you suggest any eco-friendly air purifier brands that offer a trade-in program or take-back service for old units, like Dyson?",
+          "source_session_id": "410ec447",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/24 (Wed) 20:05] user: I'm thinking of booking a flight from Chicago to Los Angeles, and I'd like to know if United Airlines offers any in-flight meal options that are more exciting than the usual chicken sandwich.",
+          "source_session_id": "ddf0f116_3",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/30 (Tue) 03:38] user: I've been thinking about adding some more decorations to the tank, like rocks or driftwood, to give the fish more hiding places. Do you think this would affect the water circulation or cause any other issues?",
+          "source_session_id": "7d054e90_2",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/30 (Tue) 05:24] user: Tell me about gods in Pyrrhos's world.",
+          "source_session_id": "sharegpt_7jNclxT_13",
+          "source_turn_index": 11,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/25 (Thu) 08:17] user: I'm going to check those out and try to incorporate more sustainable practices into my home. Do you have any other tips for reducing my carbon footprint in everyday life?",
+          "source_session_id": "ultrachat_466236",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/25 (Thu) 03:02] user: That's really interesting! Can you give me an example of a dialect that has evolved over time?",
+          "source_session_id": "ultrachat_428593",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/25 (Thu) 08:17] user: I think those are all great suggestions, especially choosing sustainable materials and supporting government policies. Do you know of any resources where I can learn more about sustainable building practices?",
+          "source_session_id": "ultrachat_466236",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/25 (Thu) 23:07] user: I'm thinking of getting Max a new collar with a nice name tag. Do you have any recommendations for a good collar brand or type that would suit a Golden Retriever like Max?",
+          "source_session_id": "answer_723bf11f",
+          "source_turn_index": 8,
+          "has_answer": true
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/22 (Mon) 07:51] user: How has the rise of populist movements in Latin America impacted the region's democracy?",
+          "source_session_id": "ultrachat_61010",
+          "source_turn_index": 4,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "75499fd8",
+          "query": "What breed is my dog?",
+          "answers": [
+            "Golden Retriever"
+          ],
+          "relevant_ids": [
+            "F19"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "86f00804",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/24 (Wed) 05:43] user: I'm still a bit worried about my ankle, though. Is it okay to perform with a minor ankle sprain, or should I prioritize my recovery and wait until it's fully healed?",
+          "source_session_id": "b38766c1_1",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/29 (Mon) 20:07] user: I'm looking for some advice on how to properly care for my new abstract painting. What are some tips for preserving its condition and maintaining its appearance over time?",
+          "source_session_id": "d0091194",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/29 (Mon) 12:43] user: If the children looked in the river and caught their reflections what would they see?",
+          "source_session_id": "sharegpt_keHFRpf_0",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/25 (Thu) 09:46] user: write a production description for a pickleball paddle with a black and white check pattern",
+          "source_session_id": "sharegpt_FvO2l0O_0",
+          "source_turn_index": 14,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/23 (Tue) 11:27] user: I'm trying to figure out how to fit more reading time into my daily routine. Do you have any tips on how to prioritize reading when life gets busy? By the way, I'm currently devouring \"The Seven Husbands of Evelyn Hugo\" and it's hard to put down!",
+          "source_session_id": "answer_96b8c9ee",
+          "source_turn_index": 0,
+          "has_answer": true
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/25 (Thu) 09:46] user: write a production description for a retro Golden Hour pickleball paddle",
+          "source_session_id": "sharegpt_FvO2l0O_0",
+          "source_turn_index": 22,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/20 (Sat) 18:52] user: Too traditional words or proper nouns sound awkward to Koreans, so please speak your everyday language.\n \n \n \n 지금 번역하기",
+          "source_session_id": "sharegpt_efPCiqy_127",
+          "source_turn_index": 1,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/20 (Sat) 18:52] user: I love you and thank you, you are truly my treasure\n \n \n \n 지금 번역하기",
+          "source_session_id": "sharegpt_efPCiqy_127",
+          "source_turn_index": 29,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/29 (Mon) 18:11] user: Would you happen to have any specific stretching routines or videos to recommend that are tailored for martial arts training?",
+          "source_session_id": "ultrachat_385235",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/30 (Tue) 09:14] user: Could you please do more like 5?",
+          "source_session_id": "sharegpt_E0YL5SX_39",
+          "source_turn_index": 19,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/30 (Tue) 08:31] user: I'm thinking of adding a few decorative elements to the shelves or side tables near the new area rug, which features a Moroccan-inspired pattern with shades of blue and gray.",
+          "source_session_id": "cf9010c2_1",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/29 (Mon) 18:11] user: How can I improve my flexibility for martial arts?",
+          "source_session_id": "ultrachat_385235",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/25 (Thu) 18:35] user: How can we ensure that our protective measures for endangered plant species are sustainable in the long term?",
+          "source_session_id": "ultrachat_375466",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/25 (Thu) 09:46] user: write a production description for a pickleball paddle with a vintage OG striped design",
+          "source_session_id": "sharegpt_FvO2l0O_0",
+          "source_turn_index": 18,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/20 (Sat) 18:52] assistant: That's a great option, incorporating the word \"soul\" adds a deeper philosophical and spiritual meaning to the name.",
+          "source_session_id": "sharegpt_efPCiqy_127",
+          "source_turn_index": 12,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/26 (Fri) 21:13] user: Can you give me some suggestions for sides to serve with my burger? I want something that complements the flavors and doesn't overpower the dish.",
+          "source_session_id": "07e6a3bd_2",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/25 (Thu) 04:23] user: How does the Tripitaka influence Theravada Buddhist worship and practice?",
+          "source_session_id": "ultrachat_540666",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/24 (Wed) 17:56] user: I'm also thinking about setting up a little studio in my garage and starting to work on some projects. I've got a bunch of canvases, paints, markers, and other materials that I've accumulated over the years.",
+          "source_session_id": "e4a1b565_2",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/29 (Mon) 03:41] user: Provide an example of how the smart contract could protect user identity and defend against reverse triangulation.",
+          "source_session_id": "sharegpt_kdQX0FT_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/29 (Mon) 20:07] user: I'd also like to know more about the art market trends for abstract art, specifically in my local area. Are there any notable galleries or art fairs that feature abstract art?",
+          "source_session_id": "d0091194",
+          "source_turn_index": 4,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "86f00804",
+          "query": "What book am I currently reading?",
+          "answers": [
+            "The Seven Husbands of Evelyn Hugo"
+          ],
+          "relevant_ids": [
+            "F05"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8a137a7f",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/25 (Thu) 07:04] user: Can you explain the historical significance of the Magna Carta in relation to English law and governance?",
+          "source_session_id": "ultrachat_382344",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/20 (Sat) 10:05] user: I think it's important for non-Indigenous people to also learn about and respect traditional Indigenous practices and knowledge. How can we encourage greater recognition and understanding among the general public?",
+          "source_session_id": "ultrachat_348812",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/27 (Sat) 09:30] user: I'm not sure if I've been doing it correctly, especially with the hanging indent and double spacing. Can you give me an example of what the reference list should look like?",
+          "source_session_id": "e7cc9c25_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/27 (Sat) 23:15] user: So, can moderators just ban anyone they disagree with or don't like? Isn't that censoring free speech?",
+          "source_session_id": "ultrachat_44939",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/28 (Sun) 22:01] user: I've been playing a lot of video games lately, and I'm actually thinking of upgrading my PC to play more demanding games. Do you have any recommendations on what specs I should look for in a new PC?",
+          "source_session_id": "65ca99fb_1",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/30 (Tue) 05:17] user: I'm looking for classes that are more focused on hand-building techniques, do you know of any studios that specialize in that?",
+          "source_session_id": "683fdb17",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/20 (Sat) 10:05] user: What role do traditional Indigenous practices and knowledge play in today's society, and how can they be protected and promoted?",
+          "source_session_id": "ultrachat_348812",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/26 (Fri) 11:17] user: Can low-impact endurance exercises, such as cycling or swimming, be used for those with joint injuries who cannot run?",
+          "source_session_id": "ultrachat_59795",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/22 (Mon) 10:10] user: I like those ideas, especially the layered lighting concept. I think I'll try placing a floor lamp behind the sofa. Can you suggest some good floor lamps with a warm tone that would work well with the Philips LED bulb I have in my bedside lamp?",
+          "source_session_id": "answer_15d63a22",
+          "source_turn_index": 2,
+          "has_answer": true
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/28 (Sun) 01:22] user: I think it's great that Japan is considering innovative solutions to tackle its challenges. Do you think other countries can learn from Japan's approach?",
+          "source_session_id": "ultrachat_199631",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/27 (Sat) 19:38] user: Can you not understand simple questions? I asked for a straightforward answer and you're just giving me excuses! This is ridiculous.",
+          "source_session_id": "ultrachat_186116",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/30 (Tue) 05:17] user: I'm looking for some new pottery classes in my area, do you know of any good studios or websites that can help me find them?",
+          "source_session_id": "683fdb17",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/24 (Wed) 15:15] user: B is the correct answer not A",
+          "source_session_id": "sharegpt_d9GL0oF_0",
+          "source_turn_index": 14,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/25 (Thu) 08:31] user: I'm allergic to cheese",
+          "source_session_id": "sharegpt_sj5ZvVB_0",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/26 (Fri) 11:17] user: Can I still get the same results from low-impact exercises as I would from running?",
+          "source_session_id": "ultrachat_59795",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/28 (Sun) 01:11] user: What are common criticisms of this view?",
+          "source_session_id": "sharegpt_W35IQm3_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/28 (Sun) 02:58] user: Can you also add a column to track my earnings from cashback apps like Ibotta and Fetch Rewards?",
+          "source_session_id": "e229be9e_1",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/26 (Fri) 06:05] user: I've been thinking of getting a fitness tracker to monitor my progress better. Can you recommend some good options that can track my heart rate, distance, and calories burned during exercise?",
+          "source_session_id": "3fdd233f",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/22 (Mon) 03:17] user: That's interesting. I wonder if there are any opportunities for tech-related jobs in Changchun right now.",
+          "source_session_id": "ultrachat_155721",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/20 (Sat) 22:13] user: Yeah, I agree. It seems like streaming platforms are really dominating the market. Do you think Discovery might start their own streaming service to keep up?",
+          "source_session_id": "ultrachat_338301",
+          "source_turn_index": 4,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "8a137a7f",
+          "query": "What type of bulb did I replace in my bedside lamp?",
+          "answers": [
+            "Philips LED bulb"
+          ],
+          "relevant_ids": [
+            "F09"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8ebdbe50",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/21 (Sun) 18:35] user: I think I might need to get my GPS updated again, can you tell me how I can do that or what I need to prepare before updating?",
+          "source_session_id": "01e806f0_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/21 (Sun) 18:11] user: I want to have a successful online course. I can teach Android open source topics. What goes into making such a course ?",
+          "source_session_id": "sharegpt_c0PdB3l_0",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/25 (Thu) 23:30] assistant: Acknowledged, I have understood the persona and scenario and will consider them in our future conversation.",
+          "source_session_id": "sharegpt_rKUGa1d_0",
+          "source_turn_index": 3,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/22 (Mon) 22:06] user: I forgot to mention the cost of the laptop. It was $1,200.",
+          "source_session_id": "12cff183_1",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/27 (Sat) 10:55] user: I'm actually looking to try out some new vegetarian protein sources, do you have any suggestions on how to cook tofu, tempeh, or seitan? I bought a bunch of them at Whole Foods last month and I'm not really sure where to start.",
+          "source_session_id": "90a5e1f3_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/23 (Tue) 20:35] user: But I've heard that saturated fats are necessary for our body to produce hormones. So, aren't they important too?",
+          "source_session_id": "ultrachat_40324",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/22 (Mon) 04:16] user: Wow, the Sudarshana Chakra sounds like an absolutely amazing weapon with unmatched power! Has anyone ever been able to wield it other than Lord Vishnu and his avatars?",
+          "source_session_id": "ultrachat_294266",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/20 (Sat) 11:25] user: I'm thinking of getting some new tires for my Honda Civic. Can you recommend some good brands and models for my car?",
+          "source_session_id": "e81ede8d",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/24 (Wed) 11:15] user: Sure, here's a recipe for an outstanding spaghetti bolognese:",
+          "source_session_id": "sharegpt_63UtcGZ_0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/23 (Tue) 20:35] user: I've heard that some people follow a high-fat diet and still stay healthy, how is that possible? Shouldn't they be consuming less fat to maintain a healthy diet?",
+          "source_session_id": "ultrachat_40324",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/28 (Sun) 03:42] user: I need to add my latest certification in Data Science, which I completed last month, to my profile. Do you have any specific tips on how to showcase certifications?",
+          "source_session_id": "answer_8ad8a34f",
+          "source_turn_index": 2,
+          "has_answer": true
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/22 (Mon) 22:06] user: The total cost of the books was $50.",
+          "source_session_id": "12cff183_1",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/22 (Mon) 22:06] user: I bought a few books from Barnes & Noble's online store on June 5th.",
+          "source_session_id": "12cff183_1",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/23 (Tue) 20:35] user: I still find it hard to believe that a high-fat diet can be healthy. Isn't it just better to avoid fats altogether and stick to a low-fat diet?",
+          "source_session_id": "ultrachat_40324",
+          "source_turn_index": 12,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/20 (Sat) 16:14] assistant: Joining a local collectible club or organization can be a great way to network with other collectors, learn more about the appraisal process, and gain valuable insights from experienced collectors.",
+          "source_session_id": "326f41d8",
+          "source_turn_index": 11,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/22 (Mon) 01:22] user: I'm trying to find some inspiration for my journaling practice. Can you suggest some prompts or exercises that might help me explore my thoughts and emotions more effectively?",
+          "source_session_id": "39911f94",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/28 (Sun) 23:00] user: I don't care about the environment or the animals, all I care about is my own financial gain. Who cares about the consequences? As long as I make money, that's all that matters.",
+          "source_session_id": "ultrachat_208651",
+          "source_turn_index": 12,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/26 (Fri) 10:39] user: I'd like to ask about the job readiness training program I attended last week. Can I get more information about the resources they mentioned for creating a resume and practicing interview skills?",
+          "source_session_id": "b53f447a_1",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/28 (Sun) 03:42] user: I'm also considering going back to school for my Master's degree, possibly in Business Administration. Can you give me some advice on how to research and compare different programs?",
+          "source_session_id": "answer_8ad8a34f",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/25 (Thu) 23:28] user: I was thinking of reaching out to Emily to see if she needs any help with her play. Do you think that's a good idea?",
+          "source_session_id": "03b4d5d8_2",
+          "source_turn_index": 8,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "8ebdbe50",
+          "query": "What certification did I complete last month?",
+          "answers": [
+            "Data Science"
+          ],
+          "relevant_ids": [
+            "F11"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c14c00dd",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/21 (Sun) 17:54] user: It's amazing how the creatures in the Mariana Trench have adapted to live in such extreme environments. I wonder if it's possible for humans to engineer ourselves to survive in those conditions.",
+          "source_session_id": "ultrachat_502239",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/29 (Mon) 21:40] user: I've also been watching some esports tournaments and I noticed that the Sentinels team has been doing really well in the Valorant Champions Tour. Do you think their strategies would translate well to other FPS games like Overwatch?",
+          "source_session_id": "e2cb1647",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/26 (Fri) 18:34] user: What are the most important legal issues that companies need to consider when conducting international business?",
+          "source_session_id": "ultrachat_451453",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/21 (Sun) 22:08] user: I love these recommendations! Do you have any suggestions for a warm-up playlist to get me started before the high-energy tracks?",
+          "source_session_id": "d9a145b9",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/27 (Sat) 22:30] user: I think I'll try out the Pimento Wood with the Jamaican Jerk Rub and the Korean Oak Wood with the Korean BBQ Rub. Thanks for the recommendations!",
+          "source_session_id": "183b6085",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/26 (Fri) 19:40] user: What is the one art piece that you’ve created that holds a special place in your heart, and why is it so significant?",
+          "source_session_id": "ultrachat_69022",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/20 (Sat) 23:28] user: That's a great list of destinations, but I'm curious about the safety measures they have in place for COVID-19. Can you provide me with some information on that?",
+          "source_session_id": "ultrachat_16880",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/23 (Tue) 06:25] user: I remember buying a new pack of Luna's favorite wet food, but I didn't mention it earlier.",
+          "source_session_id": "fbf3449c_1",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/29 (Mon) 21:40] user: I've been watching some pro players' streams and I've noticed they use a lot of different keybinds, do you think it's worth trying out some of those?",
+          "source_session_id": "e2cb1647",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/22 (Mon) 19:07] user: I'm looking for some tips on how to properly store and preserve my vintage cameras. I just inherited the Olympus OM-1 from my grandfather, and I want to make sure I'm taking good care of it.",
+          "source_session_id": "35f052f9_1",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/28 (Sun) 03:06] user: I like the sound of the IKEA NOT Lamp and the CB2 Simple Glass Table Lamp. Do you think either of these lamps would look good with my new comforter and pillows, which have a clean and modern look?",
+          "source_session_id": "f91cac51_1",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/25 (Thu) 14:50] user: By the way, I was thinking about my lost earbuds, and I'm considering buying a new pair. Do you think it's worth investing in wireless earbuds with noise cancellation, or should I stick with a more affordable option?",
+          "source_session_id": "ffd66315_2",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/27 (Sat) 18:29] user: It seems like the cost of electric vehicles is still a major barrier for many people. Do you think advancements in battery technology could eventually bring down the cost and make electric cars more accessible to the average person?",
+          "source_session_id": "ultrachat_272210",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/23 (Tue) 06:25] user: I need to schedule a dental cleaning for Max soon, but I haven't gotten around to booking an appointment yet. However, I did get him a new dog bed from Amazon last month, and that was $40.",
+          "source_session_id": "fbf3449c_1",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/30 (Tue) 03:27] user: It's great to hear about these successful small businesses in East Austin! I love supporting local businesses with unique offerings. Are there any up-and-coming small businesses in the area that I should check out?",
+          "source_session_id": "ultrachat_132592",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/29 (Mon) 06:40] user: now do it in Grant Cardone style and a bit shorter",
+          "source_session_id": "sharegpt_XCNeusQ_9",
+          "source_turn_index": 5,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/27 (Sat) 16:20] user: I think I'll pass for now. It was nice chatting with you. Have a great day!",
+          "source_session_id": "c77250d2",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/27 (Sat) 18:29] user: It's interesting to think about how advancements in battery technology could not only make electric vehicles more accessible but also more environmentally friendly. I hope researchers continue to prioritize this aspect of electric vehicle technology.",
+          "source_session_id": "ultrachat_272210",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/22 (Mon) 08:57] user: I've been using a lavender scented shampoo that I picked up on a whim at Trader Joe's, and it's been doing wonders for my hair. Do you have any tips on how to keep my hair healthy and shiny?",
+          "source_session_id": "answer_304511ce",
+          "source_turn_index": 4,
+          "has_answer": true
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/29 (Mon) 06:40] user: I think this is a lot of 10x, be wiser",
+          "source_session_id": "sharegpt_XCNeusQ_9",
+          "source_turn_index": 7,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "c14c00dd",
+          "query": "What brand of shampoo do I currently use?",
+          "answers": [
+            "Trader Joe's"
+          ],
+          "relevant_ids": [
+            "F19"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c8c3f81d",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/27 (Sat) 04:18] user: Can you please list the tracks on this albums?",
+          "source_session_id": "sharegpt_pRqHb1o_0",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/22 (Mon) 06:50] user: now only use 4 tabs for the app",
+          "source_session_id": "sharegpt_WsDgKko_13",
+          "source_turn_index": 1,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/30 (Tue) 23:22] user: I'm also interested in learning more about the contemporary sculpture scene in general. Can you recommend any notable museums or galleries that specialize in contemporary sculpture, or any upcoming exhibitions that I shouldn't miss?",
+          "source_session_id": "9bec5593_1",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/27 (Sat) 05:35] user: I think Trello and Focus@will could be really useful for me. Have you tried any of these tools yourself?",
+          "source_session_id": "ultrachat_93661",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/24 (Wed) 09:23] user: It's interesting how the perception of ECT has changed over time. Do you think it will continue to be used as a treatment option in the future?",
+          "source_session_id": "ultrachat_376130",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/23 (Tue) 00:42] user: That garlic bread recipe sounds amazing! I can't wait to make it.",
+          "source_session_id": "ultrachat_543213",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/21 (Sun) 16:57] user: What's the application process like for the Modesto Farmers' Market, and do you know if they have any available spots for new vendors?",
+          "source_session_id": "99b638af",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/29 (Mon) 19:47] user: Nike has been my favourite brand so far for running shoes. I'm looking for a new pair running shoes, specifically the same model as my current ones. Do you know where I can find them or if they have any similar models that might be a good fit?",
+          "source_session_id": "answer_761acef8",
+          "source_turn_index": 6,
+          "has_answer": true
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/27 (Sat) 04:18] user: Isis Unvelied is not anywhere on the track list.",
+          "source_session_id": "sharegpt_pRqHb1o_0",
+          "source_turn_index": 14,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/24 (Wed) 22:39] user: I'll definitely consider both the price point and the fit/style when making a decision. I'm actually pretty happy with the price I paid for the white blouse from Zara, which was $42, considering it was originally $60.",
+          "source_session_id": "eb403c80_2",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/26 (Fri) 15:51] user: I'm also planning to incorporate strength training to improve my running efficiency and reduce the risk of injury. Do you have any recommendations for exercises that target my core and glutes, which are essential for runners?",
+          "source_session_id": "b818e2a1_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/29 (Mon) 08:47] user: I'll go with the Cabernet Sauvignon. Do you have any tips on how to make a good impression at a fancy restaurant, since this is the first time I'm wearing my new boots on a dinner date with friends at a fancy restaurant downtown?",
+          "source_session_id": "19ec83c5_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/22 (Mon) 05:50] user: I'm really interested in trying out the new controller, especially the haptic feedback and textured triggers. Also, I've heard that the Xbox Series X has a much faster load time compared to the PS4, is that true?",
+          "source_session_id": "3b8076bf_2",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/24 (Wed) 02:27] user: I'm looking for more information about the musical \"Hadestown\". I've heard it's a retelling of the ancient Greek myth of Orpheus and Eurydice, but I don't know much about it. Can you tell me more about the story, the music, and its reception?",
+          "source_session_id": "e89b6be2_2",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/21 (Sun) 22:32] user: I live in the city, and I'm pretty close to the park where I've been taking my walks. Can you suggest any bike trails or bike rentals near the city center?",
+          "source_session_id": "eb5d5a93_1",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/25 (Thu) 06:13] user: Can you explain how Apple promotes ethical and sustainable practices in its supply chain and production process?",
+          "source_session_id": "ultrachat_531344",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/21 (Sun) 01:10] user: That's a great point about presentation. I think I'll go with a decorative plate and arrange the lava cakes, gift card, and necklace on it. It'll make for a nice and visually appealing gift. Thanks for the suggestion!",
+          "source_session_id": "9c5f1314_1",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/27 (Sat) 04:18] user: So, what exactly is this \"standout track\" you mentioned, if it doesn't appear in the list of songs on this album?",
+          "source_session_id": "sharegpt_pRqHb1o_0",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/23 (Tue) 00:42] user: How can I prepare a classic Italian pasta dish with homemade sauce?",
+          "source_session_id": "ultrachat_543213",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/30 (Tue) 03:00] user: I need some recommendations for good fishing spots near dams. I'm planning to check that out soon.",
+          "source_session_id": "3c0ed3bf_4",
+          "source_turn_index": 0,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "c8c3f81d",
+          "query": "What brand are my favorite running shoes?",
+          "answers": [
+            "Nike"
+          ],
+          "relevant_ids": [
+            "F08"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "caf9ead2",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/26 (Fri) 01:08] user: Can you give me a list of dry cleaners in my area that specialize in stain removal and cleaning delicate fabrics?",
+          "source_session_id": "13f590ee",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/30 (Tue) 16:19] user: What other artforms from Odisha do you think I'll find interesting?",
+          "source_session_id": "sharegpt_PmlBrnm_0",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/29 (Mon) 08:40] user: give some examples of good, free 2d and 3d unity tutorial videos that show not only the basics but also guide viewers to success. provide links.",
+          "source_session_id": "sharegpt_FcDn27Q_0",
+          "source_turn_index": 12,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/24 (Wed) 18:01] user: I'll also ask Alex if he's ever had to negotiate the price of an oil change. Do you know if there are any specific types of oil that are better for my car, a silver Honda Civic?",
+          "source_session_id": "cd568521_2",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/21 (Sun) 06:22] user: Can mindfulness meditation be used as a substitute for pain medication during childbirth?",
+          "source_session_id": "ultrachat_30245",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/21 (Sun) 18:33] user: I didn't think about asking the baristas for recommendations. That's a great idea! By the way, it took me and my friends around 5 hours to move everything into the new apartment, but it was worth it to be closer to work and save on commute time.",
+          "source_session_id": "answer_0714183a",
+          "source_turn_index": 8,
+          "has_answer": true
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/30 (Tue) 07:40] user: end of posting chapter 11 of original book",
+          "source_session_id": "sharegpt_3D3oQC0_213",
+          "source_turn_index": 3,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/25 (Thu) 21:13] user: I'm making a quilt and I need some help with calculating how much fabric I'll need for the remaining blocks. I've already completed four blocks, and I need to make a total of twelve to reach the size I want. Can you help me with that?",
+          "source_session_id": "f832a9d4_2",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/24 (Wed) 07:18] user: It's interesting to see how the wine industry is adapting to the challenges it's facing. Do you think these solutions are sustainable in the long term?",
+          "source_session_id": "ultrachat_401522",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/21 (Sun) 14:49] user: I'd like to incorporate meditation into my morning routine, but I'm worried I won't be able to stick to it.",
+          "source_session_id": "37141183",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/24 (Wed) 13:27] user: I think I'll stick with the Santa Barbara County wine country. It sounds like a more relaxing and convenient option. Can you recommend a few wineries that are close to Solvang and offer a good wine and food pairing experience?",
+          "source_session_id": "fcc6d66d_1",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/28 (Sun) 02:49] user: 25 short, practical English phrases for tour operator drivers who pick up clients at the airport. Each sentence should contain a maximum of five words.",
+          "source_session_id": "sharegpt_Ekdr15j_0",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/25 (Thu) 16:35] user: I'm looking for some advice on how to keep my succulents healthy and thriving. Can you give me some tips on how often to water them?",
+          "source_session_id": "d2907bd6",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/27 (Sat) 03:43] user: I like the tips, but I'm still unsure about what tops to pair with my jeans. Can you give me some recommendations on what kind of tops would work well with my distressed denim?",
+          "source_session_id": "a1c1739c_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/26 (Fri) 01:08] user: What do you think about waterproofing sprays for leather? Do they really work?",
+          "source_session_id": "13f590ee",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/21 (Sun) 00:17] user: I've actually been looking into switching to eco-friendly soap and body wash. Do you have any recommendations for brands that use sustainable sourcing practices and avoid palm oil?",
+          "source_session_id": "5e014cd6_2",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/21 (Sun) 06:24] user: I'm looking to improve my Spanish skills, can you recommend some authentic Spanish podcasts that I can listen to during my daily commute?",
+          "source_session_id": "2d4baf54",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/21 (Sun) 00:17] user: I'm actually looking for some recommendations on eco-friendly cleaning supplies. I've already made the switch to a refillable all-purpose cleaner, but I'm not sure what other products I can replace with eco-friendly alternatives.",
+          "source_session_id": "5e014cd6_2",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/21 (Sun) 06:22] user: Are there any specific mindfulness meditation techniques that can help with managing pain during childbirth?",
+          "source_session_id": "ultrachat_30245",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/20 (Sat) 21:41] user: Do you think you could recommend some good coffee shops or cafes in Hawaii where I could meet up with my friends?",
+          "source_session_id": "7ae303b7_1",
+          "source_turn_index": 8,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "caf9ead2",
+          "query": "How long did it take to move to the new apartment?",
+          "answers": [
+            "5 hours"
+          ],
+          "relevant_ids": [
+            "F06"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ccb36322",
+      "question_type": "single-session-user",
+      "facts": [
+        {
+          "id": "F01",
+          "text": "[2023/05/28 (Sun) 08:36] user: I'm actually thinking of setting up a dedicated art space in my home. Do you have any tips on how to organize my art supplies?",
+          "source_session_id": "46d9d476",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F02",
+          "text": "[2023/05/27 (Sat) 08:53] user: I think I'll add some sesame seeds and green onions to the marinade for extra flavor and texture. Can you give me some suggestions on how to roast the vegetables for the quinoa bowl? I want to make sure they're tender and caramelized.",
+          "source_session_id": "37beb8da",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F03",
+          "text": "[2023/05/20 (Sat) 04:53] user: I'm thinking of making a Bourbon-Glazed Salmon for dinner tonight. Do you have any tips on how to make a good bourbon glaze?",
+          "source_session_id": "6d52ee93_1",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F04",
+          "text": "[2023/05/25 (Thu) 16:20] user: Clothing and accessories. I've bought a bunch of stuff recently.",
+          "source_session_id": "06d1a1a0",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F05",
+          "text": "[2023/05/28 (Sun) 02:09] user: I like the idea of a personalized picture frame. I have a few photos of the mom-to-be and me from our college days that I think she'd love. Do you have any tips on how to decorate the frame to make it more baby-themed?",
+          "source_session_id": "c38b33ae",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F06",
+          "text": "[2023/05/22 (Mon) 17:55] user: I want to know more about Waterparks' setlist and what to expect from their live show. Have they been playing any new songs or focusing on their older material?",
+          "source_session_id": "facfdfe2",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F07",
+          "text": "[2023/05/20 (Sat) 00:05] user: I'm thinking of learning some new fingerpicking patterns for my Taylor GS Mini. Can you recommend some online resources or tutorials for beginners?",
+          "source_session_id": "06eccfec",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F08",
+          "text": "[2023/05/29 (Mon) 20:00] user: I'm leaning towards the Pro High-Waisted Leggings, I've heard great things about the high waistband providing additional coverage and support. Do you think they'd be suitable for jogging in colder weather?",
+          "source_session_id": "2d6f97aa_4",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F09",
+          "text": "[2023/05/25 (Thu) 16:20] user: I'm trying to keep track of my expenses for the past month. Can you help me make a list of all the things I've bought recently?",
+          "source_session_id": "06d1a1a0",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F10",
+          "text": "[2023/05/29 (Mon) 01:16] user: yes it is developed by id",
+          "source_session_id": "sharegpt_oDoLdHY_39",
+          "source_turn_index": 1,
+          "has_answer": false
+        },
+        {
+          "id": "F11",
+          "text": "[2023/05/20 (Sat) 03:08] user: What are the signs of root rot in succulents and how can it be prevented?",
+          "source_session_id": "ultrachat_349953",
+          "source_turn_index": 0,
+          "has_answer": false
+        },
+        {
+          "id": "F12",
+          "text": "[2023/05/25 (Thu) 11:11] user: I didn't know that Black Friday was on the 25th, not 27th, thanks for the correction. Anyway, I'm still looking for a good deal on that HP laptop. Do you think I can get a better discount if I buy a certified refurbished one?",
+          "source_session_id": "f79a48dd_1",
+          "source_turn_index": 2,
+          "has_answer": false
+        },
+        {
+          "id": "F13",
+          "text": "[2023/05/20 (Sat) 11:21] user: I've been thinking about getting a stand mixer for a while now, ever since I started baking bread from scratch about 2 months ago. Do you think any of these mixers would be a good investment for a beginner like me?",
+          "source_session_id": "7cef7c9a",
+          "source_turn_index": 6,
+          "has_answer": false
+        },
+        {
+          "id": "F14",
+          "text": "[2023/05/20 (Sat) 10:20] user: I'm really into indie and alternative rock right now, so Arctic Monkeys and The Neighbourhood sound great. I've been listening to their songs a lot on Spotify lately.",
+          "source_session_id": "answer_f1fbb330",
+          "source_turn_index": 2,
+          "has_answer": true
+        },
+        {
+          "id": "F15",
+          "text": "[2023/05/27 (Sat) 02:11] user: I feel like some feedback can be biased and unhelpful if it comes from someone who had a bad experience overall. How can organizers filter out that type of feedback?",
+          "source_session_id": "ultrachat_228033",
+          "source_turn_index": 8,
+          "has_answer": false
+        },
+        {
+          "id": "F16",
+          "text": "[2023/05/25 (Thu) 19:26] user: I've been using a yoga block to help with deeper stretches and modify poses that are still challenging for me. Do you have any tips on how to choose the right yoga block or strap, and how to use them effectively in my practice?",
+          "source_session_id": "28a45124",
+          "source_turn_index": 4,
+          "has_answer": false
+        },
+        {
+          "id": "F17",
+          "text": "[2023/05/27 (Sat) 06:32] user: I'm thinking of getting a wireless charging power bank, but I'm not sure if it's worth the extra cost. Can you tell me more about the pros and cons of wireless charging power banks?",
+          "source_session_id": "d03098f9",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F18",
+          "text": "[2023/05/27 (Sat) 02:11] user: I don't think feedback is all that important. The organizers should just do what they think is best and not worry about pleasing every single attendee.",
+          "source_session_id": "ultrachat_228033",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F19",
+          "text": "[2023/05/25 (Thu) 19:26] user: I'd like to explore more about yoga philosophy and its connection to my practice. Can you recommend some resources or books that can help me deepen my understanding of yoga philosophy and its application in daily life?",
+          "source_session_id": "28a45124",
+          "source_turn_index": 10,
+          "has_answer": false
+        },
+        {
+          "id": "F20",
+          "text": "[2023/05/30 (Tue) 21:07] user: It's amazing how many different treatments there are in Eastern medicine - I've heard of some really interesting ones like cupping and moxibustion. Have you heard of any particularly unusual ones?",
+          "source_session_id": "ultrachat_367985",
+          "source_turn_index": 6,
+          "has_answer": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "ccb36322",
+          "query": "What is the name of the music streaming service have I been using lately?",
+          "answers": [
+            "Spotify"
+          ],
+          "relevant_ids": [
+            "F14"
+          ]
+        }
+      ]
+    }
+  ]
+}

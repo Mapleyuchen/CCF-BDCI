@@ -1,0 +1,11 @@
+[
+  {
+    "id": "memgpt",
+    "title": "MemGPT: Towards LLMs as Operating Systems",
+    "authors": ["Charles Packer", "Vivian Fang", "Shishir G Patil", "Kevin Wooders", "Joseph E Gonzalez"],
+    "year": 2023,
+    "arxiv_id": "2310.08560",
+    "url": "https://arxiv.org/abs/2310.08560",
+    "metadata_note": "Demonstration copied from the repository bibliography; not independently verified."
+  }
+]

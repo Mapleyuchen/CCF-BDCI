@@ -1,0 +1,29 @@
+# Writing model: GPT-6-Astra via compatible endpoint for higher creative novelty.
+# Image generation uses apimart endpoint.
+models:
+  defaults:
+    - is_default: true
+      model_client_config:
+        client_provider: OpenAI
+        api_base: https://new.ch-at.pw/v1
+        api_key: ${NOVELTY_API_KEY}
+        model_name: gpt-6-astra
+        timeout: 600
+      model_config_obj:
+        temperature: 0.7
+        max_tokens: 22000
+arxiv:
+  api_url: https://export.arxiv.org/api/query
+  user_agent: CCF-BDCI-PaperResearch/2.0 (research metadata client)
+  interval_seconds: 3.1
+  timeout_seconds: 60
+images:
+  provider: openai
+  base_url: https://api.apimart.ai/v1
+  api_key: ${IMAGE_API_KEY}
+  model: gpt-image-2.5-flare
+  size: "1:1"
+  resolution: "1k"
+  quality: medium
+  n: 1
+  prompt_file: project/jiuwenswarm/research-paper-generator/prompts/methodology.txt

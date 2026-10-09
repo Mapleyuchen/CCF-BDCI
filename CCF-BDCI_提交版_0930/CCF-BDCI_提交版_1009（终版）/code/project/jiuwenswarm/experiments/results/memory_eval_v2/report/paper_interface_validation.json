@@ -1,0 +1,101 @@
+{
+  "verified_results": [
+    {
+      "id": "fair_baselines",
+      "budget_tokens": 1024,
+      "labels": {
+        "baseline": "bm25",
+        "enhanced": "hybrid"
+      },
+      "memory_clusters": {
+        "baseline": 84,
+        "enhanced": 84
+      },
+      "accuracies": {
+        "baseline": 0.6587301587301587,
+        "enhanced": 0.36507936507936506
+      }
+    },
+    {
+      "id": "selection_ablation",
+      "budget_tokens": 1024,
+      "labels": {
+        "baseline": "hybrid_no_time",
+        "enhanced": "hybrid"
+      },
+      "memory_clusters": {
+        "baseline": 84,
+        "enhanced": 84
+      },
+      "accuracies": {
+        "baseline": 0.634920634920635,
+        "enhanced": 0.36507936507936506
+      }
+    },
+    {
+      "id": "representation_ablation",
+      "budget_tokens": 1024,
+      "labels": {
+        "baseline": "hybrid_raw",
+        "enhanced": "hybrid_exchange"
+      },
+      "memory_clusters": {
+        "baseline": 20,
+        "enhanced": 20
+      },
+      "accuracies": {
+        "baseline": 1.0,
+        "enhanced": 0.8333333333333333
+      }
+    },
+    {
+      "id": "construction_ablation",
+      "budget_tokens": 1024,
+      "labels": {
+        "baseline": "hybrid_raw",
+        "enhanced": "hybrid_model_ack"
+      },
+      "memory_clusters": {
+        "baseline": 20,
+        "enhanced": 20
+      },
+      "accuracies": {
+        "baseline": 1.0,
+        "enhanced": 1.0
+      }
+    },
+    {
+      "id": "memory_reuse",
+      "budget_tokens": 512,
+      "labels": {
+        "baseline": "hybrid_raw",
+        "enhanced": "hybrid_model_ack"
+      },
+      "memory_clusters": {
+        "baseline": 8,
+        "enhanced": 8
+      },
+      "accuracies": {
+        "baseline": 1.0,
+        "enhanced": 1.0
+      }
+    },
+    {
+      "id": "protocol_replication",
+      "budget_tokens": 2048,
+      "labels": {
+        "baseline": "bm25",
+        "enhanced": "hybrid"
+      },
+      "memory_clusters": {
+        "baseline": 84,
+        "enhanced": 84
+      },
+      "accuracies": {
+        "baseline": 0.7063492063492063,
+        "enhanced": 0.36904761904761907
+      }
+    }
+  ],
+  "metric_count": 306
+}

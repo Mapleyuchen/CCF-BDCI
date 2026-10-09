@@ -1,0 +1,221 @@
+{
+  "kind": "live_model_experiment",
+  "dataset_sha256": "4a0b02e5a59bb04841bfdf52e26b343bedc157bc61a02e7157dc50b907bb2326",
+  "dataset_path": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\jiuwenswarm\\experiments\\data\\memory_agent_qa_v2.json",
+  "settings": {
+    "model_name": "qwen3.8-flash",
+    "model_provider": "OpenAI",
+    "model_request": {
+      "temperature": 0,
+      "top_p": null,
+      "max_tokens": null
+    },
+    "context_chars": 600,
+    "top_k": 10,
+    "repeats": 1,
+    "questions": 1,
+    "fact_order_seed": null,
+    "max_iterations": 1,
+    "tools": []
+  },
+  "summary": {
+    "baseline": {
+      "valid": 1,
+      "failed": 0,
+      "accuracy": 1,
+      "mean_evidence_recall": 1.0,
+      "mean_memory_chars": 600,
+      "mean_input_tokens": 229,
+      "mean_output_tokens": 17,
+      "mean_total_tokens": 246,
+      "mean_latency_ms": 4039.955500047654
+    },
+    "enhanced": {
+      "valid": 1,
+      "failed": 0,
+      "accuracy": 1,
+      "mean_evidence_recall": 1.0,
+      "mean_memory_chars": 509,
+      "mean_input_tokens": 178,
+      "mean_output_tokens": 9,
+      "mean_total_tokens": 187,
+      "mean_latency_ms": 1541.9149999506772
+    },
+    "paired": {
+      "n": 1,
+      "unique_questions": 1,
+      "repeats": 1,
+      "accuracy_gain": 0,
+      "evidence_recall_gain": 0.0
+    },
+    "by_repeat": [
+      {
+        "repeat": 0,
+        "paired_questions": 1,
+        "baseline_accuracy": 1,
+        "enhanced_accuracy": 1
+      }
+    ],
+    "resource_totals": {
+      "baseline": {
+        "query_tokens": 246,
+        "seed_tokens": 0,
+        "all_tokens": 246,
+        "tokens_per_valid_question_including_seed": 246.0,
+        "seed_model_calls": 0
+      },
+      "enhanced": {
+        "query_tokens": 187,
+        "seed_tokens": 3656,
+        "all_tokens": 3843,
+        "tokens_per_valid_question_including_seed": 3843.0,
+        "seed_model_calls": 20
+      }
+    }
+  },
+  "runs": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "seed_latency_ms": 0.0,
+      "seed_model_calls": 0,
+      "seed_input_tokens": 0,
+      "seed_output_tokens": 0,
+      "seed_total_tokens": 0,
+      "fact_order": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "seed_latency_ms": 25488.917899958324,
+      "seed_model_calls": 20,
+      "seed_input_tokens": 3636,
+      "seed_output_tokens": 20,
+      "seed_total_tokens": 3656,
+      "fact_order": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F19",
+        "F20"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "group": "baseline",
+      "repeat": 0,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 0.0,
+      "conversation_id": "memory-ab-96b04572457a4f1c9917eec292e14327-probe-Q01",
+      "rail_type": "ProjectMemoryRail",
+      "latency_ms": 4039.955500047654,
+      "answer": "Based on the project memory, the Atlas service stores customer profiles in **PostgreSQL**.",
+      "result_type": "answer",
+      "memory_context": "## Project Memory (auto-loaded by ProjectMemoryRail)\n\nThe following is merged from project root, user home, and local private files. Edits take effect on the next turn.\n\n### project memory -- D:\\0_数据挖掘华为比赛\\CCF-BDCI\\output\\agent-memory-ab-3fa96262195f4bcea70a4b78b8d3709a\\baseline-0\\JIUWENSWARM.md\n# Benchmark facts\n\n<FACT:F01> The Atlas service stores customer profiles in PostgreSQL.\n<FACT:F02> The Beacon service sends alert emails through Mailgun.\n<FACT:F03> The Cedar project uses React for its web interface.\n<FACT:F04> The Delta project deploys\n\n<!-- project memory truncated (> max_chars) -->\n",
+      "memory_chars": 600,
+      "observed_ids": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "complete_fact_ids": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 229,
+      "output_tokens": 17,
+      "total_tokens": 246,
+      "correct": true,
+      "status": "ok"
+    },
+    {
+      "group": "enhanced",
+      "repeat": 0,
+      "question_id": "Q01",
+      "query": "Where does Atlas store customer profiles?",
+      "relevant_ids": [
+        "F01"
+      ],
+      "answers": [
+        "PostgreSQL"
+      ],
+      "seed_latency_ms": 25488.917899958324,
+      "conversation_id": "memory-ab-9b0744d4d1c94e3b8878c4e0e3c8d7f3-probe-Q01",
+      "rail_type": "EnhancedMemoryRail",
+      "latency_ms": 1541.9149999506772,
+      "answer": "The Atlas service stores customer profiles in PostgreSQL.",
+      "result_type": "answer",
+      "memory_context": "# Relevant Context from Memory\n\nThe following information from previous interactions may be relevant:\n\n\n## Memory 1:\nUser: Remember this project fact: <FACT:F01> The Atlas service stores customer profiles in PostgreSQL. Reply ACK.\nAssistant: ACK\n\n## Memory 2:\nUser: Remember this project fact: <FACT:F20> The Terra database encrypts backups with AES-256. Reply ACK.\nAssistant: ACK\n\n## Memory 3:\nUser: Remember this project fact: <FACT:F19> The Summit document uses the ICLR template. Reply ACK.\nAssistant: ACK",
+      "memory_chars": 509,
+      "observed_ids": [
+        "F01",
+        "F19",
+        "F20"
+      ],
+      "complete_fact_ids": [
+        "F01",
+        "F19",
+        "F20"
+      ],
+      "evidence_recall": 1.0,
+      "history_isolated": true,
+      "memory_in_model_prompt": true,
+      "model_calls": 1,
+      "input_tokens": 178,
+      "output_tokens": 9,
+      "total_tokens": 187,
+      "correct": true,
+      "status": "ok"
+    }
+  ]
+}

@@ -1,0 +1,5806 @@
+{
+  "kind": "controlled_memory_eval_live",
+  "protocol_version": "memory-eval-v2.0",
+  "expected_trials": {
+    "full": 4536,
+    "micro": 540,
+    "reuse": 1440
+  },
+  "observed_trials": {
+    "full": 4536,
+    "micro": 540,
+    "reuse": 1440
+  },
+  "fairness": {
+    "valid_paired_inputs": 1416,
+    "candidate_banks_equal": true,
+    "nonmemory_prompts_equal": true,
+    "token_caps_satisfied": true,
+    "write_control_solver_prompts_identical": true,
+    "source_banks_verified": 112,
+    "unique_prompt_artifacts_verified": 1687,
+    "turn_annotations_posthoc_only": true
+  },
+  "source_manifest": {
+    "kind": "memory_eval_v2_live",
+    "protocol": {
+      "protocol_version": "memory-eval-v2.0",
+      "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+      "source_url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+      "source_count": 500,
+      "source_license": "MIT",
+      "dependencies": {
+        "longmemeval_commit": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+        "scorer_url": "https://github.com/xiaowu0162/LongMemEval/blob/9e0b455f4ef0e2ab8f2e582289761153549043fc/src/evaluation/evaluate_qa.py",
+        "scorer_sha256": "ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+        "tokenizer_repo": "Qwen/Qwen3-8B",
+        "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "tokenizer_files": {
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+        }
+      },
+      "sampling_seed": 20261006,
+      "per_stratum": 12,
+      "stratified_question_ids": {
+        "single-session-user": [
+          "e01b8e2f",
+          "726462e0",
+          "c960da58",
+          "caf9ead2",
+          "6f9b354f",
+          "1e043500",
+          "311778f1",
+          "001be529",
+          "d52b4f67",
+          "8ebdbe50",
+          "37d43f65",
+          "b320f3f8"
+        ],
+        "single-session-assistant": [
+          "18dcd5a5",
+          "28bcfaac",
+          "1b9b7252",
+          "fca762bc",
+          "488d3006",
+          "dc439ea3",
+          "cc539528",
+          "c4f10528",
+          "65240037",
+          "8cf51dda",
+          "7161e7e2",
+          "e982271f"
+        ],
+        "single-session-preference": [
+          "b0479f84",
+          "afdc33df",
+          "95228167",
+          "0edc2aef",
+          "09d032c9",
+          "1d4e3b97",
+          "54026fce",
+          "1da05512",
+          "06f04340",
+          "d6233ab6",
+          "38146c39",
+          "1c0ddc50"
+        ],
+        "multi-session": [
+          "eeda8a6d",
+          "gpt4_15e38248",
+          "d851d5ba",
+          "gpt4_59c863d7",
+          "3fe836c9",
+          "157a136e",
+          "efc3f7c2",
+          "1192316e",
+          "3a704032",
+          "9aaed6a3",
+          "ba358f49",
+          "c2ac3c61"
+        ],
+        "temporal-reasoning": [
+          "gpt4_8c8961ae",
+          "gpt4_4fc4f797",
+          "gpt4_213fd887",
+          "gpt4_ec93e27f",
+          "gpt4_18c2b244",
+          "gpt4_fa19884d",
+          "2c63a862",
+          "993da5e2",
+          "gpt4_d6585ce8",
+          "6e984301",
+          "gpt4_1d80365e",
+          "gpt4_f420262c"
+        ],
+        "knowledge-update": [
+          "10e09553",
+          "c4ea545c",
+          "5c40ec5b",
+          "5a4f22c0",
+          "72e3ee87",
+          "9bbe84a2",
+          "c6853660",
+          "0f05491a",
+          "6a1eabeb",
+          "d7c942c3",
+          "cc5ded98",
+          "2698e78f"
+        ],
+        "abstention": [
+          "0ddfec37_abs",
+          "bc8a6e93_abs",
+          "19b5f2b3_abs",
+          "ba358f49_abs",
+          "09ba9854_abs",
+          "29f2956b_abs",
+          "6aeb4375_abs",
+          "edced276_abs",
+          "eeda8a6d_abs",
+          "2311e44b_abs",
+          "2133c1b5_abs",
+          "0862e8bf_abs"
+        ]
+      },
+      "question_ids": [
+        "001be529",
+        "06f04340",
+        "0862e8bf_abs",
+        "09ba9854_abs",
+        "09d032c9",
+        "0ddfec37_abs",
+        "0edc2aef",
+        "0f05491a",
+        "10e09553",
+        "1192316e",
+        "157a136e",
+        "18dcd5a5",
+        "19b5f2b3_abs",
+        "1b9b7252",
+        "1c0ddc50",
+        "1d4e3b97",
+        "1da05512",
+        "1e043500",
+        "2133c1b5_abs",
+        "2311e44b_abs",
+        "2698e78f",
+        "28bcfaac",
+        "29f2956b_abs",
+        "2c63a862",
+        "311778f1",
+        "37d43f65",
+        "38146c39",
+        "3a704032",
+        "3fe836c9",
+        "488d3006",
+        "54026fce",
+        "5a4f22c0",
+        "5c40ec5b",
+        "65240037",
+        "6a1eabeb",
+        "6aeb4375_abs",
+        "6e984301",
+        "6f9b354f",
+        "7161e7e2",
+        "726462e0",
+        "72e3ee87",
+        "8cf51dda",
+        "8ebdbe50",
+        "95228167",
+        "993da5e2",
+        "9aaed6a3",
+        "9bbe84a2",
+        "afdc33df",
+        "b0479f84",
+        "b320f3f8",
+        "ba358f49",
+        "ba358f49_abs",
+        "bc8a6e93_abs",
+        "c2ac3c61",
+        "c4ea545c",
+        "c4f10528",
+        "c6853660",
+        "c960da58",
+        "caf9ead2",
+        "cc539528",
+        "cc5ded98",
+        "d52b4f67",
+        "d6233ab6",
+        "d7c942c3",
+        "d851d5ba",
+        "dc439ea3",
+        "e01b8e2f",
+        "e982271f",
+        "edced276_abs",
+        "eeda8a6d",
+        "eeda8a6d_abs",
+        "efc3f7c2",
+        "fca762bc",
+        "gpt4_15e38248",
+        "gpt4_18c2b244",
+        "gpt4_1d80365e",
+        "gpt4_213fd887",
+        "gpt4_4fc4f797",
+        "gpt4_59c863d7",
+        "gpt4_8c8961ae",
+        "gpt4_d6585ce8",
+        "gpt4_ec93e27f",
+        "gpt4_f420262c",
+        "gpt4_fa19884d"
+      ],
+      "budgets": [
+        512,
+        1024,
+        2048
+      ],
+      "repeats": 3,
+      "chunk_body_tokens": 256,
+      "solver_model": "qwen-plus-2025-12-01",
+      "judge_model": "qwen3-max-2026-01-23",
+      "decoding": {
+        "temperature": 0,
+        "max_tokens": 384,
+        "enable_thinking": false
+      },
+      "selectors": [
+        "prefix",
+        "recency",
+        "jaccard",
+        "bm25",
+        "hybrid",
+        "hybrid_no_time"
+      ],
+      "primary_comparison": [
+        "hybrid",
+        "bm25"
+      ],
+      "confidence": 0.95,
+      "bootstrap_seed": 20261007,
+      "bootstrap_resamples": 10000,
+      "protocol_deviations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score."
+      ],
+      "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter."
+    },
+    "protocol_sha256": "6e20a2b0b25946fa45d51d38c7bb45ba71f3e1001122a3d69da6cb6bfd050b9f",
+    "code_hashes": {
+      "run_memory_eval.py": "de2e415962ebdb9c6ca7b6ab5caf5c2c1fd060aebb164a76d30665147b5eea5a",
+      "data.py": "c8ae73cae161b55ca84cb6cd376f622abac2228a6ea5740f2cbe1cf21606e5fe",
+      "runtime.py": "be0932644ee68a195a0c1ae26af16d0072feff1ad0a5c631135714addbfb2207",
+      "controlled_retrieval.py": "7707080d43dce08ee36cac2a6607d69cbe272ba241bdbcda4c687465e231b75c",
+      "retrieval_engine.py": "3be92e3d32ba6a087ba1a290e3bb1900fc141015dd3bf7b62216b193c8ee4924",
+      "token_budget_memory_rail.py": "c9ba2c061fd405737b73ad728cbb2c58aa8f19101448d181eb7e44a5b4b8af8a"
+    },
+    "git_commit": "cf848ee26f04fb7422c78691fb8d26c60fc1cdee",
+    "official_longmemeval_score": false,
+    "execution": {
+      "suite": "all",
+      "repeats": 3,
+      "budgets": [
+        512,
+        1024,
+        2048
+      ],
+      "selectors": null,
+      "max_episodes": 0,
+      "lifecycle_episodes": 8,
+      "self_test": false,
+      "offline_retrieval": false
+    },
+    "request_schedule": {
+      "spacing_seconds": 0.65,
+      "rate_limit_cooldown_seconds": 60
+    },
+    "model_name": "qwen-plus-2025-12-01"
+  },
+  "scoring": {
+    "primary_judge_model": "qwen3-max-2026-01-23",
+    "secondary_judge_model": "qwen-plus-2025-12-01",
+    "scorer_url": "https://github.com/xiaowu0162/LongMemEval/blob/9e0b455f4ef0e2ab8f2e582289761153549043fc/src/evaluation/evaluate_qa.py",
+    "scorer_sha256": "ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+    "unique_answers": 2471,
+    "valid_solver_trials": 6516,
+    "audit_questions": 966,
+    "judge_disagreements": 239,
+    "human_adjudications_completed": 0,
+    "human_review_required": true,
+    "official_longmemeval_score": false,
+    "note": "Original task-specific LongMemEval prompts; substituted Qwen judge and strict yes/no parser. Cache identical question-answer judgments, not repeated solver generations."
+  },
+  "groups": [
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "bm25",
+      "n": 252,
+      "correct": 173,
+      "accuracy": {
+        "estimate": 0.6865079365079365,
+        "low": 0.6071428571428571,
+        "high": 0.7658730158730158,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.3492063492063492,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.8479166666666667,
+        "low": 0.7872685185185185,
+        "high": 0.9046296296296297,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.75,
+        "low": 0.6666666666666666,
+        "high": 0.8333333333333334,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.6453703703703704,
+        "low": 0.5689814814814815,
+        "high": 0.7240740740740742,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.6385517081353096,
+        "low": 0.5589015892934469,
+        "high": 0.7186971687999012,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.5138888888888888,
+        "low": 0.4166666666666667,
+        "high": 0.6111111111111112,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 3,
+      "wrong_despite_all_annotated_sessions_or_items": 34,
+      "memory_tokens_mean": 500.9761904761905,
+      "query_cost": {
+        "known_tokens": 177021,
+        "tokens": 177021,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 177021,
+      "total_tokens_per_question": 702.4642857142857,
+      "tokens_per_correct": 1023.2427745664739,
+      "query_latency_ms_mean": 4380.982338888835,
+      "ranking_latency_ms_mean": 3.060516269875907,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "hybrid",
+      "n": 252,
+      "correct": 82,
+      "accuracy": {
+        "estimate": 0.3253968253968254,
+        "low": 0.253968253968254,
+        "high": 0.40079365079365076,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.07539682539682539,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.22152777777777777,
+        "low": 0.14513888888888887,
+        "high": 0.3020833333333333,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.18055555555555555,
+        "low": 0.09722222222222222,
+        "high": 0.2638888888888889,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.15208333333333332,
+        "low": 0.09027777777777778,
+        "high": 0.21807291666666642,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.15696147871355703,
+        "low": 0.09351455877203727,
+        "high": 0.22634235678146852,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.1111111111111111,
+        "low": 0.05555555555555555,
+        "high": 0.18055555555555555,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 19,
+      "wrong_despite_all_annotated_sessions_or_items": 14,
+      "memory_tokens_mean": 499.35714285714283,
+      "query_cost": {
+        "known_tokens": 166973,
+        "tokens": 166973,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 166973,
+      "total_tokens_per_question": 662.5912698412699,
+      "tokens_per_correct": 2036.2560975609756,
+      "query_latency_ms_mean": 3324.772110714299,
+      "ranking_latency_ms_mean": 30.360480555532014,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "hybrid_no_time",
+      "n": 252,
+      "correct": 143,
+      "accuracy": {
+        "estimate": 0.5674603174603174,
+        "low": 0.4841269841269841,
+        "high": 0.6547619047619048,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.24206349206349206,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.7319444444444445,
+        "low": 0.6423437500000001,
+        "high": 0.8159722222222222,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.6666666666666666,
+        "low": 0.5694444444444444,
+        "high": 0.7638888888888888,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.4541666666666667,
+        "low": 0.3638888888888889,
+        "high": 0.5444444444444445,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.44908127196753334,
+        "low": 0.35952382492642887,
+        "high": 0.540699207146866,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.3611111111111111,
+        "low": 0.2638888888888889,
+        "high": 0.4583333333333333,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 5,
+      "wrong_despite_all_annotated_sessions_or_items": 49,
+      "memory_tokens_mean": 499.6666666666667,
+      "query_cost": {
+        "known_tokens": 172310,
+        "tokens": 172310,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 172310,
+      "total_tokens_per_question": 683.7698412698413,
+      "tokens_per_correct": 1204.9650349650349,
+      "query_latency_ms_mean": 3932.9500091270065,
+      "ranking_latency_ms_mean": 30.09204007936739,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "jaccard",
+      "n": 252,
+      "correct": 139,
+      "accuracy": {
+        "estimate": 0.5515873015873017,
+        "low": 0.46825396825396826,
+        "high": 0.6388888888888888,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.23809523809523808,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.7319444444444445,
+        "low": 0.6423437500000001,
+        "high": 0.8159722222222222,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.6666666666666666,
+        "low": 0.5694444444444444,
+        "high": 0.7638888888888888,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.4541666666666667,
+        "low": 0.3638888888888889,
+        "high": 0.5444444444444445,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.44908127196753334,
+        "low": 0.35952382492642887,
+        "high": 0.540699207146866,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.3611111111111111,
+        "low": 0.2638888888888889,
+        "high": 0.4583333333333333,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 5,
+      "wrong_despite_all_annotated_sessions_or_items": 52,
+      "memory_tokens_mean": 499.6666666666667,
+      "query_cost": {
+        "known_tokens": 172891,
+        "tokens": 172891,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 172891,
+      "total_tokens_per_question": 686.0753968253969,
+      "tokens_per_correct": 1243.820143884892,
+      "query_latency_ms_mean": 3991.9642277778034,
+      "ranking_latency_ms_mean": 37.17483253967296,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "prefix",
+      "n": 252,
+      "correct": 68,
+      "accuracy": {
+        "estimate": 0.2698412698412698,
+        "low": 0.21031746031746032,
+        "high": 0.3333333333333333,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.03571428571428571,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.004629629629629629,
+        "low": 0.0,
+        "high": 0.013888888888888888,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 32,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 501.79761904761904,
+      "query_cost": {
+        "known_tokens": 165299,
+        "tokens": 165299,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 165299,
+      "total_tokens_per_question": 655.9484126984127,
+      "tokens_per_correct": 2430.8676470588234,
+      "query_latency_ms_mean": 3246.4689880952183,
+      "ranking_latency_ms_mean": 4.196108730119314,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "recency",
+      "n": 252,
+      "correct": 74,
+      "accuracy": {
+        "estimate": 0.2936507936507936,
+        "low": 0.23015873015873015,
+        "high": 0.3611111111111111,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.03571428571428571,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.02361111111111111,
+        "low": 0.002777777777777778,
+        "high": 0.04861111111111111,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.013888888888888888,
+        "low": 0.0,
+        "high": 0.034722222222222224,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.015694976446804603,
+        "low": 0.0,
+        "high": 0.040153180406836714,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 32,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 500.2738095238095,
+      "query_cost": {
+        "known_tokens": 164585,
+        "tokens": 164585,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 164585,
+      "total_tokens_per_question": 653.1150793650794,
+      "tokens_per_correct": 2224.1216216216217,
+      "query_latency_ms_mean": 3351.810476984109,
+      "ranking_latency_ms_mean": 1.990232539745713,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "bm25",
+      "n": 252,
+      "correct": 166,
+      "accuracy": {
+        "estimate": 0.6587301587301587,
+        "low": 0.5873015873015873,
+        "high": 0.7301587301587302,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.376984126984127,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.8553240740740741,
+        "low": 0.7953703703703704,
+        "high": 0.9118055555555556,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.7777777777777778,
+        "low": 0.6944444444444444,
+        "high": 0.8611111111111112,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.6886574074074073,
+        "low": 0.6113425925925926,
+        "high": 0.7664351851851853,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.685351407264943,
+        "low": 0.6063289785172017,
+        "high": 0.7655439290531649,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.5694444444444444,
+        "low": 0.4722222222222222,
+        "high": 0.6666666666666666,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 1,
+      "wrong_despite_all_annotated_sessions_or_items": 36,
+      "memory_tokens_mean": 1015.202380952381,
+      "query_cost": {
+        "known_tokens": 308559,
+        "tokens": 308559,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 308559,
+      "total_tokens_per_question": 1224.4404761904761,
+      "tokens_per_correct": 1858.789156626506,
+      "query_latency_ms_mean": 4557.859536904711,
+      "ranking_latency_ms_mean": 3.060516269875907,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "hybrid",
+      "n": 252,
+      "correct": 92,
+      "accuracy": {
+        "estimate": 0.36507936507936506,
+        "low": 0.28968253968253965,
+        "high": 0.4444444444444445,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.06349206349206349,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.2347222222222222,
+        "low": 0.1638888888888889,
+        "high": 0.30972222222222223,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.18055555555555555,
+        "low": 0.1111111111111111,
+        "high": 0.2638888888888889,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.16249999999999998,
+        "low": 0.09722222222222222,
+        "high": 0.23194444444444443,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.16574697199094557,
+        "low": 0.09933900324458012,
+        "high": 0.236836051055135,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.125,
+        "low": 0.05555555555555555,
+        "high": 0.19444444444444445,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 29,
+      "wrong_despite_all_annotated_sessions_or_items": 14,
+      "memory_tokens_mean": 1013.2142857142857,
+      "query_cost": {
+        "known_tokens": 297801,
+        "tokens": 297801,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 297801,
+      "total_tokens_per_question": 1181.75,
+      "tokens_per_correct": 3236.967391304348,
+      "query_latency_ms_mean": 3750.0681436507484,
+      "ranking_latency_ms_mean": 30.360480555532014,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "hybrid_no_time",
+      "n": 252,
+      "correct": 160,
+      "accuracy": {
+        "estimate": 0.634920634920635,
+        "low": 0.5555555555555556,
+        "high": 0.7182539682539681,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.3055555555555556,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.8326388888888889,
+        "low": 0.7597222222222223,
+        "high": 0.8993055555555556,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.7777777777777778,
+        "low": 0.6944444444444444,
+        "high": 0.8611111111111112,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.5317129629629629,
+        "low": 0.4460648148148148,
+        "high": 0.617824074074074,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.5226178936993289,
+        "low": 0.4367429026847575,
+        "high": 0.6097242979428262,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.4583333333333333,
+        "low": 0.3611111111111111,
+        "high": 0.5555555555555556,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 3,
+      "wrong_despite_all_annotated_sessions_or_items": 54,
+      "memory_tokens_mean": 1012.6785714285714,
+      "query_cost": {
+        "known_tokens": 301944,
+        "tokens": 301944,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 301944,
+      "total_tokens_per_question": 1198.1904761904761,
+      "tokens_per_correct": 1887.15,
+      "query_latency_ms_mean": 4080.2937440475725,
+      "ranking_latency_ms_mean": 30.09204007936739,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "jaccard",
+      "n": 252,
+      "correct": 170,
+      "accuracy": {
+        "estimate": 0.6746031746031745,
+        "low": 0.5912698412698413,
+        "high": 0.7579365079365079,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.30952380952380953,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.8326388888888889,
+        "low": 0.7597222222222223,
+        "high": 0.8993055555555556,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.7777777777777778,
+        "low": 0.6944444444444444,
+        "high": 0.8611111111111112,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.5317129629629629,
+        "low": 0.4460648148148148,
+        "high": 0.617824074074074,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.5226178936993289,
+        "low": 0.4367429026847575,
+        "high": 0.6097242979428262,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.4583333333333333,
+        "low": 0.3611111111111111,
+        "high": 0.5555555555555556,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 5,
+      "wrong_despite_all_annotated_sessions_or_items": 48,
+      "memory_tokens_mean": 1012.6785714285714,
+      "query_cost": {
+        "known_tokens": 302452,
+        "tokens": 302452,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 302452,
+      "total_tokens_per_question": 1200.2063492063492,
+      "tokens_per_correct": 1779.129411764706,
+      "query_latency_ms_mean": 4103.0673400793585,
+      "ranking_latency_ms_mean": 37.17483253967296,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "prefix",
+      "n": 252,
+      "correct": 63,
+      "accuracy": {
+        "estimate": 0.25,
+        "low": 0.19841269841269843,
+        "high": 0.3055555555555556,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.03571428571428571,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.008101851851851851,
+        "low": 0.0,
+        "high": 0.019675925925925923,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.006944444444444444,
+        "low": 0.0,
+        "high": 0.020833333333333332,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.008507347254447023,
+        "low": 0.0,
+        "high": 0.025522041763341066,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 27,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 1012.7380952380952,
+      "query_cost": {
+        "known_tokens": 294054,
+        "tokens": 294054,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 294054,
+      "total_tokens_per_question": 1166.8809523809523,
+      "tokens_per_correct": 4667.523809523809,
+      "query_latency_ms_mean": 3461.674899999996,
+      "ranking_latency_ms_mean": 4.196108730119314,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "recency",
+      "n": 252,
+      "correct": 83,
+      "accuracy": {
+        "estimate": 0.32936507936507936,
+        "low": 0.2579365079365079,
+        "high": 0.40476190476190477,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.03571428571428571,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.04027777777777777,
+        "low": 0.009722222222222222,
+        "high": 0.07916666666666666,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.013888888888888888,
+        "low": 0.0,
+        "high": 0.041666666666666664,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.013888888888888888,
+        "low": 0.0,
+        "high": 0.034722222222222224,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.015694976446804603,
+        "low": 0.0,
+        "high": 0.040153180406836714,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 33,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 1013.8333333333334,
+      "query_cost": {
+        "known_tokens": 294490,
+        "tokens": 294490,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 294490,
+      "total_tokens_per_question": 1168.611111111111,
+      "tokens_per_correct": 3548.0722891566265,
+      "query_latency_ms_mean": 3479.679832539699,
+      "ranking_latency_ms_mean": 1.990232539745713,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "bm25",
+      "n": 252,
+      "correct": 178,
+      "accuracy": {
+        "estimate": 0.7063492063492063,
+        "low": 0.6309523809523809,
+        "high": 0.7817460317460316,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.3888888888888889,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.9085648148148149,
+        "low": 0.8557812499999999,
+        "high": 0.9555613425925924,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.8472222222222222,
+        "low": 0.7777777777777778,
+        "high": 0.9166666666666666,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.7219907407407408,
+        "low": 0.6479166666666667,
+        "high": 0.7967592592592593,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.7184538784319607,
+        "low": 0.6448223959701044,
+        "high": 0.7949573926241855,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.5833333333333334,
+        "low": 0.4861111111111111,
+        "high": 0.6805555555555556,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 1,
+      "wrong_despite_all_annotated_sessions_or_items": 40,
+      "memory_tokens_mean": 2035.6666666666667,
+      "query_cost": {
+        "known_tokens": 567226,
+        "tokens": 567226,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 567226,
+      "total_tokens_per_question": 2250.8968253968255,
+      "tokens_per_correct": 3186.6629213483147,
+      "query_latency_ms_mean": 4630.651383730169,
+      "ranking_latency_ms_mean": 3.060516269875907,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "hybrid",
+      "n": 252,
+      "correct": 93,
+      "accuracy": {
+        "estimate": 0.36904761904761907,
+        "low": 0.2936507936507936,
+        "high": 0.4523809523809524,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.06746031746031746,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.25416666666666665,
+        "low": 0.17777777777777778,
+        "high": 0.3361111111111111,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.20833333333333334,
+        "low": 0.125,
+        "high": 0.2916666666666667,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.18796296296296297,
+        "low": 0.11851851851851852,
+        "high": 0.2597222222222222,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.19052555598280557,
+        "low": 0.11934615707871093,
+        "high": 0.2641990898654275,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.1527777777777778,
+        "low": 0.08333333333333333,
+        "high": 0.2222222222222222,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 24,
+      "wrong_despite_all_annotated_sessions_or_items": 15,
+      "memory_tokens_mean": 2036.5357142857142,
+      "query_cost": {
+        "known_tokens": 558841,
+        "tokens": 558841,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 558841,
+      "total_tokens_per_question": 2217.623015873016,
+      "tokens_per_correct": 6009.043010752688,
+      "query_latency_ms_mean": 4076.182688492061,
+      "ranking_latency_ms_mean": 30.360480555532014,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "hybrid_no_time",
+      "n": 252,
+      "correct": 177,
+      "accuracy": {
+        "estimate": 0.7023809523809523,
+        "low": 0.6230158730158729,
+        "high": 0.7817460317460319,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.3253968253968254,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.9046296296296297,
+        "low": 0.8421180555555555,
+        "high": 0.9587962962962963,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.875,
+        "low": 0.8055555555555556,
+        "high": 0.9444444444444444,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.680787037037037,
+        "low": 0.5935185185185184,
+        "high": 0.7662037037037037,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.6704069379192165,
+        "low": 0.5823081958042724,
+        "high": 0.7563562498636108,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.5833333333333334,
+        "low": 0.4861111111111111,
+        "high": 0.6805555555555556,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 3,
+      "wrong_despite_all_annotated_sessions_or_items": 54,
+      "memory_tokens_mean": 2039.2738095238096,
+      "query_cost": {
+        "known_tokens": 565014,
+        "tokens": 565014,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 565014,
+      "total_tokens_per_question": 2242.1190476190477,
+      "tokens_per_correct": 3192.169491525424,
+      "query_latency_ms_mean": 4388.945570634917,
+      "ranking_latency_ms_mean": 30.09204007936739,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "jaccard",
+      "n": 252,
+      "correct": 180,
+      "accuracy": {
+        "estimate": 0.7142857142857142,
+        "low": 0.634920634920635,
+        "high": 0.7936507936507937,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.32142857142857145,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.9046296296296297,
+        "low": 0.8421180555555555,
+        "high": 0.9587962962962963,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.875,
+        "low": 0.8055555555555556,
+        "high": 0.9444444444444444,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.680787037037037,
+        "low": 0.5935185185185184,
+        "high": 0.7662037037037037,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.6704069379192165,
+        "low": 0.5823081958042724,
+        "high": 0.7563562498636108,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.5833333333333334,
+        "low": 0.4861111111111111,
+        "high": 0.6805555555555556,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 2,
+      "wrong_despite_all_annotated_sessions_or_items": 50,
+      "memory_tokens_mean": 2039.2738095238096,
+      "query_cost": {
+        "known_tokens": 564935,
+        "tokens": 564935,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 564935,
+      "total_tokens_per_question": 2241.8055555555557,
+      "tokens_per_correct": 3138.527777777778,
+      "query_latency_ms_mean": 4432.652401984118,
+      "ranking_latency_ms_mean": 37.17483253967296,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "prefix",
+      "n": 252,
+      "correct": 63,
+      "accuracy": {
+        "estimate": 0.24999999999999994,
+        "low": 0.19841269841269837,
+        "high": 0.3055555555555556,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.03571428571428571,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.024768518518518516,
+        "low": 0.00625,
+        "high": 0.04722222222222222,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.019444444444444445,
+        "low": 0.002777777777777778,
+        "high": 0.04027777777777778,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.01958303859187503,
+        "low": 0.002506898176189515,
+        "high": 0.042415265025383224,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 27,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 2036.4761904761904,
+      "query_cost": {
+        "known_tokens": 551968,
+        "tokens": 551968,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 551968,
+      "total_tokens_per_question": 2190.3492063492063,
+      "tokens_per_correct": 8761.396825396825,
+      "query_latency_ms_mean": 3534.64028253971,
+      "ranking_latency_ms_mean": 4.196108730119314,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "recency",
+      "n": 252,
+      "correct": 77,
+      "accuracy": {
+        "estimate": 0.3055555555555555,
+        "low": 0.23809523809523808,
+        "high": 0.38095238095238093,
+        "clusters": 84,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.03571428571428571,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.037500000000000006,
+        "low": 0.0125,
+        "high": 0.06805555555555556,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.020833333333333332,
+        "low": 0.0,
+        "high": 0.041666666666666664,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.022748267982854755,
+        "low": 0.0,
+        "high": 0.047449557147833006,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 72,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 32,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 2037.5357142857142,
+      "query_cost": {
+        "known_tokens": 552164,
+        "tokens": 552164,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 552164,
+      "total_tokens_per_question": 2191.126984126984,
+      "tokens_per_correct": 7170.961038961039,
+      "query_latency_ms_mean": 3516.1893178571468,
+      "ranking_latency_ms_mean": 1.990232539745713,
+      "write_latency_ms": 2.909299985731195,
+      "memory_instances": 252
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 512,
+      "arm": "hybrid_exchange",
+      "n": 60,
+      "correct": 19,
+      "accuracy": {
+        "estimate": 0.31666666666666665,
+        "low": 0.13333333333333333,
+        "high": 0.5166666666666667,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.3,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.3,
+        "low": 0.1,
+        "high": 0.5,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.3,
+        "low": 0.1,
+        "high": 0.5,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 1,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 476.2,
+      "query_cost": {
+        "known_tokens": 35493,
+        "tokens": 35493,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 35493,
+      "total_tokens_per_question": 591.55,
+      "tokens_per_correct": 1868.0526315789473,
+      "query_latency_ms_mean": 3451.332544999999,
+      "ranking_latency_ms_mean": 0.3701649998523256,
+      "write_latency_ms": 0.24980000307550654,
+      "memory_instances": 60
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 512,
+      "arm": "hybrid_model_ack",
+      "n": 60,
+      "correct": 40,
+      "accuracy": {
+        "estimate": 0.6666666666666666,
+        "low": 0.4666666666666666,
+        "high": 0.85,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.55,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.55,
+        "low": 0.35,
+        "high": 0.75,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.55,
+        "low": 0.35,
+        "high": 0.75,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 7,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 484.8,
+      "query_cost": {
+        "known_tokens": 36100,
+        "tokens": 36100,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 204163,
+        "tokens": 204163,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 240263,
+      "total_tokens_per_question": 4004.383333333333,
+      "tokens_per_correct": 6006.575,
+      "query_latency_ms_mean": 4416.998436666745,
+      "ranking_latency_ms_mean": 0.39810333325173514,
+      "write_latency_ms": 4467993.639800001,
+      "memory_instances": 60
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 512,
+      "arm": "hybrid_raw",
+      "n": 60,
+      "correct": 41,
+      "accuracy": {
+        "estimate": 0.6833333333333333,
+        "low": 0.4833333333333333,
+        "high": 0.8666666666666666,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.55,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.55,
+        "low": 0.35,
+        "high": 0.75,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.55,
+        "low": 0.35,
+        "high": 0.75,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 8,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 484.8,
+      "query_cost": {
+        "known_tokens": 36167,
+        "tokens": 36167,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 36167,
+      "total_tokens_per_question": 602.7833333333333,
+      "tokens_per_correct": 882.1219512195122,
+      "query_latency_ms_mean": 3530.8312483332884,
+      "ranking_latency_ms_mean": 0.362693333287704,
+      "write_latency_ms": 0.24980000307550654,
+      "memory_instances": 60
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 1024,
+      "arm": "hybrid_exchange",
+      "n": 60,
+      "correct": 50,
+      "accuracy": {
+        "estimate": 0.8333333333333333,
+        "low": 0.6666666666666666,
+        "high": 0.9833333333333332,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.8,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.8,
+        "low": 0.6,
+        "high": 0.95,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.8,
+        "low": 0.6,
+        "high": 0.95,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 2,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 990.45,
+      "query_cost": {
+        "known_tokens": 66275,
+        "tokens": 66275,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 66275,
+      "total_tokens_per_question": 1104.5833333333333,
+      "tokens_per_correct": 1325.5,
+      "query_latency_ms_mean": 3577.121819999926,
+      "ranking_latency_ms_mean": 0.3701649998523256,
+      "write_latency_ms": 0.24980000307550654,
+      "memory_instances": 60
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 1024,
+      "arm": "hybrid_model_ack",
+      "n": 60,
+      "correct": 60,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.95,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.95,
+        "low": 0.85,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.95,
+        "low": 0.85,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 3,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 998.6,
+      "query_cost": {
+        "known_tokens": 67003,
+        "tokens": 67003,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 204163,
+        "tokens": 204163,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 271166,
+      "total_tokens_per_question": 4519.433333333333,
+      "tokens_per_correct": 4519.433333333333,
+      "query_latency_ms_mean": 3544.558926666529,
+      "ranking_latency_ms_mean": 0.39810333325173514,
+      "write_latency_ms": 4467993.639800001,
+      "memory_instances": 60
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 1024,
+      "arm": "hybrid_raw",
+      "n": 60,
+      "correct": 60,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 0.95,
+      "evidence_session_or_item_recall": {
+        "estimate": 0.95,
+        "low": 0.85,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 0.95,
+        "low": 0.85,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 3,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 998.6,
+      "query_cost": {
+        "known_tokens": 66935,
+        "tokens": 66935,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 66935,
+      "total_tokens_per_question": 1115.5833333333333,
+      "tokens_per_correct": 1115.5833333333333,
+      "query_latency_ms_mean": 4084.1115016667572,
+      "ranking_latency_ms_mean": 0.362693333287704,
+      "write_latency_ms": 0.24980000307550654,
+      "memory_instances": 60
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 2048,
+      "arm": "hybrid_exchange",
+      "n": 60,
+      "correct": 60,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 1,
+      "evidence_session_or_item_recall": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 0,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 1873.5,
+      "query_cost": {
+        "known_tokens": 119716,
+        "tokens": 119716,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 119716,
+      "total_tokens_per_question": 1995.2666666666667,
+      "tokens_per_correct": 1995.2666666666667,
+      "query_latency_ms_mean": 3721.7944499999853,
+      "ranking_latency_ms_mean": 0.3701649998523256,
+      "write_latency_ms": 0.24980000307550654,
+      "memory_instances": 60
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 2048,
+      "arm": "hybrid_model_ack",
+      "n": 60,
+      "correct": 60,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 1,
+      "evidence_session_or_item_recall": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 0,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 1595.8,
+      "query_cost": {
+        "known_tokens": 102691,
+        "tokens": 102691,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 204163,
+        "tokens": 204163,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 306854,
+      "total_tokens_per_question": 5114.233333333334,
+      "tokens_per_correct": 5114.233333333334,
+      "query_latency_ms_mean": 4049.6447450000837,
+      "ranking_latency_ms_mean": 0.39810333325173514,
+      "write_latency_ms": 4467993.639800001,
+      "memory_instances": 60
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 2048,
+      "arm": "hybrid_raw",
+      "n": 60,
+      "correct": 60,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 1,
+      "evidence_session_or_item_recall": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 20,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 0,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 1595.8,
+      "query_cost": {
+        "known_tokens": 102704,
+        "tokens": 102704,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 102704,
+      "total_tokens_per_question": 1711.7333333333333,
+      "tokens_per_correct": 1711.7333333333333,
+      "query_latency_ms_mean": 3680.645141666537,
+      "ranking_latency_ms_mean": 0.362693333287704,
+      "write_latency_ms": 0.24980000307550654,
+      "memory_instances": 60
+    },
+    {
+      "suite": "reuse",
+      "budget_tokens": 512,
+      "arm": "bm25_raw",
+      "n": 480,
+      "correct": 480,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 1,
+      "evidence_session_or_item_recall": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 0,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 394.5,
+      "query_cost": {
+        "known_tokens": 239440,
+        "tokens": 239440,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 239440,
+      "total_tokens_per_question": 498.8333333333333,
+      "tokens_per_correct": 498.8333333333333,
+      "query_latency_ms_mean": 3256.3128658333308,
+      "ranking_latency_ms_mean": 0.05102833333741804,
+      "write_latency_ms": 0.09010000076159486,
+      "memory_instances": 24
+    },
+    {
+      "suite": "reuse",
+      "budget_tokens": 512,
+      "arm": "hybrid_model_ack",
+      "n": 480,
+      "correct": 480,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 1,
+      "evidence_session_or_item_recall": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 0,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 394.5,
+      "query_cost": {
+        "known_tokens": 239440,
+        "tokens": 239440,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 49647,
+        "tokens": 49647,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 289087,
+      "total_tokens_per_question": 602.2645833333333,
+      "tokens_per_correct": 602.2645833333333,
+      "query_latency_ms_mean": 3274.5947162499856,
+      "ranking_latency_ms_mean": 0.17088312498880023,
+      "write_latency_ms": 1557673.9425000022,
+      "memory_instances": 24
+    },
+    {
+      "suite": "reuse",
+      "budget_tokens": 512,
+      "arm": "hybrid_raw",
+      "n": 480,
+      "correct": 480,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "literal_accuracy_diagnostic": 1,
+      "evidence_session_or_item_recall": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_or_item_hit": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": null,
+      "annotated_evidence_character_coverage": null,
+      "all_annotated_evidence_turns_complete": null,
+      "errors": 0,
+      "correct_without_any_annotated_evidence": 0,
+      "wrong_despite_all_annotated_sessions_or_items": 0,
+      "memory_tokens_mean": 394.5,
+      "query_cost": {
+        "known_tokens": 239442,
+        "tokens": 239442,
+        "unknown_usage_records": 0
+      },
+      "write_cost": {
+        "known_tokens": 0,
+        "tokens": 0,
+        "unknown_usage_records": 0
+      },
+      "total_tokens": 239442,
+      "total_tokens_per_question": 498.8375,
+      "tokens_per_correct": 498.8375,
+      "query_latency_ms_mean": 3275.513556666689,
+      "ranking_latency_ms_mean": 0.16328583332428556,
+      "write_latency_ms": 0.09010000076159486,
+      "memory_instances": 24
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "full:512:prefix-bm25",
+      "suite": "full",
+      "budget_tokens": 512,
+      "estimate": -0.4166666666666667,
+      "low": -0.507936507936508,
+      "high": -0.32142857142857145,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "prefix",
+      "right": "bm25",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": false
+    },
+    {
+      "id": "full:512:recency-bm25",
+      "suite": "full",
+      "budget_tokens": 512,
+      "estimate": -0.39285714285714285,
+      "low": -0.4999999999999999,
+      "high": -0.28174603174603174,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "recency",
+      "right": "bm25",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": false
+    },
+    {
+      "id": "full:512:jaccard-bm25",
+      "suite": "full",
+      "budget_tokens": 512,
+      "estimate": -0.1349206349206349,
+      "low": -0.23412698412698413,
+      "high": -0.03174603174603176,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "jaccard",
+      "right": "bm25",
+      "p_two_sided": 0.0192980701929807,
+      "p_holm": 0.1543845615438456,
+      "primary": false
+    },
+    {
+      "id": "full:512:hybrid-bm25",
+      "suite": "full",
+      "budget_tokens": 512,
+      "estimate": -0.36111111111111116,
+      "low": -0.46031746031746035,
+      "high": -0.2579365079365079,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid",
+      "right": "bm25",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": true
+    },
+    {
+      "id": "full:512:hybrid-hybrid_no_time",
+      "suite": "full",
+      "budget_tokens": 512,
+      "estimate": -0.24206349206349204,
+      "low": -0.3373015873015873,
+      "high": -0.1468253968253968,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid",
+      "right": "hybrid_no_time",
+      "p_two_sided": 0.00019998000199980003,
+      "p_holm": 0.0021997800219978004,
+      "primary": false
+    },
+    {
+      "id": "full:1024:prefix-bm25",
+      "suite": "full",
+      "budget_tokens": 1024,
+      "estimate": -0.4087301587301588,
+      "low": -0.5000000000000001,
+      "high": -0.3174603174603175,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "prefix",
+      "right": "bm25",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": false
+    },
+    {
+      "id": "full:1024:recency-bm25",
+      "suite": "full",
+      "budget_tokens": 1024,
+      "estimate": -0.32936507936507936,
+      "low": -0.4444444444444445,
+      "high": -0.21428571428571427,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "recency",
+      "right": "bm25",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": false
+    },
+    {
+      "id": "full:1024:jaccard-bm25",
+      "suite": "full",
+      "budget_tokens": 1024,
+      "estimate": 0.015873015873015886,
+      "low": -0.05952380952380952,
+      "high": 0.09126984126984128,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "jaccard",
+      "right": "bm25",
+      "p_two_sided": 0.8068193180681932,
+      "p_holm": 1.0,
+      "primary": false
+    },
+    {
+      "id": "full:1024:hybrid-bm25",
+      "suite": "full",
+      "budget_tokens": 1024,
+      "estimate": -0.2936507936507936,
+      "low": -0.40079365079365087,
+      "high": -0.18253968253968256,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid",
+      "right": "bm25",
+      "p_two_sided": 0.00019998000199980003,
+      "p_holm": 0.0021997800219978004,
+      "primary": true
+    },
+    {
+      "id": "full:1024:hybrid-hybrid_no_time",
+      "suite": "full",
+      "budget_tokens": 1024,
+      "estimate": -0.2698412698412699,
+      "low": -0.36904761904761907,
+      "high": -0.1746031746031746,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid",
+      "right": "hybrid_no_time",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": false
+    },
+    {
+      "id": "full:2048:prefix-bm25",
+      "suite": "full",
+      "budget_tokens": 2048,
+      "estimate": -0.4563492063492064,
+      "low": -0.5515873015873015,
+      "high": -0.3611111111111111,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "prefix",
+      "right": "bm25",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": false
+    },
+    {
+      "id": "full:2048:recency-bm25",
+      "suite": "full",
+      "budget_tokens": 2048,
+      "estimate": -0.40079365079365076,
+      "low": -0.503968253968254,
+      "high": -0.29365079365079366,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "recency",
+      "right": "bm25",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": false
+    },
+    {
+      "id": "full:2048:jaccard-bm25",
+      "suite": "full",
+      "budget_tokens": 2048,
+      "estimate": 0.00793650793650794,
+      "low": -0.07142857142857142,
+      "high": 0.08730158730158731,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "jaccard",
+      "right": "bm25",
+      "p_two_sided": 0.9264073592640736,
+      "p_holm": 1.0,
+      "primary": false
+    },
+    {
+      "id": "full:2048:hybrid-bm25",
+      "suite": "full",
+      "budget_tokens": 2048,
+      "estimate": -0.33730158730158727,
+      "low": -0.44047619047619047,
+      "high": -0.23015873015873015,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid",
+      "right": "bm25",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": true
+    },
+    {
+      "id": "full:2048:hybrid-hybrid_no_time",
+      "suite": "full",
+      "budget_tokens": 2048,
+      "estimate": -0.3333333333333333,
+      "low": -0.42857142857142855,
+      "high": -0.23412698412698413,
+      "clusters": 84,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid",
+      "right": "hybrid_no_time",
+      "p_two_sided": 9.999000099990002e-05,
+      "p_holm": 0.0020997900209979003,
+      "primary": false
+    },
+    {
+      "id": "micro:512:hybrid_exchange-hybrid_raw",
+      "suite": "micro",
+      "budget_tokens": 512,
+      "estimate": -0.36666666666666664,
+      "low": -0.5666666666666667,
+      "high": -0.18333333333333332,
+      "clusters": 20,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid_exchange",
+      "right": "hybrid_raw",
+      "p_two_sided": 0.0035996400359964,
+      "p_holm": 0.0323967603239676,
+      "primary": false
+    },
+    {
+      "id": "micro:512:hybrid_model_ack-hybrid_raw",
+      "suite": "micro",
+      "budget_tokens": 512,
+      "estimate": -0.016666666666666666,
+      "low": -0.05,
+      "high": 0.0,
+      "clusters": 20,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid_model_ack",
+      "right": "hybrid_raw",
+      "p_two_sided": 1.0,
+      "p_holm": 1.0,
+      "primary": false
+    },
+    {
+      "id": "micro:1024:hybrid_exchange-hybrid_raw",
+      "suite": "micro",
+      "budget_tokens": 1024,
+      "estimate": -0.16666666666666669,
+      "low": -0.33333333333333337,
+      "high": -0.01666666666666667,
+      "clusters": 20,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid_exchange",
+      "right": "hybrid_raw",
+      "p_two_sided": 0.12468753124687532,
+      "p_holm": 0.8728127187281272,
+      "primary": false
+    },
+    {
+      "id": "micro:1024:hybrid_model_ack-hybrid_raw",
+      "suite": "micro",
+      "budget_tokens": 1024,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.0,
+      "clusters": 20,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid_model_ack",
+      "right": "hybrid_raw",
+      "p_two_sided": 1.0,
+      "p_holm": 1.0,
+      "primary": false
+    },
+    {
+      "id": "micro:2048:hybrid_exchange-hybrid_raw",
+      "suite": "micro",
+      "budget_tokens": 2048,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.0,
+      "clusters": 20,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid_exchange",
+      "right": "hybrid_raw",
+      "p_two_sided": 1.0,
+      "p_holm": 1.0,
+      "primary": false
+    },
+    {
+      "id": "micro:2048:hybrid_model_ack-hybrid_raw",
+      "suite": "micro",
+      "budget_tokens": 2048,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.0,
+      "clusters": 20,
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 20261007,
+      "method": "stratified paired memory-cluster bootstrap",
+      "left": "hybrid_model_ack",
+      "right": "hybrid_raw",
+      "p_two_sided": 1.0,
+      "p_holm": 1.0,
+      "primary": false
+    }
+  ],
+  "category_results": [
+    {
+      "arm": "bm25",
+      "budget_tokens": 512,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 0.9722222222222222,
+        "low": 0.9166666666666665,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 512,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.7222222222222222,
+        "low": 0.47222222222222215,
+        "high": 0.9166666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 512,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.47222222222222215,
+        "low": 0.2222222222222222,
+        "high": 0.7222222222222223,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 512,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.9166666666666666,
+        "low": 0.75,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 512,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.3055555555555555,
+        "low": 0.08333333333333333,
+        "high": 0.5555555555555555,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 512,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 512,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.4166666666666667,
+        "low": 0.16666666666666666,
+        "high": 0.6666666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 512,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 512,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.25,
+        "low": 0.0,
+        "high": 0.5,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 512,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.08333333333333333,
+        "low": 0.0,
+        "high": 0.2222222222222222,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 512,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.25,
+        "low": 0.0,
+        "high": 0.5,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 512,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.19444444444444442,
+        "low": 0.027777777777777776,
+        "high": 0.38888888888888884,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 512,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.08333333333333333,
+        "low": 0.0,
+        "high": 0.2222222222222222,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 512,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.4166666666666667,
+        "low": 0.16666666666666666,
+        "high": 0.6666666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 512,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 512,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.6666666666666666,
+        "low": 0.4166666666666667,
+        "high": 0.9166666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 512,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.16666666666666666,
+        "low": 0.0,
+        "high": 0.4166666666666667,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 512,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.5,
+        "low": 0.24999999999999997,
+        "high": 0.75,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 512,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.3333333333333333,
+        "low": 0.1111111111111111,
+        "high": 0.5833333333333334,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 512,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.75,
+        "low": 0.5,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 512,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.5555555555555556,
+        "low": 0.3055555555555555,
+        "high": 0.8055555555555555,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 512,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 512,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.6944444444444443,
+        "low": 0.4166666666666667,
+        "high": 0.9166666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 512,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.16666666666666666,
+        "low": 0.0,
+        "high": 0.4166666666666667,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 512,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.5277777777777778,
+        "low": 0.25,
+        "high": 0.7777777777777777,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 512,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.2222222222222222,
+        "low": 0.0,
+        "high": 0.47222222222222215,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 512,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.75,
+        "low": 0.5,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 512,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.49999999999999994,
+        "low": 0.25,
+        "high": 0.75,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 512,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 512,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 512,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.08333333333333333,
+        "low": 0.0,
+        "high": 0.25,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 512,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.2222222222222222,
+        "low": 0.05555555555555555,
+        "high": 0.4444444444444444,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 512,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.36111111111111116,
+        "low": 0.1111111111111111,
+        "high": 0.6111111111111112,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 512,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.05555555555555555,
+        "low": 0.0,
+        "high": 0.16666666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 512,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.16666666666666666,
+        "low": 0.0,
+        "high": 0.4166666666666667,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 512,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 512,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.08333333333333333,
+        "low": 0.0,
+        "high": 0.25,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 512,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.08333333333333333,
+        "low": 0.0,
+        "high": 0.25,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 512,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.16666666666666666,
+        "low": 0.0,
+        "high": 0.4166666666666667,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 512,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.3333333333333333,
+        "low": 0.1111111111111111,
+        "high": 0.5833333333333334,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 512,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 512,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.38888888888888884,
+        "low": 0.13888888888888887,
+        "high": 0.6388888888888888,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 1024,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 0.9166666666666666,
+        "low": 0.75,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 1024,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.75,
+        "low": 0.5,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 1024,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.4166666666666667,
+        "low": 0.16666666666666666,
+        "high": 0.6666666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 1024,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 1024,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.25,
+        "low": 0.08333333333333333,
+        "high": 0.4444444444444444,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 1024,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 1024,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.27777777777777773,
+        "low": 0.08333333333333333,
+        "high": 0.5,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 1024,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 1024,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.25,
+        "low": 0.0,
+        "high": 0.5,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 1024,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.1111111111111111,
+        "low": 0.0,
+        "high": 0.24999999999999997,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 1024,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.3333333333333333,
+        "low": 0.08333333333333333,
+        "high": 0.5833333333333334,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 1024,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.3055555555555555,
+        "low": 0.08333333333333333,
+        "high": 0.5833333333333334,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 1024,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.1111111111111111,
+        "low": 0.0,
+        "high": 0.3055555555555555,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 1024,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.4444444444444445,
+        "low": 0.16666666666666666,
+        "high": 0.7222222222222222,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 1024,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 1024,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.6666666666666666,
+        "low": 0.4166666666666667,
+        "high": 0.9166666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 1024,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.4166666666666667,
+        "low": 0.16666666666666666,
+        "high": 0.6666666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 1024,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.5555555555555555,
+        "low": 0.3055555555555555,
+        "high": 0.8055555555555555,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 1024,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.2222222222222222,
+        "low": 0.0,
+        "high": 0.47222222222222215,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 1024,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 1024,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.5833333333333333,
+        "low": 0.3333333333333333,
+        "high": 0.8333333333333334,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 1024,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 1024,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.6666666666666666,
+        "low": 0.4166666666666667,
+        "high": 0.9166666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 1024,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.4166666666666667,
+        "low": 0.16666666666666666,
+        "high": 0.6666666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 1024,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.5833333333333334,
+        "low": 0.3333333333333333,
+        "high": 0.8333333333333334,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 1024,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.3055555555555555,
+        "low": 0.08333333333333333,
+        "high": 0.5555555555555556,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 1024,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 1024,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.75,
+        "low": 0.5,
+        "high": 0.9444444444444443,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 1024,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 1024,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 1024,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 1024,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.1111111111111111,
+        "low": 0.0,
+        "high": 0.3055555555555555,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 1024,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.27777777777777773,
+        "low": 0.08333333333333333,
+        "high": 0.5,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 1024,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.16666666666666666,
+        "low": 0.0,
+        "high": 0.4166666666666667,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 1024,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.19444444444444442,
+        "low": 0.027777777777777776,
+        "high": 0.38888888888888884,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 1024,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 1024,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.08333333333333333,
+        "low": 0.0,
+        "high": 0.25,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 1024,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.19444444444444442,
+        "low": 0.0,
+        "high": 0.3888888888888889,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 1024,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.25,
+        "low": 0.0,
+        "high": 0.5,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 1024,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.4166666666666667,
+        "low": 0.16666666666666666,
+        "high": 0.6666666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 1024,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.13888888888888887,
+        "low": 0.0,
+        "high": 0.3333333333333333,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 1024,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.2222222222222222,
+        "low": 0.0,
+        "high": 0.47222222222222215,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 2048,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 0.9166666666666666,
+        "low": 0.75,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 2048,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.7777777777777778,
+        "low": 0.5277777777777778,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 2048,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.4444444444444444,
+        "low": 0.19444444444444442,
+        "high": 0.6944444444444445,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 2048,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 2048,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.3611111111111111,
+        "low": 0.13888888888888887,
+        "high": 0.611111111111111,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 2048,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 2048,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.4444444444444444,
+        "low": 0.19444444444444442,
+        "high": 0.6944444444444445,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 2048,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 2048,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.3333333333333333,
+        "low": 0.08333333333333333,
+        "high": 0.5833333333333334,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 2048,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.08333333333333333,
+        "low": 0.0,
+        "high": 0.25,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 2048,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.3055555555555555,
+        "low": 0.08333333333333333,
+        "high": 0.5555555555555556,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 2048,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.19444444444444445,
+        "low": 0.05555555555555555,
+        "high": 0.36111111111111116,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 2048,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.19444444444444445,
+        "low": 0.0,
+        "high": 0.4166666666666667,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 2048,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.47222222222222215,
+        "low": 0.19444444444444442,
+        "high": 0.75,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 2048,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 2048,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.75,
+        "low": 0.5,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 2048,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.5,
+        "low": 0.25,
+        "high": 0.75,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 2048,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.75,
+        "low": 0.5277777777777778,
+        "high": 0.9444444444444443,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 2048,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.3611111111111111,
+        "low": 0.1111111111111111,
+        "high": 0.6111111111111112,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 2048,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 2048,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.5555555555555555,
+        "low": 0.3055555555555555,
+        "high": 0.8055555555555555,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 2048,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 2048,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.75,
+        "low": 0.5,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 2048,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.5,
+        "low": 0.25,
+        "high": 0.75,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 2048,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.7777777777777777,
+        "low": 0.5833333333333333,
+        "high": 0.9444444444444445,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 2048,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.3611111111111111,
+        "low": 0.1111111111111111,
+        "high": 0.6388888888888888,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 2048,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 2048,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.611111111111111,
+        "low": 0.3611111111111111,
+        "high": 0.861111111111111,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 2048,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 2048,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 2048,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 2048,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.16666666666666666,
+        "low": 0.0,
+        "high": 0.3611111111111111,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 2048,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.3055555555555555,
+        "low": 0.08333333333333333,
+        "high": 0.5833333333333334,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 2048,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.13888888888888887,
+        "low": 0.0,
+        "high": 0.3333333333333333,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 2048,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.13888888888888887,
+        "low": 0.0,
+        "high": 0.3333333333333333,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 2048,
+      "category": "abstention",
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 2048,
+      "category": "knowledge-update",
+      "accuracy": {
+        "estimate": 0.08333333333333333,
+        "low": 0.0,
+        "high": 0.25,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 2048,
+      "category": "multi-session",
+      "accuracy": {
+        "estimate": 0.08333333333333333,
+        "low": 0.0,
+        "high": 0.25,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 2048,
+      "category": "single-session-assistant",
+      "accuracy": {
+        "estimate": 0.16666666666666666,
+        "low": 0.0,
+        "high": 0.4166666666666667,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 2048,
+      "category": "single-session-preference",
+      "accuracy": {
+        "estimate": 0.25,
+        "low": 0.05555555555555555,
+        "high": 0.5,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 2048,
+      "category": "single-session-user",
+      "accuracy": {
+        "estimate": 0.16666666666666666,
+        "low": 0.0,
+        "high": 0.3611111111111111,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 2048,
+      "category": "temporal-reasoning",
+      "accuracy": {
+        "estimate": 0.38888888888888884,
+        "low": 0.13888888888888887,
+        "high": 0.6666666666666666,
+        "clusters": 12,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    }
+  ],
+  "judge_sensitivity": [
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "bm25",
+      "primary_accuracy": 0.6865079365079365,
+      "audited_substitution_accuracy": 0.623015873015873,
+      "known_disagreement_lower": 0.6190476190476191,
+      "known_disagreement_upper": 0.6904761904761905,
+      "audited_generations": 113,
+      "disputed_generations": 18,
+      "unaudited_generations": 139,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "hybrid",
+      "primary_accuracy": 0.3253968253968254,
+      "audited_substitution_accuracy": 0.2261904761904762,
+      "known_disagreement_lower": 0.2261904761904762,
+      "known_disagreement_upper": 0.3253968253968254,
+      "audited_generations": 104,
+      "disputed_generations": 25,
+      "unaudited_generations": 148,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "hybrid_no_time",
+      "primary_accuracy": 0.5674603174603174,
+      "audited_substitution_accuracy": 0.503968253968254,
+      "known_disagreement_lower": 0.5,
+      "known_disagreement_upper": 0.5714285714285714,
+      "audited_generations": 113,
+      "disputed_generations": 18,
+      "unaudited_generations": 139,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "jaccard",
+      "primary_accuracy": 0.5515873015873016,
+      "audited_substitution_accuracy": 0.503968253968254,
+      "known_disagreement_lower": 0.5,
+      "known_disagreement_upper": 0.5555555555555556,
+      "audited_generations": 109,
+      "disputed_generations": 14,
+      "unaudited_generations": 143,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "prefix",
+      "primary_accuracy": 0.2698412698412698,
+      "audited_substitution_accuracy": 0.14285714285714285,
+      "known_disagreement_lower": 0.14285714285714285,
+      "known_disagreement_upper": 0.2698412698412698,
+      "audited_generations": 87,
+      "disputed_generations": 32,
+      "unaudited_generations": 165,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 512,
+      "arm": "recency",
+      "primary_accuracy": 0.29365079365079366,
+      "audited_substitution_accuracy": 0.16666666666666666,
+      "known_disagreement_lower": 0.16666666666666666,
+      "known_disagreement_upper": 0.29365079365079366,
+      "audited_generations": 96,
+      "disputed_generations": 32,
+      "unaudited_generations": 156,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "bm25",
+      "primary_accuracy": 0.6587301587301587,
+      "audited_substitution_accuracy": 0.626984126984127,
+      "known_disagreement_lower": 0.626984126984127,
+      "known_disagreement_upper": 0.6587301587301587,
+      "audited_generations": 106,
+      "disputed_generations": 8,
+      "unaudited_generations": 146,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "hybrid",
+      "primary_accuracy": 0.36507936507936506,
+      "audited_substitution_accuracy": 0.23809523809523808,
+      "known_disagreement_lower": 0.23809523809523808,
+      "known_disagreement_upper": 0.36507936507936506,
+      "audited_generations": 98,
+      "disputed_generations": 32,
+      "unaudited_generations": 154,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "hybrid_no_time",
+      "primary_accuracy": 0.6349206349206349,
+      "audited_substitution_accuracy": 0.5793650793650794,
+      "known_disagreement_lower": 0.5793650793650794,
+      "known_disagreement_upper": 0.6349206349206349,
+      "audited_generations": 111,
+      "disputed_generations": 14,
+      "unaudited_generations": 141,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "jaccard",
+      "primary_accuracy": 0.6746031746031746,
+      "audited_substitution_accuracy": 0.5873015873015873,
+      "known_disagreement_lower": 0.5873015873015873,
+      "known_disagreement_upper": 0.6746031746031746,
+      "audited_generations": 113,
+      "disputed_generations": 22,
+      "unaudited_generations": 139,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "prefix",
+      "primary_accuracy": 0.25,
+      "audited_substitution_accuracy": 0.14285714285714285,
+      "known_disagreement_lower": 0.14285714285714285,
+      "known_disagreement_upper": 0.25,
+      "audited_generations": 95,
+      "disputed_generations": 27,
+      "unaudited_generations": 157,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 1024,
+      "arm": "recency",
+      "primary_accuracy": 0.32936507936507936,
+      "audited_substitution_accuracy": 0.16666666666666666,
+      "known_disagreement_lower": 0.16666666666666666,
+      "known_disagreement_upper": 0.32936507936507936,
+      "audited_generations": 103,
+      "disputed_generations": 41,
+      "unaudited_generations": 149,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "bm25",
+      "primary_accuracy": 0.7063492063492064,
+      "audited_substitution_accuracy": 0.6746031746031746,
+      "known_disagreement_lower": 0.6626984126984127,
+      "known_disagreement_upper": 0.7182539682539683,
+      "audited_generations": 107,
+      "disputed_generations": 14,
+      "unaudited_generations": 145,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "hybrid",
+      "primary_accuracy": 0.36904761904761907,
+      "audited_substitution_accuracy": 0.25,
+      "known_disagreement_lower": 0.25,
+      "known_disagreement_upper": 0.36904761904761907,
+      "audited_generations": 99,
+      "disputed_generations": 30,
+      "unaudited_generations": 153,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "hybrid_no_time",
+      "primary_accuracy": 0.7023809523809523,
+      "audited_substitution_accuracy": 0.6507936507936508,
+      "known_disagreement_lower": 0.6388888888888888,
+      "known_disagreement_upper": 0.7142857142857143,
+      "audited_generations": 114,
+      "disputed_generations": 19,
+      "unaudited_generations": 138,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "jaccard",
+      "primary_accuracy": 0.7142857142857143,
+      "audited_substitution_accuracy": 0.6547619047619048,
+      "known_disagreement_lower": 0.6507936507936508,
+      "known_disagreement_upper": 0.7182539682539683,
+      "audited_generations": 113,
+      "disputed_generations": 17,
+      "unaudited_generations": 139,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "prefix",
+      "primary_accuracy": 0.25,
+      "audited_substitution_accuracy": 0.14285714285714285,
+      "known_disagreement_lower": 0.14285714285714285,
+      "known_disagreement_upper": 0.25,
+      "audited_generations": 92,
+      "disputed_generations": 27,
+      "unaudited_generations": 160,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "full",
+      "budget_tokens": 2048,
+      "arm": "recency",
+      "primary_accuracy": 0.3055555555555556,
+      "audited_substitution_accuracy": 0.17857142857142858,
+      "known_disagreement_lower": 0.17857142857142858,
+      "known_disagreement_upper": 0.3055555555555556,
+      "audited_generations": 90,
+      "disputed_generations": 32,
+      "unaudited_generations": 162,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 512,
+      "arm": "hybrid_exchange",
+      "primary_accuracy": 0.31666666666666665,
+      "audited_substitution_accuracy": 0.3,
+      "known_disagreement_lower": 0.3,
+      "known_disagreement_upper": 0.31666666666666665,
+      "audited_generations": 8,
+      "disputed_generations": 1,
+      "unaudited_generations": 52,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 512,
+      "arm": "hybrid_model_ack",
+      "primary_accuracy": 0.6666666666666666,
+      "audited_substitution_accuracy": 0.55,
+      "known_disagreement_lower": 0.55,
+      "known_disagreement_upper": 0.6666666666666666,
+      "audited_generations": 10,
+      "disputed_generations": 7,
+      "unaudited_generations": 50,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 512,
+      "arm": "hybrid_raw",
+      "primary_accuracy": 0.6833333333333333,
+      "audited_substitution_accuracy": 0.55,
+      "known_disagreement_lower": 0.55,
+      "known_disagreement_upper": 0.6833333333333333,
+      "audited_generations": 11,
+      "disputed_generations": 8,
+      "unaudited_generations": 49,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 1024,
+      "arm": "hybrid_exchange",
+      "primary_accuracy": 0.8333333333333334,
+      "audited_substitution_accuracy": 0.8,
+      "known_disagreement_lower": 0.8,
+      "known_disagreement_upper": 0.8333333333333334,
+      "audited_generations": 2,
+      "disputed_generations": 2,
+      "unaudited_generations": 58,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 1024,
+      "arm": "hybrid_model_ack",
+      "primary_accuracy": 1.0,
+      "audited_substitution_accuracy": 0.95,
+      "known_disagreement_lower": 0.95,
+      "known_disagreement_upper": 1.0,
+      "audited_generations": 3,
+      "disputed_generations": 3,
+      "unaudited_generations": 57,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 1024,
+      "arm": "hybrid_raw",
+      "primary_accuracy": 1.0,
+      "audited_substitution_accuracy": 0.95,
+      "known_disagreement_lower": 0.95,
+      "known_disagreement_upper": 1.0,
+      "audited_generations": 3,
+      "disputed_generations": 3,
+      "unaudited_generations": 57,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 2048,
+      "arm": "hybrid_exchange",
+      "primary_accuracy": 1.0,
+      "audited_substitution_accuracy": 1.0,
+      "known_disagreement_lower": 1.0,
+      "known_disagreement_upper": 1.0,
+      "audited_generations": 4,
+      "disputed_generations": 0,
+      "unaudited_generations": 56,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 2048,
+      "arm": "hybrid_model_ack",
+      "primary_accuracy": 1.0,
+      "audited_substitution_accuracy": 1.0,
+      "known_disagreement_lower": 1.0,
+      "known_disagreement_upper": 1.0,
+      "audited_generations": 1,
+      "disputed_generations": 0,
+      "unaudited_generations": 59,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "micro",
+      "budget_tokens": 2048,
+      "arm": "hybrid_raw",
+      "primary_accuracy": 1.0,
+      "audited_substitution_accuracy": 1.0,
+      "known_disagreement_lower": 1.0,
+      "known_disagreement_upper": 1.0,
+      "audited_generations": 1,
+      "disputed_generations": 0,
+      "unaudited_generations": 59,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "reuse",
+      "budget_tokens": 512,
+      "arm": "bm25_raw",
+      "primary_accuracy": 1.0,
+      "audited_substitution_accuracy": 1.0,
+      "known_disagreement_lower": 1.0,
+      "known_disagreement_upper": 1.0,
+      "audited_generations": 36,
+      "disputed_generations": 0,
+      "unaudited_generations": 444,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "reuse",
+      "budget_tokens": 512,
+      "arm": "hybrid_model_ack",
+      "primary_accuracy": 1.0,
+      "audited_substitution_accuracy": 1.0,
+      "known_disagreement_lower": 1.0,
+      "known_disagreement_upper": 1.0,
+      "audited_generations": 39,
+      "disputed_generations": 0,
+      "unaudited_generations": 441,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    },
+    {
+      "suite": "reuse",
+      "budget_tokens": 512,
+      "arm": "hybrid_raw",
+      "primary_accuracy": 1.0,
+      "audited_substitution_accuracy": 1.0,
+      "known_disagreement_lower": 1.0,
+      "known_disagreement_upper": 1.0,
+      "audited_generations": 38,
+      "disputed_generations": 0,
+      "unaudited_generations": 442,
+      "scope": "Hold all unaudited primary labels fixed; substitute only the predeclared audited labels. Bounds vary only known primary/secondary disagreements. Descriptive, not a full independent judge evaluation, confidence interval or bound on all grading errors."
+    }
+  ],
+  "reuse": [
+    {
+      "arm": "bm25_raw",
+      "distinct_queries": 1,
+      "amortized_tokens_per_query": {
+        "estimate": 500.875,
+        "low": 499.25,
+        "high": 502.375,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 500.875,
+        "low": 499.25,
+        "high": 502.375,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 24,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "bm25_raw",
+      "distinct_queries": 5,
+      "amortized_tokens_per_query": {
+        "estimate": 499.4,
+        "low": 498.8,
+        "high": 500.025,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 499.4,
+        "low": 498.8,
+        "high": 500.025,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 120,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "bm25_raw",
+      "distinct_queries": 10,
+      "amortized_tokens_per_query": {
+        "estimate": 498.84166666666664,
+        "low": 497.8625,
+        "high": 499.70416666666665,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 498.84166666666664,
+        "low": 497.8625,
+        "high": 499.70416666666665,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 240,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "bm25_raw",
+      "distinct_queries": 20,
+      "amortized_tokens_per_query": {
+        "estimate": 498.83333333333337,
+        "low": 497.94578125,
+        "high": 499.5208854166667,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 498.83333333333337,
+        "low": 497.94578125,
+        "high": 499.5208854166667,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 480,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "hybrid_model_ack",
+      "distinct_queries": 1,
+      "amortized_tokens_per_query": {
+        "estimate": 2569.5,
+        "low": 2567.708333333333,
+        "high": 2571.3333333333335,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 2569.5,
+        "low": 2567.708333333333,
+        "high": 2571.3333333333335,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 24,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "hybrid_model_ack",
+      "distinct_queries": 5,
+      "amortized_tokens_per_query": {
+        "estimate": 913.125,
+        "low": 912.3833333333333,
+        "high": 913.8583333333332,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 913.125,
+        "low": 912.3833333333333,
+        "high": 913.8583333333332,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 120,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "hybrid_model_ack",
+      "distinct_queries": 10,
+      "amortized_tokens_per_query": {
+        "estimate": 705.7125000000001,
+        "low": 704.6416666666667,
+        "high": 706.6375,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 705.7125000000001,
+        "low": 704.6416666666667,
+        "high": 706.6375,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 240,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "hybrid_model_ack",
+      "distinct_queries": 20,
+      "amortized_tokens_per_query": {
+        "estimate": 602.2645833333333,
+        "low": 601.3374479166666,
+        "high": 602.96875,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 602.2645833333333,
+        "low": 601.3374479166666,
+        "high": 602.96875,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 480,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "hybrid_raw",
+      "distinct_queries": 1,
+      "amortized_tokens_per_query": {
+        "estimate": 501.04166666666663,
+        "low": 499.29166666666663,
+        "high": 502.7083333333333,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 501.04166666666663,
+        "low": 499.29166666666663,
+        "high": 502.7083333333333,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 24,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "hybrid_raw",
+      "distinct_queries": 5,
+      "amortized_tokens_per_query": {
+        "estimate": 499.43333333333334,
+        "low": 498.8333333333333,
+        "high": 500.0335416666667,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 499.43333333333334,
+        "low": 498.8333333333333,
+        "high": 500.0335416666667,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 120,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "hybrid_raw",
+      "distinct_queries": 10,
+      "amortized_tokens_per_query": {
+        "estimate": 498.85833333333335,
+        "low": 497.8666666666667,
+        "high": 499.725,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 498.85833333333335,
+        "low": 497.8666666666667,
+        "high": 499.725,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 240,
+      "write_once_instances": 24
+    },
+    {
+      "arm": "hybrid_raw",
+      "distinct_queries": 20,
+      "amortized_tokens_per_query": {
+        "estimate": 498.8375,
+        "low": 497.9458333333333,
+        "high": 499.51458333333335,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "known_tokens_per_query_lower_bound": {
+        "estimate": 498.8375,
+        "low": 497.9458333333333,
+        "high": 499.51458333333335,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "instances_with_unknown_usage": 0,
+      "accuracy": {
+        "estimate": 1.0,
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 8,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "actual_query_generations": 480,
+      "write_once_instances": 24
+    }
+  ],
+  "accounting": {
+    "solver_attempts": 8196,
+    "failed_attempts": 0,
+    "write_instances_reconciled_with_call_ledger": 420,
+    "known_solver_tokens": 7783743,
+    "unknown_usage_attempts": 0,
+    "reported_input_minus_local_content_tokens_min": 13,
+    "reported_input_minus_local_content_tokens_max": 13,
+    "queue_wait_ms_total": 20678300.889600042,
+    "evaluation_attempts": 3437,
+    "evaluation_tokens_not_deployment_cost": 804054
+  },
+  "inference": "Mean of repeated generations per memory, then stratified memory-cluster bootstrap; paired cluster sign-flip test; Holm correction over all prespecified full/micro comparisons.",
+  "latency_scope": "Query wall clock includes Agent invocation, rate-gate queue waiting and memory packing; excludes source chunking, index creation, precomputed ranking and artifact writes. Call-level service latency excludes queue_wait_ms; rankings and index creation have separate traces. Do not claim total preprocessing or unthrottled production speed.",
+  "retrieval_metric_scope": "Full histories: evidence-session hits and annotated-turn recall (any selected fragment), plus fraction of source characters in annotated turns delivered and complete annotated-turn coverage. None is a semantic proof that every answer fact was delivered. Gold annotations enter reporting only. Abstentions excluded from retrieval metrics. Micro/reuse: required fact-item recall.",
+  "human_review_required": true,
+  "official_longmemeval_score": false,
+  "limitations": [
+    "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+    "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+    "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+    "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+    "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+    "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score.",
+    "Synthetic reuse banks share templates; eight entity/value variants do not establish generality on independent natural memory workloads.",
+    "Representation and model-ACK controls use the adapted 20-item workload; they are mechanism controls, not full-history benchmark results.",
+    "Representation ablation keeps the selector algorithm fixed; changed exchange formatting can affect both lexical features and token packing, so it does not isolate packing alone.",
+    "Construction control canonicalizes identical source facts after real ACK writes; it measures acquisition overhead, not learned summarization quality.",
+    "Three temperature-zero calls measure operational repeatability, not variation across model families.",
+    "Blinded primary/secondary judge audit requires human adjudication before final paper submission.",
+    "The hybrid selector is an existing lexical/time heuristic; no new retrieval algorithm is claimed.",
+    "This evaluates a memory question-answering component, not the quality of automatically generated research papers; a new manuscript and reviewer evaluation are required to measure any paper-score change."
+  ]
+}

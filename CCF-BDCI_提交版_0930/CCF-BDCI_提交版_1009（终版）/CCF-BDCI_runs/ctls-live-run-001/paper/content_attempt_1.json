@@ -1,0 +1,168 @@
+{
+  "sections": [
+    {
+      "id": "abstract",
+      "paragraphs": [
+        "This study asks whether a tier-partitioned lexical selector can prevent temporal dominance without removing temporal information from memory retrieval. The proposed Contrastive Tier-Based Lexical Selection rule separates lexically overlapping candidates from lexically absent candidates, ranks relevant items with the existing hybrid score, and uses recency only for fallback ordering. Its non-dominance property is structural: a zero-overlap item cannot displace a positive-overlap item during ranking or packing. The supplied measurements, however, do not contain CTLS outcome tokens, so they cannot establish the proposed selector’s empirical accuracy, recall, or cost. The available controlled comparisons instead show the reported enhanced hybrid arm below BM25: at the smallest evaluated budget, enhanced accuracy was [[metric:fair_baselines_512.enhanced.accuracy]] while baseline accuracy was [[metric:fair_baselines_512.baseline.accuracy]], and at the primary budget enhanced accuracy was [[metric:fair_baselines.enhanced.accuracy]] while baseline accuracy was [[metric:fair_baselines.baseline.accuracy]]. The reported reuse endpoint shows equal accuracy but higher total token cost for the model-acknowledgment arm. Thus, the mechanism is specified and testable, but the central CTLS comparison remains unresolved."
+      ],
+      "subsections": []
+    },
+    {
+      "id": "introduction",
+      "paragraphs": [
+        "Long-term agent memory must choose a bounded context from histories that differ in lexical relevance, recency, access frequency, and importance. A global hybrid score can allow a fresh but lexically irrelevant item to outrank an older item sharing query terms when the temporal contribution exceeds the relevance contribution. This is the temporal-dominance failure mode examined here. The practical consequence is not merely a different ordering: under whole-item packing, an irrelevant item may consume scarce context space before relevant evidence is admitted.",
+        "The research question is whether a tier-partitioned scoring rule can eliminate that failure by construction while retaining temporal information as a within-tier tiebreaker. The scope is deliberately operational. It concerns a frozen, read-only, single-layer memory bank, lexical tokenization, matched context packing, and answer quality under a controlled LongMemEval-S adaptation. It does not evaluate autonomous memory evolution, learned representations, reflection, persistence across restarts, official benchmark compliance, or paper-generation quality.",
+        "The first contribution is a precise algorithmic proposal. CTLS partitions candidates according to positive versus zero lexical overlap, ranks the positive-overlap tier with the existing hybrid score, ranks the fallback tier with recency and importance, and packs the relevant tier first. The second contribution is a formal non-dominance claim: relevant candidates cannot be displaced by zero-overlap candidates regardless of freshness or weight ratios. The third contribution is an empirical evaluation design spanning matched budgets, a no-temporal ablation, and memory reuse. Only part of that design is supported by the supplied measurements, so the evidence and its gaps are separated explicitly."
+      ],
+      "subsections": [
+        {
+          "id": "rq_quality",
+          "paragraphs": [
+            "The quality question compares CTLS, hybrid, and BM25 under matched budgets using semantic answer accuracy, evidence-session recall, annotated-turn retrieval measures, token accounting, and query wall-clock measurements. The planned design holds question identities, models, prompts, memory items, tokenizer, packing, and write path constant while changing the selector. This is an appropriate test of selector effects in principle, but the supplied metric inventory reports only baseline and enhanced arms, not CTLS. Consequently, the intended three-way accuracy comparison cannot be completed from the evidence provided."
+          ]
+        },
+        {
+          "id": "rq_attribution",
+          "paragraphs": [
+            "The attribution question separates the structural tier guarantee from empirical usefulness. Removing temporal weighting globally is specified as a mechanism ablation, whereas CTLS retains temporal scoring inside the relevant tier. The formal guarantee therefore does not require a measured accuracy increase. Yet the supplied outcomes contain no CTLS or hybrid-no-time accuracy tokens, no tier assignments, and no item-level packing traces. Aggregate baseline-versus-enhanced results cannot reveal which candidate displaced which, so they do not verify the proposed failure mechanism empirically."
+          ]
+        },
+        {
+          "id": "rq_lifecycle",
+          "paragraphs": [
+            "The lifecycle question asks whether selector substitution changes construction cost, query cost, or amortized write-plus-query cost when a memory bank serves repeated queries. The implementation brief predicts no new model calls for CTLS and therefore no selector-induced construction overhead, but this remains a protocol expectation rather than a measured CTLS result. The available reuse evidence compares raw and model-acknowledgment paths on synthetic banks, where accuracy is equal and total cost differs; it does not measure CTLS."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "related_work",
+      "paragraphs": [
+        "Agent memory systems motivate different points in the memory lifecycle. Generative Agents synthesize natural-language experiences, reflections, and dynamically retrieved records for interactive behavior, whereas the present method addresses only ranking and packing of already available records; it does not implement reflection or planning [[cite:ref_6e953134a3c04402]]. MemoryBank describes long-term retrieval and updates with forgetting and reinforcement influenced by elapsed time and importance. CTLS differs in ordering policy because temporal decay is subordinate to lexical relevance rather than globally dominant [[cite:ref_713e886950406893]]. A-MEM organizes structured notes with dynamic links and evolving memories. That work motivates structured memory organization, but no empirical comparison is supplied here and CTLS does not implement autonomous linking or evolution [[cite:ref_1aacba116cbe3c5b]].",
+        "A second theme concerns context management and retrieval position. MemGPT describes virtual context management inspired by operating-system hierarchies, moving information across memory tiers; CTLS is narrower, operating at selection within L1 rather than implementing an autonomous virtual-memory controller [[cite:ref_959d6858d034c6e1]]. Lost in the Middle reports that the position of relevant information affects long-context question answering and key-value retrieval. This motivates relevance-first packing, but it does not show that the temporal-dominance condition here is caused by positional behavior in the answer model [[cite:ref_9dbf664b6954efbc]]. LongMemEval separates indexing, retrieval, and reading while testing extraction, temporal reasoning, updates, multi-session reasoning, and abstention. The present evaluation adapts that setting with a fixed question subset and substituted judge, so its measurements should be interpreted as controlled component evidence rather than an official benchmark score [[cite:ref_ab2c226739f2f52a]].",
+        "Within information retrieval, the method belongs to the family of lexical and hybrid selectors that combine overlap with auxiliary signals. Its distinction is not a new learned representation or a new model call, but a precedence constraint between relevance tiers. The packing problem is also budget constrained: candidates are ranked, then whole items are admitted only when they fit. This makes ordering consequential even when the score difference between candidates is small. The supplied sources motivate retrieval, temporal dynamics, memory tiers, and context placement, but none directly measures CTLS; the empirical question therefore remains specific to the controlled implementation described here."
+      ],
+      "subsections": []
+    },
+    {
+      "id": "method",
+      "paragraphs": [
+        "The method evaluates a selector substitution over a frozen memory bank. Full source histories are retained and segmented without loss into bounded turn records using the pinned lexical tokenizer. Each selector sees the same records, timestamps, metadata, wrapper, and whole-item first-fit packing policy. This design isolates ranking and packing behavior from memory construction, learned summarization, embedding generation, and persistent storage. The legacy production Rail capacity is not treated as equivalent to the controlled bank.",
+        "The proposed mechanism is contrasted with BM25 and the existing hybrid heuristic. BM25 supplies a lexical retrieval baseline, while the hybrid combines lexical overlap, temporal decay, frequency, and importance globally. CTLS changes the precedence relation rather than adding a representation: lexical overlap first determines tier membership, after which the existing hybrid score is used within the relevant tier. The fallback tier is ordered by recency and importance. All stated empirical claims below are limited by the absence of CTLS-specific outcome metrics in the supplied evidence."
+      ],
+      "subsections": [
+        {
+          "id": "method_baseline",
+          "paragraphs": [
+            "The baseline bank is read-only and single-layer, with source histories segmented into bounded turn records. Every arm uses the same canonical records, timestamps, metadata, memory wrapper, tokenizer, candidate consideration, and whole-item first-fit overflow rule. A displayed item is either admitted as a whole or skipped, so a candidate’s rank can affect later packing decisions. The controlled bank is distinct from the legacy L1 capacity and should not be interpreted as a production persistence evaluation.",
+            "BM25 and the existing hybrid are implementation baselines, not new contributions. The hybrid applies its lexical, temporal, frequency, and importance components to the candidate list globally. Because the token cap applies to the complete memory section including the identical wrapper, contextual content is matched at the selector level. Source chunking, index creation, precomputed ranking, and artifact writes are excluded from query wall-clock measurements; therefore reported query latency is not end-to-end system latency."
+          ]
+        },
+        {
+          "id": "method_ctls",
+          "paragraphs": [
+            "CTLS first computes lexical overlap for every candidate and assigns each item to a relevant tier when overlap is positive or an absent tier when overlap is zero. It then ranks the relevant tier with the full hybrid score, allowing temporal decay and frequency to resolve ordering among genuinely overlapping items. The absent tier uses recency plus importance as a fallback. The final candidate sequence concatenates the relevant tier before the absent tier, and the unchanged greedy packer consumes that sequence.",
+            "The non-dominance proof is direct. A relevant item receives a positive lexical contribution that an absent item cannot receive, while absent-tier scoring uses a lower-weight schedule. Therefore any relevant item ranks above any absent item under the CTLS tier rule, regardless of the absent item’s freshness, frequency, or importance. Packing reinforces the same relation because the relevant tier is drained before fallback items are considered. This is a guarantee about relative ordering, not a guarantee of answer accuracy, evidence completeness, or performance against BM25.",
+            "CTLS requires no model call, learned parameter, embedding model, reflection module, or persistence mechanism. Its relationship to the no-temporal ablation is also specific: when candidates are all relevant, removing temporal decay can approximate the within-tier ordering, while mixed-overlap queries preserve a distinction because CTLS still uses temporal information among relevant items. The supplied evidence does not contain the ablation’s outcomes or candidate traces, so the proposed upper-bound interpretation remains untested here. The method is situated within the narrower selection layer described by MemGPT and LongMemEval, rather than claiming either system’s broader capabilities [[cite:ref_959d6858d034c6e1]] [[cite:ref_ab2c226739f2f52a]]."
+          ]
+        },
+        {
+          "id": "method_protocol",
+          "paragraphs": [
+            "The planned protocol uses isolated conversations, deterministic answer generation, repeated solver calls, and fixed task-specific grading prompts. The real agent uses qwen-plus-2025-12-01 without tools and with one iteration, while grading uses qwen3-max-2026-01-23 with a fixed audit procedure. Retrieval from the full history collection is separated from question answering. The design also includes a no-temporal ablation and synthetic reuse banks, but planned protocol fields are not themselves measurements.",
+            "The protocol’s citation context is LongMemEval, whose task structure separates indexing, retrieval, and reading and includes temporal, update, multi-session, extraction, and abstention questions [[cite:ref_ab2c226739f2f52a]]. The adapted evaluation retains full histories but uses a balanced subset, segmented records, and a substituted judge. Those deviations are material: the result is not an official benchmark score. The declared review process also remains incomplete because blinded human adjudication is still required before final confirmation."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experiments",
+      "paragraphs": [
+        "The experimental design has matched selector arms, fixed model identity, pinned prompts, and controlled memory formatting. It evaluates a smaller-budget comparison, a primary-budget comparison, a larger-budget replication, and a synthetic reuse study. The budget changes are intended to test whether selector ordering matters more when packing is constrained. However, the research plan distinguishes declared protocols from verified evidence, and the supplied metric tokens do not include CTLS results. The setup is therefore reported as the scope of the test, not as proof that the proposed selector ran successfully."
+      ],
+      "subsections": [
+        {
+          "id": "setup_fair_baselines_512",
+          "paragraphs": [
+            "The smallest-budget setup uses the predeclared LongMemEval-S full-history subset, a pinned Qwen tokenizer, identical whole-item packing, and repeated solver calls per question and selector. It records answer accuracy, evidence-session recall, annotated-turn recall, complete annotated-turn coverage, write-plus-query tokens, and query latency including scheduling. The supplied data verify baseline and enhanced arms but do not provide CTLS metrics, CTLS traces, or CTLS paired outcomes. The available intervals therefore quantify uncertainty for the reported arms only."
+          ]
+        },
+        {
+          "id": "setup_fair_baselines",
+          "paragraphs": [
+            "The primary-budget setup preserves the same question subset, model identity, prompts, memory bank, tokenizer, packing, and write path while changing the selector. Baseline and enhanced token accounting includes query tokens and memory construction tokens where present. Query wall clock includes agent invocation, queue waiting, and memory packing, but excludes preprocessing and artifact writes. Since CTLS-specific accuracy, recall, cost, and latency tokens are absent, this setup establishes a valid intended comparison rather than a completed CTLS evaluation."
+          ]
+        },
+        {
+          "id": "setup_protocol_replication",
+          "paragraphs": [
+            "The larger-budget setup repeats the same question subset at a less restrictive context capacity and uses the same broad scoring procedure. It is not an independent cohort, and the protocol record has a missing scoring-review field. The declared comparison includes BM25, hybrid, and the no-temporal ablation, but the supplied measurements expose only baseline and enhanced outcomes. Claims about CTLS robustness, diminishing gains, or behavior when relevant items fit cannot therefore be made from this record."
+          ]
+        },
+        {
+          "id": "setup_memory_reuse",
+          "paragraphs": [
+            "The reuse study uses synthetic entity and value variants, repeated queries against a constructed bank, and a per-query accounting rule that counts construction once before amortizing query costs. It compares a raw path with a model-acknowledgment path, not CTLS with its baseline. The sample is small and templated, and endpoint evidence is available after repeated querying while intermediate reuse points are supplied only through supporting material. Query latency remains operational query time, not complete lifecycle latency."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "paragraphs": [
+        "The supplied results do not contain CTLS outcome tokens despite the planned CTLS comparisons. Accordingly, this section reports the available baseline-versus-enhanced evidence and identifies what it cannot establish. The observed comparisons are useful for auditing the controlled setup, but they cannot be relabeled as CTLS findings. In particular, no aggregate result can reveal tier membership, candidate positions, packing decisions, or a diagnosed temporal-dominance case without item-level traces."
+      ],
+      "subsections": [
+        {
+          "id": "result_fair_baselines_512",
+          "paragraphs": [
+            "At the smallest evaluated budget, the reported baseline accuracy was [[metric:fair_baselines_512.baseline.accuracy]], with evidence-session recall [[metric:fair_baselines_512.baseline.evidence_recall]]. The reported enhanced accuracy was [[metric:fair_baselines_512.enhanced.accuracy]], and enhanced evidence-session recall was [[metric:fair_baselines_512.enhanced.evidence_recall]]. The paired difference interval spans [[metric:fair_baselines_512.accuracy_difference_ci_low_pp]] to [[metric:fair_baselines_512.accuracy_difference_ci_high_pp]] percentage points, with the supplied corrected test token [[metric:fair_baselines_512.paired_p_holm]]. These are baseline-versus-enhanced findings, not CTLS findings.",
+            "The cost tradeoff is mixed in the reported arms. Baseline total tokens were [[metric:fair_baselines_512.baseline.all_tokens]], whereas enhanced total tokens were [[metric:fair_baselines_512.enhanced.all_tokens]]; per-question values were [[metric:fair_baselines_512.baseline.tokens_per_question]] and [[metric:fair_baselines_512.enhanced.tokens_per_question]], respectively. Enhanced query latency was [[metric:fair_baselines_512.enhanced.query_latency_ms]] milliseconds versus [[metric:fair_baselines_512.baseline.query_latency_ms]] milliseconds for baseline. Total end-to-end latency is unavailable for both arms, and no CTLS token or latency measurement is supplied."
+          ]
+        },
+        {
+          "id": "result_fair_baselines",
+          "paragraphs": [
+            "At the primary budget, baseline accuracy was [[metric:fair_baselines.baseline.accuracy]] and evidence-session recall was [[metric:fair_baselines.baseline.evidence_recall]]. The enhanced arm recorded accuracy [[metric:fair_baselines.enhanced.accuracy]] and evidence-session recall [[metric:fair_baselines.enhanced.evidence_recall]]. The supplied paired accuracy interval ranges from [[metric:fair_baselines.accuracy_difference_ci_low_pp]] to [[metric:fair_baselines.accuracy_difference_ci_high_pp]] percentage points, and the corrected test is [[metric:fair_baselines.paired_p_holm]]. The interval and test concern the reported arms only; they do not measure CTLS or validate the non-dominance property.",
+            "Baseline all-token usage was [[metric:fair_baselines.baseline.all_tokens]], compared with [[metric:fair_baselines.enhanced.all_tokens]] for enhanced. The corresponding tokens per question were [[metric:fair_baselines.baseline.tokens_per_question]] and [[metric:fair_baselines.enhanced.tokens_per_question]]. Enhanced query latency was [[metric:fair_baselines.enhanced.query_latency_ms]] milliseconds, while baseline query latency was [[metric:fair_baselines.baseline.query_latency_ms]] milliseconds. Because write and query components are separately logged, these totals include the supplied accounting scope but do not support a claim about unmeasured preprocessing or end-to-end production speed."
+          ]
+        },
+        {
+          "id": "result_protocol_replication",
+          "paragraphs": [
+            "At the larger budget, baseline accuracy was [[metric:protocol_replication.baseline.accuracy]] and evidence-session recall was [[metric:protocol_replication.baseline.evidence_recall]]. Enhanced accuracy was [[metric:protocol_replication.enhanced.accuracy]], with enhanced evidence-session recall [[metric:protocol_replication.enhanced.evidence_recall]]. The supplied paired interval for accuracy extends from [[metric:protocol_replication.accuracy_difference_ci_low_pp]] to [[metric:protocol_replication.accuracy_difference_ci_high_pp]] percentage points, and the corrected test token is [[metric:protocol_replication.paired_p_holm]]. This is the same question subset at a different budget, not an independent replication, and it does not provide CTLS measurements.",
+            "The reported baseline all-token total was [[metric:protocol_replication.baseline.all_tokens]], compared with [[metric:protocol_replication.enhanced.all_tokens]] for enhanced. Enhanced query latency was [[metric:protocol_replication.enhanced.query_latency_ms]] milliseconds versus [[metric:protocol_replication.baseline.query_latency_ms]] milliseconds. Complete annotated-turn coverage was [[metric:protocol_replication.baseline.all_annotated_evidence_turns_complete]] for baseline and [[metric:protocol_replication.enhanced.all_annotated_evidence_turns_complete]] for enhanced. These retrieval measures indicate selected annotated evidence, not semantic proof that every answer fact was delivered, and they cannot identify a CTLS mechanism."
+          ]
+        },
+        {
+          "id": "result_memory_reuse",
+          "paragraphs": [
+            "In the synthetic reuse study, both reported arms achieved accuracy [[metric:memory_reuse.baseline.accuracy]] and [[metric:memory_reuse.enhanced.accuracy]], while required fact-item recall was [[metric:memory_reuse.baseline.evidence_recall]] for baseline and [[metric:memory_reuse.enhanced.evidence_recall]] for enhanced. The supplied accuracy gain is [[metric:memory_reuse.accuracy_gain_pp]] percentage points, and no interval or paired test token is available. This equality is descriptive for the raw and model-acknowledgment paths; it is not evidence about CTLS.",
+            "Including construction, baseline all-token usage was [[metric:memory_reuse.baseline.all_tokens]], whereas enhanced usage was [[metric:memory_reuse.enhanced.all_tokens]]. The reported total-token ratio is [[metric:memory_reuse.total_token_ratio]], and the enhanced path includes [[metric:memory_reuse.enhanced.seed_tokens]] seed tokens and [[metric:memory_reuse.enhanced.seed_model_calls]] seed model calls. Query latency was [[metric:memory_reuse.baseline.query_latency_ms]] milliseconds for baseline and [[metric:memory_reuse.enhanced.query_latency_ms]] milliseconds for enhanced. The synthetic banks share templates, so the endpoint does not establish generality or CTLS cost neutrality empirically."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "discussion",
+      "paragraphs": [
+        "The strongest supported conclusion is methodological rather than empirical. CTLS is specified as a relevance-first selector with a clear non-dominance property, and the frozen-bank protocol would be capable of testing it if CTLS outputs were supplied. The available measurements instead show that the reported enhanced hybrid arm underperforms the reported BM25 arm across the supplied budget comparisons, with differences in evidence recall and token usage. That pattern does not diagnose temporal dominance, because no item-level ranking or packing trace is available and the enhanced arm is not identified as CTLS.",
+        "The cost accounting also requires careful interpretation. Selector substitution is intended to add no model calls, but that is an implementation statement, not a measured CTLS lifecycle result. The reuse evidence demonstrates that construction can materially affect amortized totals in the model-acknowledgment path, while answer accuracy remains equal to the raw path in the supplied synthetic workload. Since no CTLS reuse tokens exist, it is not possible to state that CTLS preserves those costs empirically, even though the proposed algorithm contains no construction operation.",
+        "Several limitations constrain interpretation. The question-answer evaluation uses an adapted subset and a substituted judge rather than an official benchmark score. The primary and secondary judge audit still requires human adjudication. Temperature-zero repetitions measure operational repeatability, not variation across model families. Retrieval measures based on annotated turns do not prove semantic answer support, abstentions are excluded from retrieval metrics, and the synthetic reuse workload is small and templated. The larger-budget result reuses the same question subset, while the reuse protocol lacks complete review metadata.",
+        "Future evaluation should export CTLS-specific accuracy, evidence recall, complete coverage, write-plus-query tokens, and query latency under every planned budget. It should also report paired question outcomes against hybrid, BM25, and the no-temporal ablation, together with tier membership and whole-item packing traces. Those traces would test whether the formal ordering affects delivered evidence without attributing an aggregate failure to an unobserved item. Human adjudication and the missing review fields should be completed before treating the outcomes as final."
+      ],
+      "subsections": []
+    },
+    {
+      "id": "conclusion",
+      "paragraphs": [
+        "The study defines a testable question about preventing temporal dominance in bounded agent memory retrieval. CTLS provides a principled mechanism: positive-overlap candidates are protected in a higher-priority tier, while temporal information remains available within that tier and for fallback ordering. The non-dominance property follows from the tier rule and packing order, but it guarantees ordering only, not answer quality or benchmark performance.",
+        "The supplied evidence cannot answer whether CTLS improves accuracy, recall, or lifecycle cost because CTLS-specific metric tokens and paired traces are absent. It does show that the reported enhanced hybrid arm has lower answer accuracy than the reported BM25 arm at the available comparisons, and that a model-acknowledgment reuse path can preserve accuracy while increasing total token accounting. Those findings motivate, but do not substitute for, the missing CTLS evaluation.",
+        "Accordingly, the defensible conclusion is that CTLS is an explicitly specified algorithm awaiting empirical verification in this record. Claims of recovery toward BM25, superiority, temporal-dominance elimination in observed cases, or cost neutrality should remain unmade until the planned selector outputs, ablation results, human adjudication, and lifecycle measurements are supplied."
+      ],
+      "subsections": []
+    }
+  ],
+  "title": "CTLS: Contrastive Tier-Based Lexical Selection Eliminates Temporal Dominance in Agent Memory Retrieval",
+  "research_question": "Can a theoretically grounded tier-partitioned scoring rule that uses temporal decay only as a within-tier tiebreaker eliminate the temporal dominance failure mode and close the gap to BM25 without discarding temporal information entirely?"
+}

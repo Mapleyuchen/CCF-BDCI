@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{iclr2027_conference,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+
+\title{@@TITLE@@}
+\author{@@AUTHORS@@}
+@@AUTHOR_MODE@@
+
+\begin{document}
+\maketitle
+% Override the bundled style's submission/acceptance header for this draft.
+\lhead{Research paper framework -- draft}
+\begin{abstract}
+\input{sections/abstract.tex}
+\end{abstract}
+
+@@SECTIONS@@
+
+@@BIBLIOGRAPHY@@
+\end{document}

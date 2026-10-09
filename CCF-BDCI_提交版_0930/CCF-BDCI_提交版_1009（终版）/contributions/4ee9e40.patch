@@ -1,0 +1,1324 @@
+From 4ee9e403e47ad71a08cd17c96a21efb7fc80a743 Mon Sep 17 00:00:00 2001
+From: Eureka-Y17 <2454276@tongji.edu.cn>
+Date: Tue, 6 Oct 2026 01:15:08 +0800
+Subject: [PATCH 1/4] =?UTF-8?q?=E8=B0=83=E6=95=B4=E7=AB=A0=E8=8A=82?=
+ =?UTF-8?q?=E8=A7=84=E5=88=92?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../research-paper-generator/README.md        |   8 +
+ .../examples/memory-revision.brief.json       | 662 ++++++++++++++++++
+ .../references/research_revision.md           |  92 +++
+ .../scripts/paper_content/project.py          |   2 +
+ .../scripts/paper_content/prose.py            |  10 +
+ .../scripts/paper_framework/planner.py        |  34 +-
+ .../scripts/paper_framework/project.py        |   6 +
+ .../scripts/paper_framework/research.py       | 175 +++++
+ .../tests/test_research_plan.py               | 174 +++++
+ 9 files changed, 1162 insertions(+), 1 deletion(-)
+ create mode 100644 jiuwenswarm/research-paper-generator/examples/memory-revision.brief.json
+ create mode 100644 jiuwenswarm/research-paper-generator/references/research_revision.md
+ create mode 100644 jiuwenswarm/research-paper-generator/scripts/paper_framework/research.py
+ create mode 100644 jiuwenswarm/research-paper-generator/tests/test_research_plan.py
+
+diff --git a/jiuwenswarm/research-paper-generator/README.md b/jiuwenswarm/research-paper-generator/README.md
+index 087934b..eef0c26 100644
+--- a/jiuwenswarm/research-paper-generator/README.md
++++ b/jiuwenswarm/research-paper-generator/README.md
+@@ -8,6 +8,8 @@
+ 
+ **框架生成器是规则规划器，不调用 LLM，不生成论文正文、实验数字或研究结论。** 主章节使用科研论文常见结构，方法与实验子章节根据输入生成。后续主 Agent 可以先组织研究说明，再调用本模块。尚未实现自主研究构思或主 Agent 的工具注册。
+ 
++针对测试平台反馈的修订版框架与第 2 / 4 / 5 部分交接说明见 [研究修订接口](references/research_revision.md)。`examples/memory-revision.brief.json` 保留两份初步实验，并增加六项计划实验；新增结果需由实验模块实际运行后交付。
++
+ ## 立即运行
+ 
+ 在仓库根目录执行：
+@@ -39,11 +41,15 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模
+ | `authors` | 否 | 作者姓名字符串数组；非匿名时必填 |
+ | `methods` | 否 | 方法对象数组；每项有 `id`、`title`，可选 `description`、`citation_ids` |
+ | `experiments` | 否 | 实验对象数组；每项有 `id`、`title`，可选 `status`、`metrics`、`result_path` |
++| `research_questions` | 否 | 研究问题数组：`id/title/question`，用于生成引言子章节并关联实验 |
++| `review_concerns` | 否 | 评审问题数组：`id/title/description/experiment_ids`，记录仍待证据或科学复核的问题 |
+ 
+ 方法、实验的 `id` 在各自数组内唯一，使用小写字母开头及小写字母、数字、下划线、短横线。它们生成稳定的章节标签。`citation_ids` 是文献的显式 `id` 或规范 ID，例如 `arxiv:2310.08560`、`doi:10.xxxx/xxx`；引用不存在的 ID 会报错。
+ 
+ `status` 默认 `planned`。计划实验仅产生实验设置子章节，并列出待补数据。`completed` 必须附上存在的 `result_path`，其路径**相对原始 brief 文件所在目录**解析。模块记录 SHA-256，并将当时的原始文件复制到 `evidence/raw/`；复制后再次核对哈希。结果子章节标记为“待证据复核”，不会根据文件存在生成结论。
+ 
++`planned` 实验不能同时提供非空 `result_path`，避免状态与证据矛盾。实验可选增加 `purpose`、`research_question_ids`、`protocol`、`evidence_requirements`、`limitations`。协议字段、缺失信息处理和示例见 [修订接口](references/research_revision.md)；不使用这些字段时保持原有八章结构和子章节 ID。
++
+ 新证据记录的 `project_path` 相对当前论文工程解析，跨目录、跨电脑交接时以此为准。`original_path`、原始 `input_path` 只用于来源追踪；`resolved_path` 为生成时的快照绝对路径，保留给旧调用方。第 4、5 部分优先读取项目内快照，快照缺失或被修改时拒绝使用，不回退到旧电脑上的文件。生成后原始实验文件的后续变化不会改变这份已规划的证据；要采用新结果，应重新生成框架。旧的绝对路径工程仍可在原路径有效时读取，交接前建议重新生成。
+ 
+ 这允许第 2 位同学继续使用自己的结果格式。第 3 部分只约定实验描述和文件关联，不要求对方先改实验脚本。输入给正文的实验结果由第 4 位同学解析。
+@@ -65,6 +71,8 @@ CLI 输入与输出路径相对当前工作目录；模板默认路径相对模
+   paper.tex                 主文件及章节装配
+   sections/*.tex            8 个主章节的可填写文件
+   outline.json              每节目标、状态、子章节、候选引用与证据关联
++  research_plan.json        使用修订字段时生成：协议、研究问题关联和待补证据
++  RESEARCH_HANDOFF.md        使用修订字段时生成：可直接交给队友的任务说明
+   citation_map.json         规范元数据、原始 ID -> 引用键、去重来源索引
+   references.bib            从输入生成的 BibTeX
+   brief.input.json          研究说明快照（结果相对路径仍以原始 brief 为基准）
+diff --git a/jiuwenswarm/research-paper-generator/examples/memory-revision.brief.json b/jiuwenswarm/research-paper-generator/examples/memory-revision.brief.json
+new file mode 100644
+index 0000000..953e97d
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/examples/memory-revision.brief.json
+@@ -0,0 +1,662 @@
++{
++  "schema_version": 1,
++  "anonymous": true,
++  "methods": [
++    {
++      "id": "baseline",
++      "title": "File-Based Project Memory",
++      "description": "The baseline is the actual ProjectMemoryRail. Facts are written to an isolated JIUWENSWARM.md file. Its prompt includes file metadata and is truncated to the full-section character budget. Both arms receive the same facts, questions, model, system prompt and no tools. This is not a retrieval-augmented embedding baseline.",
++      "citation_ids": []
++    },
++    {
++      "id": "retrieval",
++      "title": "Hybrid Selection from Working Memory",
++      "description": "EnhancedMemoryRail writes completed user-assistant exchanges to process-local L1 memory. The experiment uses lexical Jaccard similarity combined with temporal decay, access frequency and importance, rather than learned embeddings. Selected memories are assembled under the same full-section character budget. The architecture has L2/L3 classes, but this Rail does not route writes there, persist them across process restarts or synchronize a team. MemGPT is conceptual context, not an implemented or tested baseline.",
++      "citation_ids": [
++        "memgpt"
++      ]
++    },
++    {
++      "id": "protocol",
++      "title": "Isolation and Cost Accounting",
++      "description": "Each public-data question has its own fact episode and fresh agents. Baseline writes facts to disk; enhanced performs model-backed memory-writing conversations. The formal question uses a new conversation ID. The runner verifies isolated query history and actual memory injection, alternates arm order across questions, and records both query usage and memory-write usage. Latency including writes is amortized over paired observations. Correctness is accepted-answer string matching; evidence recall requires the complete target fact to survive prompt truncation.",
++      "citation_ids": [
++        "longmemeval"
++      ]
++    }
++  ],
++  "source_notes": {
++    "memgpt": "Verified arXiv abstract: virtual context management inspired by operating-system hierarchies moves information across memory tiers; demonstrations include document analysis and multi-session chat. Our fixed L1 Rail does not implement its autonomous virtual-memory controller.",
++    "longmemeval": "Verified arXiv abstract: LongMemEval evaluates extraction, multi-session reasoning, temporal reasoning, updates and abstention; it separates indexing, retrieval and reading. The submitted small single-session-user adaptation covers only a narrow slice, not the official full benchmark.",
++    "generative_agents": "Verified arXiv abstract: natural-language experience records are synthesized into reflections and dynamically retrieved for planning behavior in an interactive simulation. This study neither implements reflection/planning nor tests social behavior; distinguish record retrieval from that broader architecture.",
++    "lost_middle": "Verified arXiv abstract: relevant information position affects multi-document QA and key-value retrieval in long contexts, with middle positions often harder. This motivates attention to information access but does not establish that our observed prefix truncation is caused by the same phenomenon.",
++    "memorybank": "Verified arXiv abstract: MemoryBank supports retrieval and updates for sustained personalized interaction, with forgetting and reinforcement influenced by elapsed time and importance. Our temporal ranking is a simple heuristic, not a replication of MemoryBank or its companionship evaluation.",
++    "amem": "Verified arXiv abstract: A-MEM creates structured notes and dynamically links and evolves memories, inspired by Zettelkasten organization. Our fixed lexical ranking lacks autonomous linking and evolution; no empirical comparison to A-MEM was run."
++  },
++  "title": "Evaluating Memory Retrieval: Evidence Quality and Lifecycle Cost",
++  "research_question": "Under matched token budgets and controlled memory representations, how do selection and construction affect answer quality and lifecycle cost across repeated queries?",
++  "research_questions": [
++    {
++      "id": "quality",
++      "title": "Quality under Matched Budgets",
++      "question": "How does answer and evidence quality compare against stronger baselines with identical representations, formatting and token accounting?"
++    },
++    {
++      "id": "attribution",
++      "title": "Attributing Component Effects",
++      "question": "Which differences remain when selection, representation and construction are varied separately?"
++    },
++    {
++      "id": "lifecycle",
++      "title": "Lifecycle Cost under Memory Reuse",
++      "question": "How does measured write-plus-query cost change when a constructed memory serves multiple distinct queries?"
++    }
++  ],
++  "writing_notes": [
++    "This is a revision plan, not a completed revised paper. Frame the contribution as an auditable empirical systems evaluation, without claiming a novel retrieval algorithm.",
++    "Existing public_small and public_large files remain pilot observations with character budgets, different construction and formatting, and a single run per budget. They cannot answer the new controlled research questions.",
++    "All new experiments are planned. Proposed token budgets, repetition counts and reuse counts are design choices, not observed measurements or approved experimental scale.",
++    "Confirm tokenizer and model versions, dataset revision and sample size, scorer version and statistical implementation with the experiment owner before running. Missing fields are deliberately omitted and reported.",
++    "The benchmark-protocol replication is a task to implement and verify, not a claim of current official LongMemEval compliance.",
++    "Do not claim significance, a break-even point, better generalization, or resolution of reviewer concerns before new evidence is reviewed.",
++    "Keep the existing implemented-method descriptions separate from candidate baselines and changes proposed in experiment protocols.",
++    "Use the general content renderer until new multi-arm and repeated-query evidence parsers and assets are implemented. The existing research assets describe only the audited L1 pilot."
++  ],
++  "experiments": [
++    {
++      "id": "public_small",
++      "title": "Pilot: Restricted Context Budget",
++      "status": "completed",
++      "result_path": "../../experiments/results/longmemeval_s_turn20_live.json",
++      "metrics": [
++        "answer accuracy",
++        "complete evidence recall",
++        "total tokens including writes",
++        "latency"
++      ],
++      "purpose": "pilot",
++      "research_question_ids": [
++        "quality",
++        "lifecycle"
++      ],
++      "limitations": [
++        "Character budgets and different memory formatting do not establish a fair token-matched retrieval comparison.",
++        "Construction, representation and selection change together; no component attribution.",
++        "One run per budget on the same selected questions; not a multi-query memory-reuse or official benchmark experiment."
++      ],
++      "protocol": {
++        "budget": {
++          "unit": "characters",
++          "values": [
++            600
++          ],
++          "scope": "Full injected memory section, including headers and metadata.",
++          "packing": "File prefix versus whole formatted selected exchanges; not matched."
++        },
++        "dataset": {
++          "name": "Adapted LongMemEval-S",
++          "split": "Selected single-session-user slice",
++          "version": "sha256:af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
++          "adaptation": "Fixed fact episodes derived from selected questions; not the official full protocol.",
++          "sample_size": 20
++        },
++        "baselines": [
++          "ProjectMemoryRail prefix including file metadata",
++          "EnhancedMemoryRail hybrid lexical selection"
++        ],
++        "controlled_variables": [
++          "facts",
++          "questions",
++          "query_model",
++          "system_prompt",
++          "tools"
++        ],
++        "changed_variables": [
++          "construction",
++          "representation",
++          "selection",
++          "packing"
++        ],
++        "repeats": 1,
++        "scoring": {
++          "method": "Accepted-answer string matching; complete target fact recall.",
++          "review": "Correctness labels and evidence annotations still require scientific review."
++        },
++        "statistics": {
++          "unit": "Selected question; budgets reuse the same question set.",
++          "method": "Descriptive paired counts; no repeated-run inference."
++        }
++      },
++      "evidence_requirements": [
++        "Verify saved per-question records and write/query usage; preserve original hashes."
++      ]
++    },
++    {
++      "id": "public_large",
++      "title": "Pilot: Expanded Context Budget",
++      "status": "completed",
++      "result_path": "../../experiments/results/longmemeval_s_turn20_live_2400.json",
++      "metrics": [
++        "answer accuracy",
++        "complete evidence recall",
++        "total tokens including writes",
++        "latency"
++      ],
++      "purpose": "pilot",
++      "research_question_ids": [
++        "quality",
++        "lifecycle"
++      ],
++      "limitations": [
++        "Character budgets and different memory formatting do not establish a fair token-matched retrieval comparison.",
++        "Construction, representation and selection change together; no component attribution.",
++        "One run per budget on the same selected questions; not a multi-query memory-reuse or official benchmark experiment."
++      ],
++      "protocol": {
++        "budget": {
++          "unit": "characters",
++          "values": [
++            2400
++          ],
++          "scope": "Full injected memory section, including headers and metadata.",
++          "packing": "File prefix versus whole formatted selected exchanges; not matched."
++        },
++        "dataset": {
++          "name": "Adapted LongMemEval-S",
++          "split": "Selected single-session-user slice",
++          "version": "sha256:af1ab48c87870d964cd653f6b102c8977f8629d7302532ddb4e21e8af19f3c48",
++          "adaptation": "Fixed fact episodes derived from selected questions; not the official full protocol.",
++          "sample_size": 20
++        },
++        "baselines": [
++          "ProjectMemoryRail prefix including file metadata",
++          "EnhancedMemoryRail hybrid lexical selection"
++        ],
++        "controlled_variables": [
++          "facts",
++          "questions",
++          "query_model",
++          "system_prompt",
++          "tools"
++        ],
++        "changed_variables": [
++          "construction",
++          "representation",
++          "selection",
++          "packing"
++        ],
++        "repeats": 1,
++        "scoring": {
++          "method": "Accepted-answer string matching; complete target fact recall.",
++          "review": "Correctness labels and evidence annotations still require scientific review."
++        },
++        "statistics": {
++          "unit": "Selected question; budgets reuse the same question set.",
++          "method": "Descriptive paired counts; no repeated-run inference."
++        }
++      },
++      "evidence_requirements": [
++        "Verify saved per-question records and write/query usage; preserve original hashes."
++      ]
++    },
++    {
++      "id": "fair_baselines",
++      "title": "Token-Matched Baselines and Shared Representation",
++      "status": "planned",
++      "purpose": "comparison",
++      "research_question_ids": [
++        "quality"
++      ],
++      "metrics": [
++        "answer accuracy",
++        "complete evidence recall",
++        "write and query tokens",
++        "end-to-end latency"
++      ],
++      "protocol": {
++        "budget": {
++          "unit": "tokens",
++          "values": [
++            512,
++            1024,
++            2048
++          ],
++          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
++          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
++        },
++        "dataset": {
++          "name": "LongMemEval",
++          "split": "Predeclared shared question IDs and categories",
++          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
++        },
++        "baselines": [
++          "Identical canonical memory items with prefix selection",
++          "Identical canonical memory items with recency selection",
++          "Identical canonical memory items with lexical Jaccard selection",
++          "Identical canonical memory items with BM25 selection (requires implementation)",
++          "Identical canonical memory items with current hybrid selection"
++        ],
++        "controlled_variables": [
++          "question_ids",
++          "query_model_and_version",
++          "decoding_settings",
++          "system_prompt",
++          "canonical_memory_items",
++          "memory_wrapper",
++          "tokenizer",
++          "packing",
++          "write_path"
++        ],
++        "changed_variables": [
++          "selector"
++        ],
++        "repeats": 3,
++        "scoring": {
++          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
++          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
++        },
++        "statistics": {
++          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
++          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
++        }
++      },
++      "evidence_requirements": [
++        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
++        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
++        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
++        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
++        "Verify equal candidate item hashes, wrapper and token limits across all arms; report actual token utilization."
++      ]
++    },
++    {
++      "id": "selection_ablation",
++      "title": "Selection Ablation with Fixed Memory Items",
++      "status": "planned",
++      "purpose": "ablation",
++      "research_question_ids": [
++        "attribution"
++      ],
++      "metrics": [
++        "answer accuracy",
++        "complete evidence recall",
++        "write and query tokens",
++        "end-to-end latency"
++      ],
++      "protocol": {
++        "budget": {
++          "unit": "tokens",
++          "values": [
++            512,
++            1024,
++            2048
++          ],
++          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
++          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
++        },
++        "dataset": {
++          "name": "LongMemEval",
++          "split": "Predeclared shared question IDs and categories",
++          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
++        },
++        "baselines": [
++          "Full current hybrid ranker",
++          "Hybrid ranker with the recency contribution removed; other terms unchanged"
++        ],
++        "controlled_variables": [
++          "question_ids",
++          "query_model_and_version",
++          "decoding_settings",
++          "system_prompt",
++          "canonical_memory_items",
++          "memory_wrapper",
++          "tokenizer",
++          "packing",
++          "write_path"
++        ],
++        "changed_variables": [
++          "recency_contribution"
++        ],
++        "repeats": 3,
++        "scoring": {
++          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
++          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
++        },
++        "statistics": {
++          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
++          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
++        }
++      },
++      "evidence_requirements": [
++        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
++        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
++        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
++        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
++        "Freeze memory age and access state before every paired ranking; log score components. Add other component removals as separate experiments."
++      ]
++    },
++    {
++      "id": "representation_ablation",
++      "title": "Representation Ablation with Fixed Selection",
++      "status": "planned",
++      "purpose": "ablation",
++      "research_question_ids": [
++        "attribution"
++      ],
++      "metrics": [
++        "answer accuracy",
++        "complete evidence recall",
++        "write and query tokens",
++        "end-to-end latency"
++      ],
++      "protocol": {
++        "budget": {
++          "unit": "tokens",
++          "values": [
++            512,
++            1024,
++            2048
++          ],
++          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
++          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
++        },
++        "dataset": {
++          "name": "LongMemEval",
++          "split": "Predeclared shared question IDs and categories",
++          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
++        },
++        "baselines": [
++          "Raw canonical facts",
++          "Stored exchange text reconstructed offline from the same facts; no new model-backed write calls"
++        ],
++        "controlled_variables": [
++          "question_ids",
++          "query_model_and_version",
++          "decoding_settings",
++          "system_prompt",
++          "memory_wrapper",
++          "tokenizer",
++          "packing",
++          "write_path",
++          "source_facts",
++          "selector"
++        ],
++        "changed_variables": [
++          "representation"
++        ],
++        "repeats": 3,
++        "scoring": {
++          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
++          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
++        },
++        "statistics": {
++          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
++          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
++        }
++      },
++      "evidence_requirements": [
++        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
++        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
++        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
++        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
++        "Preserve source fact IDs and representation hashes; report how serialization changes packing and evidence availability."
++      ]
++    },
++    {
++      "id": "construction_ablation",
++      "title": "Construction Cost with Matched Memory Content",
++      "status": "planned",
++      "purpose": "ablation",
++      "research_question_ids": [
++        "attribution",
++        "lifecycle"
++      ],
++      "metrics": [
++        "answer accuracy",
++        "complete evidence recall",
++        "write and query tokens",
++        "end-to-end latency"
++      ],
++      "protocol": {
++        "budget": {
++          "unit": "tokens",
++          "values": [
++            512,
++            1024,
++            2048
++          ],
++          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
++          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
++        },
++        "dataset": {
++          "name": "LongMemEval",
++          "split": "Predeclared shared question IDs and categories",
++          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
++        },
++        "baselines": [
++          "Direct insertion of a frozen canonical memory",
++          "Model-backed acquisition followed by the same canonical representation; verify identical content before comparison"
++        ],
++        "controlled_variables": [
++          "question_ids",
++          "query_model_and_version",
++          "decoding_settings",
++          "system_prompt",
++          "canonical_memory_items",
++          "memory_wrapper",
++          "tokenizer",
++          "packing",
++          "selector"
++        ],
++        "changed_variables": [
++          "write_path"
++        ],
++        "repeats": 3,
++        "scoring": {
++          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
++          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
++        },
++        "statistics": {
++          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
++          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
++        }
++      },
++      "evidence_requirements": [
++        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
++        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
++        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
++        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
++        "If canonical content hashes differ, exclude the pair from construction-only attribution and report the mismatch; do not silently relabel it as controlled."
++      ]
++    },
++    {
++      "id": "memory_reuse",
++      "title": "Amortized Cost across Distinct Queries",
++      "status": "planned",
++      "purpose": "amortization",
++      "research_question_ids": [
++        "lifecycle"
++      ],
++      "metrics": [
++        "answer accuracy",
++        "complete evidence recall",
++        "write and query tokens",
++        "end-to-end latency"
++      ],
++      "protocol": {
++        "budget": {
++          "unit": "tokens",
++          "values": [
++            512,
++            1024,
++            2048
++          ],
++          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
++          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
++        },
++        "dataset": {
++          "name": "LongMemEval",
++          "split": "Predeclared shared question IDs and categories",
++          "adaptation": "Record every transformation; keep adapted and standard-protocol results separate."
++        },
++        "baselines": [
++          "Fixed canonical memory and hybrid selector across reuse counts"
++        ],
++        "controlled_variables": [
++          "question_ids",
++          "query_model_and_version",
++          "decoding_settings",
++          "system_prompt",
++          "canonical_memory_items",
++          "memory_wrapper",
++          "tokenizer",
++          "packing",
++          "write_path",
++          "selector"
++        ],
++        "changed_variables": [
++          "queries_per_memory"
++        ],
++        "repeats": 3,
++        "scoring": {
++          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
++          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
++        },
++        "statistics": {
++          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
++          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
++        },
++        "reuse": {
++          "queries_per_memory": [
++            1,
++            5,
++            10,
++            20
++          ],
++          "construction_cost_policy": "Measure one construction per memory instance and count it once: total = write + sum(query); per-query = total / query count. Freeze query-side mutation. Report failures and all usage; distinguish observed totals from extrapolation."
++        }
++      },
++      "evidence_requirements": [
++        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
++        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
++        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
++        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
++        "Provide memory_instance_id and the exact distinct query sequence. Repeating isolated single-query pilot runs does not satisfy memory reuse."
++      ]
++    },
++    {
++      "id": "protocol_replication",
++      "title": "Repeated Runs, Scoring Audit and Benchmark Alignment",
++      "status": "planned",
++      "purpose": "replication",
++      "research_question_ids": [
++        "quality"
++      ],
++      "metrics": [
++        "answer accuracy",
++        "complete evidence recall",
++        "write and query tokens",
++        "end-to-end latency"
++      ],
++      "protocol": {
++        "budget": {
++          "unit": "tokens",
++          "values": [
++            512,
++            1024,
++            2048
++          ],
++          "scope": "Complete memory section including the identical wrapper; log full prompt tokens separately.",
++          "packing": "Identical whole-item packing and overflow rules in every arm; log skipped items and actual token count."
++        },
++        "dataset": {
++          "name": "LongMemEval",
++          "split": "Predeclared shared question IDs and categories",
++          "adaptation": "Follow a pinned benchmark protocol and scorer; enumerate deviations explicitly. An adapted pilot cannot be labelled an official score."
++        },
++        "baselines": [
++          "Identical canonical memory items with prefix selection",
++          "Identical canonical memory items with recency selection",
++          "Identical canonical memory items with lexical Jaccard selection",
++          "Identical canonical memory items with BM25 selection (requires implementation)",
++          "Identical canonical memory items with current hybrid selection"
++        ],
++        "controlled_variables": [
++          "question_ids",
++          "query_model_and_version",
++          "decoding_settings",
++          "system_prompt",
++          "canonical_memory_items",
++          "memory_wrapper",
++          "tokenizer",
++          "packing",
++          "write_path"
++        ],
++        "changed_variables": [
++          "selector"
++        ],
++        "repeats": 3,
++        "scoring": {
++          "method": "Versioned benchmark scorer plus blinded adjudication of disagreements; retain legacy string match as a separate diagnostic.",
++          "review": "Save answers, scorer outputs and disagreement decisions; document any judge model and its usage."
++        },
++        "statistics": {
++          "unit": "Memory episode with paired questions and repeated runs; do not pool repeated queries as independent samples.",
++          "method": "Predeclare a paired cluster-aware interval procedure and comparison family; log seeds and resampling settings, failures and exclusions."
++        }
++      },
++      "evidence_requirements": [
++        "Dataset revision and hash, exact question and memory IDs, run/repeat IDs, model/decoding settings and code commit.",
++        "Actual rendered prompt, tokenizer/version, memory token count, candidate scores, selected and skipped item IDs.",
++        "Per-query answers and scorer decisions, complete evidence annotations, errors and exclusion reasons.",
++        "Write and query input/output token usage, latency and call counts, including failed and retried calls; preserve missing usage as unknown.",
++        "Pin and verify benchmark data, protocol, scorer and selected task categories before running. Preserve question-level paired outcomes across repeats."
++      ]
++    }
++  ],
++  "review_concerns": [
++    {
++      "id": "fairness",
++      "title": "Weak Baseline and Budget Confounding",
++      "description": "Match token accounting, representation and formatting; compare against stronger selectors before attributing gains to retrieval.",
++      "experiment_ids": [
++        "fair_baselines"
++      ]
++    },
++    {
++      "id": "attribution",
++      "title": "Construction, Representation and Selection Confounds",
++      "description": "Change one component per ablation and preserve control traces; budget sensitivity alone is not a component ablation.",
++      "experiment_ids": [
++        "selection_ablation",
++        "representation_ablation",
++        "construction_ablation"
++      ]
++    },
++    {
++      "id": "amortization",
++      "title": "Unmeasured Memory Reuse",
++      "description": "Measure multiple distinct queries against one built memory and count construction once.",
++      "experiment_ids": [
++        "memory_reuse"
++      ]
++    },
++    {
++      "id": "robustness",
++      "title": "Small Single-Run Sample and Scoring Limitations",
++      "description": "Predeclare a broader evaluation, repeat runs, review scoring, account for dependence and verify benchmark protocol alignment.",
++      "experiment_ids": [
++        "protocol_replication"
++      ]
++    },
++    {
++      "id": "contribution",
++      "title": "Limited Algorithmic Novelty",
++      "description": "Scope the contribution as a controlled and reproducible lifecycle-cost study. Better prose does not create a new retrieval algorithm, and these experiments do not guarantee acceptance.",
++      "experiment_ids": [
++        "fair_baselines",
++        "construction_ablation",
++        "memory_reuse"
++      ]
++    }
++  ]
++}
+diff --git a/jiuwenswarm/research-paper-generator/references/research_revision.md b/jiuwenswarm/research-paper-generator/references/research_revision.md
+new file mode 100644
+index 0000000..f8fa5c0
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/references/research_revision.md
+@@ -0,0 +1,92 @@
++# 测试反馈后的研究修订接口（第 3 部分）
++
++本轮完成研究问题、章节规划、实验协议字段和证据交接。截图指出的基线公平性、组件混淆、成本摊销与统计局限仍需新实验回答；这份计划不表示问题已经解决，也不保证评审得分提高。
++
++## 生成可交接框架
++
++在仓库根目录执行，不需要模型服务或 API Key：
++
++```powershell
++python jiuwenswarm/research-paper-generator/scripts/generate_framework.py --brief jiuwenswarm/research-paper-generator/examples/memory-revision.brief.json --literature jiuwenswarm/research-paper-generator/examples/memory-research.literature.json --output output/memory-revision-framework
++```
++
++输出目录必须不存在。主要查看 `RESEARCH_HANDOFF.md`、`research_plan.json` 和 `outline.json`。主章节仍为八章，引言增加三个研究问题子章节，实验设置按实验任务组织，结果章节目前只保留两个初步实验的待复核入口。引用沿用已有文献 ID 与去重规则，没有新增未经核对的文献。
++
++这份修订说明使用通用正文流程，未启用 `writing_profile: research`。当前研究版的自动公式、诊断和附录专用于旧 L1 实验，不应把它们直接套到尚未实现的新协议上。旧 `memory-research.brief.json` 和已交付正文保持原样，仍可离线复现。
++
++## 本轮的任务与边界
++
++| 任务 | 当前交付 | 后续负责人 |
++| --- | --- | --- |
++| 研究问题与章节 | 质量、组件归因、生命周期成本三个问题及实验关联 | 第 3 部分已实现 |
++| Token 匹配和更强基线 | `fair_baselines` 协议、固定变量和证据清单 | 第 2 部分实现并运行 |
++| 单因素消融 | `selection_ablation`、`representation_ablation`、`construction_ablation` | 第 2 部分实现并运行 |
++| 多查询摊销 | `memory_reuse`，一次构建对应多个不同查询 | 第 2 部分实现并运行 |
++| 重复运行与评分复核 | `protocol_replication`，需固定数据/评分器版本和统计单位 | 第 2 部分实施，第 5 部分复核 |
++| 新证据进入正文 | 保留协议和未解决问题的写作输入及文件交接 | 第 4 部分接入新结果格式后写正文 |
++| 实验有效性与论断支持 | 文件存在和哈希只记录来源，不自动作学术判断 | 第 2 / 4 / 5 部分共同复核 |
++
++先落实公平比较和消融，再扩大样本；扩大有混淆的原实验不能替代控制变量。BM25 等候选基线只是计划，不表示仓库已经实现。
++
++## 新增可选字段（继续使用 schema_version: 1）
++
++顶层 `research_questions` 每项为 `id/title/question`；`review_concerns` 每项为 `id/title/description/experiment_ids`。ID 规则与已有方法和实验一致。实验 ID、研究问题 ID 的引用必须存在；未知引用和重复 ID 会在生成输出前报错。
++
++实验可增加：
++
++| 字段 | 类型与含义 |
++| --- | --- |
++| `purpose` | `pilot`、`comparison`、`ablation`、`amortization`、`replication`，默认 `comparison` |
++| `research_question_ids` | 关联的研究问题 ID 数组 |
++| `protocol` | 下表中的设计元数据；缺字段会列为待补，不自动补造 |
++| `evidence_requirements` | 交付后还需逐项复核的原始记录和分析材料，字符串数组 |
++| `limitations` | 该实验的解释边界，字符串数组 |
++
++`protocol` 是声明的协议，不能证明运行器实际遵守。只接受下列键，拼错字段会报错：
++
++| 字段 | 内容 |
++| --- | --- |
++| `budget.unit` | `tokens` 或 `characters` |
++| `budget.values` | 不重复的正整数数组；计划中的预算不是实测数据 |
++| `budget.scope` | 预算包含哪些内容，是否计入包装和元数据 |
++| `budget.tokenizer` | Token 预算需明确 tokenizer 名称及版本；未提供会列为缺失 |
++| `budget.packing` | 装入、截断、跳过和溢出规则 |
++| `dataset.name/split/version/adaptation` | 数据集、划分、固定版本/哈希、相对原协议的变更 |
++| `dataset.sample_size` | 正整数；在实验负责人确定规模后填写 |
++| `baselines` | 基线及实现约定，字符串数组 |
++| `controlled_variables/changed_variables` | 固定/改变的变量名称数组，名称不能同时出现在两边 |
++| `repeats` | 正整数，布尔值不视为整数；这是计划重复次数 |
++| `scoring.method/version/review` | 评分方式、实现版本、争议样本复核方式 |
++| `statistics.unit/method` | 独立/聚类单位、配对与区间方法；不能将重复查询直接算作独立样本 |
++| `reuse.queries_per_memory` | 摊销实验必需，不重复的正整数数组 |
++| `reuse.construction_cost_policy` | 摊销实验必需，规定写入只计一次、失败和重试如何计费等 |
++
++字符串必须非空。尚未确定的字段请省略，生成器会在 `missing_protocol_fields` 和交接文档中列出；不要用“待定”冒充已确定的 tokenizer、版本或样本量。一般比较允许多个变化因素，但 `ablation` 若声明多个变化变量会报错，应拆成独立实验。变量名称匹配仅检查字面一致，不能判定语义上是否真正控制变量。
++
++示例提出的预算 `512/1024/2048` tokens、`3` 次重复以及 `1/5/10/20` 个复用查询均为可调整的设计初稿，不是实际运行结果。tokenizer、数据版本、样本量和评分器版本故意留空，需与实验负责人确认后补齐。示例沿用旧实验的模型说明，但新实验必须另行固定实际模型版本和解码设置。
++
++## 结果状态与评审问题
++
++- `planned` → `awaiting_evidence`：只生成设置，不生成结果子章节；非空 `result_path` 与该状态冲突，会报错。
++- `completed` → `evidence_needs_review`：必须已有结果文件，框架创建快照并哈希；文件内容是否符合设计仍需复核。
++- 评审问题没有关联实验 → `unmapped`；有关联且包含计划实验 → `awaiting_evidence`；关联实验全部交付 → `needs_scientific_review`。
++
++不存在自动 `resolved` 或“科学审查通过”状态。即使协议字段全部填写，或 `completed` 的文件只是空对象，框架也不会据此宣称评审意见解决。现有两份实验标记为 `pilot`，且评审问题只关联新实验，以免旧结果被用于证明尚未运行的新设计。
++
++规划器仍允许任意原始结果文件结构，由第 4 部分的证据解析器验证。当前正文解析器只支持已有两组实验格式，不能直接理解任意多基线、标准评测器或共享记忆的多查询输出。新实验交付前，第 2 / 4 部分必须约定并接入解析、指标和图表，不能把新数据伪装成旧格式。
++
++## 给队友的具体交接
++
++第 2 部分：按 `research_plan.json` 确定尚缺的协议项，实现并实跑实验，交付逐题、逐次、逐记忆实例记录。共享记忆摊销需记录 `memory_instance_id`，总成本按一次构建加全部查询计算，再除以查询数；失败和重试不能丢弃。更改为 `completed` 并填写相对 brief 的 `result_path` 后，重新生成新目录中的框架。
++
++第 4 部分：按新 `outline.json` 组织正文。写作请求已经携带完整 `research_plan`；未执行协议使用将来时，初步结果与新增实验分开论述。旧 `memory-research.content.json` 的子章节 ID 不匹配修订框架，不能直接复用。填充时两份研究交接文件会随论文工程复制，指标仍只能从已有实测记录产生。
++
++第 5 部分：核对原始记录是否遵守声明的协议，复核评分、排除规则、相关样本的统计处理和论断范围。现有机械质量检查通过不意味着研究设计或公平性通过，也不能代替标准评测协议对齐核查。
++
++## 验证
++
++```powershell
++python -m unittest discover -s jiuwenswarm/research-paper-generator/tests -v
++```
++
++新增回归覆盖协议类型与矛盾、未知关联、单因素消融、摊销缺项、未执行实验不生成结果、已有文件不自动解决评审问题、旧输入兼容，以及第 3 → 第 4 部分的协议传递和交接文件保留。它们验证工程行为，不验证新实验结论。
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_content/project.py b/jiuwenswarm/research-paper-generator/scripts/paper_content/project.py
+index 486a6cb..db0cf93 100644
+--- a/jiuwenswarm/research-paper-generator/scripts/paper_content/project.py
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_content/project.py
+@@ -59,6 +59,8 @@ def fill_project(framework: Path, output: Path, *, model=None, content_json: Pat
+     files = ["paper.tex", "outline.json", "brief.input.json", "citation_map.json", "manifest.json",
+              "iclr2027_conference.sty", "iclr2027_conference.bst", "natbib.sty", "fancyhdr.sty"]
+     files += [section["file"] for section in outline["sections"]]
++    files += [name for name in ("HANDOFF.md", "research_plan.json", "RESEARCH_HANDOFF.md")
++              if (framework / name).is_file()]
+     for relative in files:
+         if not inside(framework, relative).is_file():
+             raise ValueError(f"Missing framework file: {relative}")
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_content/prose.py b/jiuwenswarm/research-paper-generator/scripts/paper_content/prose.py
+index 90a0dc8..a28e6b8 100644
+--- a/jiuwenswarm/research-paper-generator/scripts/paper_content/prose.py
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_content/prose.py
+@@ -84,6 +84,16 @@ def build_messages(outline, brief, citations, metrics, results, source_notes):
+                "mandatory_citation_tokens_by_subsection": required_citations,
+                "source_notes": source_notes}
+     system = SYSTEM
++    if "research_plan" in outline:
++        payload["research_plan"] = outline["research_plan"]
++        system += """
++The research_plan separates declared protocols from observed evidence. Planned experiments have NOT run.
++Describe their setup as future work; never turn their budgets, repetitions or sample sizes into measurements.
++Use only supplied metric tokens for measured quantities; describe unexecuted protocol quantities qualitatively.
++Initial pilot observations cannot establish the outcomes of new comparisons, ablations or reuse experiments.
++Neither a completed flag nor a reviewer-to-experiment mapping means a criticism is resolved.
++Explain missing protocol fields and unresolved concerns. Do not claim official benchmark compliance from a plan.
++"""
+     if brief.get("writing_profile") == "research":
+         system = system.replace("Aim for 1400-1900 words total.", "Aim for 3000-3800 words total, excluding program-rendered equations, tables and appendices.")
+         system = system.replace("Use 100-160 words for Abstract.", "Use 170-220 words for Abstract, with concrete findings and their cost tradeoff.")
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_framework/planner.py b/jiuwenswarm/research-paper-generator/scripts/paper_framework/planner.py
+index 9a3982a..f520c82 100644
+--- a/jiuwenswarm/research-paper-generator/scripts/paper_framework/planner.py
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_framework/planner.py
+@@ -7,6 +7,7 @@ import re
+ from pathlib import Path
+ 
+ from .citations import required_text
++from .research import build_research_plan
+ 
+ 
+ def _objects(value: object, label: str) -> list[dict]:
+@@ -31,6 +32,9 @@ def plan_outline(brief: object, citations: dict, base_dir: Path) -> dict:
+     question = required_text(brief.get("research_question"), "brief.research_question")
+     methods = _objects(brief.get("methods", []), "methods")
+     experiments = _objects(brief.get("experiments", []), "experiments")
++    has_research_plan = any(key in brief for key in ("research_questions", "review_concerns")) or any(
++        any(key in experiment for key in ("protocol", "purpose", "research_question_ids", "evidence_requirements", "limitations"))
++        for experiment in experiments)
+     authors = brief.get("authors", [])
+     if not isinstance(authors, list):
+         raise ValueError("authors must be an array of strings")
+@@ -85,6 +89,8 @@ def plan_outline(brief: object, citations: dict, base_dir: Path) -> dict:
+             "status": status, "citation_keys": [],
+         })
+         if status == "planned":
++            if experiment.get("result_path"):
++                raise ValueError(f"Planned experiment {experiment['id']} must not supply result_path; mark completed only after execution")
+             warnings.append(f"Experiment {experiment['id']} is planned; no result subsection generated.")
+             continue
+         source = required_text(experiment.get("result_path"), "completed experiment.result_path")
+@@ -103,7 +109,33 @@ def plan_outline(brief: object, citations: dict, base_dir: Path) -> dict:
+         warnings.append("No completed experiment evidence supplied; result claims must remain empty.")
+     section("discussion", "Discussion and Limitations", "Explain scope, confounders, missing evaluations, and resource tradeoffs.")
+     section("conclusion", "Conclusion", "Answer the research question using only reviewed results.")
+-    return {"schema_version": 1, "planner": "deterministic_rules_v1", "title": title,
++    outline = {"schema_version": 1, "planner": "deterministic_rules_v1", "title": title,
+             "research_question": question, "anonymous": anonymous, "authors": authors,
+             "sections": sections, "evidence": evidence, "warnings": warnings,
+             "citation_policy": "Candidates only; presence does not establish support for any claim."}
++    if has_research_plan:
++        plan = build_research_plan(_objects(brief.get("research_questions", []), "research_questions"),
++                                   _objects(brief.get("review_concerns", []), "review_concerns"), experiments)
++        outline["research_plan"] = plan
++        outline["planner"] = "deterministic_rules_v2"
++        by_section = {item["id"]: item for item in sections}
++        for item in plan["research_questions"]:
++            by_section["introduction"]["subsections"].append({
++                "id": "rq_" + item["id"], "title": item["title"], "goal": item["question"],
++                "status": "needs_content", "citation_keys": [], "experiment_ids": item["experiment_ids"],
++            })
++            if not item["experiment_ids"]:
++                warnings.append(f"Research question {item['id']} has no linked experiment.")
++        for child, experiment in zip(setup["subsections"], plan["experiments"]):
++            child.update(protocol=experiment["protocol"], research_question_ids=experiment["research_question_ids"],
++                         evidence_requirements=experiment["evidence_requirements"], purpose=experiment["purpose"])
++            child["goal"] += (". Protocol fields are declared metadata; verify them against actual execution. "
++                              + ("This experiment has not run. Describe only a future protocol; no findings."
++                                 if experiment["status"] == "planned" else "Evidence is supplied but needs scientific review."))
++            if experiment["missing_protocol_fields"]:
++                warnings.append(f"Experiment {experiment['id']} protocol needs: " + ", ".join(experiment["missing_protocol_fields"]))
++        for concern in plan["review_concerns"]:
++            warnings.append(f"Review concern {concern['id']}: {concern['status']}.")
++        by_section["discussion"]["goal"] += " Address these unresolved review concerns: " + "; ".join(
++            item["description"] for item in plan["review_concerns"])
++    return outline
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_framework/project.py b/jiuwenswarm/research-paper-generator/scripts/paper_framework/project.py
+index ea19877..3a0c092 100644
+--- a/jiuwenswarm/research-paper-generator/scripts/paper_framework/project.py
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_framework/project.py
+@@ -11,6 +11,7 @@ from pathlib import Path
+ 
+ from .citations import bibliography, build_citations, latex_text
+ from .planner import plan_outline
++from .research import handoff_markdown
+ 
+ ROOT = Path(__file__).resolve().parents[4]
+ DEFAULT_TEMPLATE = ROOT / "iclr-2027-style-files" / "iclr2027"
+@@ -98,6 +99,10 @@ def generate_project(brief_path: Path, output: Path, literature_path: Path | Non
+         (staged / "paper.tex").write_text(tex, encoding="utf-8")
+         (staged / "references.bib").write_text(bibliography(citations), encoding="utf-8")
+         _write_json(staged / "outline.json", outline)
++        if "research_plan" in outline:
++            _write_json(staged / "research_plan.json", outline["research_plan"])
++            (staged / "RESEARCH_HANDOFF.md").write_text(handoff_markdown(outline["research_plan"]), encoding="utf-8")
++            manifest["research_plan"] = {"path": "research_plan.json", "scientific_review_required": True}
+         _write_json(staged / "citation_map.json", citations)
+         _write_json(staged / "manifest.json", manifest)
+         _write_json(staged / "brief.input.json", brief)
+@@ -108,6 +113,7 @@ def generate_project(brief_path: Path, output: Path, literature_path: Path | Non
+             "Fill sections/*.tex using outline.json. Do not edit measured results into the planner.\n"
+             "Result hashes record provenance, not scientific validity. Read project_path relative to this project.\n"
+             "Evidence snapshots travel with the framework. original_path and input_path are source provenance only.\n"
++            "If present, read research_plan.json and RESEARCH_HANDOFF.md for planned protocols and unresolved review concerns.\n"
+             "Use citation_map.json to select citation keys; verify each source and claim before citing it.\n"
+             "Remove draft placeholders, the Draft bibliography paragraph, and \\nocite{*} before final review.\n"
+             "Keep paper.tex and sections/*.tex changes: regeneration requires a new output directory.\n"
+diff --git a/jiuwenswarm/research-paper-generator/scripts/paper_framework/research.py b/jiuwenswarm/research-paper-generator/scripts/paper_framework/research.py
+new file mode 100644
+index 0000000..bc67095
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/scripts/paper_framework/research.py
+@@ -0,0 +1,175 @@
++"""Planning metadata and evidence gaps, never an assessment of scientific validity."""
++
++from __future__ import annotations
++
++from copy import deepcopy
++
++from .citations import required_text
++
++
++PROTOCOL_FIELDS = {
++    "budget": {"unit", "values", "scope", "tokenizer", "packing"},
++    "dataset": {"name", "split", "version", "adaptation", "sample_size"},
++    "scoring": {"method", "version", "review"},
++    "statistics": {"unit", "method"},
++    "reuse": {"queries_per_memory", "construction_cost_policy"},
++}
++LIST_FIELDS = {"baselines", "controlled_variables", "changed_variables"}
++REQUIRED_FIELDS = (
++    "budget.unit", "budget.values", "budget.scope", "budget.packing",
++    "dataset.name", "dataset.split", "dataset.version", "dataset.adaptation", "dataset.sample_size",
++    "baselines", "controlled_variables", "changed_variables", "repeats",
++    "scoring.method", "scoring.version", "scoring.review", "statistics.unit", "statistics.method",
++)
++PURPOSES = {"pilot", "comparison", "ablation", "amortization", "replication"}
++
++
++def texts(value, label):
++    if not isinstance(value, list):
++        raise ValueError(f"{label} must be an array of strings")
++    result = [required_text(item, label) for item in value]
++    if len(result) != len(set(result)):
++        raise ValueError(f"{label} must not contain duplicates")
++    return result
++
++
++def _positive_integer(value, label):
++    if type(value) is not int or value < 1:
++        raise ValueError(f"{label} must be a positive integer")
++
++
++def _positive_integers(value, label):
++    if not isinstance(value, list) or not value:
++        raise ValueError(f"{label} must be a nonempty array of positive integers")
++    for item in value:
++        _positive_integer(item, label)
++    if len(set(value)) != len(value):
++        raise ValueError(f"{label} must not contain duplicates")
++
++
++def _protocol(value, purpose):
++    if not isinstance(value, dict):
++        raise ValueError("experiment.protocol must be an object")
++    unknown = set(value) - (set(PROTOCOL_FIELDS) | LIST_FIELDS | {"repeats"})
++    if unknown:
++        raise ValueError(f"Unknown protocol fields: {sorted(unknown)}")
++    result = deepcopy(value)
++    for key, item in result.items():
++        label = f"protocol.{key}"
++        if key in LIST_FIELDS:
++            result[key] = texts(item, label)
++        elif key == "repeats":
++            _positive_integer(item, label)
++        else:
++            if not isinstance(item, dict) or set(item) - PROTOCOL_FIELDS[key]:
++                raise ValueError(f"{label} must be an object with fields {sorted(PROTOCOL_FIELDS[key])}")
++            for field, field_value in item.items():
++                field_label = f"{label}.{field}"
++                if field in {"values", "queries_per_memory"}:
++                    _positive_integers(field_value, field_label)
++                elif field == "sample_size":
++                    _positive_integer(field_value, field_label)
++                else:
++                    item[field] = required_text(field_value, field_label)
++    budget = result.get("budget", {})
++    if "unit" in budget and budget["unit"] not in {"tokens", "characters"}:
++        raise ValueError("protocol.budget.unit must be tokens or characters")
++    controls, changed = (result.get(key, []) for key in ("controlled_variables", "changed_variables"))
++    if set(controls) & set(changed):
++        raise ValueError("A variable cannot be both controlled and changed")
++    if purpose == "ablation" and len(changed) > 1:
++        raise ValueError("An ablation plan must change one variable; split multi-factor studies into separate experiments")
++    return result
++
++
++def _missing(protocol, purpose):
++    required = list(REQUIRED_FIELDS)
++    if protocol.get("budget", {}).get("unit") == "tokens":
++        required.append("budget.tokenizer")
++    if purpose == "amortization":
++        required += ["reuse.queries_per_memory", "reuse.construction_cost_policy"]
++    missing = []
++    for path in required:
++        value = protocol
++        for part in path.split("."):
++            value = value.get(part) if isinstance(value, dict) else None
++        if not value:
++            missing.append(path)
++    return missing
++
++
++def build_research_plan(questions, concerns, experiments):
++    """Inputs have stable IDs validated by the outline planner. Missing design stays visible."""
++    question_ids = {q["id"] for q in questions}
++    for question in questions:
++        question["question"] = required_text(question.get("question"), "research_questions.question")
++    plans = []
++    for experiment in experiments:
++        eid = experiment["id"]
++        refs = texts(experiment.get("research_question_ids", []), f"{eid}.research_question_ids")
++        if set(refs) - question_ids:
++            raise ValueError(f"Unknown research question IDs in experiment {eid}: {sorted(set(refs) - question_ids)}")
++        purpose = experiment.get("purpose", "comparison")
++        if not isinstance(purpose, str) or purpose not in PURPOSES:
++            raise ValueError(f"experiment.purpose must be one of {sorted(PURPOSES)}")
++        protocol = _protocol(experiment.get("protocol", {}), purpose)
++        state = "awaiting_evidence" if experiment.get("status", "planned") == "planned" else "evidence_needs_review"
++        plans.append({
++            "id": eid, "title": experiment["title"], "purpose": purpose,
++            "status": experiment.get("status", "planned"), "evidence_status": state,
++            "research_question_ids": refs, "protocol": protocol,
++            "metrics": experiment.get("metrics", []),
++            "evidence_requirements": texts(experiment.get("evidence_requirements", []), f"{eid}.evidence_requirements"),
++            "limitations": texts(experiment.get("limitations", []), f"{eid}.limitations"),
++            "missing_protocol_fields": _missing(protocol, purpose),
++            "evidence_ids": [eid] if state == "evidence_needs_review" else [],
++        })
++    by_id = {e["id"]: e for e in plans}
++    for question in questions:
++        linked = [e for e in plans if question["id"] in e["research_question_ids"]]
++        question["experiment_ids"] = [e["id"] for e in linked]
++        question["awaiting_evidence"] = [e["id"] for e in linked if e["status"] == "planned"]
++        question["evidence_to_review"] = [e["id"] for e in linked if e["status"] == "completed"]
++    for concern in concerns:
++        concern["description"] = required_text(concern.get("description"), "review_concerns.description")
++        refs = texts(concern.get("experiment_ids", []), "review_concerns.experiment_ids")
++        if set(refs) - set(by_id):
++            raise ValueError(f"Unknown experiment IDs in review concern {concern['id']}: {sorted(set(refs) - set(by_id))}")
++        concern["experiment_ids"] = refs
++        concern["awaiting_evidence"] = [eid for eid in refs if by_id[eid]["status"] == "planned"]
++        concern["evidence_to_review"] = [eid for eid in refs if by_id[eid]["status"] == "completed"]
++        # A mapping, a completed flag or a file hash cannot resolve a scientific criticism.
++        concern["status"] = "unmapped" if not refs else "awaiting_evidence" if concern["awaiting_evidence"] else "needs_scientific_review"
++    return {"schema_version": 1, "kind": "research_revision_plan", "scientific_review_required": True,
++            "policy": "Protocols are declared plans, not verified execution. Files and mappings do not establish claim support or resolve reviewer concerns.",
++            "research_questions": questions, "experiments": plans, "review_concerns": concerns}
++
++
++def handoff_markdown(plan):
++    lines = ["# 研究修订交接", "", "此文件由研究说明生成。协议字段描述计划或声明，尚未核对实际执行；文件存在和哈希匹配不代表科学结论成立。", "",
++             "## 研究问题", ""]
++    for question in plan["research_questions"]:
++        lines += [f"- {question['id']} — {question['question']}",
++                  "  关联实验：" + (", ".join(question["experiment_ids"]) or "尚未关联")]
++    lines += ["", "## 实验交接（第 2 部分）", ""]
++    for item in plan["experiments"]:
++        lines += [f"### {item['id']} — {item['title']}", "",
++                  f"状态：{item['evidence_status']}；用途：{item['purpose']}。", "",
++                  "协议待补字段：" + (", ".join(item["missing_protocol_fields"]) or "无；仍需核对实际执行") + "。", "",
++                  "指标：" + (", ".join(item["metrics"]) or "待约定") + "。", ""]
++        lines += ["- 待交付并复核：" + text for text in item["evidence_requirements"]]
++        lines += ["- 解释边界：" + text for text in item["limitations"]]
++        lines.append("")
++    lines += ["## 评审问题到实验的映射", ""]
++    for concern in plan["review_concerns"]:
++        lines += [f"- {concern['id']} — {concern['title']}：{concern['status']}。",
++                  "  " + concern["description"],
++                  "  关联实验：" + (", ".join(concern["experiment_ids"]) or "尚未关联")]
++    lines += ["", "## 正文与复核交接（第 4 / 5 部分）", "",
++              "- 完整协议见 research_plan.json；outline.json 的 research_plan 与其内容一致。",
++              "- planned 实验只进入实验设置，不生成结果子章节、数值或结论。待实施协议必须使用将来时。",
++              "- completed 只代表已交付文件；必须按实验 ID 核对原始记录、协议、统计单位和引用支持。",
++              "- 初步观察不能用于证明新的公平性、消融、重复运行或多查询结论。",
++              "- 修改章节后旧 content.json 不能直接复用；应按新 outline 的 ID 与顺序重新交付正文。",
++              "- 新实验格式需要第 2 / 4 部分共同接入；规划器不会执行实验或自动计算新指标。", ""]
++    return "\n".join(lines)
+diff --git a/jiuwenswarm/research-paper-generator/tests/test_research_plan.py b/jiuwenswarm/research-paper-generator/tests/test_research_plan.py
+new file mode 100644
+index 0000000..47bd7d5
+--- /dev/null
++++ b/jiuwenswarm/research-paper-generator/tests/test_research_plan.py
+@@ -0,0 +1,174 @@
++"""Revision planning must preserve evidence boundaries and the content handoff."""
++
++from copy import deepcopy
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++
++MODULE = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(MODULE / "scripts"))
++
++from paper_content.project import fill_project
++from paper_content.prose import build_messages, validate_content
++from paper_framework.citations import build_citations
++from paper_framework.planner import plan_outline
++from paper_framework.project import generate_project
++from test_content import experiment, PROSE
++
++
++class ResearchPlanTests(unittest.TestCase):
++    def setUp(self):
++        temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(temporary.cleanup)
++        self.root = Path(temporary.name)
++        self.brief = {
++            "schema_version": 1, "title": "Controlled Memory Evaluation", "research_question": "What does memory buy?",
++            "research_questions": [{"id": "quality", "title": "Answer Quality", "question": "Does matched retrieval help?"}],
++            "experiments": [{"id": "fair", "title": "Matched Retrieval", "status": "planned",
++                             "research_question_ids": ["quality"], "purpose": "comparison",
++                             "protocol": {"budget": {"unit": "tokens", "values": [512]}, "repeats": 3},
++                             "evidence_requirements": ["Rendered prompts and per-query usage"]}],
++            "review_concerns": [{"id": "fairness", "title": "Fair Baselines", "description": "Match representation and budgets.",
++                                 "experiment_ids": ["fair"]}],
++        }
++        self.citations = build_citations([])
++
++    def plan(self):
++        return plan_outline(self.brief, self.citations, self.root)
++
++    def generate(self):
++        source = self.root / "brief.json"
++        source.write_text(json.dumps(self.brief), encoding="utf-8")
++        return generate_project(source, self.root / "framework")
++
++    def test_plan_exposes_missing_protocol_without_inventing_results(self):
++        outline = self.plan()
++        plan = outline["research_plan"]
++        sections = {s["id"]: s for s in outline["sections"]}
++        self.assertEqual(outline["evidence"], [])
++        self.assertEqual(sections["results"]["subsections"], [])
++        self.assertEqual(sections["introduction"]["subsections"][0]["id"], "rq_quality")
++        self.assertEqual(sections["experiments"]["subsections"][0]["protocol"]["budget"]["unit"], "tokens")
++        self.assertIn("budget.tokenizer", plan["experiments"][0]["missing_protocol_fields"])
++        self.assertIn("scoring.version", plan["experiments"][0]["missing_protocol_fields"])
++        self.assertEqual(plan["review_concerns"][0]["status"], "awaiting_evidence")
++
++    def test_unknown_links_and_duplicate_ids_fail_before_writing(self):
++        original = deepcopy(self.brief)
++        for mutate in (
++            lambda b: b["experiments"][0].update(research_question_ids=["missing"]),
++            lambda b: b["review_concerns"][0].update(experiment_ids=["missing"]),
++            lambda b: b["research_questions"].append(deepcopy(b["research_questions"][0])),
++        ):
++            self.brief = deepcopy(original)
++            mutate(self.brief)
++            with self.assertRaises(ValueError):
++                self.generate()
++            self.assertFalse((self.root / "framework").exists())
++
++    def test_invalid_protocols_are_not_silently_accepted(self):
++        invalid = [
++            {"repeat": 3}, {"repeats": True}, {"repeats": 0}, {"repeats": 1.5},
++            {"budget": {"unit": "bytes"}}, {"budget": {"values": [0]}},
++            {"budget": {"values": [True]}}, {"budget": {"values": [512, 512]}},
++            {"budget": {"tokeniser": "typo"}}, {"baselines": "prefix"},
++            {"controlled_variables": ["representation"], "changed_variables": ["representation"]},
++            {"dataset": {"sample_size": -1}}, {"reuse": {"queries_per_memory": []}},
++        ]
++        for protocol in invalid:
++            with self.subTest(protocol=protocol):
++                self.brief["experiments"][0]["protocol"] = protocol
++                with self.assertRaises(ValueError):
++                    self.plan()
++
++    def test_ablation_rejects_conflated_variables_and_reuse_lists_required_inputs(self):
++        item = self.brief["experiments"][0]
++        item.update(purpose="ablation", protocol={"changed_variables": ["representation", "selector"]})
++        with self.assertRaisesRegex(ValueError, "one variable"):
++            self.plan()
++        item.update(purpose="amortization", protocol={})
++        missing = self.plan()["research_plan"]["experiments"][0]["missing_protocol_fields"]
++        self.assertIn("reuse.queries_per_memory", missing)
++        self.assertIn("reuse.construction_cost_policy", missing)
++
++    def test_planned_result_file_cannot_silently_become_evidence(self):
++        (self.root / "run.json").write_text("{}", encoding="utf-8")
++        self.brief["experiments"][0]["result_path"] = "run.json"
++        with self.assertRaisesRegex(ValueError, "Planned experiment"):
++            self.generate()
++        self.assertFalse((self.root / "framework").exists())
++
++    def test_file_and_complete_protocol_do_not_resolve_a_review_concern(self):
++        (self.root / "run.json").write_text("{}", encoding="utf-8")
++        self.brief["experiments"][0].update(status="completed", result_path="run.json")
++        outline = self.plan()
++        self.assertEqual(outline["evidence"][0]["validation"], "file_exists_and_hashed_only")
++        self.assertEqual(outline["research_plan"]["review_concerns"][0]["status"], "needs_scientific_review")
++        self.assertTrue(outline["research_plan"]["scientific_review_required"])
++
++    def test_unmapped_question_and_review_concern_remain_visible(self):
++        self.brief["experiments"] = []
++        self.brief["review_concerns"][0]["experiment_ids"] = []
++        outline = self.plan()
++        self.assertEqual(outline["research_plan"]["review_concerns"][0]["status"], "unmapped")
++        self.assertTrue(any("no linked experiment" in w for w in outline["warnings"]))
++
++    def test_legacy_brief_has_unchanged_structure_and_no_new_requirements(self):
++        for key in ("research_questions", "review_concerns"):
++            self.brief.pop(key)
++        self.brief["experiments"] = [{"id": "old", "title": "Original Trial"}]
++        outline = self.plan()
++        self.assertNotIn("research_plan", outline)
++        self.assertEqual(outline["planner"], "deterministic_rules_v1")
++        self.assertEqual(outline["sections"][1]["subsections"], [])
++        self.assertEqual(len(outline["sections"][4]["subsections"]), 1)
++
++    def test_revision_example_keeps_only_pilot_results_and_stable_citations(self):
++        brief = json.loads((MODULE / "examples/memory-revision.brief.json").read_text(encoding="utf-8"))
++        literature = json.loads((MODULE / "examples/memory-research.literature.json").read_text(encoding="utf-8"))
++        citations = build_citations(literature)
++        outline = plan_outline(brief, citations, MODULE / "examples")
++        self.assertEqual([e["id"] for e in outline["evidence"]], ["public_small", "public_large"])
++        self.assertEqual(len(outline["research_plan"]["experiments"]), 8)
++        self.assertEqual(len(outline["sections"][5]["subsections"]), 2)
++        self.assertTrue(all(c["status"] == "awaiting_evidence" for c in outline["research_plan"]["review_concerns"]))
++        self.assertTrue(all(e["purpose"] == "pilot" for e in outline["research_plan"]["experiments"] if e["evidence_ids"]))
++        self.assertEqual(citations["by_source_id"], build_citations(list(reversed(literature)))["by_source_id"])
++
++    def test_content_receives_and_preserves_the_plan_with_mixed_evidence(self):
++        (self.root / "pilot.json").write_text(json.dumps(experiment()), encoding="utf-8")
++        self.brief["experiments"].append({"id": "pilot", "title": "Pilot Observation", "purpose": "pilot",
++                                          "status": "completed", "result_path": "pilot.json"})
++        self.generate()
++        framework = self.root / "framework"
++        outline = json.loads((framework / "outline.json").read_text(encoding="utf-8"))
++        content = {"sections": []}
++        for section in outline["sections"]:
++            children = []
++            for child in section["subsections"]:
++                paragraph = PROSE
++                if child.get("evidence_ids"):
++                    paragraph += " Observed accuracy was [[metric:pilot.baseline.accuracy]]."
++                children.append({"id": child["id"], "paragraphs": [paragraph]})
++            content["sections"].append({"id": section["id"], "paragraphs": [PROSE], "subsections": children})
++        source = self.root / "content.json"
++        source.write_text(json.dumps(content), encoding="utf-8")
++        report = fill_project(framework, self.root / "paper", content_json=source)
++        self.assertEqual(report["calls"], [])
++        self.assertEqual(report["status"], "completed")
++        for filename in ("research_plan.json", "RESEARCH_HANDOFF.md"):
++            self.assertEqual((framework / filename).read_bytes(), (self.root / "paper" / filename).read_bytes())
++        request = json.loads((self.root / "paper/generation_request.json").read_text(encoding="utf-8"))
++        payload = json.loads(request[1]["content"])
++        self.assertEqual(payload["research_plan"], outline["research_plan"])
++        self.assertIn("Planned experiments have NOT run", request[0]["content"])
++        self.assertFalse(any(key.startswith("fair.") for key in payload["metric_tokens"]))
++        content["sections"][5]["paragraphs"] = [PROSE + " Accuracy was [[metric:fair.baseline.accuracy]]."]
++        with self.assertRaisesRegex(ValueError, "Unknown measurement token"):
++            validate_content(content, outline, {}, self.citations)
++
++
++if __name__ == "__main__":
++    unittest.main()
+-- 
+2.55.0.windows.5
+

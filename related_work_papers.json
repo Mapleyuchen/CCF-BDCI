@@ -1,0 +1,446 @@
+[
+  {
+    "citekey": "wang2024learning",
+    "title": "Learning From Failure: Integrating Negative Examples when Fine-tuning Large Language Models as Agents",
+    "authors": [
+      "Renxi Wang",
+      "Haonan Li",
+      "Xudong Han"
+    ],
+    "year": "2024",
+    "abstract_snippet": "Large language models (LLMs) have achieved success in acting as agents, which interact with environments through tools such as search engines. However, LLMs are optimized for language generation instead of tool use during training or alignment, limiting their effectiveness as age",
+    "url": "http://arxiv.org/abs/2402.11651v2",
+    "categories": [
+      "cs.CL"
+    ]
+  },
+  {
+    "citekey": "rothfarb2025hierarchic",
+    "title": "Hierarchical Multi-agent Large Language Model Reasoning for Autonomous Functional Materials Discovery",
+    "authors": [
+      "Samuel Rothfarb",
+      "Megan C. Davis",
+      "Ivana Matanovic"
+    ],
+    "year": "2025",
+    "abstract_snippet": "Artificial intelligence is reshaping scientific exploration, but most methods automate procedural tasks without engaging in scientific reasoning, limiting autonomy in discovery. We introduce Materials Agents for Simulation and Theory in Electronic-structure Reasoning (MASTER), an",
+    "url": "http://arxiv.org/abs/2512.13930v1",
+    "categories": [
+      "cond-mat.mtrl-sci",
+      "cs.AI",
+      "cs.CL"
+    ]
+  },
+  {
+    "citekey": "shang2023pb",
+    "title": "PB-LLM: Partially Binarized Large Language Models",
+    "authors": [
+      "Yuzhang Shang",
+      "Zhihang Yuan",
+      "Qiang Wu"
+    ],
+    "year": "2023",
+    "abstract_snippet": "This paper explores network binarization, a radical form of quantization, compressing model weights to a single bit, specifically for Large Language Models (LLMs) compression. Due to previous binarization methods collapsing LLMs, we propose a novel approach, Partially-Binarized L",
+    "url": "http://arxiv.org/abs/2310.00034v2",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ]
+  },
+  {
+    "citekey": "patel2026ai",
+    "title": "AI Hardware Accelerators for Large Language Models: Architectures and the Memory Wall",
+    "authors": [
+      "Siddharth Patel",
+      "Rohit Singh"
+    ],
+    "year": "2026",
+    "abstract_snippet": "Large language models (LLMs) place unprecedented and still-growing demands on the hardware that trains and serves them. This review surveys the full landscape of AI hardware accelerators for LLMs, including general-purpose GPUs, custom ASICs such as TPUs, Trainium, Groq, and Cere",
+    "url": "http://arxiv.org/abs/2608.28048v1",
+    "categories": [
+      "cs.AR",
+      "cs.DC"
+    ]
+  },
+  {
+    "citekey": "rasheed2024large",
+    "title": "Large Language Model Evaluation Via Multi AI Agents: Preliminary results",
+    "authors": [
+      "Zeeshan Rasheed",
+      "Muhammad Waseem",
+      "Kari Systä"
+    ],
+    "year": "2024",
+    "abstract_snippet": "As Large Language Models (LLMs) have become integral to both research and daily operations, rigorous evaluation is crucial. This assessment is important not only for individual tasks but also for understanding their societal impact and potential risks. Despite extensive efforts t",
+    "url": "http://arxiv.org/abs/2404.01023v1",
+    "categories": [
+      "cs.SE"
+    ]
+  },
+  {
+    "citekey": "zhou2026we",
+    "title": "Are We Ready For An Agent-Native Memory System?",
+    "authors": [
+      "Wei Zhou",
+      "Xuanhe Zhou",
+      "Shaokun Han"
+    ],
+    "year": "2026",
+    "abstract_snippet": "Memory for large language model (LLM) agents has rapidly evolved from simple retrieval-augmented mechanisms into a data management system that supports persistent information storage, retrieval, update, consolidation, and dynamic lifecycle governance throughout agent execution. D",
+    "url": "http://arxiv.org/abs/2606.24775v1",
+    "categories": [
+      "cs.CL",
+      "cs.DB",
+      "cs.IR"
+    ]
+  },
+  {
+    "citekey": "roffo2024exploring",
+    "title": "Exploring Advanced Large Language Models with LLMsuite",
+    "authors": [
+      "Giorgio Roffo"
+    ],
+    "year": "2024",
+    "abstract_snippet": "This tutorial explores the advancements and challenges in the development of Large Language Models (LLMs) such as ChatGPT and Gemini. It addresses inherent limitations like temporal knowledge cutoffs, mathematical inaccuracies, and the generation of incorrect information, proposi",
+    "url": "http://arxiv.org/abs/2407.12036v2",
+    "categories": [
+      "cs.CL",
+      "cs.CV"
+    ]
+  },
+  {
+    "citekey": "chen2026mrmmia",
+    "title": "MRMMIA: Membership Inference Attacks on Memory in Chat Agents",
+    "authors": [
+      "Kai Chen",
+      "Yan Pang",
+      "Tianhao Wang"
+    ],
+    "year": "2026",
+    "abstract_snippet": "Membership inference attacks (MIAs) test whether a target data record belongs to a system's private data, and have become a standard tool to measure privacy leakage in machine learning systems. Prior work has primarily focused on training corpora or retrieval databases. However, ",
+    "url": "http://arxiv.org/abs/2605.27825v1",
+    "categories": [
+      "cs.CR",
+      "cs.LG"
+    ]
+  },
+  {
+    "citekey": "gallego2026distilling",
+    "title": "Distilling Feedback into Memory-as-a-Tool",
+    "authors": [
+      "Víctor Gallego"
+    ],
+    "year": "2026",
+    "abstract_snippet": "We propose a framework that amortizes the cost of inference-time reasoning by converting transient critiques into retrievable guidelines, through a file-based memory system and agent-controlled tool calls. We evaluate this method on the Rubric Feedback Bench, a novel dataset for ",
+    "url": "http://arxiv.org/abs/2601.05960v2",
+    "categories": [
+      "cs.CL"
+    ]
+  },
+  {
+    "citekey": "alake2026oracle",
+    "title": "Oracle Agent Memory as an Enterprise Memory Substrate for Long-Horizon AI Agents",
+    "authors": [
+      "Richmond Alake",
+      "Cesare Bernardis",
+      "Paul Cayet"
+    ],
+    "year": "2026",
+    "abstract_snippet": "Agent memory is a systems problem for long-horizon agents. Practical deployments require retention of task state across extended conversations, recovery of user-specific facts and preferences across sessions, and accumulation of procedural knowledge from prior outcomes. These req",
+    "url": "http://arxiv.org/abs/2607.13157v1",
+    "categories": [
+      "cs.AI",
+      "cs.DB"
+    ]
+  },
+  {
+    "citekey": "lee2021carousel",
+    "title": "Carousel Memory: Rethinking the Design of Episodic Memory for Continual Learning",
+    "authors": [
+      "Soobee Lee",
+      "Minindu Weerakoon",
+      "Jonghyun Choi"
+    ],
+    "year": "2021",
+    "abstract_snippet": "Continual Learning (CL) is an emerging machine learning paradigm that aims to learn from a continuous stream of tasks without forgetting knowledge learned from the previous tasks. To avoid performance decrease caused by forgetting, prior studies exploit episodic memory (EM), whic",
+    "url": "http://arxiv.org/abs/2110.07276v3",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ]
+  },
+  {
+    "citekey": "ji2015line",
+    "title": "In-Line-Test of Variability and Bit-Error-Rate of HfOx-Based Resistive Memory",
+    "authors": [
+      "B. L. Ji",
+      "H. Li",
+      "Q. Ye"
+    ],
+    "year": "2015",
+    "abstract_snippet": "Spatial and temporal variability of HfOx-based resistive random access memory (RRAM) are investigated for manufacturing and product designs. Manufacturing variability is characterized at different levels including lots, wafers, and chips. Bit-error-rate (BER) is proposed as a hol",
+    "url": "http://arxiv.org/abs/1509.00070v1",
+    "categories": [
+      "cs.ET",
+      "cond-mat.mtrl-sci",
+      "physics.data-an"
+    ]
+  },
+  {
+    "citekey": "machens2013opacity",
+    "title": "Opacity of Memory Management in Software Transactional Memory",
+    "authors": [
+      "Holger Machens",
+      "Volker Turau"
+    ],
+    "year": "2013",
+    "abstract_snippet": "Opacity of Transactional Memory is proposed to be established by incremental validation. Quiescence in terms of epoch-based memory reclamation is applied to deal with doomed transactions causing memory access violations. This method unfortunately involves increased memory consump",
+    "url": "http://arxiv.org/abs/1308.2881v1",
+    "categories": [
+      "cs.DC",
+      "cs.OS"
+    ]
+  },
+  {
+    "citekey": "pavez2018working",
+    "title": "Working Memory Networks: Augmenting Memory Networks with a Relational Reasoning Module",
+    "authors": [
+      "Juan Pavez",
+      "Héctor Allende",
+      "Héctor Allende-Cid"
+    ],
+    "year": "2018",
+    "abstract_snippet": "During the last years, there has been a lot of interest in achieving some kind of complex reasoning using deep neural networks. To do that, models like Memory Networks (MemNNs) have combined external memory storages and attention mechanisms. These architectures, however, lack of ",
+    "url": "http://arxiv.org/abs/1805.09354v1",
+    "categories": [
+      "cs.CL"
+    ]
+  },
+  {
+    "citekey": "mihaylov2019semanticz",
+    "title": "SemanticZ at SemEval-2016 Task 3: Ranking Relevant Answers in Community Question Answering Using Semantic Similarity Based on Fine-tuned Word Embeddings",
+    "authors": [
+      "Todor Mihaylov",
+      "Preslav Nakov"
+    ],
+    "year": "2019",
+    "abstract_snippet": "We describe our system for finding good answers in a community forum, as defined in SemEval-2016, Task 3 on Community Question Answering. Our approach relies on several semantic similarity features based on fine-tuned word embeddings and topics similarities. In the main Subtask C",
+    "url": "http://arxiv.org/abs/1911.08743v1",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.IR"
+    ]
+  },
+  {
+    "citekey": "awad2026developing",
+    "title": "Developing an Intelligent Job Recommendation System Using Semantic Retrieval and Explainable AI Techniques",
+    "authors": [
+      "Hussein Al Awad",
+      "Khaled Fathi Omar"
+    ],
+    "year": "2026",
+    "abstract_snippet": "Online recruitment platforms require recommendation methods capable of retrieving relevant job opportunities from large and heterogeneous collections of job postings. Keyword-based search is efficient and interpretable, but it may fail to retrieve relevant postings when equivalen",
+    "url": "http://arxiv.org/abs/2605.27656v1",
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ]
+  },
+  {
+    "citekey": "macavaney2018overcoming",
+    "title": "Overcoming low-utility facets for complex answer retrieval",
+    "authors": [
+      "Sean MacAvaney",
+      "Andrew Yates",
+      "Arman Cohan"
+    ],
+    "year": "2018",
+    "abstract_snippet": "Many questions cannot be answered simply; their answers must include numerous nuanced details and additional context. Complex Answer Retrieval (CAR) is the retrieval of answers to such questions. In their simplest form, these questions are constructed from a topic entity (e.g., `",
+    "url": "http://arxiv.org/abs/1811.08772v1",
+    "categories": [
+      "cs.IR"
+    ]
+  },
+  {
+    "citekey": "trabelsi2021neural",
+    "title": "Neural ranking models for document retrieval",
+    "authors": [
+      "Mohamed Trabelsi",
+      "Zhiyu Chen",
+      "Brian D. Davison"
+    ],
+    "year": "2021",
+    "abstract_snippet": "Ranking models are the main components of information retrieval systems. Several approaches to ranking are based on traditional machine learning algorithms using a set of hand-crafted features. Recently, researchers have leveraged deep learning models in information retrieval. Th",
+    "url": "http://arxiv.org/abs/2102.11903v2",
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ]
+  },
+  {
+    "citekey": "sawarkar2024blended",
+    "title": "Blended RAG: Improving RAG (Retriever-Augmented Generation) Accuracy with Semantic Search and Hybrid Query-Based Retrievers",
+    "authors": [
+      "Kunal Sawarkar",
+      "Abhilasha Mangal",
+      "Shivam Raj Solanki"
+    ],
+    "year": "2024",
+    "abstract_snippet": "Retrieval-Augmented Generation (RAG) is a prevalent approach to infuse a private knowledge base of documents with Large Language Models (LLM) to build Generative Q\\&A (Question-Answering) systems. However, RAG accuracy becomes increasingly challenging as the corpus of documents s",
+    "url": "http://arxiv.org/abs/2404.07220v2",
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.CL"
+    ]
+  },
+  {
+    "citekey": "han2018linear",
+    "title": "Linear Temporal Logic for Hybrid Dynamical Systems: Characterizations and Sufficient Conditions",
+    "authors": [
+      "Hyejin Han",
+      "Ricardo G. Sanfelice"
+    ],
+    "year": "2018",
+    "abstract_snippet": "This paper introduces operators, semantics, characterizations, and solution-independent conditions to guarantee temporal logic specifications for hybrid dynamical systems. Hybrid dynamical systems are given in terms of differential inclusions -- capturing the continuous dynamics ",
+    "url": "http://arxiv.org/abs/1807.02574v6",
+    "categories": [
+      "eess.SY",
+      "math.DS",
+      "math.OC"
+    ]
+  },
+  {
+    "citekey": "ovcharov2026temporal",
+    "title": "Temporal Decay of Co-Citation Predictability: A 20-Year Statute Retrieval Benchmark from 396M Ukrainian Court Citations",
+    "authors": [
+      "Volodymyr Ovcharov"
+    ],
+    "year": "2026",
+    "abstract_snippet": "Co-citation structure is widely assumed to provide stable retrieval signal in legal information systems. We test this assumption longitudinally by constructing UA-StatuteRetrieval, a benchmark that measures co-citation predictability across 20 annual snapshots (2007-2026) of 396 ",
+    "url": "http://arxiv.org/abs/2605.17639v1",
+    "categories": [
+      "cs.CL",
+      "cs.IR"
+    ]
+  },
+  {
+    "citekey": "oncescu2024dissecting",
+    "title": "Dissecting Temporal Understanding in Text-to-Audio Retrieval",
+    "authors": [
+      "Andreea-Maria Oncescu",
+      "João F. Henriques",
+      "A. Sophia Koepke"
+    ],
+    "year": "2024",
+    "abstract_snippet": "Recent advancements in machine learning have fueled research on multimodal tasks, such as for instance text-to-video and text-to-audio retrieval. These tasks require models to understand the semantic content of video and audio data, including objects, and characters. The models a",
+    "url": "http://arxiv.org/abs/2409.00851v1",
+    "categories": [
+      "cs.IR",
+      "cs.LG",
+      "cs.SD"
+    ]
+  },
+  {
+    "citekey": "cao2025tv",
+    "title": "TV-RAG: A Temporal-aware and Semantic Entropy-Weighted Framework for Long Video Retrieval and Understanding",
+    "authors": [
+      "Zong-Sheng Cao",
+      "Yang-Fan He",
+      "Anran Liu"
+    ],
+    "year": "2025",
+    "abstract_snippet": "Large Video Language Models (LVLMs) have rapidly emerged as the focus of multimedia AI research. Nonetheless, when confronted with lengthy videos, these models struggle: their temporal windows are narrow, and they fail to notice fine-grained semantic shifts that unfold over exten",
+    "url": "https://www.semanticscholar.org/paper/5e6caa39aaf34c7d61600240cbe4cfbe1267f1dc",
+    "categories": []
+  },
+  {
+    "citekey": "jambula2026metadata",
+    "title": "Metadata Matters: A Hybrid Retrieval Framework for Structured Financial Document Analysis",
+    "authors": [
+      "S. Jambula",
+      "Srihari Kumar Pendyala",
+      "Rajesh Kumar Butteddi"
+    ],
+    "year": "2026",
+    "abstract_snippet": "Large Language Models are deployed in financial applications such as research synthesis and risk analysis, yet their effectiveness is constrained by the limitations of conventional retrieval methods. Existing approaches rely primarily on semantic similarity or token-level matchin",
+    "url": "https://www.semanticscholar.org/paper/82f27035b79a891bc9872ba0f6f3928315611a11",
+    "categories": []
+  },
+  {
+    "citekey": "bindle2025hybrid",
+    "title": "A Hybrid Large Language Model for Context-Aware Document Ranking in Telecommunication Data",
+    "authors": [
+      "Abhay Bindle",
+      "P. Singla",
+      "Sachin Sharma"
+    ],
+    "year": "2025",
+    "abstract_snippet": "Large language models (LLMs) have drawn a lot of attention due to their exceptional comprehension and reasoning capabilities. The development of LLM methods are leading to countless prospects for the automation of numerous tasks in the telecommunication industry. Following pre-tr",
+    "url": "https://www.semanticscholar.org/paper/2fd64d79768840a688f6c7d6a895220f5c324802",
+    "categories": []
+  },
+  {
+    "citekey": "steffens2026vstash",
+    "title": "vstash: Local-First Hybrid Retrieval with Adaptive Fusion for LLM Agents",
+    "authors": [
+      "Jayson Steffens"
+    ],
+    "year": "2026",
+    "abstract_snippet": "We present **vstash**, a local-first document memory system that combines vector similarity search with full-text keyword matching via Reciprocal Rank Fusion (RRF) and adaptive per-query IDF weighting. All data resides in a single SQLite file using sqlite-vec for approximate near",
+    "url": "https://www.semanticscholar.org/paper/33fa40b41dcd3689c7be79d5dc90bcfc453a2482",
+    "categories": []
+  },
+  {
+    "citekey": "jiang2026synapse",
+    "title": "SYNAPSE: Empowering LLM Agents with Episodic-Semantic Memory via Spreading Activation",
+    "authors": [
+      "Han-Qi Jiang",
+      "Jun-Hao Chen",
+      "Yi Pan"
+    ],
+    "year": "2026",
+    "abstract_snippet": "While Large Language Models (LLMs) excel at generalized reasoning, standard retrieval-augmented approaches fail to address the disconnected nature of long-term agentic memory. To bridge this gap, we introduce Synapse (Synergistic Associative Processing Semantic Encoding), a unifi",
+    "url": "https://www.semanticscholar.org/paper/a0bd272b7d4ac151fbd0724f3cc77e2e2fa6941c",
+    "categories": []
+  },
+  {
+    "citekey": "neji2021hyra",
+    "title": "HyRa: An Effective Hybrid Ranking Model",
+    "authors": [
+      "Sameh Neji",
+      "T. Chenaina",
+      "Abdullah M. Shoeb"
+    ],
+    "year": "2021",
+    "abstract_snippet": "Abstract Information retrieval (IR) systems are concerned of the processing of the textual content of the document, the query, and issues of system effectiveness. IR models are means to integrate many sources of evidence on documents to achieve an effective retrieval system. Unli",
+    "url": "https://www.semanticscholar.org/paper/30bd78a83dea4bda8cd296fb66bcf2b6f68166aa",
+    "categories": []
+  },
+  {
+    "citekey": "atoum2025evolving",
+    "title": "Evolving Information Retrieval: From Traditional Models to Emerging Paradigms",
+    "authors": [
+      "Ibrahim Atoum"
+    ],
+    "year": "2025",
+    "abstract_snippet": "— Information Retrieval (IR) development shows a trajectory from strict symbolic systems Boolean Retrieval Model (BRM), Term Frequency-Inverse Document Frequency (TF-IDF), and Vector Space Model (VSM) towards flexible hybrid approaches using statistical BM25, Latent Semantic Anal",
+    "url": "https://www.semanticscholar.org/paper/2476389ca5689ac26ee12c2933fdc026ab3d3cab",
+    "categories": []
+  },
+  {
+    "citekey": "lei2026navirag",
+    "title": "NaviRAG: Learning to Navigate Knowledge Graphs for Retrieval-Augmented Generation",
+    "authors": [
+      "Jinghong Lei",
+      "Wang Kun",
+      "Zhigang Chen"
+    ],
+    "year": "2026",
+    "abstract_snippet": "Retrieval-Augmented Generation (RAG) has become a fundamental paradigm for enhancing Large Language Models (LLMs) with external knowledge. However, while recent structure-augmented approaches organize documents into graphs to improve information access, their retrieval strategies",
+    "url": "https://www.semanticscholar.org/paper/a35d11cd99bcac96a539c04e4efa50d89079589f",
+    "categories": []
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "status": "completed",
+  "human_review_required": true,
+  "source_framework": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\output\\paper-quality-revision\\final-framework",
+  "source_outline_sha256": "e24ade508a4d54462a3e640737915f154dcc7a265db2fb86f5e24b8a7480dea2",
+  "calls": [],
+  "validation_errors": [],
+  "figures": [
+    "methodology.png",
+    "quality_cost_overview.pdf",
+    "quality_cost_overview.png",
+    "quality_cost_overview.svg",
+    "question_audit.pdf",
+    "question_audit.png",
+    "question_audit.svg"
+  ],
+  "content_input_sha256": "c7e80c0fd0d9891cb32672848d65f87db42e17b116bcb26ff171ade008074441",
+  "content_input_path": "D:\\0_数据挖掘华为比赛\\CCF-BDCI\\jiuwenswarm\\research-paper-generator\\examples\\memory-research.content.json",
+  "methodology_image_sha256": "7c33aabf738bc3b56cbc464a1ac347ff47949a41ae84649adcb9732e25915f05",
+  "editorial_checks": {
+    "prose_words": 3514,
+    "reference_count": 6,
+    "method_equations": 3,
+    "question_level_appendix": true,
+    "research_validity_requires_human_review": true
+  },
+  "quality": {
+    "passed": 75,
+    "errors": 0,
+    "warnings": 0,
+    "info": 0
+  },
+  "mechanical_checks_passed": true
+}

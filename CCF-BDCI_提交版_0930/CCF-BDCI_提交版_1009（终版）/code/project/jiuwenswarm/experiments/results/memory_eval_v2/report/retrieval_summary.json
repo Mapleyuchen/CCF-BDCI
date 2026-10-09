@@ -1,0 +1,1298 @@
+{
+  "kind": "controlled_memory_retrieval_only",
+  "groups": [
+    {
+      "arm": "prefix",
+      "budget_tokens": 512,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.0199290780141844,
+        "low": 0.011418439716312056,
+        "high": 0.029432624113475175,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.002127659574468085,
+        "low": 0.0,
+        "high": 0.006382978723404255,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.006382978723404255,
+        "low": 0.0010638297872340426,
+        "high": 0.01276595744680851,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.006750902377511067,
+        "low": 0.0013099396633852016,
+        "high": 0.01347927447495095,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.002127659574468085,
+        "low": 0.0,
+        "high": 0.006382978723404255,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 512,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.03978723404255319,
+        "low": 0.025070921985815602,
+        "high": 0.056205673758865246,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.023404255319148935,
+        "low": 0.010638297872340425,
+        "high": 0.03829787234042553,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.018687943262411348,
+        "low": 0.00886436170212766,
+        "high": 0.03028368794326241,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.016939686659475536,
+        "low": 0.007847528599608092,
+        "high": 0.027793294007610225,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.00851063829787234,
+        "low": 0.002127659574468085,
+        "high": 0.01702127659574468,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 512,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.6967021276595745,
+        "low": 0.66322695035461,
+        "high": 0.7301063829787233,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.5851063829787234,
+        "low": 0.5468085106382978,
+        "high": 0.625531914893617,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.46067375886524825,
+        "low": 0.42429078014184396,
+        "high": 0.49868794326241134,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.4445937350382405,
+        "low": 0.40848237351999694,
+        "high": 0.48225142991008807,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.3425531914893617,
+        "low": 0.30425531914893617,
+        "high": 0.3829787234042553,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 512,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.8040425531914893,
+        "low": 0.7782969858156028,
+        "high": 0.8295390070921985,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.6808510638297872,
+        "low": 0.6446808510638298,
+        "high": 0.7170212765957447,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.6304609929078013,
+        "low": 0.5968085106382979,
+        "high": 0.6633705673758865,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.6171143558219687,
+        "low": 0.5828240072842263,
+        "high": 0.650583321395799,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.46595744680851064,
+        "low": 0.425531914893617,
+        "high": 0.5063829787234042,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 512,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.2442553191489362,
+        "low": 0.2150354609929078,
+        "high": 0.2742553191489362,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.1723404255319149,
+        "low": 0.14042553191489363,
+        "high": 0.20425531914893616,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.17904255319148937,
+        "low": 0.15265868794326243,
+        "high": 0.20663209219858159,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.17567356251770766,
+        "low": 0.1491141444635683,
+        "high": 0.20346371974401356,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.12127659574468085,
+        "low": 0.09361702127659574,
+        "high": 0.14893617021276595,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 512,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.6967021276595745,
+        "low": 0.66322695035461,
+        "high": 0.7301063829787233,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.5851063829787234,
+        "low": 0.5468085106382978,
+        "high": 0.625531914893617,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.46067375886524825,
+        "low": 0.42429078014184396,
+        "high": 0.49868794326241134,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.4445937350382405,
+        "low": 0.40848237351999694,
+        "high": 0.48225142991008807,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.3425531914893617,
+        "low": 0.30425531914893617,
+        "high": 0.3829787234042553,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 1024,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.022836879432624115,
+        "low": 0.013687943262411345,
+        "high": 0.033156028368794326,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.00425531914893617,
+        "low": 0.0,
+        "high": 0.010638297872340425,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.010177304964539008,
+        "low": 0.0041489361702127655,
+        "high": 0.0175177304964539,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.011084241854144956,
+        "low": 0.0045214225634621,
+        "high": 0.019036157802859856,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.002127659574468085,
+        "low": 0.0,
+        "high": 0.006382978723404255,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 1024,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.04234042553191489,
+        "low": 0.02673758865248227,
+        "high": 0.05946897163120566,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.027659574468085105,
+        "low": 0.014893617021276596,
+        "high": 0.0425531914893617,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.021879432624113473,
+        "low": 0.011063829787234043,
+        "high": 0.034184397163120564,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.021195181715477455,
+        "low": 0.010821187087233172,
+        "high": 0.033104272125087805,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.010638297872340425,
+        "low": 0.002127659574468085,
+        "high": 0.02127659574468085,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 1024,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.7988297872340426,
+        "low": 0.7684397163120568,
+        "high": 0.8281914893617022,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.7042553191489361,
+        "low": 0.6659574468085107,
+        "high": 0.7404255319148936,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.5748581560283686,
+        "low": 0.5387234042553192,
+        "high": 0.6124831560283688,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.5578387630144204,
+        "low": 0.5218346393247721,
+        "high": 0.5949723743662307,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.4574468085106383,
+        "low": 0.41702127659574467,
+        "high": 0.5,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 1024,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.8617375886524823,
+        "low": 0.8387934397163122,
+        "high": 0.8839716312056737,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.7617021276595745,
+        "low": 0.7276595744680852,
+        "high": 0.7957446808510639,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.7201418439716313,
+        "low": 0.6880132978723403,
+        "high": 0.7520921985815603,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.7139729253715166,
+        "low": 0.681862700712032,
+        "high": 0.7462559844378113,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.5914893617021276,
+        "low": 0.5531914893617021,
+        "high": 0.6319148936170212,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 1024,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.28517730496453897,
+        "low": 0.2559210992907801,
+        "high": 0.31450620567375887,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.2148936170212766,
+        "low": 0.1829787234042553,
+        "high": 0.24680851063829787,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.22531914893617022,
+        "low": 0.19691400709219858,
+        "high": 0.25439716312056737,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.22066698372419075,
+        "low": 0.19208544130558675,
+        "high": 0.24988278492432878,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.16595744680851063,
+        "low": 0.13617021276595745,
+        "high": 0.19787234042553192,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 1024,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.7988297872340426,
+        "low": 0.7684397163120568,
+        "high": 0.8281914893617022,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.7042553191489361,
+        "low": 0.6659574468085107,
+        "high": 0.7404255319148936,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.5748581560283686,
+        "low": 0.5387234042553192,
+        "high": 0.6124831560283688,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.5578387630144204,
+        "low": 0.5218346393247721,
+        "high": 0.5949723743662307,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.4574468085106383,
+        "low": 0.41702127659574467,
+        "high": 0.5,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "prefix",
+      "budget_tokens": 2048,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.02333333333333333,
+        "low": 0.014609929078014186,
+        "high": 0.03329875886524822,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.002127659574468085,
+        "low": 0.0,
+        "high": 0.006382978723404255,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.015886524822695036,
+        "low": 0.008510638297872339,
+        "high": 0.024397163120567375,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.016454391144603977,
+        "low": 0.008700174858768502,
+        "high": 0.025265442595517988,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.002127659574468085,
+        "low": 0.0,
+        "high": 0.006382978723404255,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "recency",
+      "budget_tokens": 2048,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.04865248226950355,
+        "low": 0.032517730496453894,
+        "high": 0.06631205673758865,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.02553191489361702,
+        "low": 0.01276595744680851,
+        "high": 0.04042553191489362,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.03507092198581561,
+        "low": 0.020921985815602836,
+        "high": 0.050709219858156025,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.03449855519550047,
+        "low": 0.020336248613509425,
+        "high": 0.0499820437385884,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.02127659574468085,
+        "low": 0.00851063829787234,
+        "high": 0.036170212765957444,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "jaccard",
+      "budget_tokens": 2048,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.8947872340425531,
+        "low": 0.8719849290780142,
+        "high": 0.9165957446808509,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.825531914893617,
+        "low": 0.7936170212765957,
+        "high": 0.8574468085106383,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.6880496453900709,
+        "low": 0.6534033687943264,
+        "high": 0.722554964539007,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.6761729725861826,
+        "low": 0.6407537114519452,
+        "high": 0.7109437478580792,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.5765957446808511,
+        "low": 0.5361702127659574,
+        "high": 0.6170212765957447,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "bm25",
+      "budget_tokens": 2048,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.9184042553191489,
+        "low": 0.8997872340425531,
+        "high": 0.9361347517730497,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.8446808510638298,
+        "low": 0.8148404255319149,
+        "high": 0.874468085106383,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.784290780141844,
+        "low": 0.7540416666666666,
+        "high": 0.8152136524822694,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.7779250444183268,
+        "low": 0.7471923848743508,
+        "high": 0.8090338313878105,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.6723404255319149,
+        "low": 0.6340425531914894,
+        "high": 0.7127659574468085,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid",
+      "budget_tokens": 2048,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.3221276595744681,
+        "low": 0.2935097517730496,
+        "high": 0.3508156028368794,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.24468085106382978,
+        "low": 0.2127659574468085,
+        "high": 0.27872340425531916,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.26255319148936174,
+        "low": 0.23251773049645388,
+        "high": 0.29255407801418437,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.25915626696232985,
+        "low": 0.22866389566472325,
+        "high": 0.2893319179146973,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.20425531914893616,
+        "low": 0.1723404255319149,
+        "high": 0.23617021276595745,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    },
+    {
+      "arm": "hybrid_no_time",
+      "budget_tokens": 2048,
+      "n_histories": 500,
+      "eligible_non_abstention": 470,
+      "evidence_session_recall": {
+        "estimate": 0.8947872340425531,
+        "low": 0.8719849290780142,
+        "high": 0.9165957446808509,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_evidence_session_hit": {
+        "estimate": 0.825531914893617,
+        "low": 0.7936170212765957,
+        "high": 0.8574468085106383,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "evidence_turn_recall_any_fragment": {
+        "estimate": 0.6880496453900709,
+        "low": 0.6534033687943264,
+        "high": 0.722554964539007,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "annotated_evidence_character_coverage": {
+        "estimate": 0.6761729725861826,
+        "low": 0.6407537114519452,
+        "high": 0.7109437478580792,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      },
+      "all_annotated_evidence_turns_complete": {
+        "estimate": 0.5765957446808511,
+        "low": 0.5361702127659574,
+        "high": 0.6170212765957447,
+        "clusters": 470,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 20261007,
+        "method": "stratified paired memory-cluster bootstrap"
+      }
+    }
+  ],
+  "n_trials": 9000,
+  "source_manifest": {
+    "kind": "memory_eval_v2_retrieval",
+    "protocol": {
+      "protocol_version": "memory-eval-v2.0",
+      "source_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+      "source_url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+      "source_count": 500,
+      "source_license": "MIT",
+      "dependencies": {
+        "longmemeval_commit": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+        "scorer_url": "https://github.com/xiaowu0162/LongMemEval/blob/9e0b455f4ef0e2ab8f2e582289761153549043fc/src/evaluation/evaluate_qa.py",
+        "scorer_sha256": "ecce9c4c79dc89d99534ac17b383a5cbb5b9f0c69ee98adaf0684742e3d95251",
+        "tokenizer_repo": "Qwen/Qwen3-8B",
+        "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "tokenizer_files": {
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+        }
+      },
+      "sampling_seed": 20261006,
+      "per_stratum": 12,
+      "stratified_question_ids": {
+        "single-session-user": [
+          "e01b8e2f",
+          "726462e0",
+          "c960da58",
+          "caf9ead2",
+          "6f9b354f",
+          "1e043500",
+          "311778f1",
+          "001be529",
+          "d52b4f67",
+          "8ebdbe50",
+          "37d43f65",
+          "b320f3f8"
+        ],
+        "single-session-assistant": [
+          "18dcd5a5",
+          "28bcfaac",
+          "1b9b7252",
+          "fca762bc",
+          "488d3006",
+          "dc439ea3",
+          "cc539528",
+          "c4f10528",
+          "65240037",
+          "8cf51dda",
+          "7161e7e2",
+          "e982271f"
+        ],
+        "single-session-preference": [
+          "b0479f84",
+          "afdc33df",
+          "95228167",
+          "0edc2aef",
+          "09d032c9",
+          "1d4e3b97",
+          "54026fce",
+          "1da05512",
+          "06f04340",
+          "d6233ab6",
+          "38146c39",
+          "1c0ddc50"
+        ],
+        "multi-session": [
+          "eeda8a6d",
+          "gpt4_15e38248",
+          "d851d5ba",
+          "gpt4_59c863d7",
+          "3fe836c9",
+          "157a136e",
+          "efc3f7c2",
+          "1192316e",
+          "3a704032",
+          "9aaed6a3",
+          "ba358f49",
+          "c2ac3c61"
+        ],
+        "temporal-reasoning": [
+          "gpt4_8c8961ae",
+          "gpt4_4fc4f797",
+          "gpt4_213fd887",
+          "gpt4_ec93e27f",
+          "gpt4_18c2b244",
+          "gpt4_fa19884d",
+          "2c63a862",
+          "993da5e2",
+          "gpt4_d6585ce8",
+          "6e984301",
+          "gpt4_1d80365e",
+          "gpt4_f420262c"
+        ],
+        "knowledge-update": [
+          "10e09553",
+          "c4ea545c",
+          "5c40ec5b",
+          "5a4f22c0",
+          "72e3ee87",
+          "9bbe84a2",
+          "c6853660",
+          "0f05491a",
+          "6a1eabeb",
+          "d7c942c3",
+          "cc5ded98",
+          "2698e78f"
+        ],
+        "abstention": [
+          "0ddfec37_abs",
+          "bc8a6e93_abs",
+          "19b5f2b3_abs",
+          "ba358f49_abs",
+          "09ba9854_abs",
+          "29f2956b_abs",
+          "6aeb4375_abs",
+          "edced276_abs",
+          "eeda8a6d_abs",
+          "2311e44b_abs",
+          "2133c1b5_abs",
+          "0862e8bf_abs"
+        ]
+      },
+      "question_ids": [
+        "001be529",
+        "06f04340",
+        "0862e8bf_abs",
+        "09ba9854_abs",
+        "09d032c9",
+        "0ddfec37_abs",
+        "0edc2aef",
+        "0f05491a",
+        "10e09553",
+        "1192316e",
+        "157a136e",
+        "18dcd5a5",
+        "19b5f2b3_abs",
+        "1b9b7252",
+        "1c0ddc50",
+        "1d4e3b97",
+        "1da05512",
+        "1e043500",
+        "2133c1b5_abs",
+        "2311e44b_abs",
+        "2698e78f",
+        "28bcfaac",
+        "29f2956b_abs",
+        "2c63a862",
+        "311778f1",
+        "37d43f65",
+        "38146c39",
+        "3a704032",
+        "3fe836c9",
+        "488d3006",
+        "54026fce",
+        "5a4f22c0",
+        "5c40ec5b",
+        "65240037",
+        "6a1eabeb",
+        "6aeb4375_abs",
+        "6e984301",
+        "6f9b354f",
+        "7161e7e2",
+        "726462e0",
+        "72e3ee87",
+        "8cf51dda",
+        "8ebdbe50",
+        "95228167",
+        "993da5e2",
+        "9aaed6a3",
+        "9bbe84a2",
+        "afdc33df",
+        "b0479f84",
+        "b320f3f8",
+        "ba358f49",
+        "ba358f49_abs",
+        "bc8a6e93_abs",
+        "c2ac3c61",
+        "c4ea545c",
+        "c4f10528",
+        "c6853660",
+        "c960da58",
+        "caf9ead2",
+        "cc539528",
+        "cc5ded98",
+        "d52b4f67",
+        "d6233ab6",
+        "d7c942c3",
+        "d851d5ba",
+        "dc439ea3",
+        "e01b8e2f",
+        "e982271f",
+        "edced276_abs",
+        "eeda8a6d",
+        "eeda8a6d_abs",
+        "efc3f7c2",
+        "fca762bc",
+        "gpt4_15e38248",
+        "gpt4_18c2b244",
+        "gpt4_1d80365e",
+        "gpt4_213fd887",
+        "gpt4_4fc4f797",
+        "gpt4_59c863d7",
+        "gpt4_8c8961ae",
+        "gpt4_d6585ce8",
+        "gpt4_ec93e27f",
+        "gpt4_f420262c",
+        "gpt4_fa19884d"
+      ],
+      "budgets": [
+        512,
+        1024,
+        2048
+      ],
+      "repeats": 3,
+      "chunk_body_tokens": 256,
+      "solver_model": "qwen-plus-2025-12-01",
+      "judge_model": "qwen3-max-2026-01-23",
+      "decoding": {
+        "temperature": 0,
+        "max_tokens": 384,
+        "enable_thinking": false
+      },
+      "selectors": [
+        "prefix",
+        "recency",
+        "jaccard",
+        "bm25",
+        "hybrid",
+        "hybrid_no_time"
+      ],
+      "primary_comparison": [
+        "hybrid",
+        "bm25"
+      ],
+      "confidence": 0.95,
+      "bootstrap_seed": 20261007,
+      "bootstrap_resamples": 10000,
+      "protocol_deviations": [
+        "Question-answer evaluation uses a deterministic stratified subset; retrieval evaluation covers all 500 histories.",
+        "Original complete histories, questions, dates and gold answers are retained; histories are split losslessly into bounded turn segments.",
+        "A frozen read-only single-layer bank is evaluated; the legacy 20-item EnhancedMemoryRail capacity is not asserted to support full histories.",
+        "Token caps use the pinned public Qwen3-8B BPE; service-reported input/output tokens are logged separately and may differ.",
+        "The original LongMemEval evaluation prompts are pinned; qwen3-max-2026-01-23 replaces its recommended GPT-4o judge.",
+        "This is a LongMemEval-S subset with disclosed deviations, not an official leaderboard score."
+      ],
+      "selection_rule": "Before generation, take the first fixed-hash-order 12 non-abstention questions in each of six categories and 12 abstention questions. No answer-length/content or outcome filter."
+    },
+    "protocol_sha256": "6e20a2b0b25946fa45d51d38c7bb45ba71f3e1001122a3d69da6cb6bfd050b9f",
+    "code_hashes": {
+      "run_memory_eval.py": "de2e415962ebdb9c6ca7b6ab5caf5c2c1fd060aebb164a76d30665147b5eea5a",
+      "data.py": "c8ae73cae161b55ca84cb6cd376f622abac2228a6ea5740f2cbe1cf21606e5fe",
+      "runtime.py": "be0932644ee68a195a0c1ae26af16d0072feff1ad0a5c631135714addbfb2207",
+      "controlled_retrieval.py": "7707080d43dce08ee36cac2a6607d69cbe272ba241bdbcda4c687465e231b75c",
+      "retrieval_engine.py": "3be92e3d32ba6a087ba1a290e3bb1900fc141015dd3bf7b62216b193c8ee4924",
+      "token_budget_memory_rail.py": "c9ba2c061fd405737b73ad728cbb2c58aa8f19101448d181eb7e44a5b4b8af8a"
+    },
+    "git_commit": "cf848ee26f04fb7422c78691fb8d26c60fc1cdee",
+    "official_longmemeval_score": false,
+    "execution": {
+      "suite": "all",
+      "repeats": 3,
+      "budgets": [
+        512,
+        1024,
+        2048
+      ],
+      "selectors": null,
+      "max_episodes": 0,
+      "lifecycle_episodes": 8,
+      "self_test": false,
+      "offline_retrieval": true
+    },
+    "request_schedule": {
+      "spacing_seconds": 0.65,
+      "rate_limit_cooldown_seconds": 60
+    },
+    "model_name": "qwen-plus-2025-12-01"
+  },
+  "source_audit": {
+    "source_banks_verified": 500,
+    "unique_prompt_artifacts_verified": 0,
+    "turn_annotations_posthoc_only": true
+  },
+  "not_answer_accuracy": true,
+  "official_longmemeval_score": false
+}

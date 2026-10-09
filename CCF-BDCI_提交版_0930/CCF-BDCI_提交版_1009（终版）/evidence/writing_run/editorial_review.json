@@ -1,0 +1,76 @@
+{
+  "major_issues": [
+    {
+      "section": "results",
+      "issue": "The draft claims the enhanced arm's total token cost per question is 'roughly twenty to fifty-six times higher than the baseline's.' Recomputation from supplied evidence shows: small budget ratio = 5083.45 / 234.3 = 21.7x; large budget ratio = 13201.8 / 843.85 = 15.6x. The 'fifty-six times' figure is unsupported and mathematically incorrect.",
+      "required_revision": "Replace 'twenty to fifty-six times' with 'approximately 15.6 to 21.7 times' and cite the exact tokens_per_question values."
+    },
+    {
+      "section": "method_protocol",
+      "issue": "The draft states 'Arm order is alternated across questions to mitigate ordering effects,' but the protocol description specifies that each question gets its own fact episode and fresh agents, meaning there is no cross-question state contamination to mitigate. Alternation applies only to execution sequence, not shared state.",
+      "required_revision": "Clarify that alternating arm order controls for potential API-level rate-limiting or temporal drift, not shared-state interference, since agents are instantiated fresh per question."
+    },
+    {
+      "section": "discussion",
+      "issue": "The draft attributes the residual 35pp gap at the large budget entirely to 'whole-item packing can surface facts from any serialisation position while the prefix remains order-bound.' However, it fails to analyze why the enhanced arm also failed on 1 question (both_wrong) and why the baseline achieved 1 correct_without_full_evidence. The causal mechanism for the 7 enhanced_only cases at large budget is asserted but not demonstrated via item-level analysis.",
+      "required_revision": "Add item-level analysis of the 7 enhanced_only cases at the large budget to show whether they correspond to facts positioned late in the baseline's serialized file."
+    }
+  ],
+  "factual_checks": [
+    {
+      "claim": "Baseline achieves accuracy of 0% at small budget.",
+      "status": "supported",
+      "evidence": "public_small.baseline.accuracy = 0, public_small.baseline.correct = 0 out of 20."
+    },
+    {
+      "claim": "Enhanced arm uses 400 seed model calls per budget.",
+      "status": "supported",
+      "evidence": "public_small.enhanced.seed_model_calls = 400, public_large.enhanced.seed_model_calls = 400."
+    },
+    {
+      "claim": "Enhanced query latency is lower than baseline at expanded budget.",
+      "status": "supported",
+      "evidence": "public_large.enhanced.query_latency_ms (601.4) < public_large.baseline.query_latency_ms (717.0)."
+    },
+    {
+      "claim": "No enhanced answer was correct without full evidence at either budget.",
+      "status": "supported",
+      "evidence": "public_small.enhanced.correct_without_full_evidence = 0, public_large.enhanced.correct_without_full_evidence = 0."
+    },
+    {
+      "claim": "Cost ratio is 20 to 56 times higher.",
+      "status": "refuted",
+      "evidence": "Computed ratios are 21.7x (small) and 15.6x (large). No metric supports 56x."
+    }
+  ],
+  "repetitive_passages": [
+    {
+      "location": "abstract, introduction, discussion, conclusion",
+      "text_pattern": "Repeated phrasing of 'accuracy gain narrows from X to Y percentage points as budget grows' and 'purchased through model-backed memory-write calls'.",
+      "recommendation": "Consolidate the quantitative summary into the results section; use the abstract and conclusion for high-level synthesis without repeating exact metric tokens verbatim."
+    },
+    {
+      "location": "method_baseline, setup_public_small",
+      "text_pattern": "Redundant explanation of prefix truncation and file metadata overhead consuming the character budget.",
+      "recommendation": "Define the truncation mechanism once in method_baseline and reference it in setup_public_small."
+    }
+  ],
+  "missing_analysis": [
+    {
+      "section": "results",
+      "gap": "The draft does not compute or report the cost-per-correct-answer metric. Given total tokens and correct counts, the cost per correct answer for enhanced at small budget is 101669/13 = 7820 tokens, versus undefined (division by zero) for baseline. At large budget: enhanced = 264036/19 = 13896 tokens; baseline = 16877/12 = 1406 tokens. This 9.9x cost-per-correct-answer ratio at the large budget is a critical efficiency metric omitted from the trade-off analysis.",
+      "recommendation": "Compute and discuss cost-per-correct-answer to contextualize whether the accuracy gain justifies the absolute token expenditure."
+    },
+    {
+      "section": "discussion",
+      "gap": "The 7 'both_wrong' cases at the small budget and 1 at the large budget for the enhanced arm indicate retrieval failures independent of budget size. The draft notes this but does not analyze whether these failures correlate with specific Jaccard similarity scores, distractor density, or the 500-character item cap causing relevant items to be skipped during greedy packing.",
+      "recommendation": "Analyze the diagnostic cases (e.g., question_id 58bf7951, 75499fd8) to determine if lexical overlap was insufficient or if packing constraints excluded the target fact."
+    },
+    {
+      "section": "experiments",
+      "gap": "No analysis of the 20 L1 capacity limit relative to the number of facts per episode. If an episode contains more than 20 exchanges, earlier facts may be evicted before the query phase, confounding retrieval quality with FIFO eviction.",
+      "recommendation": "State the maximum number of facts per episode and confirm whether L1 capacity (20) was ever exceeded during seeding."
+    }
+  ],
+  "ready_for_human_review": false
+}

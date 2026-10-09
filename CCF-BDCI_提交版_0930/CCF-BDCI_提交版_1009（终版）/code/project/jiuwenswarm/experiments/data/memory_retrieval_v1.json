@@ -1,0 +1,31 @@
+{
+  "facts": [
+    {"id": "F01", "text": "The Atlas service stores customer profiles in PostgreSQL."},
+    {"id": "F02", "text": "The Beacon service sends alert emails through Mailgun."},
+    {"id": "F03", "text": "The Cedar project uses React for its web interface."},
+    {"id": "F04", "text": "The Delta project deploys to the Frankfurt region."},
+    {"id": "F05", "text": "The Echo API limits requests to 120 per minute."},
+    {"id": "F06", "text": "The Falcon team meets every Tuesday at 10 AM."},
+    {"id": "F07", "text": "The Grove pipeline exports metrics to Prometheus."},
+    {"id": "F08", "text": "The Harbor backup job runs every six hours."},
+    {"id": "F09", "text": "The Iris application uses Redis for session storage."},
+    {"id": "F10", "text": "The Juniper repository requires two code reviewers."},
+    {"id": "F11", "text": "The Kestrel experiment uses seed number 417."},
+    {"id": "F12", "text": "The Lunar project owner is Morgan Chen."},
+    {"id": "F13", "text": "The Maple dataset contains 2400 labeled examples."},
+    {"id": "F14", "text": "The Nimbus service archives logs after 30 days."},
+    {"id": "F15", "text": "The Orion dashboard refreshes every five minutes."},
+    {"id": "F16", "text": "The Pine release is scheduled for November 18."},
+    {"id": "F17", "text": "The Quartz model was trained with batch size 64."},
+    {"id": "F18", "text": "The River client retries failed requests three times."},
+    {"id": "F19", "text": "The Summit document uses the ICLR template."},
+    {"id": "F20", "text": "The Terra database encrypts backups with AES-256."}
+  ],
+  "questions": [
+    {"id": "Q01", "query": "Where does Atlas store customer profiles?", "relevant_ids": ["F01"]},
+    {"id": "Q02", "query": "Which service uses Redis session storage?", "relevant_ids": ["F09"]},
+    {"id": "Q03", "query": "How many labeled examples are in the Maple dataset?", "relevant_ids": ["F13"]},
+    {"id": "Q04", "query": "When is the Pine release scheduled?", "relevant_ids": ["F16"]},
+    {"id": "Q05", "query": "What encryption does the Terra database use for backups?", "relevant_ids": ["F20"]}
+  ]
+}
